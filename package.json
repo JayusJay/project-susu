@@ -1,0 +1,25 @@
+{
+  "name": "project-susu",
+  "version": "1.0.0",
+  "description": "Mobile savings app with React-Native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JayusJay/project-susu.git"
+  },
+  "keywords": [
+    "Susu",
+    "mobile",
+    "savings",
+    "app"
+  ],
+  "author": "Jonathan Atayure && Eshun Felix",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JayusJay/project-susu/issues"
+  },
+  "homepage": "https://github.com/JayusJay/project-susu#readme"
+}
