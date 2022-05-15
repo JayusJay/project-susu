@@ -27,7 +27,11 @@ const LoginStyle = StyleSheet.create({
         marginBottom: 25,
     },
     view4: {
-
+        marginTop: -10,
+        flexDirection: "row",
+    },
+    view4Text: {
+        color: "#8A8A8A",
     },
     icon: {
         color: "#666",
@@ -47,7 +51,8 @@ const LoginStyle = StyleSheet.create({
     },
     signupText: {
         color: "#AD40AF",
-        fontWeight: "400"
+        fontWeight: "400",
+        marginTop: 15,
     },
     signupOpacity: {
         marginTop: -15,
@@ -74,6 +79,7 @@ const LoginStyle = StyleSheet.create({
     googleOpacity: {
         alignItems: "center",
         borderRadius: 10,
+        marginTop: -10,
         paddingHorizontal: 10,
         paddingVertical: 10,
     },
