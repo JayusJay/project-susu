@@ -1,6 +1,6 @@
 import {StyleSheet} from "react-native"
 
-const LoginStyle = StyleSheet.create({
+const RegisterStyle = StyleSheet.create({
     safeAreaView: {
         flex: 1,
         backgroundColor: "#fff",
@@ -48,14 +48,22 @@ const LoginStyle = StyleSheet.create({
     },
     forgotPassword: {
         color: "#AD40AF",
-        fontWeight: "500",
+        fontWeight: "700",
     },
-    signupText: {
+    DoBOpacity: {
+
+    },
+    DoBText: {
+        color: "#666",
+        marginTop: 13,
+        marginLeft: 5,
+    },
+    RegisterText: {
         color: "#AD40AF",
         fontWeight: "400",
         marginTop: 15,
     },
-    signupOpacity: {
+    RegisterOpacity: {
         marginTop: -15,
     },
     loginOpacity: {
@@ -85,4 +93,6 @@ const LoginStyle = StyleSheet.create({
         paddingVertical: 10,
     },
 })
-export default LoginStyle
+export default RegisterStyle
+
+//create a style sheet for the login page

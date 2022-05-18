@@ -13,7 +13,7 @@ import Ionicons from "react-native-vector-icons/Ionicons"
 import LoginSVG from "../assets/images/sampleLogo.svg"
 import GoogleSVG from "../assets/images/google.svg"
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
@@ -24,7 +24,9 @@ const LoginScreen = () => {
             <ScrollView>
                 <View style={LoginStyle.view1}>
                     <View style = {LoginStyle.view2}>
-                        <LoginSVG height = {280} width = {280}/>
+                        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                            <LoginSVG height = {200} width = {200}/>
+                        </TouchableOpacity>
                     </View>
                     <Text style = {LoginStyle.text}>Login</Text>
                     <View style = {LoginStyle.view3}>
@@ -49,10 +51,10 @@ const LoginScreen = () => {
                         </TouchableOpacity>
                     </View>
                     <View style = {LoginStyle.view4}>
-                    <Text style = {LoginStyle.view4Text}>Dont have an account?</Text>
-                    <TouchableOpacity onPress={() => {}} style = {LoginStyle.signupOpacity}>
-                        <Text style = {LoginStyle.signupText}> Sign up</Text>
-                    </TouchableOpacity>
+                        <Text style = {LoginStyle.view4Text}>Don't have an account?</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate('Register')} style = {LoginStyle.signupOpacity}>
+                            <Text style = {LoginStyle.signupText}> Sign up</Text>
+                        </TouchableOpacity>
                     </View>
                     <TouchableOpacity onPress={() => {}} style = {LoginStyle.loginOpacity}>
                         <Text style = {LoginStyle.loginText}>Login</Text>

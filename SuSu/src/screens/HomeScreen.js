@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, View, SafeAreaView, TouchableOpacity } from "react-native";
 import HomeStyle  from "../styles/homeStyle";
+
 const Home = ({navigation}) => {
     return (
         <SafeAreaView style={HomeStyle.SafeAreaView}>
