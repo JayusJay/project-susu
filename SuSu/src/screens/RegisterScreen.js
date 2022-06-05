@@ -54,6 +54,16 @@ const RegisterScreen = ({navigation}) => {
                         />
                     </View>
                     <View style = {RegisterStyle.view3}>
+                        <MaterialIcons name = 'call' size={20} style = {RegisterStyle.icon}/>
+                        <TextInput
+                            underlineColorAndroid="transparent"
+                            placeholder="Phone Number"
+                            placeholderTextColor='#8A8A8A'
+                            style = {RegisterStyle.textInput}
+                            keyboardType = "phone-pad"
+                        />
+                    </View>    
+                    <View style = {RegisterStyle.view3}>
                         <Ionicons name ='lock-closed-outline' size={20} style = {RegisterStyle.icon}/>
                         <TextInput
                             underlineColorAndroid="transparent"
