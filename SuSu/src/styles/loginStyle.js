@@ -30,6 +30,10 @@ const LoginStyle = StyleSheet.create({
         marginTop: -10,
         flexDirection: "row",
     },
+    view5: {
+        alignSelf: "center",
+        paddingBottom: 15,
+    },
     view4Text: {
         color: "#8A8A8A",
     },
@@ -76,13 +80,6 @@ const LoginStyle = StyleSheet.create({
         color: "#666",
         marginTop: 10,
         marginBottom: 30,
-    },
-    googleOpacity: {
-        alignItems: "center",
-        borderRadius: 10,
-        marginTop: -10,
-        paddingHorizontal: 10,
-        paddingVertical: 10,
     },
 })
 export default LoginStyle

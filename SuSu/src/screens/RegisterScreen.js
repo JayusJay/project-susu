@@ -29,7 +29,7 @@ const RegisterScreen = ({navigation}) => {
             <ScrollView>
                 <View style={RegisterStyle.view1}>
                     <View style = {RegisterStyle.view2}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Landing')}>
                             <SVG height = {200} width = {200}/>
                         </TouchableOpacity>
                     </View>
@@ -113,9 +113,11 @@ const RegisterScreen = ({navigation}) => {
                         <Text style = {RegisterStyle.loginText}>Register</Text>
                     </TouchableOpacity>
                     <Text style = {RegisterStyle.alternate}>Or SignUp with ...</Text>
-                    <TouchableOpacity onPress={() => {}} style = {RegisterStyle.googleOpacity}>
-                        <GoogleSVG height = {40} width = {40}/>
-                    </TouchableOpacity>
+                    <View style = {RegisterStyle.view5}>
+                        <TouchableOpacity onPress={() => {}}>
+                            <GoogleSVG height = {40} width = {40}/>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </ScrollView>
         </SafeAreaView>

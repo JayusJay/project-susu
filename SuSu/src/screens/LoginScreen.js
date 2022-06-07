@@ -24,7 +24,7 @@ const LoginScreen = ({navigation}) => {
             <ScrollView>
                 <View style={LoginStyle.view1}>
                     <View style = {LoginStyle.view2}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Landing')}>
                             <LoginSVG height = {200} width = {200}/>
                         </TouchableOpacity>
                     </View>
@@ -60,9 +60,11 @@ const LoginScreen = ({navigation}) => {
                         <Text style = {LoginStyle.loginText}>Login</Text>
                     </TouchableOpacity>
                     <Text style = {LoginStyle.alternate}>Or login with ...</Text>
-                    <TouchableOpacity onPress={() => {}} style = {LoginStyle.googleOpacity}>
-                        <GoogleSVG height = {40} width = {40}/>
-                    </TouchableOpacity>
+                    <View style = {LoginStyle.view5}>
+                        <TouchableOpacity onPress={() => {}}>
+                            <GoogleSVG height = {40} width = {40}/>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </ScrollView>
         </SafeAreaView>

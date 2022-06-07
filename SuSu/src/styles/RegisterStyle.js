@@ -33,6 +33,10 @@ const RegisterStyle = StyleSheet.create({
     view4Text: {
         color: "#8A8A8A",
     },
+    view5: {
+        alignSelf: "center",
+        paddingBottom: 15,
+    },
     icon: {
         color: "#666",
         marginRight: 5,
@@ -85,14 +89,5 @@ const RegisterStyle = StyleSheet.create({
         marginTop: 10,
         marginBottom: 30,
     },
-    googleOpacity: {
-        alignItems: "center",
-        borderRadius: 10,
-        marginTop: -10,
-        paddingHorizontal: 10,
-        paddingVertical: 10,
-    },
 })
 export default RegisterStyle
-
-//create a style sheet for the login page
