@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "874120969609",
+    "project_id": "project-susu",
+    "storage_bucket": "project-susu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874120969609:android:c698132e69a1aa8b59f558",
+        "android_client_info": {
+          "package_name": "com.susu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "874120969609-927dihb5ltp7tnnk68mdsl9agdhbh2v7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.susu",
+            "certificate_hash": "afe8f54a38abea32ed3020ea599c3c93ccd68b6c"
+          }
+        },
+        {
+          "client_id": "874120969609-ceb969mq9h9aamsh78p45ie3opavujfe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.susu",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "874120969609-frjb44rnlnih5eqnqcpk97buq4e6f7rb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKgmywKDIZDRQdkcUQDGrzBo3KLMwh-XY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "874120969609-frjb44rnlnih5eqnqcpk97buq4e6f7rb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

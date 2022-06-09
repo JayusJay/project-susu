@@ -38,11 +38,20 @@ const RegisterScreen = ({navigation}) => {
                         <MaterialIcons name ='person-outline' size={20} style = {RegisterStyle.icon}/>
                         <TextInput
                             underlineColorAndroid="transparent"
-                            placeholder="FullName"
+                            placeholder="FirstName"
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
                         />
-                    </View>    
+                    </View>
+                    <View style = {RegisterStyle.view3}>
+                        <MaterialIcons name ='person-outline' size={20} style = {RegisterStyle.icon}/>
+                        <TextInput
+                            underlineColorAndroid="transparent"
+                            placeholder="LastName"
+                            placeholderTextColor='#8A8A8A'
+                            style = {RegisterStyle.textInput}
+                        />
+                    </View>     
                     <View style = {RegisterStyle.view3}>
                         <MaterialIcons name ='alternate-email' size={20} style = {RegisterStyle.icon}/>
                         <TextInput 
