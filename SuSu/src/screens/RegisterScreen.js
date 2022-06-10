@@ -14,16 +14,36 @@ import SVG from "../assets/images/sampleLogo.svg"
 import GoogleSVG from "../assets/images/google.svg"
 
 import DatePicker from 'react-native-date-picker'
+import register from '../components/register'
 
 const RegisterScreen = ({navigation}) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [isKeyboardVisible, setIsKeyboardVisible] = useState(false)
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false)
+    const [validData, setValidData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        phoneNumber: '',
+        dateOfBirth: '',
+        isValidFirstName: true,
+        isValidLastName: true,
+        isValidEmail: true,
+        isValidPassword: true,
+        isValidConfirmPassword: true,
+        isValidPhoneNumber: true,
+        isValidDateOfBirth: true,
+    })
+
     const [date, setDate] = useState(new Date())
     const [open, setOpen] = useState(false)
     const [DoBLabel, setDoBLabel] = useState("Date of Birth")
-    
     return(
         <SafeAreaView style={RegisterStyle.SafeAreaView}>
             <ScrollView>
@@ -39,6 +59,8 @@ const RegisterScreen = ({navigation}) => {
                         <TextInput
                             underlineColorAndroid="transparent"
                             placeholder="FirstName"
+                            value={firstName}
+                            onChangeText={(text) => setFirstName(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
                         />
@@ -48,6 +70,8 @@ const RegisterScreen = ({navigation}) => {
                         <TextInput
                             underlineColorAndroid="transparent"
                             placeholder="LastName"
+                            value={lastName}
+                            onChangeText={(text) => setLastName(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
                         />
@@ -57,6 +81,8 @@ const RegisterScreen = ({navigation}) => {
                         <TextInput 
                             underlineColorAndroid="transparent"
                             placeholder="Email"
+                            value={email}
+                            onChangeText={(text) => setEmail(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput} 
                             keyboardType = "email-address"
@@ -67,6 +93,8 @@ const RegisterScreen = ({navigation}) => {
                         <TextInput
                             underlineColorAndroid="transparent"
                             placeholder="Phone Number"
+                            value={phoneNumber}
+                            onChangeText={(text) => setPhoneNumber(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
                             keyboardType = "phone-pad"
@@ -77,6 +105,8 @@ const RegisterScreen = ({navigation}) => {
                         <TextInput
                             underlineColorAndroid="transparent"
                             placeholder="Password"
+                            value={password}
+                            onChangeText={(text) => setPassword(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
                             secureTextEntry = {true}
@@ -87,6 +117,8 @@ const RegisterScreen = ({navigation}) => {
                         <TextInput
                             underlineColorAndroid="transparent"
                             placeholder="Confirm password"
+                            value={confirmPassword}
+                            onChangeText={(text) => setConfirmPassword(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
                             secureTextEntry = {true}
@@ -118,7 +150,7 @@ const RegisterScreen = ({navigation}) => {
                             <Text style = {RegisterStyle.RegisterText}> Login</Text>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={() => {}} style = {RegisterStyle.loginOpacity}>
+                    <TouchableOpacity onPress={() => {register(firstName, lastName, email, password, phoneNumber, date)}} style = {RegisterStyle.loginOpacity}>
                         <Text style = {RegisterStyle.loginText}>Register</Text>
                     </TouchableOpacity>
                     <Text style = {RegisterStyle.alternate}>Or SignUp with ...</Text>

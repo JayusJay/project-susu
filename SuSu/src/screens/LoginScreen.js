@@ -16,7 +16,6 @@ import GoogleSVG from "../assets/images/google.svg"
 const LoginScreen = ({navigation}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     
     return(
@@ -34,6 +33,8 @@ const LoginScreen = ({navigation}) => {
                         <TextInput 
                         underlineColorAndroid="transparent"
                         placeholder="Email"
+                        value={email}
+                        onChangeText={(text) => setEmail(text)}
                         placeholderTextColor='#8A8A8A'
                         style = {LoginStyle.textInput} 
                         keyboardType = "email-address"/>
@@ -43,6 +44,8 @@ const LoginScreen = ({navigation}) => {
                         <TextInput
                         underlineColorAndroid="transparent"
                         placeholder="Password"
+                        value={password}
+                        onChangeText={(text) => setPassword(text)}
                         placeholderTextColor='#8A8A8A'
                         style = {LoginStyle.textInput}
                         secureTextEntry = {true}/>
