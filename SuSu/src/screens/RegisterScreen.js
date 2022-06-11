@@ -14,33 +14,24 @@ import SVG from "../assets/images/sampleLogo.svg"
 import GoogleSVG from "../assets/images/google.svg"
 
 import DatePicker from 'react-native-date-picker'
+import {registrationValidation} from '../components/inputValidation'
 import register from '../components/register'
-
 const RegisterScreen = ({navigation}) => {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [phoneNumber, setPhoneNumber] = useState("")
-    const [confirmPassword, setConfirmPassword] = useState("")
-    const [isLoading, setIsLoading] = useState(false)
-    const [validData, setValidData] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        phoneNumber: '',
-        dateOfBirth: '',
-        isValidFirstName: true,
-        isValidLastName: true,
-        isValidEmail: true,
-        isValidPassword: true,
-        isValidConfirmPassword: true,
-        isValidPhoneNumber: true,
-        isValidDateOfBirth: true,
-    })
+    const {handleFirstName, 
+        handleLastName, 
+        handleEmail, 
+        handlePassword, 
+        handleConfirmPassword, 
+        handlePhoneNumber, 
+        handleDateOfBirth, 
+        handleSubmit, 
+        validData, 
+        setValidData
+    } = registrationValidation()
 
+    const [isLoading, setIsLoading] = useState(false)
+    
+    
     const [date, setDate] = useState(new Date())
     const [open, setOpen] = useState(false)
     const [DoBLabel, setDoBLabel] = useState("Date of Birth")
@@ -59,71 +50,108 @@ const RegisterScreen = ({navigation}) => {
                         <TextInput
                             underlineColorAndroid="transparent"
                             placeholder="FirstName"
-                            value={firstName}
-                            onChangeText={(text) => setFirstName(text)}
+                            value={validData.firstName}
+                            onChangeText={(text) => handleFirstName(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
+                            onBlur={() => {validData.firstName.length == 0 ? setValidData({...validData, isValidFirstName: false}) : null}}
                         />
                     </View>
+                    {validData.isValidFirstName ? null : 
+                        <Text style = {RegisterStyle.errorText}>
+                            First Name must be at least 3 characters long and contain no numbers
+                        </Text>
+                    }
+                    
                     <View style = {RegisterStyle.view3}>
                         <MaterialIcons name ='person-outline' size={20} style = {RegisterStyle.icon}/>
                         <TextInput
                             underlineColorAndroid="transparent"
                             placeholder="LastName"
-                            value={lastName}
-                            onChangeText={(text) => setLastName(text)}
+                            value={validData.lastName}
+                            onChangeText={(text) => handleLastName(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
+                            onBlur={() => {validData.lastName.length == 0 ? setValidData({...validData, isValidLastName: false}) : null}}
                         />
-                    </View>     
+                    </View>  
+                    {validData.isValidFirstName ? null : 
+                        <Text style = {RegisterStyle.errorText}>
+                            First Name must be at least 3 characters long and contain no numbers
+                        </Text>
+                    }   
                     <View style = {RegisterStyle.view3}>
                         <MaterialIcons name ='alternate-email' size={20} style = {RegisterStyle.icon}/>
                         <TextInput 
                             underlineColorAndroid="transparent"
                             placeholder="Email"
-                            value={email}
-                            onChangeText={(text) => setEmail(text)}
+                            value={validData.email}
+                            onChangeText={(text) => handleEmail(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput} 
                             keyboardType = "email-address"
+                            onBlur={() => {validData.email.length == 0 ? setValidData({...validData, isValidEmail: false}) : null}}
                         />
                     </View>
+                    {validData.isValidEmail ? null :
+                        <Text style = {RegisterStyle.errorText}>
+                            Enter a valid email address
+                        </Text>
+                    }
                     <View style = {RegisterStyle.view3}>
                         <MaterialIcons name = 'call' size={20} style = {RegisterStyle.icon}/>
                         <TextInput
                             underlineColorAndroid="transparent"
                             placeholder="Phone Number"
-                            value={phoneNumber}
-                            onChangeText={(text) => setPhoneNumber(text)}
+                            value={validData.phoneNumber}
+                            onChangeText={(text) => handlePhoneNumber(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
                             keyboardType = "phone-pad"
+                            onBlur={() => {validData.phoneNumber.length == 0 ? setValidData({...validData, isValidPhoneNumber: false}) : null}}
                         />
-                    </View>    
+                    </View> 
+                    {validData.isValidPhoneNumber ? null :
+                        <Text style = {RegisterStyle.errorText}>
+                            Enter a valid phone number
+                        </Text>
+                    } 
                     <View style = {RegisterStyle.view3}>
                         <Ionicons name ='lock-closed-outline' size={20} style = {RegisterStyle.icon}/>
                         <TextInput
                             underlineColorAndroid="transparent"
                             placeholder="Password"
-                            value={password}
-                            onChangeText={(text) => setPassword(text)}
+                            value={validData.password}
+                            onChangeText={(text) => handlePassword(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
                             secureTextEntry = {true}
+                            onBlur={() => {validData.password.length == 0 ? setValidData({...validData, isValidPassword: false}) : null}}
                         />
                     </View>
+                    {validData.isValidPassword ? null :
+                        <Text style = {RegisterStyle.errorText}>
+                            Password must be at least 6 characters long, contain at least one number and one special character
+                        </Text>
+                    }
                     <View style = {RegisterStyle.view3}>
                         <Ionicons name ='lock-closed-outline' size={20} style = {RegisterStyle.icon}/>
                         <TextInput
                             underlineColorAndroid="transparent"
                             placeholder="Confirm password"
-                            value={confirmPassword}
-                            onChangeText={(text) => setConfirmPassword(text)}
+                            value={validData.confirmPassword}
+                            onChangeText={(text) => handleConfirmPassword(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
                             secureTextEntry = {true}
+                            onBlur={() => {validData.confirmPassword.length == 0 ? setValidData({...validData, isValidConfirmPassword: false}) : null}}
                         /> 
                     </View>
+                    {validData.isValidConfirmPassword ? null :
+                        <Text style = {RegisterStyle.errorText}>
+                            Passwords do not match
+                        </Text>
+                    }
                     <View style = {RegisterStyle.view3}>
                         <Ionicons name ='calendar-outline' size={20} style = {RegisterStyle.icon}/>
                         <TouchableOpacity onPress={() => setOpen(true)}>
@@ -164,4 +192,4 @@ const RegisterScreen = ({navigation}) => {
         </SafeAreaView>
     )
 }
-export default RegisterScreen
+export default RegisterScreen 
