@@ -10,14 +10,15 @@ import {
 import RegisterStyle from "../styles/RegisterStyle"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import Ionicons from "react-native-vector-icons/Ionicons"
+import {registrationValidation} from '../components/inputValidation'
+import LoadingScreen from "./LoadingScreen"
 import SVG from "../assets/images/sampleLogo.svg"
 import GoogleSVG from "../assets/images/google.svg"
 
 import DatePicker from 'react-native-date-picker'
-import {registrationValidation} from '../components/inputValidation'
-import register from '../components/register'
 const RegisterScreen = ({navigation}) => {
-    const {handleFirstName, 
+    const {
+        handleFirstName, 
         handleLastName, 
         handleEmail, 
         handlePassword, 
@@ -26,17 +27,16 @@ const RegisterScreen = ({navigation}) => {
         handleDateOfBirth, 
         handleSubmit, 
         validData, 
-        setValidData
+        setValidData,
     } = registrationValidation()
 
     const [isLoading, setIsLoading] = useState(false)
     
-    
-    const [date, setDate] = useState(new Date())
     const [open, setOpen] = useState(false)
     const [DoBLabel, setDoBLabel] = useState("Date of Birth")
     return(
         <SafeAreaView style={RegisterStyle.SafeAreaView}>
+            {/* {validData.loader? <LoadingScreen/> : null} */}
             <ScrollView>
                 <View style={RegisterStyle.view1}>
                     <View style = {RegisterStyle.view2}>
@@ -75,9 +75,9 @@ const RegisterScreen = ({navigation}) => {
                             onBlur={() => {validData.lastName.length == 0 ? setValidData({...validData, isValidLastName: false}) : null}}
                         />
                     </View>  
-                    {validData.isValidFirstName ? null : 
+                    {validData.isValidLastName ? null : 
                         <Text style = {RegisterStyle.errorText}>
-                            First Name must be at least 3 characters long and contain no numbers
+                            Last Name must be at least 3 characters long and contain no numbers
                         </Text>
                     }   
                     <View style = {RegisterStyle.view3}>
@@ -131,7 +131,7 @@ const RegisterScreen = ({navigation}) => {
                     </View>
                     {validData.isValidPassword ? null :
                         <Text style = {RegisterStyle.errorText}>
-                            Password must be at least 6 characters long, contain at least one number and one special character
+                            Password must be at least 8 characters long, contain at least one number and one special character
                         </Text>
                     }
                     <View style = {RegisterStyle.view3}>
@@ -159,11 +159,12 @@ const RegisterScreen = ({navigation}) => {
                             <DatePicker
                                 modal
                                 open={open}
-                                date={date}
+                                date={validData.dateOfBirth}
                                 mode={"date"}
+                                androidVariant={"nativeAndroid"}
                                 onConfirm={(date) => {
                                 setOpen(false)
-                                setDate(date)
+                                handleDateOfBirth(date)
                                 setDoBLabel(date.toDateString())
                                 }}
                                 onCancel={() => {
@@ -178,7 +179,7 @@ const RegisterScreen = ({navigation}) => {
                             <Text style = {RegisterStyle.RegisterText}> Login</Text>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={() => {register(firstName, lastName, email, password, phoneNumber, date)}} style = {RegisterStyle.loginOpacity}>
+                    <TouchableOpacity onPress={() => {handleSubmit()}} style = {RegisterStyle.loginOpacity}>
                         <Text style = {RegisterStyle.loginText}>Register</Text>
                     </TouchableOpacity>
                     <Text style = {RegisterStyle.alternate}>Or SignUp with ...</Text>

@@ -10,7 +10,7 @@ const registrationValidation = () => {
         password: '',
         confirmPassword: '',
         phoneNumber: '',
-        dateOfBirth: '',
+        dateOfBirth: new Date(),
         isValidFirstName: true,
         isValidLastName: true,
         isValidEmail: true,
@@ -18,7 +18,9 @@ const registrationValidation = () => {
         isValidConfirmPassword: true,
         isValidPhoneNumber: true,
         isValidDateOfBirth: true,
+        loader: false,
     })
+    
     const handleFirstName = (name) => {
         let reg = new RegExp(/^[a-zA-Z]{3,16}$/).test(name)
         if(reg){
@@ -50,7 +52,7 @@ const registrationValidation = () => {
     }
 
     const handlePassword = (password) => {
-        let reg = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/).test(password)
+        let reg = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,.])[A-Za-z\d@$!%*?&,.]{8,}$/).test(password)
         if(reg){
             setValidData({...validData, password: password, isValidPassword: true})
         }
@@ -79,13 +81,8 @@ const registrationValidation = () => {
     }
 
     const handleDateOfBirth = (dateOfBirth) => {
-        let reg = new RegExp(/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/).test(dateOfBirth)
-        if(reg){
-            setValidData({...validData, dateOfBirth: dateOfBirth, isValidDateOfBirth: true})
-        }
-        else{
-            setValidData({...validData, dateOfBirth: dateOfBirth, isValidDateOfBirth: false})
-        }
+
+        setValidData({...validData, dateOfBirth: dateOfBirth, isValidDateOfBirth: true})
     }
 
     const handleSubmit = () => {
@@ -95,7 +92,15 @@ const registrationValidation = () => {
             validData.isValidPassword && 
             validData.isValidConfirmPassword && 
             validData.isValidPhoneNumber && 
-            validData.isValidDateOfBirth){
+            validData.isValidDateOfBirth &&
+            validData.firstName !== '' && 
+            validData.lastName !== '' && 
+            validData.email !== '' && 
+            validData.password !== '' && 
+            validData.confirmPassword !== '' && 
+            validData.phoneNumber !== '' && 
+            validData.dateOfBirth !== ''){
+            validData.loader = true
             register(
                 validData.firstName, 
                 validData.lastName, 
@@ -104,11 +109,14 @@ const registrationValidation = () => {
                 validData.phoneNumber, 
                 validData.dateOfBirth
             )
+            setValidData({...validData, loader: false})
+
         }
         else{
             alert('Please fill all the fields correctly')
         }
     }
+
 
     return {
         handleFirstName, 
@@ -120,9 +128,10 @@ const registrationValidation = () => {
         handleDateOfBirth, 
         handleSubmit, 
         validData, 
-        setValidData
+        setValidData,
     }
 }
+
 const loginValidation = (data) => {
 
 }
