@@ -30,13 +30,11 @@ const RegisterScreen = ({navigation}) => {
         setValidData,
     } = registrationValidation()
 
-    const [isLoading, setIsLoading] = useState(false)
-    
     const [open, setOpen] = useState(false)
     const [DoBLabel, setDoBLabel] = useState("Date of Birth")
     return(
         <SafeAreaView style={RegisterStyle.SafeAreaView}>
-            {/* {validData.loader? <LoadingScreen/> : null} */}
+            {validData.loader? <LoadingScreen/> : null}
             <ScrollView>
                 <View style={RegisterStyle.view1}>
                     <View style = {RegisterStyle.view2}>

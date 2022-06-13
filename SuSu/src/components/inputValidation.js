@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import register from "./register"
 import login from "./login"
 
@@ -22,6 +22,7 @@ const registrationValidation = () => {
     })
     
     const handleFirstName = (name) => {
+        name = name.trim()
         let reg = new RegExp(/^[a-zA-Z]{3,16}$/).test(name)
         if(reg){
             setValidData({...validData, firstName: name, isValidFirstName: true})
@@ -32,6 +33,7 @@ const registrationValidation = () => {
     }
 
     const handleLastName = (name) => {
+        name = name.trim()
         let reg = new RegExp(/^[a-zA-Z]{3,16}$/).test(name)
         if(reg){
             setValidData({...validData, lastName: name, isValidLastName: true})
@@ -42,6 +44,7 @@ const registrationValidation = () => {
     }
 
     const handleEmail = (email) => {
+        email = email.trim()
         let reg = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(email)
         if(reg){
             setValidData({...validData, email: email, isValidEmail: true})
@@ -52,6 +55,7 @@ const registrationValidation = () => {
     }
 
     const handlePassword = (password) => {
+        password = password.trim()
         let reg = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,.])[A-Za-z\d@$!%*?&,.]{8,}$/).test(password)
         if(reg){
             setValidData({...validData, password: password, isValidPassword: true})
@@ -62,6 +66,7 @@ const registrationValidation = () => {
     }
 
     const handleConfirmPassword = (password) => {
+        password = password.trim()
         if(password === validData.password){
             setValidData({...validData, confirmPassword: password, isValidConfirmPassword: true})
         }
@@ -71,6 +76,7 @@ const registrationValidation = () => {
     }
 
     const handlePhoneNumber = (phoneNumber) => {
+        phoneNumber = phoneNumber.trim()
         let reg = new RegExp(/^[0-9]{10}$/).test(phoneNumber)
         if(reg){
             setValidData({...validData, phoneNumber: phoneNumber, isValidPhoneNumber: true})
@@ -109,14 +115,18 @@ const registrationValidation = () => {
                 validData.phoneNumber, 
                 validData.dateOfBirth
             )
-            setValidData({...validData, loader: false})
-
+            // useEffect(function persistForm() {
+            //     // 👍 We're not breaking the first rule anymore
+            //     if (val) {
+            //         setValidData({...validData, loader: false})
+            //     }
+            //   });
         }
         else{
             alert('Please fill all the fields correctly')
         }
     }
-
+//if validData.loader = true then show loader else show button
 
     return {
         handleFirstName, 

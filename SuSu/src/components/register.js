@@ -1,6 +1,11 @@
+import React, {useState} from 'react'
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
+import {registrationValidation} from './inputValidation'
+
+
 const register = (firstName, lastName, email, password, phoneNumber, dob) => {
+    const {validData, setValidData} = registrationValidation()
     auth()
     .createUserWithEmailAndPassword(email, password)
     .then(() => {
@@ -26,6 +31,10 @@ const register = (firstName, lastName, email, password, phoneNumber, dob) => {
         if (error.code === 'auth/invalid-email') {
           alert('That email address is invalid!');
         }
+    })
+    .finally(() => {
+        console.log(validData.loader)
+        setValidData({...validData, loader: false})
     })
 }
 
