@@ -12,6 +12,8 @@ import {
 import LandingScreen from './src/screens/LandingScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
+import LoadingScreen from './src/screens/LoadingScreen';
+import HomeScreen from './src/screens/HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -26,6 +28,8 @@ const App = () => {
         <stack.Screen component={LandingScreen} name = "Landing" options={{headerShown: false}}/>
         <stack.Screen component={LoginScreen} name = "Login" options={{headerShown: false}}/>
         <stack.Screen component={RegisterScreen} name = "Register" options={{headerShown: false}}/>
+        <stack.Screen component={LoadingScreen} name = "Loading" options={{headerShown: false}}/>
+        <stack.Screen component={HomeScreen} name = "Home" options={{headerShown: false}}/>
       </stack.Navigator>
     </NavigationContainer>
   );

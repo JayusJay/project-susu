@@ -1,6 +1,7 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
+import { SafeAreaView, ActivityIndicator } from "react-native"
 
 const registrationValidation = () => {
     const [validData, setValidData] = useState({
@@ -19,6 +20,7 @@ const registrationValidation = () => {
         isValidPhoneNumber: true,
         isValidDateOfBirth: true,
         isLoading: false,
+        authenticated: false,
     })
     
     const handleFirstName = (name) => {
@@ -106,14 +108,16 @@ const registrationValidation = () => {
             validData.phoneNumber !== '' && 
             validData.dateOfBirth !== ''){
             setValidData({...validData, isLoading: true})
-            register(
-                validData.firstName, 
-                validData.lastName, 
-                validData.email, 
-                validData.password, 
-                validData.phoneNumber, 
-                validData.dateOfBirth
-            )
+            setTimeout(() => {
+                register(
+                    validData.firstName, 
+                    validData.lastName, 
+                    validData.email, 
+                    validData.password, 
+                    validData.phoneNumber, 
+                    validData.dateOfBirth
+                )
+            }, 5000)
         }
         else{
             alert('Please fill all the fields correctly')
@@ -133,9 +137,9 @@ const registrationValidation = () => {
                         dob: dob,
                     })
                     .then(() => {
+                        setValidData({...validData, isLoading: false, authenticated: true})
                         alert('Registration Successful')
                     });
-            console.log("User created")
         })
         .catch(error => {
             if (error.code === 'auth/email-already-in-use') {

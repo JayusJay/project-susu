@@ -34,7 +34,7 @@ const RegisterScreen = ({navigation}) => {
     const [DoBLabel, setDoBLabel] = useState("Date of Birth")
     return(
         <SafeAreaView style={RegisterStyle.SafeAreaView}>
-            {validData.isLoading? <LoadingScreen/> : null}
+            {validData.isLoading ? <LoadingScreen /> : validData.authenticated ? navigation.navigate('Home') : null}
             <ScrollView>
                 <View style={RegisterStyle.view1}>
                     <View style = {RegisterStyle.view2}>
