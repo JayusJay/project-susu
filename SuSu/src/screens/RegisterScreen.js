@@ -10,7 +10,7 @@ import {
 import RegisterStyle from "../styles/RegisterStyle"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import Ionicons from "react-native-vector-icons/Ionicons"
-import {registrationValidation} from '../components/inputValidation'
+import registrationValidation from '../components/registrationValidation'
 import LoadingScreen from "./LoadingScreen"
 import SVG from "../assets/images/sampleLogo.svg"
 import GoogleSVG from "../assets/images/google.svg"
@@ -34,7 +34,7 @@ const RegisterScreen = ({navigation}) => {
     const [DoBLabel, setDoBLabel] = useState("Date of Birth")
     return(
         <SafeAreaView style={RegisterStyle.SafeAreaView}>
-            {validData.loader? <LoadingScreen/> : null}
+            {validData.isLoading? <LoadingScreen/> : null}
             <ScrollView>
                 <View style={RegisterStyle.view1}>
                     <View style = {RegisterStyle.view2}>

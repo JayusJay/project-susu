@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react"
-import register from "./register"
-import login from "./login"
+import { useState } from "react"
+import auth from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore'
 
 const registrationValidation = () => {
     const [validData, setValidData] = useState({
@@ -18,7 +18,7 @@ const registrationValidation = () => {
         isValidConfirmPassword: true,
         isValidPhoneNumber: true,
         isValidDateOfBirth: true,
-        loader: false,
+        isLoading: false,
     })
     
     const handleFirstName = (name) => {
@@ -87,7 +87,6 @@ const registrationValidation = () => {
     }
 
     const handleDateOfBirth = (dateOfBirth) => {
-
         setValidData({...validData, dateOfBirth: dateOfBirth, isValidDateOfBirth: true})
     }
 
@@ -106,7 +105,7 @@ const registrationValidation = () => {
             validData.confirmPassword !== '' && 
             validData.phoneNumber !== '' && 
             validData.dateOfBirth !== ''){
-            validData.loader = true
+            setValidData({...validData, isLoading: true})
             register(
                 validData.firstName, 
                 validData.lastName, 
@@ -115,18 +114,42 @@ const registrationValidation = () => {
                 validData.phoneNumber, 
                 validData.dateOfBirth
             )
-            // useEffect(function persistForm() {
-            //     // 👍 We're not breaking the first rule anymore
-            //     if (val) {
-            //         setValidData({...validData, loader: false})
-            //     }
-            //   });
         }
         else{
             alert('Please fill all the fields correctly')
         }
     }
-//if validData.loader = true then show loader else show button
+    const register = (firstName, lastName, email, password, phoneNumber, dob) => {
+        auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(() => {
+            firestore()
+                    .collection('users')
+                    .add({
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        phoneNumber: phoneNumber,
+                        dob: dob,
+                    })
+                    .then(() => {
+                        alert('Registration Successful')
+                    });
+            console.log("User created")
+        })
+        .catch(error => {
+            if (error.code === 'auth/email-already-in-use') {
+              alert('That email address is already in use!');
+            }
+        
+            if (error.code === 'auth/invalid-email') {
+              alert('That email address is invalid!');
+            }
+        })
+        .finally(() => {
+            setValidData({...validData, isLoading: false})
+        })
+    }
 
     return {
         handleFirstName, 
@@ -142,7 +165,5 @@ const registrationValidation = () => {
     }
 }
 
-const loginValidation = (data) => {
 
-}
-export {registrationValidation, loginValidation}
+export default registrationValidation
