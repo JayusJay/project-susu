@@ -6,6 +6,7 @@ const LandingStyle = StyleSheet.create({
         backgroundColor: "#fff",
         justifyContent: "center",
         alignItems: "center",
+        paddingHorizontal: 15,
     },
     view2: {
         flex: 1
@@ -23,7 +24,7 @@ const LandingStyle = StyleSheet.create({
     starterOpacity: {
         backgroundColor: "#AD40AF",
         padding: 20,
-        width: '90%',
+        width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderRadius: 10,

@@ -1,37 +1,25 @@
-import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-//import { initializeApp } from "firebase/app";
-import LandingScreen from './src/screens/LandingScreen';
-import LoginScreen from './src/screens/LoginScreen';
-import RegisterScreen from './src/screens/RegisterScreen';
+import React, {useState, useEffect} from 'react';
+import auth from '@react-native-firebase/auth';
+import AuthStack from './src/navigation/AuthStack'
+import AppStack from './src/navigation/AppStack';
 import LoadingScreen from './src/screens/LoadingScreen';
-import HomeScreen from './src/screens/HomeScreen';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { AuthProvider } from './src/components/AuthContext';
 
 const stack = createNativeStackNavigator()
 
 
 const App = () => {
 
+
   return (
-    <NavigationContainer>
-      <stack.Navigator>
-        <stack.Screen component={LandingScreen} name = "Landing" options={{headerShown: false}}/>
-        <stack.Screen component={LoginScreen} name = "Login" options={{headerShown: false}}/>
-        <stack.Screen component={RegisterScreen} name = "Register" options={{headerShown: false}}/>
-        <stack.Screen component={LoadingScreen} name = "Loading" options={{headerShown: false}}/>
-        <stack.Screen component={HomeScreen} name = "Home" options={{headerShown: false}}/>
-      </stack.Navigator>
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        {/* {loading ? <LoadingScreen /> : user ? <AppStack /> : <AuthStack />} */}
+        <AuthStack/>
+      </NavigationContainer>
+    </AuthProvider>
   );
 };
 

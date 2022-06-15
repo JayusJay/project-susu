@@ -19,8 +19,8 @@ const registrationValidation = () => {
         isValidConfirmPassword: true,
         isValidPhoneNumber: true,
         isValidDateOfBirth: true,
-        isLoading: false,
-        authenticated: false,
+        //isLoading: false,
+        //authenticated: false,
     })
     
     const handleFirstName = (name) => {
@@ -137,7 +137,7 @@ const registrationValidation = () => {
                         dob: dob,
                     })
                     .then(() => {
-                        setValidData({...validData, isLoading: false, authenticated: true})
+                        //setValidData({...validData, isLoading: false, authenticated: true})
                         alert('Registration Successful')
                     });
         })
@@ -151,7 +151,7 @@ const registrationValidation = () => {
             }
         })
         .finally(() => {
-            setValidData({...validData, isLoading: false})
+            //setValidData({...validData, isLoading: false})
         })
     }
 
