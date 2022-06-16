@@ -47,8 +47,15 @@ const LoginStyle = StyleSheet.create({
         paddingVertical: 0,
         color: "#000"
     },
+    errorText: {
+        color: "red",
+        fontSize: 12,
+        marginTop: -20,
+        paddingBottom: 5,
+    },
     forgotOpacity: {
-        marginTop: 15,
+        marginTop: -15,
+        marginBottom: 15,
     },
     forgotPassword: {
         color: "#AD40AF",

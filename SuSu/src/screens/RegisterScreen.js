@@ -1,21 +1,13 @@
 import React, {useState, useContext} from "react"
-import {
-    View, 
-    Text, 
-    TextInput, 
-    TouchableOpacity, 
-    ScrollView, 
-    SafeAreaView
-} from "react-native"
+import {View, Text, TextInput, TouchableOpacity, ScrollView, SafeAreaView} from "react-native"
 import RegisterStyle from "../styles/RegisterStyle"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import Ionicons from "react-native-vector-icons/Ionicons"
-import LoadingScreen from "./LoadingScreen"
 import SVG from "../assets/images/sampleLogo.svg"
 import GoogleSVG from "../assets/images/google.svg"
 import { AuthContext, AuthProvider } from "../components/AuthContext"
-
 import DatePicker from 'react-native-date-picker'
+
 const RegisterScreen = ({navigation}) => {
 
     const {registrationValidation} = useContext(AuthContext)
@@ -35,9 +27,10 @@ const RegisterScreen = ({navigation}) => {
 
     const [open, setOpen] = useState(false)
     const [DoBLabel, setDoBLabel] = useState("Date of Birth")
+    const [visibility, setVisibility] = useState(true)
     return(
         <SafeAreaView style={RegisterStyle.SafeAreaView}>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator = {false}>
                 <View style={RegisterStyle.view1}>
                     <View style = {RegisterStyle.view2}>
                         <TouchableOpacity onPress={() => navigation.navigate('Landing')}>
@@ -125,9 +118,13 @@ const RegisterScreen = ({navigation}) => {
                             onChangeText={(text) => handlePassword(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
-                            secureTextEntry = {true}
+                            secureTextEntry = {visibility}
                             onBlur={() => {validData.password.length == 0 ? setValidData({...validData, isValidPassword: false}) : null}}
                         />
+                        <TouchableOpacity onPress={() => {setVisibility(!visibility)}}>
+                            {!visibility? <MaterialIcons name="visibility" size ={20} style = {RegisterStyle.icon}/>:
+                            <MaterialIcons name="visibility-off" size ={20} style = {RegisterStyle.icon}/>}
+                        </TouchableOpacity>
                     </View>
                     {validData.isValidPassword ? null :
                         <Text style = {RegisterStyle.errorText}>
@@ -143,9 +140,13 @@ const RegisterScreen = ({navigation}) => {
                             onChangeText={(text) => handleConfirmPassword(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
-                            secureTextEntry = {true}
+                            secureTextEntry = {visibility}
                             onBlur={() => {validData.confirmPassword.length == 0 ? setValidData({...validData, isValidConfirmPassword: false}) : null}}
                         /> 
+                        <TouchableOpacity onPress={() => {setVisibility(!visibility)}}>
+                            {!visibility? <MaterialIcons name="visibility" size ={20} style = {RegisterStyle.icon}/>:
+                            <MaterialIcons name="visibility-off" size ={20} style = {RegisterStyle.icon}/>}
+                        </TouchableOpacity>
                     </View>
                     {validData.isValidConfirmPassword ? null :
                         <Text style = {RegisterStyle.errorText}>

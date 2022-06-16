@@ -1,13 +1,15 @@
 import React, {useState, useEffect, createContext} from "react"
+import Snackbar from 'react-native-snackbar';
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
+import errors from "./errors";
 
 const AuthContext = createContext()
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    
+    const firebaseAuthenticationError = errors()
     const onAuthStateChanged = (user) => {
       setUser(user);
       setLoading(false)
@@ -17,16 +19,128 @@ const AuthProvider = ({children}) => {
       const subscriber = auth().onAuthStateChanged(onAuthStateChanged)
       return subscriber
     } , [])
-    //login validations
+    
+
+    /*#########################################################################################################
+    #                                       LOGIN VALIDATIONS                                                 #
+    #########################################################################################################*/
     const loginValidation = () => {
+        const [loginData, setLoginData] = useState({
+            email: '',
+            password: '',
+            isValidEmail: true,
+        })
+        const [resetEmail, setResetEmail] = useState({
+            email: '',
+            isValidEmail: true,
+        });
+
+        const handleEmail = (email) => {
+            email = email.trim()
+            let reg = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(email)
+            if(reg){
+                setLoginData({...loginData, email: email, isValidEmail: true})
+            }
+            else{
+                setLoginData({...loginData, email: email, isValidEmail: false})
+            }
+        }
+
+        const handleLogin = () => {
+            if(loginData.isValidEmail && loginData.email !== '' && loginData.password !== ''){
+                setLoading(true)
+                login(loginData.email, loginData.password)
+            }
+            else{
+                Snackbar.show({
+                    text: 'Please fill all fields correctly',
+                    duration: Snackbar.LENGTH_LONG,
+                    textColor: 'white',
+                    backgroundColor: 'red',
+                })
+            }
+        }
+        const login = (email, password) => {
+            password = password.trim()
+            auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(() => {
+                Snackbar.show({
+                    text: 'Login Successful',
+                    duration: Snackbar.LENGTH_SHORT,
+                    textColor: 'white',
+                    backgroundColor: '#AD40AF',
+                })
+            })
+            .catch(error => {
+                firebaseAuthenticationError(error)
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+        }
+        //################################## RESET PASSWORD BEGINS #################################################
+        const handleResetEmail = (email) => {
+            email = email.trim()
+            let reg = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(email)
+            if(reg){
+                setResetEmail({...resetEmail, email: email, isValidEmail: true})
+            }
+            else{
+                setResetEmail({...resetEmail, email: email, isValidEmail: false})
+            }   
+        }
+        const handleResetPassword = () => {
+            if(resetEmail.isValidEmail && resetEmail.email !== ''){
+                setLoading(true)
+                resetPassword(resetEmail.email)
+            }
+            else{
+                Snackbar.show({
+                    text: 'Please enter a valid email',
+                    duration: Snackbar.LENGTH_LONG,
+                    textColor: 'white',
+                    backgroundColor: 'red',
+                })
+            }
+        }
+        const resetPassword = (email) => {
+            auth().sendPasswordResetEmail(email)
+            .then(() => {
+            Snackbar.show({
+                text: 'Password reset link has been sent to your email',
+                duration: Snackbar.LENGTH_LONG,
+                textColor: 'white',
+                backgroundColor: '#AD40AF',
+            })
+        })
+            .catch(error => {
+                firebaseAuthenticationError(error)
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+        }
+        //################################## RESET PASSWORD ENDS #################################################
         const handleLogOut = () => {
             auth()
             .signOut()
-            .then(() => alert('User signed out!'));
+            .then(() => Snackbar.show({
+                text: 'User signed out',
+                duration: Snackbar.LENGTH_SHORT,
+                textColor: 'white',
+                backgroundColor: '#AD40AF',
+            }));
         }
-        return handleLogOut;
+        return {handleEmail, handleLogin, handleLogOut, handleResetEmail, 
+            handleResetPassword, loginData, setLoginData, resetEmail, setResetEmail
+        }
     }
-    //registration validations
+
+
+    /*#########################################################################################################
+    #                                       REGISTRATION VALIDATIONS                                          #
+    #########################################################################################################*/
     const registrationValidation = () => {
         const [validData, setValidData] = useState({
             firstName: '',
@@ -118,15 +232,20 @@ const AuthProvider = ({children}) => {
                 validData.phoneNumber !== '' && validData.dateOfBirth !== ''){
                     
                 setLoading(true)
-                setTimeout(() => {
+               // setTimeout(() => {
                     register(
                         validData.firstName, validData.lastName, validData.email, 
                         validData.password, validData.phoneNumber, validData.dateOfBirth
                     )
-                }, 5000)
+                //}, 5000)
             }
             else{
-                alert('Please fill all the fields correctly')
+                Snackbar.show({
+                    text: 'Please fill all fields correctly',
+                    duration: Snackbar.LENGTH_LONG,
+                    textColor: 'white',
+                    backgroundColor: 'red',
+                })
             }
         }
         //register user to firebase 
@@ -145,12 +264,16 @@ const AuthProvider = ({children}) => {
                     dob: dob,
                 })
                 .then(() => {
-                    alert('Registration Successful')
+                    Snackbar.show({
+                        text: 'Registration Successful',
+                        duration: Snackbar.LENGTH_SHORT,
+                        textColor: 'white',
+                        backgroundColor: '#AD40AF',
+                    })
                 });
             })
             .catch(error => {
-                (error.code === 'auth/email-already-in-use') ? alert('That email address is already in use!') : 
-                (error.code === 'auth/invalid-email') ? alert('That email address is invalid!') : null
+                firebaseAuthenticationError(error)   
             })
             .finally(() => {
                 setLoading(false)

@@ -6,7 +6,7 @@ import HomeStyle from '../styles/homeStyle'
 
 const HomeScreen = () => {
   const { loginValidation } = useContext(AuthContext);
-  const handleLogOut = loginValidation()
+  const {handleLogOut} = loginValidation()
   return (
     <SafeAreaView style = {HomeStyle.SafeAreaView}>
         <Text style = {HomeStyle.Text}>HomeScreen</Text>
