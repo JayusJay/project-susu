@@ -1,10 +1,18 @@
-import React from 'react'
-import { SafeAreaView, Text} from 'react-native'
+import React, {useContext} from 'react'
+import { SafeAreaView, Text, TouchableOpacity} from 'react-native'
+import { AuthContext } from '../components/AuthContext';
+import HomeStyle from '../styles/homeStyle'
+
 
 const HomeScreen = () => {
+  const { loginValidation } = useContext(AuthContext);
+  const handleLogOut = loginValidation()
   return (
-    <SafeAreaView style = {{flex:1, alignItems: "center"}}>
-        <Text style = {{color: "red"}}>HomeScreen</Text>
+    <SafeAreaView style = {HomeStyle.SafeAreaView}>
+        <Text style = {HomeStyle.Text}>HomeScreen</Text>
+        <TouchableOpacity onPress={() => {handleLogOut()}} style = {HomeStyle.logoutOpacity}>
+        <Text style = {{color: "#fff"}}>Log Out</Text>
+        </TouchableOpacity>
     </SafeAreaView>
   )
 }

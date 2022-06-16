@@ -1,9 +1,10 @@
-import React, { useState } from "react"
+import { useState, useContext } from "react"
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
-import { SafeAreaView, ActivityIndicator } from "react-native"
+import { AuthContext } from "../components/AuthContext"
 
 const registrationValidation = () => {
+    const { setLoading, } = useContext(AuthContext);
     const [validData, setValidData] = useState({
         firstName: '',
         lastName: '',
@@ -19,8 +20,8 @@ const registrationValidation = () => {
         isValidConfirmPassword: true,
         isValidPhoneNumber: true,
         isValidDateOfBirth: true,
-        //isLoading: false,
-        //authenticated: false,
+        isLoading: false,
+        user: null,
     })
     
     const handleFirstName = (name) => {
@@ -93,29 +94,17 @@ const registrationValidation = () => {
     }
 
     const handleSubmit = () => {
-        if(validData.isValidFirstName &&
-            validData.isValidLastName && 
-            validData.isValidEmail && 
-            validData.isValidPassword && 
-            validData.isValidConfirmPassword && 
-            validData.isValidPhoneNumber && 
-            validData.isValidDateOfBirth &&
-            validData.firstName !== '' && 
-            validData.lastName !== '' && 
-            validData.email !== '' && 
-            validData.password !== '' && 
-            validData.confirmPassword !== '' && 
-            validData.phoneNumber !== '' && 
-            validData.dateOfBirth !== ''){
-            setValidData({...validData, isLoading: true})
+        if(validData.isValidFirstName && validData.isValidLastName && validData.isValidEmail && 
+            validData.isValidPassword && validData.isValidConfirmPassword && validData.isValidPhoneNumber && 
+            validData.isValidDateOfBirth && validData.firstName !== '' && validData.lastName !== '' && 
+            validData.email !== '' && validData.password !== '' && validData.confirmPassword !== '' && 
+            validData.phoneNumber !== '' && validData.dateOfBirth !== ''){
+                
+            setLoading(true)
             setTimeout(() => {
                 register(
-                    validData.firstName, 
-                    validData.lastName, 
-                    validData.email, 
-                    validData.password, 
-                    validData.phoneNumber, 
-                    validData.dateOfBirth
+                    validData.firstName, validData.lastName, validData.email, 
+                    validData.password, validData.phoneNumber, validData.dateOfBirth
                 )
             }, 5000)
         }
@@ -123,49 +112,38 @@ const registrationValidation = () => {
             alert('Please fill all the fields correctly')
         }
     }
+
     const register = (firstName, lastName, email, password, phoneNumber, dob) => {
         auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
             firestore()
-                    .collection('users')
-                    .add({
-                        firstName: firstName,
-                        lastName: lastName,
-                        email: email,
-                        phoneNumber: phoneNumber,
-                        dob: dob,
-                    })
-                    .then(() => {
-                        //setValidData({...validData, isLoading: false, authenticated: true})
-                        alert('Registration Successful')
-                    });
+            .collection('users')
+            .add({
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                phoneNumber: phoneNumber,
+                dob: dob,
+            })
+            .then(() => {
+                alert('Registration Successful')
+            });
         })
         .catch(error => {
-            if (error.code === 'auth/email-already-in-use') {
-              alert('That email address is already in use!');
-            }
-        
-            if (error.code === 'auth/invalid-email') {
-              alert('That email address is invalid!');
-            }
+            (error.code === 'auth/weak-password') ? alert('That password is too weak!') : 
+            (error.code === 'auth/email-already-in-use') ? alert('That email address is already in use!') : 
+            (error.code === 'auth/invalid-email') ? alert('That email address is invalid!') : alert('Registration Failed')
         })
         .finally(() => {
-            //setValidData({...validData, isLoading: false})
+            setLoading(false)
         })
     }
-
+    
     return {
-        handleFirstName, 
-        handleLastName, 
-        handleEmail, 
-        handlePassword, 
-        handleConfirmPassword, 
-        handlePhoneNumber, 
-        handleDateOfBirth, 
-        handleSubmit, 
-        validData, 
-        setValidData,
+        handleFirstName, handleLastName, handleEmail, handlePassword, 
+        handleConfirmPassword, handlePhoneNumber, handleDateOfBirth, 
+        handleSubmit, validData, setValidData,
     }
 }
 
