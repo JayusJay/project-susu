@@ -9,13 +9,6 @@ import { ActivityIndicator, View } from "react-native";
 const AppNav = () => {
     const {loading, user} = useContext(AuthContext);
     if(loading) return <LoadingScreen />
-    // if(loading){
-    //     return (
-    //     <View style = {{flex: 1, justifyContent: "center", alignItems: "center"}}>
-    //         <ActivityIndicator size="large" color="#0000ff" style = {{backgroundColor: "#fff"}}/>
-    //     </View>
-    //     )
-    // }
 
     return (
         <NavigationContainer>

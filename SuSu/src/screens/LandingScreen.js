@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, SafeAreaView, TouchableOpacity } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import LandingStyle  from "../styles/landingStyle";
+
 const Landing = ({navigation}) => {
     return (
         <SafeAreaView style={LandingStyle.SafeAreaView}>

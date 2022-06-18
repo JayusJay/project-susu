@@ -21,8 +21,8 @@ const RegisterScreen = ({navigation}) => {
         handlePhoneNumber, 
         handleDateOfBirth, 
         handleSubmit, 
-        validData, 
-        setValidData,
+        registerData, 
+        setRegisterData,
     } = registrationValidation()
 
     const [open, setOpen] = useState(false)
@@ -37,20 +37,21 @@ const RegisterScreen = ({navigation}) => {
                             <SVG height = {200} width = {200}/>
                         </TouchableOpacity>
                     </View>
+
                     <Text style = {RegisterStyle.text}>Register</Text>
                     <View style = {RegisterStyle.view3}>
                         <MaterialIcons name ='person-outline' size={20} style = {RegisterStyle.icon}/>
                         <TextInput
                             underlineColorAndroid="transparent"
                             placeholder="FirstName"
-                            value={validData.firstName}
+                            value={registerData.firstName}
                             onChangeText={(text) => handleFirstName(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
-                            onBlur={() => {validData.firstName.length == 0 ? setValidData({...validData, isValidFirstName: false}) : null}}
+                            onBlur={() => {registerData.firstName.length == 0 ? setRegisterData({...registerData, isValidFirstName: false}) : null}}
                         />
                     </View>
-                    {validData.isValidFirstName ? null : 
+                    {registerData.isValidFirstName ? null : 
                         <Text style = {RegisterStyle.errorText}>
                             First Name must be at least 3 characters long and contain no numbers
                         </Text>
@@ -61,14 +62,14 @@ const RegisterScreen = ({navigation}) => {
                         <TextInput
                             underlineColorAndroid="transparent"
                             placeholder="LastName"
-                            value={validData.lastName}
+                            value={registerData.lastName}
                             onChangeText={(text) => handleLastName(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
-                            onBlur={() => {validData.lastName.length == 0 ? setValidData({...validData, isValidLastName: false}) : null}}
+                            onBlur={() => {registerData.lastName.length == 0 ? setRegisterData({...registerData, isValidLastName: false}) : null}}
                         />
                     </View>  
-                    {validData.isValidLastName ? null : 
+                    {registerData.isValidLastName ? null : 
                         <Text style = {RegisterStyle.errorText}>
                             Last Name must be at least 3 characters long and contain no numbers
                         </Text>
@@ -78,15 +79,15 @@ const RegisterScreen = ({navigation}) => {
                         <TextInput 
                             underlineColorAndroid="transparent"
                             placeholder="Email"
-                            value={validData.email}
+                            value={registerData.email}
                             onChangeText={(text) => handleEmail(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput} 
                             keyboardType = "email-address"
-                            onBlur={() => {validData.email.length == 0 ? setValidData({...validData, isValidEmail: false}) : null}}
+                            onBlur={() => {registerData.email.length == 0 ? setRegisterData({...registerData, isValidEmail: false}) : null}}
                         />
                     </View>
-                    {validData.isValidEmail ? null :
+                    {registerData.isValidEmail ? null :
                         <Text style = {RegisterStyle.errorText}>
                             Enter a valid email address
                         </Text>
@@ -96,37 +97,35 @@ const RegisterScreen = ({navigation}) => {
                         <TextInput
                             underlineColorAndroid="transparent"
                             placeholder="Phone Number"
-                            value={validData.phoneNumber}
+                            value={registerData.phoneNumber}
                             onChangeText={(text) => handlePhoneNumber(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
                             keyboardType = "phone-pad"
-                            onBlur={() => {validData.phoneNumber.length == 0 ? setValidData({...validData, isValidPhoneNumber: false}) : null}}
+                            onBlur={() => {registerData.phoneNumber.length == 0 ? setRegisterData({...registerData, isValidPhoneNumber: false}) : null}}
                         />
                     </View> 
-                    {validData.isValidPhoneNumber ? null :
-                        <Text style = {RegisterStyle.errorText}>
-                            Enter a valid phone number
-                        </Text>
+                    {registerData.isValidPhoneNumber ? null :
+                        <Text style = {RegisterStyle.errorText}>Enter a valid phone number</Text>
                     } 
                     <View style = {RegisterStyle.view3}>
                         <Ionicons name ='lock-closed-outline' size={20} style = {RegisterStyle.icon}/>
                         <TextInput
                             underlineColorAndroid="transparent"
                             placeholder="Password"
-                            value={validData.password}
+                            value={registerData.password}
                             onChangeText={(text) => handlePassword(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
                             secureTextEntry = {visibility}
-                            onBlur={() => {validData.password.length == 0 ? setValidData({...validData, isValidPassword: false}) : null}}
+                            onBlur={() => {registerData.password.length == 0 ? setRegisterData({...registerData, isValidPassword: false}) : null}}
                         />
                         <TouchableOpacity onPress={() => {setVisibility(!visibility)}}>
-                            {!visibility? <MaterialIcons name="visibility" size ={20} style = {RegisterStyle.icon}/>:
+                            {visibility? <MaterialIcons name="visibility" size ={20} style = {RegisterStyle.icon}/>:
                             <MaterialIcons name="visibility-off" size ={20} style = {RegisterStyle.icon}/>}
                         </TouchableOpacity>
                     </View>
-                    {validData.isValidPassword ? null :
+                    {registerData.isValidPassword ? null :
                         <Text style = {RegisterStyle.errorText}>
                             Password must be at least 8 characters long, contain at least one number and one special character
                         </Text>
@@ -136,19 +135,19 @@ const RegisterScreen = ({navigation}) => {
                         <TextInput
                             underlineColorAndroid="transparent"
                             placeholder="Confirm password"
-                            value={validData.confirmPassword}
+                            value={registerData.confirmPassword}
                             onChangeText={(text) => handleConfirmPassword(text)}
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput}
                             secureTextEntry = {visibility}
-                            onBlur={() => {validData.confirmPassword.length == 0 ? setValidData({...validData, isValidConfirmPassword: false}) : null}}
+                            onBlur={() => {registerData.confirmPassword.length == 0 ? setRegisterData({...registerData, isValidConfirmPassword: false}) : null}}
                         /> 
                         <TouchableOpacity onPress={() => {setVisibility(!visibility)}}>
-                            {!visibility? <MaterialIcons name="visibility" size ={20} style = {RegisterStyle.icon}/>:
+                            {visibility? <MaterialIcons name="visibility" size ={20} style = {RegisterStyle.icon}/>:
                             <MaterialIcons name="visibility-off" size ={20} style = {RegisterStyle.icon}/>}
                         </TouchableOpacity>
                     </View>
-                    {validData.isValidConfirmPassword ? null :
+                    {registerData.isValidConfirmPassword ? null :
                         <Text style = {RegisterStyle.errorText}>
                             Passwords do not match
                         </Text>
@@ -160,7 +159,7 @@ const RegisterScreen = ({navigation}) => {
                             <DatePicker
                                 modal
                                 open={open}
-                                date={validData.dateOfBirth}
+                                date={registerData.dateOfBirth}
                                 mode={"date"}
                                 androidVariant={"nativeAndroid"}
                                 onConfirm={(date) => {
@@ -176,7 +175,7 @@ const RegisterScreen = ({navigation}) => {
                     </View>
                     <View style = {RegisterStyle.view4}>
                         <Text style = {RegisterStyle.view4Text}>Already have an account?</Text>
-                        <TouchableOpacity onPress={() => navigation.goBack()} style = {RegisterStyle.RegisterOpacity}>
+                        <TouchableOpacity onPress={() => navigation.navigate("Login")} style = {RegisterStyle.RegisterOpacity}>
                             <Text style = {RegisterStyle.RegisterText}> Login</Text>
                         </TouchableOpacity>
                     </View>

@@ -55,7 +55,7 @@ const LoginScreen = ({navigation}) => {
                             secureTextEntry = {visibility}
                         />
                         <TouchableOpacity onPress={() => {setVisibility(!visibility)}}>
-                            {!visibility? <MaterialIcons name="visibility" size ={20} style = {LoginStyle.icon}/>:
+                            {visibility? <MaterialIcons name="visibility" size ={20} style = {LoginStyle.icon}/>:
                             <MaterialIcons name="visibility-off" size ={20} style = {LoginStyle.icon}/>}
                         </TouchableOpacity>
                     </View>

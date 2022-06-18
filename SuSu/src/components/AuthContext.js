@@ -1,14 +1,21 @@
 import React, {useState, useEffect, createContext} from "react"
-import Snackbar from 'react-native-snackbar';
+import Snackbar from 'react-native-snackbar'
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
-import errors from "./errors";
+import errors from "./errors"
+import asyncStorage from "./AsyncStorage"
 
 const AuthContext = createContext()
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    //This state navigates AuthStack's initial screen to the screen an error has occured on.
+    const [screenError, setScreenError] = useState({
+        loginError: false,
+        resetError: false,
+        registerError: false,
+    });
     const firebaseAuthenticationError = errors()
     const onAuthStateChanged = (user) => {
       setUser(user);
@@ -34,6 +41,7 @@ const AuthProvider = ({children}) => {
             email: '',
             isValidEmail: true,
         });
+        const {loginStore, loginRetrieve, loginRemove, resetStore, resetRetrieve, resetRemove} = asyncStorage()
 
         const handleEmail = (email) => {
             email = email.trim()
@@ -49,9 +57,18 @@ const AuthProvider = ({children}) => {
         const handleLogin = () => {
             if(loginData.isValidEmail && loginData.email !== '' && loginData.password !== ''){
                 setLoading(true)
+                loginStore(loginData)
                 login(loginData.email, loginData.password)
             }
             else{
+                // setScreenError({loginError: true, resetError: false, registerError: false})
+                // loginRetrieve()
+                // .then(res => {
+                //     setLoginData({email: res.email, password: res.password, isValidEmail: true})
+                // })
+                // .catch(err => {
+                //     console.log(err)
+                // })
                 Snackbar.show({
                     text: 'Please fill all fields correctly',
                     duration: Snackbar.LENGTH_LONG,
@@ -65,6 +82,7 @@ const AuthProvider = ({children}) => {
             auth()
             .signInWithEmailAndPassword(email, password)
             .then(() => {
+                setScreenError({registerError: false, loginError: false, resetError: false})
                 Snackbar.show({
                     text: 'Login Successful',
                     duration: Snackbar.LENGTH_SHORT,
@@ -73,13 +91,16 @@ const AuthProvider = ({children}) => {
                 })
             })
             .catch(error => {
+                setScreenError({loginError: true, registerError: false, resetError: false})
                 firebaseAuthenticationError(error)
             })
             .finally(() => {
                 setLoading(false)
             })
         }
+
         //################################## RESET PASSWORD BEGINS #################################################
+
         const handleResetEmail = (email) => {
             email = email.trim()
             let reg = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(email)
@@ -96,6 +117,7 @@ const AuthProvider = ({children}) => {
                 resetPassword(resetEmail.email)
             }
             else{
+               setScreenError({resetError: true, registerError: false, loginError: false})
                 Snackbar.show({
                     text: 'Please enter a valid email',
                     duration: Snackbar.LENGTH_LONG,
@@ -107,21 +129,26 @@ const AuthProvider = ({children}) => {
         const resetPassword = (email) => {
             auth().sendPasswordResetEmail(email)
             .then(() => {
-            Snackbar.show({
-                text: 'Password reset link has been sent to your email',
-                duration: Snackbar.LENGTH_LONG,
-                textColor: 'white',
-                backgroundColor: '#AD40AF',
+                //reset error screen
+                setScreenError({registerError: false, loginError: false, resetError: false})
+                Snackbar.show({
+                    text: 'Password reset link has been sent to your email',
+                    duration: Snackbar.LENGTH_LONG,
+                    textColor: 'white',
+                    backgroundColor: '#AD40AF',
+                })
             })
-        })
             .catch(error => {
+                setScreenError({resetError: true, registerError: false, loginError: false})
                 firebaseAuthenticationError(error)
             })
             .finally(() => {
                 setLoading(false)
             })
         }
+
         //################################## RESET PASSWORD ENDS #################################################
+
         const handleLogOut = () => {
             auth()
             .signOut()
@@ -141,8 +168,9 @@ const AuthProvider = ({children}) => {
     /*#########################################################################################################
     #                                       REGISTRATION VALIDATIONS                                          #
     #########################################################################################################*/
+
     const registrationValidation = () => {
-        const [validData, setValidData] = useState({
+        const [registerData, setRegisterData] = useState({
             firstName: '',
             lastName: '',
             email: '',
@@ -158,24 +186,26 @@ const AuthProvider = ({children}) => {
             isValidPhoneNumber: true,
             isValidDateOfBirth: true,
         })
+
+        const {registrationStore, registrationRetrieve, registrationRemove} = asyncStorage()
         
         const handleFirstName = (name) => {
             let reg = new RegExp(/^[a-zA-Z ]{3,16}$/).test(name)
             if(reg){
-                setValidData({...validData, firstName: name, isValidFirstName: true})
+                setRegisterData({...registerData, firstName: name, isValidFirstName: true})
             }
             else{
-                setValidData({...validData, firstName: name, isValidFirstName: false})
+                setRegisterData({...registerData, firstName: name, isValidFirstName: false})
             }
         }
     
         const handleLastName = (name) => {
             let reg = new RegExp(/^[a-zA-Z ]{3,16}$/).test(name)
             if(reg){
-                setValidData({...validData, lastName: name, isValidLastName: true})
+                setRegisterData({...registerData, lastName: name, isValidLastName: true})
             }
             else{
-                setValidData({...validData, lastName: name, isValidLastName: false})
+                setRegisterData({...registerData, lastName: name, isValidLastName: false})
             }
         }
     
@@ -183,29 +213,29 @@ const AuthProvider = ({children}) => {
             email = email.trim()
             let reg = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(email)
             if(reg){
-                setValidData({...validData, email: email, isValidEmail: true})
+                setRegisterData({...registerData, email: email, isValidEmail: true})
             }
             else{
-                setValidData({...validData, email: email, isValidEmail: false})
+                setRegisterData({...registerData, email: email, isValidEmail: false})
             }
         }
     
         const handlePassword = (password) => {
             let reg = new RegExp(/^(?=.*[a-z ])(?=.*[A-Z ])(?=.*\d)(?=.*[@$!%*?&,.])[A-Za-z \d@$!%*?&,.]{8,}$/).test(password)
             if(reg){
-                setValidData({...validData, password: password, isValidPassword: true})
+                setRegisterData({...registerData, password: password, isValidPassword: true})
             }
             else{
-                setValidData({...validData, password: password, isValidPassword: false})
+                setRegisterData({...registerData, password: password, isValidPassword: false})
             }
         }
     
         const handleConfirmPassword = (password) => {
-            if(password === validData.password){
-                setValidData({...validData, confirmPassword: password, isValidConfirmPassword: true})
+            if(password === registerData.password){
+                setRegisterData({...registerData, confirmPassword: password, isValidConfirmPassword: true})
             }
             else{
-                setValidData({...validData, confirmPassword: password, isValidConfirmPassword: false})
+                setRegisterData({...registerData, confirmPassword: password, isValidConfirmPassword: false})
             }
         }
     
@@ -213,33 +243,34 @@ const AuthProvider = ({children}) => {
             phoneNumber = phoneNumber.trim()
             let reg = new RegExp(/^[0-9]{10}$/).test(phoneNumber)
             if(reg){
-                setValidData({...validData, phoneNumber: phoneNumber, isValidPhoneNumber: true})
+                setRegisterData({...registerData, phoneNumber: phoneNumber, isValidPhoneNumber: true})
             }
             else{
-                setValidData({...validData, phoneNumber: phoneNumber, isValidPhoneNumber: false})
+                setRegisterData({...registerData, phoneNumber: phoneNumber, isValidPhoneNumber: false})
             }
         }
     
         const handleDateOfBirth = (dateOfBirth) => {
-            setValidData({...validData, dateOfBirth: dateOfBirth, isValidDateOfBirth: true})
+            setRegisterData({...registerData, dateOfBirth: dateOfBirth, isValidDateOfBirth: true})
         }
     
         const handleSubmit = () => {
-            if(validData.isValidFirstName && validData.isValidLastName && validData.isValidEmail && 
-                validData.isValidPassword && validData.isValidConfirmPassword && validData.isValidPhoneNumber && 
-                validData.isValidDateOfBirth && validData.firstName !== '' && validData.lastName !== '' && 
-                validData.email !== '' && validData.password !== '' && validData.confirmPassword !== '' && 
-                validData.phoneNumber !== '' && validData.dateOfBirth !== ''){
+            if(registerData.isValidFirstName && registerData.isValidLastName && registerData.isValidEmail && 
+                registerData.isValidPassword && registerData.isValidConfirmPassword && registerData.isValidPhoneNumber && 
+                registerData.isValidDateOfBirth && registerData.firstName !== '' && registerData.lastName !== '' && 
+                registerData.email !== '' && registerData.password !== '' && registerData.confirmPassword !== '' && 
+                registerData.phoneNumber !== '' && registerData.dateOfBirth !== ''){
                     
                 setLoading(true)
                // setTimeout(() => {
                     register(
-                        validData.firstName, validData.lastName, validData.email, 
-                        validData.password, validData.phoneNumber, validData.dateOfBirth
+                        registerData.firstName, registerData.lastName, registerData.email, 
+                        registerData.password, registerData.phoneNumber, registerData.dateOfBirth
                     )
                 //}, 5000)
             }
             else{
+                setScreenError({registerError: true, loginError: false, resetError: false})
                 Snackbar.show({
                     text: 'Please fill all fields correctly',
                     duration: Snackbar.LENGTH_LONG,
@@ -264,6 +295,8 @@ const AuthProvider = ({children}) => {
                     dob: dob,
                 })
                 .then(() => {
+                    //reset error state
+                    setScreenError({registerError: false, loginError: false, resetError: false})
                     Snackbar.show({
                         text: 'Registration Successful',
                         duration: Snackbar.LENGTH_SHORT,
@@ -273,6 +306,7 @@ const AuthProvider = ({children}) => {
                 });
             })
             .catch(error => {
+                setScreenError({registerError: true, loginError: false, resetError: false})
                 firebaseAuthenticationError(error)   
             })
             .finally(() => {
@@ -283,12 +317,12 @@ const AuthProvider = ({children}) => {
         return {
             handleFirstName, handleLastName, handleEmail, handlePassword, 
             handleConfirmPassword, handlePhoneNumber, handleDateOfBirth, 
-            handleSubmit, validData, setValidData,
+            handleSubmit, registerData, setRegisterData,
         }
     }
 
     return(
-        <AuthContext.Provider value={{loginValidation, registrationValidation, loading, user}}>
+        <AuthContext.Provider value={{loginValidation, registrationValidation, loading, user, screenError}}>
             {children}
         </AuthContext.Provider>
     )
