@@ -2,6 +2,7 @@ import React, {useState, useEffect, createContext} from "react"
 import Snackbar from 'react-native-snackbar'
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
+import { GoogleSignin } from '@react-native-google-signin/google-signin'
 import errors from "./errors"
 import asyncStorage from "./AsyncStorage"
 
