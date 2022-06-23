@@ -121,8 +121,8 @@ const RegisterScreen = ({navigation}) => {
                             onBlur={() => {registerData.password.length == 0 ? setRegisterData({...registerData, isValidPassword: false}) : null}}
                         />
                         <TouchableOpacity onPress={() => {setVisibility(!visibility)}}>
-                            {visibility? <MaterialIcons name="visibility" size ={20} style = {RegisterStyle.icon}/>:
-                            <MaterialIcons name="visibility-off" size ={20} style = {RegisterStyle.icon}/>}
+                            {visibility? <MaterialIcons name="visibility-off" size ={20} style = {RegisterStyle.icon}/>:
+                            <MaterialIcons name="visibility" size ={20} style = {RegisterStyle.icon}/>}
                         </TouchableOpacity>
                     </View>
                     {registerData.isValidPassword ? null :
@@ -143,8 +143,8 @@ const RegisterScreen = ({navigation}) => {
                             onBlur={() => {registerData.confirmPassword.length == 0 ? setRegisterData({...registerData, isValidConfirmPassword: false}) : null}}
                         /> 
                         <TouchableOpacity onPress={() => {setVisibility(!visibility)}}>
-                            {visibility? <MaterialIcons name="visibility" size ={20} style = {RegisterStyle.icon}/>:
-                            <MaterialIcons name="visibility-off" size ={20} style = {RegisterStyle.icon}/>}
+                            {visibility? <MaterialIcons name="visibility-off" size ={20} style = {RegisterStyle.icon}/>:
+                            <MaterialIcons name="visibility" size ={20} style = {RegisterStyle.icon}/>}
                         </TouchableOpacity>
                     </View>
                     {registerData.isValidConfirmPassword ? null :

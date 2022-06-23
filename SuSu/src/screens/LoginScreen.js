@@ -55,14 +55,15 @@ const LoginScreen = ({navigation}) => {
                             secureTextEntry = {visibility}
                         />
                         <TouchableOpacity onPress={() => {setVisibility(!visibility)}}>
-                            {visibility? <MaterialIcons name="visibility" size ={20} style = {LoginStyle.icon}/>:
-                            <MaterialIcons name="visibility-off" size ={20} style = {LoginStyle.icon}/>}
+                            {visibility? <MaterialIcons name="visibility-off" size ={20} style = {LoginStyle.icon}/>:
+                            <MaterialIcons name="visibility" size ={20} style = {LoginStyle.icon}/>}
                         </TouchableOpacity>
                     </View>
-
+                    <View style = {LoginStyle.view6}>
                     <TouchableOpacity onPress={() => {navigation.navigate('ResetPassword')}} style = {LoginStyle.forgotOpacity}>
                         <Text style = {LoginStyle.forgotPassword}>Forgot Password?</Text>
                     </TouchableOpacity>
+                    </View>
                     <View style = {LoginStyle.view4}>
                         <Text style = {LoginStyle.view4Text}>Don't have an account?</Text>
                         <TouchableOpacity onPress={() => navigation.navigate('Register')} style = {LoginStyle.signupOpacity}>

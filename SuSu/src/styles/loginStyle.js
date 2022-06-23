@@ -34,6 +34,9 @@ const LoginStyle = StyleSheet.create({
         alignSelf: "center",
         paddingBottom: 15,
     },
+    view6: {
+        alignSelf: 'flex-start'
+    },
     view4Text: {
         color: "#8A8A8A",
     },

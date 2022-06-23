@@ -61,14 +61,11 @@ const AuthProvider = ({children}) => {
                 login(loginData.email, loginData.password)
             }
             else{
-                // setScreenError({loginError: true, resetError: false, registerError: false})
-                // loginRetrieve()
-                // .then(res => {
-                //     setLoginData({email: res.email, password: res.password, isValidEmail: true})
-                // })
-                // .catch(err => {
-                //     console.log(err)
-                // })
+                setScreenError({loginError: true, resetError: false, registerError: false})
+                loginRetrieve()
+                .then(res => {
+                    setLoginData({email: res.email, password: res.password, isValidEmail: true})
+                })
                 Snackbar.show({
                     text: 'Please fill all fields correctly',
                     duration: Snackbar.LENGTH_LONG,
@@ -92,6 +89,12 @@ const AuthProvider = ({children}) => {
             })
             .catch(error => {
                 setScreenError({loginError: true, registerError: false, resetError: false})
+                loginRetrieve()
+                .then((res) => {
+                    console.log(`Response: ${JSON.stringify(res.email)}`)
+
+                    setLoginData({email: res.email, password: res.password, isValidEmail: true})
+                })
                 firebaseAuthenticationError(error)
             })
             .finally(() => {
@@ -114,10 +117,11 @@ const AuthProvider = ({children}) => {
         const handleResetPassword = () => {
             if(resetEmail.isValidEmail && resetEmail.email !== ''){
                 setLoading(true)
+                resetStore(resetEmail)
                 resetPassword(resetEmail.email)
             }
             else{
-               setScreenError({resetError: true, registerError: false, loginError: false})
+                setScreenError({resetError: true, registerError: false, loginError: false})
                 Snackbar.show({
                     text: 'Please enter a valid email',
                     duration: Snackbar.LENGTH_LONG,
@@ -262,6 +266,7 @@ const AuthProvider = ({children}) => {
                 registerData.phoneNumber !== '' && registerData.dateOfBirth !== ''){
                     
                 setLoading(true)
+                registrationStore(registerData)
                // setTimeout(() => {
                     register(
                         registerData.firstName, registerData.lastName, registerData.email, 
