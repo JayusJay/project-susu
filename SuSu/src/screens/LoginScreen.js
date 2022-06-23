@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react"
+import React, {useState, useEffect, useContext} from "react"
 import {View, Text, TextInput, TouchableOpacity, ScrollView, SafeAreaView} from "react-native"
 import LoginStyle from "../styles/loginStyle"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
@@ -6,11 +6,23 @@ import Ionicons from "react-native-vector-icons/Ionicons"
 import LoginSVG from "../assets/images/sampleLogo.svg"
 import GoogleSVG from "../assets/images/google.svg"
 import {AuthContext} from "../components/AuthContext"
+import asyncStorage from "../components/AsyncStorage"
 
 const LoginScreen = ({navigation}) => {
     const [visibility, setVisibility] = useState(true)
-    const { loginValidation } = useContext(AuthContext)
+    const { loginValidation} = useContext(AuthContext)
     const {handleEmail, handleLogin, loginData, setLoginData} = loginValidation()
+    //const disabled = () => (loginData.email == '' || loginData.password == '') ? true : false
+    const {loginRetrieve} = asyncStorage()
+    
+        useEffect(() => {
+            loginRetrieve().then(data => setLoginData({
+                ...loginData,
+                email: data.email,
+                password: data.password
+            }))
+            .catch(err => console.log(err))
+        }, [])
 
     return(
         <SafeAreaView style={LoginStyle.SafeAreaView}>
@@ -70,7 +82,7 @@ const LoginScreen = ({navigation}) => {
                             <Text style = {LoginStyle.signupText}> Sign up</Text>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={() => {handleLogin()}} style = {LoginStyle.loginOpacity}>
+                    <TouchableOpacity onPress={() => {handleLogin()}} style = {LoginStyle.loginOpacity} >
                         <Text style = {LoginStyle.loginText}>Login</Text>
                     </TouchableOpacity>
                     <Text style = {LoginStyle.alternate}>Or login with ...</Text>

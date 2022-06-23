@@ -1,12 +1,18 @@
-import React, {useContext} from "react";
+import React, {useEffect, useContext} from "react";
 import { SafeAreaView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import { AuthContext } from "../components/AuthContext";
 import ResetPasswordStyle from "../styles/resetPasswordStyle";
+import asyncStorage from "../components/AsyncStorage";
 
 const ResetPasswordScreen = () => {
     const { loginValidation } = useContext(AuthContext);
     const {handleResetEmail,handleResetPassword, resetEmail, setResetEmail} = loginValidation()
+    const {resetRetrieve} = asyncStorage()
+    useEffect(() => {
+        resetRetrieve().then(data => setResetEmail({...resetEmail, email: data.email}))
+        .catch(err => console.log(err))
+    }, [])
     return (
         <SafeAreaView style={ResetPasswordStyle.SafeAreaView}>
             <Text style = {ResetPasswordStyle.text}>ResetPasswordScreen</Text>

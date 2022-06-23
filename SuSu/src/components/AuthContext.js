@@ -2,7 +2,7 @@ import React, {useState, useEffect, createContext} from "react"
 import Snackbar from 'react-native-snackbar'
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
-import { GoogleSignin } from '@react-native-google-signin/google-signin'
+//import { GoogleSignin } from '@react-native-google-signin/google-signin'
 import errors from "./errors"
 import asyncStorage from "./AsyncStorage"
 
@@ -42,7 +42,7 @@ const AuthProvider = ({children}) => {
             email: '',
             isValidEmail: true,
         });
-        const {loginStore, loginRetrieve, loginRemove, resetStore, resetRetrieve, resetRemove} = asyncStorage()
+        const {loginStore, loginRemove, resetStore, resetRemove} = asyncStorage()
 
         const handleEmail = (email) => {
             email = email.trim()
@@ -58,15 +58,13 @@ const AuthProvider = ({children}) => {
         const handleLogin = () => {
             if(loginData.isValidEmail && loginData.email !== '' && loginData.password !== ''){
                 setLoading(true)
+                //store login data in async storage
                 loginStore(loginData)
                 login(loginData.email, loginData.password)
             }
             else{
                 setScreenError({loginError: true, resetError: false, registerError: false})
-                loginRetrieve()
-                .then(res => {
-                    setLoginData({email: res.email, password: res.password, isValidEmail: true})
-                })
+                
                 Snackbar.show({
                     text: 'Please fill all fields correctly',
                     duration: Snackbar.LENGTH_LONG,
@@ -79,8 +77,10 @@ const AuthProvider = ({children}) => {
             password = password.trim()
             auth()
             .signInWithEmailAndPassword(email, password)
-            .then(() => {
+            .then(async() => {
                 setScreenError({registerError: false, loginError: false, resetError: false})
+                //remove login data from AsyncStorage
+                await loginRemove()
                 Snackbar.show({
                     text: 'Login Successful',
                     duration: Snackbar.LENGTH_SHORT,
@@ -90,16 +90,10 @@ const AuthProvider = ({children}) => {
             })
             .catch(error => {
                 setScreenError({loginError: true, registerError: false, resetError: false})
-                loginRetrieve()
-                .then((res) => {
-                    console.log(`Response: ${JSON.stringify(res.email)}`)
-
-                    setLoginData({email: res.email, password: res.password, isValidEmail: true})
-                })
                 firebaseAuthenticationError(error)
             })
             .finally(() => {
-                setLoading(false)
+                setLoading(false) 
             })
         }
 
@@ -118,6 +112,7 @@ const AuthProvider = ({children}) => {
         const handleResetPassword = () => {
             if(resetEmail.isValidEmail && resetEmail.email !== ''){
                 setLoading(true)
+                //store email in AsyncStorage
                 resetStore(resetEmail)
                 resetPassword(resetEmail.email)
             }
@@ -133,9 +128,11 @@ const AuthProvider = ({children}) => {
         }
         const resetPassword = (email) => {
             auth().sendPasswordResetEmail(email)
-            .then(() => {
+            .then(async() => {
                 //reset error screen
                 setScreenError({registerError: false, loginError: false, resetError: false})
+                //remove reset email from AsyncStorage
+                await resetRemove()
                 Snackbar.show({
                     text: 'Password reset link has been sent to your email',
                     duration: Snackbar.LENGTH_LONG,
@@ -192,7 +189,7 @@ const AuthProvider = ({children}) => {
             isValidDateOfBirth: true,
         })
 
-        const {registrationStore, registrationRetrieve, registrationRemove} = asyncStorage()
+        const {registrationStore, registrationRemove} = asyncStorage()
         
         const handleFirstName = (name) => {
             let reg = new RegExp(/^[a-zA-Z ]{3,16}$/).test(name)
@@ -264,9 +261,10 @@ const AuthProvider = ({children}) => {
                 registerData.isValidPassword && registerData.isValidConfirmPassword && registerData.isValidPhoneNumber && 
                 registerData.isValidDateOfBirth && registerData.firstName !== '' && registerData.lastName !== '' && 
                 registerData.email !== '' && registerData.password !== '' && registerData.confirmPassword !== '' && 
-                registerData.phoneNumber !== '' && registerData.dateOfBirth !== ''){
+                registerData.phoneNumber !== '' && registerData.dateOfBirth.getFullYear() !== new Date().getFullYear()){
                     
                 setLoading(true)
+                //store registration data in AsyncStorage
                 registrationStore(registerData)
                // setTimeout(() => {
                     register(
@@ -300,9 +298,11 @@ const AuthProvider = ({children}) => {
                     phoneNumber: phoneNumber,
                     dob: dob,
                 })
-                .then(() => {
+                .then(async () => {
                     //reset error state
                     setScreenError({registerError: false, loginError: false, resetError: false})
+                    //remove registration data from AsyncStorage
+                    await registrationRemove()
                     Snackbar.show({
                         text: 'Registration Successful',
                         duration: Snackbar.LENGTH_SHORT,

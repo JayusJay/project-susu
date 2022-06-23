@@ -1,12 +1,13 @@
-import React, {useState, useContext} from "react"
+import React, {useState, useEffect, useContext} from "react"
 import {View, Text, TextInput, TouchableOpacity, ScrollView, SafeAreaView} from "react-native"
 import RegisterStyle from "../styles/RegisterStyle"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import Ionicons from "react-native-vector-icons/Ionicons"
 import SVG from "../assets/images/sampleLogo.svg"
 import GoogleSVG from "../assets/images/google.svg"
-import { AuthContext, AuthProvider } from "../components/AuthContext"
+import { AuthContext} from "../components/AuthContext"
 import DatePicker from 'react-native-date-picker'
+import asyncStorage from "../components/AsyncStorage"
 
 const RegisterScreen = ({navigation}) => {
 
@@ -28,6 +29,20 @@ const RegisterScreen = ({navigation}) => {
     const [open, setOpen] = useState(false)
     const [DoBLabel, setDoBLabel] = useState("Date of Birth")
     const [visibility, setVisibility] = useState(true)
+    const {registrationRetrieve} = asyncStorage()
+    useEffect(() => {
+        registrationRetrieve().then(data => setRegisterData({
+            ...registerData,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            password: data.password,
+            confirmPassword: data.confirmPassword,
+            phoneNumber: data.phoneNumber,
+        }))
+        .catch(err => console.log(err))
+    }, [])
+
     return(
         <SafeAreaView style={RegisterStyle.SafeAreaView}>
             <ScrollView showsVerticalScrollIndicator = {false}>
