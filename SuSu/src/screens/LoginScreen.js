@@ -11,8 +11,7 @@ import asyncStorage from "../components/AsyncStorage"
 const LoginScreen = ({navigation}) => {
     const [visibility, setVisibility] = useState(true)
     const { loginValidation} = useContext(AuthContext)
-    const {handleEmail, handleLogin, loginData, setLoginData} = loginValidation()
-    //const disabled = () => (loginData.email == '' || loginData.password == '') ? true : false
+    const {handleEmail, handleLogin, handleGoogleSignIn, loginData, setLoginData} = loginValidation()
     const {loginRetrieve} = asyncStorage()
     
         useEffect(() => {
@@ -87,7 +86,7 @@ const LoginScreen = ({navigation}) => {
                     </TouchableOpacity>
                     <Text style = {LoginStyle.alternate}>Or login with ...</Text>
                     <View style = {LoginStyle.view5}>
-                        <TouchableOpacity onPress={() => {}}>
+                        <TouchableOpacity onPress={() => {handleGoogleSignIn()}}>
                             <GoogleSVG height = {40} width = {40}/>
                         </TouchableOpacity>
                     </View>

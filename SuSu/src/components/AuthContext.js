@@ -2,7 +2,7 @@ import React, {useState, useEffect, createContext} from "react"
 import Snackbar from 'react-native-snackbar'
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
-//import { GoogleSignin } from '@react-native-google-signin/google-signin'
+import { GoogleSignin } from '@react-native-google-signin/google-signin'
 import errors from "./errors"
 import asyncStorage from "./AsyncStorage"
 
@@ -22,6 +22,9 @@ const AuthProvider = ({children}) => {
       setUser(user);
       setLoading(false)
     }
+    GoogleSignin.configure({
+        webClientId: "874120969609-frjb44rnlnih5eqnqcpk97buq4e6f7rb.apps.googleusercontent.com",
+    });
     //prevent continous re-rendering
     useEffect(() => {
       const subscriber = auth().onAuthStateChanged(onAuthStateChanged)
@@ -60,7 +63,9 @@ const AuthProvider = ({children}) => {
                 setLoading(true)
                 //store login data in async storage
                 loginStore(loginData)
+                //setTimeout(() => {
                 login(loginData.email, loginData.password)
+                //}, 5000)
             }
             else{
                 setScreenError({loginError: true, resetError: false, registerError: false})
@@ -96,7 +101,25 @@ const AuthProvider = ({children}) => {
                 setLoading(false) 
             })
         }
-
+        //##################################GOOGLE SIGNIN ##########################################################
+        const handleGoogleSignIn = async () => {
+            try{
+                const userInfo = await GoogleSignin.signIn();
+                const credential = auth.GoogleAuthProvider.credential(userInfo.idToken, userInfo.accessToken)
+                await auth().signInWithCredential(credential)
+                
+                Snackbar.show({
+                    text: 'Login Successful',
+                    duration: Snackbar.LENGTH_SHORT,
+                    textColor: 'white',
+                    backgroundColor: '#AD40AF',
+                })
+            }
+            catch(error){
+                setScreenError({loginError: true, registerError: false, resetError: false})
+                //firebaseAuthenticationError(error)
+            }
+        }
         //################################## RESET PASSWORD BEGINS #################################################
 
         const handleResetEmail = (email) => {
@@ -152,6 +175,7 @@ const AuthProvider = ({children}) => {
         //################################## RESET PASSWORD ENDS #################################################
 
         const handleLogOut = () => {
+            setLoading(true)
             auth()
             .signOut()
             .then(() => Snackbar.show({
@@ -159,9 +183,12 @@ const AuthProvider = ({children}) => {
                 duration: Snackbar.LENGTH_SHORT,
                 textColor: 'white',
                 backgroundColor: '#AD40AF',
-            }));
+            }))
+            .finally(() => {
+                setLoading(false)
+            })
         }
-        return {handleEmail, handleLogin, handleLogOut, handleResetEmail, 
+        return {handleEmail, handleLogin, handleLogOut, handleGoogleSignIn , handleResetEmail, 
             handleResetPassword, loginData, setLoginData, resetEmail, setResetEmail
         }
     }

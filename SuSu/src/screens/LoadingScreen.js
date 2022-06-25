@@ -1,8 +1,8 @@
 import React from "react";
-import { SafeAreaView, View, StyleSheet,useColorScheme } from "react-native";
+import { SafeAreaView, View, StyleSheet, useColorScheme } from "react-native";
 import LottieView from 'lottie-react-native'
 
-const LoadingScreen = ({navigation}) => {
+const LoadingScreen = () => {
     const colorScheme = useColorScheme();
     const color = colorScheme === 'dark' ? '#fff' : '#000';
     return (
