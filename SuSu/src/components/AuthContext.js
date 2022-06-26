@@ -17,6 +17,7 @@ const AuthProvider = ({children}) => {
         resetError: false,
         registerError: false,
     });
+    const [showDialog, setShowDialog] = useState(false);
     const firebaseAuthenticationError = errors()
     const onAuthStateChanged = (user) => {
       setUser(user);
@@ -101,8 +102,9 @@ const AuthProvider = ({children}) => {
                 setLoading(false) 
             })
         }
-        //##################################GOOGLE SIGNIN ##########################################################
+        //################################## GOOGLE SIGNIN ##########################################################
         const handleGoogleSignIn = async () => {
+            //check user gmail exists?? if true, signin with email&&password credentials and then link accounts.
             try{
                 const userInfo = await GoogleSignin.signIn();
                 const credential = auth.GoogleAuthProvider.credential(userInfo.idToken, userInfo.accessToken)
@@ -117,6 +119,7 @@ const AuthProvider = ({children}) => {
             }
             catch(error){
                 setScreenError({loginError: true, registerError: false, resetError: false})
+                console.log(error)
                 //firebaseAuthenticationError(error)
             }
         }
@@ -174,19 +177,37 @@ const AuthProvider = ({children}) => {
 
         //################################## RESET PASSWORD ENDS #################################################
 
-        const handleLogOut = () => {
+        const handleLogOut = async () => {
             setLoading(true)
-            auth()
-            .signOut()
-            .then(() => Snackbar.show({
-                text: 'User signed out',
-                duration: Snackbar.LENGTH_SHORT,
-                textColor: 'white',
-                backgroundColor: '#AD40AF',
-            }))
-            .finally(() => {
-                setLoading(false)
-            })
+            if(await GoogleSignin.isSignedIn()){
+                GoogleSignin.signOut()
+                .then(() => {
+                    auth().signOut()
+                    Snackbar.show({
+                        text: 'Gmail user signed out',
+                        duration: Snackbar.LENGTH_SHORT,
+                        textColor: 'white',
+                        backgroundColor: '#AD40AF',
+                    })
+                })
+                .finally(() => {
+                    setLoading(false)
+                })
+            }
+            else{
+                auth()
+                .signOut()
+                .then(() => Snackbar.show({
+                    text: 'User signed out',
+                    duration: Snackbar.LENGTH_SHORT,
+                    textColor: 'white',
+                    backgroundColor: '#AD40AF',
+                }))
+                .finally(() => {
+                    setLoading(false)
+                })
+            }
+        
         }
         return {handleEmail, handleLogin, handleLogOut, handleGoogleSignIn , handleResetEmail, 
             handleResetPassword, loginData, setLoginData, resetEmail, setResetEmail
@@ -355,7 +376,8 @@ const AuthProvider = ({children}) => {
     }
 
     return(
-        <AuthContext.Provider value={{loginValidation, registrationValidation, loading, user, screenError}}>
+        <AuthContext.Provider value={{loginValidation, registrationValidation, loading, user, 
+        screenError, showDialog, setShowDialog}}>
             {children}
         </AuthContext.Provider>
     )

@@ -5,6 +5,7 @@ import LandingScreen from '../screens/LandingScreen';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import LoadingScreen from '../screens/LoadingScreen';
+import DialogScreen from '../screens/DialogScreen';
 import { AuthContext } from "../components/AuthContext";
 const stack = createNativeStackNavigator();
 
