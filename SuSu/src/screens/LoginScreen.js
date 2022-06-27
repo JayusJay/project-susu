@@ -7,22 +7,25 @@ import LoginSVG from "../assets/images/sampleLogo.svg"
 import GoogleSVG from "../assets/images/google.svg"
 import {AuthContext} from "../components/AuthContext"
 import asyncStorage from "../components/AsyncStorage"
+import DialogScreen from "./DialogScreen"
+
 
 const LoginScreen = ({navigation}) => {
     const [visibility, setVisibility] = useState(true)
-    const { loginValidation} = useContext(AuthContext)
+    const { loginValidation, dialogData } = useContext(AuthContext)
     const {handleEmail, handleLogin, handleGoogleSignIn, loginData, setLoginData} = loginValidation()
     const {loginRetrieve} = asyncStorage()
     
-        useEffect(() => {
-            loginRetrieve().then(data => setLoginData({
-                ...loginData,
-                email: data.email,
-                password: data.password
-            }))
-            .catch(err => console.log(err))
-        }, [])
+    useEffect(() => {
+        loginRetrieve().then(data => setLoginData({
+            ...loginData,
+            email: data.email,
+            password: data.password
+        }))
+        .catch(err => console.log(err))
+    }, [])
 
+    if(dialogData.showDialog) return <DialogScreen/>
     return(
         <SafeAreaView style={LoginStyle.SafeAreaView}>
             <ScrollView>

@@ -11,7 +11,7 @@ import asyncStorage from "../components/AsyncStorage"
 
 const RegisterScreen = ({navigation}) => {
 
-    const {registrationValidation} = useContext(AuthContext)
+    const {registrationValidation, loginValidation} = useContext(AuthContext)
 
     const {
         handleFirstName, 
@@ -25,7 +25,7 @@ const RegisterScreen = ({navigation}) => {
         registerData, 
         setRegisterData,
     } = registrationValidation()
-
+    const {handleGoogleSignIn} = loginValidation()
     const [open, setOpen] = useState(false)
     const [DoBLabel, setDoBLabel] = useState("Date of Birth")
     const [visibility, setVisibility] = useState(true)
@@ -199,7 +199,7 @@ const RegisterScreen = ({navigation}) => {
                     </TouchableOpacity>
                     <Text style = {RegisterStyle.alternate}>Or SignUp with ...</Text>
                     <View style = {RegisterStyle.view5}>
-                        <TouchableOpacity onPress={() => {}}>
+                        <TouchableOpacity onPress={() => {handleGoogleSignIn()}}>
                             <GoogleSVG height = {40} width = {40}/>
                         </TouchableOpacity>
                     </View>

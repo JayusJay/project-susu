@@ -17,7 +17,13 @@ const AuthProvider = ({children}) => {
         resetError: false,
         registerError: false,
     });
-    const [showDialog, setShowDialog] = useState(false);
+    //const [showDialog, setShowDialog] = useState(false);
+    const [dialogData, setDialogData] = useState({
+        gmail: "",
+        password: "",
+        credential: null,
+        showDialog: false,
+    });
     const firebaseAuthenticationError = errors()
     const onAuthStateChanged = (user) => {
       setUser(user);
@@ -25,6 +31,7 @@ const AuthProvider = ({children}) => {
     }
     GoogleSignin.configure({
         webClientId: "874120969609-frjb44rnlnih5eqnqcpk97buq4e6f7rb.apps.googleusercontent.com",
+        scopes: ['email', 'profile']
     });
     //prevent continous re-rendering
     useEffect(() => {
@@ -104,25 +111,62 @@ const AuthProvider = ({children}) => {
         }
         //################################## GOOGLE SIGNIN ##########################################################
         const handleGoogleSignIn = async () => {
-            //check user gmail exists?? if true, signin with email&&password credentials and then link accounts.
+           // check user gmail exists?? if true, signin with email&&password credentials and then link accounts.
             try{
                 const userInfo = await GoogleSignin.signIn();
+                const gmail = userInfo.user.email
                 const credential = auth.GoogleAuthProvider.credential(userInfo.idToken, userInfo.accessToken)
-                await auth().signInWithCredential(credential)
-                
-                Snackbar.show({
-                    text: 'Login Successful',
-                    duration: Snackbar.LENGTH_SHORT,
-                    textColor: 'white',
-                    backgroundColor: '#AD40AF',
-                })
+                auth().fetchSignInMethodsForEmail(gmail).then(async(providers) => {
+                    if (providers[0] == auth.EmailAuthProvider.PROVIDER_ID){
+                        //set dialog visible, ask user for password and continue to handleDialog()
+                        setDialogData({...dialogData, gmail: gmail, credential: credential, showDialog: true})
+                    }
+                    else{
+                        await auth().signInWithCredential(credential)
+                        
+                        Snackbar.show({
+                            text: 'Login Successful',
+                            duration: Snackbar.LENGTH_SHORT,
+                            textColor: 'white',
+                            backgroundColor: '#AD40AF',
+                        })
+                    }
+                })    
             }
             catch(error){
-                setScreenError({loginError: true, registerError: false, resetError: false})
-                console.log(error)
-                //firebaseAuthenticationError(error)
+                setScreenError({loginError: true, registerError: false, resetError: false})            
+                firebaseAuthenticationError(error)
             }
         }
+        const handleDialog = () => {
+            setLoading(true)
+            setDialogData({...dialogData, showDialog: false})
+            if(dialogData.password !== ""){
+                dialogData.password = dialogData.password.trim()
+                auth().signInWithEmailAndPassword(dialogData.gmail, dialogData.password)
+                .then(async(result) => {
+                    result.user.linkWithCredential(dialogData.credential)
+                    setScreenError({registerError: false, loginError: false, resetError: false})
+                    setDialogData({gmail: '', password: '', credential: null, showDialog: false})
+                    Snackbar.show({
+                        text: 'Login and Linking Successful',
+                        duration: Snackbar.LENGTH_SHORT,
+                        textColor: 'white',
+                        backgroundColor: '#AD40AF',
+                    })
+                })
+                .catch(error => {
+                    setScreenError({loginError: true, registerError: false, resetError: false})
+                    setDialogData({...dialogData, showDialog: true})
+                    firebaseAuthenticationError(error)
+                })
+                .finally(() => {
+                    setLoading(false) 
+                })
+            }
+        }
+
+
         //################################## RESET PASSWORD BEGINS #################################################
 
         const handleResetEmail = (email) => {
@@ -210,7 +254,7 @@ const AuthProvider = ({children}) => {
         
         }
         return {handleEmail, handleLogin, handleLogOut, handleGoogleSignIn , handleResetEmail, 
-            handleResetPassword, loginData, setLoginData, resetEmail, setResetEmail
+            handleResetPassword, handleDialog, loginData, setLoginData, resetEmail, setResetEmail
         }
     }
 
@@ -377,7 +421,7 @@ const AuthProvider = ({children}) => {
 
     return(
         <AuthContext.Provider value={{loginValidation, registrationValidation, loading, user, 
-        screenError, showDialog, setShowDialog}}>
+        screenError, dialogData, setDialogData}}>
             {children}
         </AuthContext.Provider>
     )
