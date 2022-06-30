@@ -1,17 +1,14 @@
 import React from "react";
-import { SafeAreaView, View, StyleSheet, useColorScheme } from "react-native";
-import LottieView from 'lottie-react-native'
+import { ActivityIndicator, SafeAreaView, useColorScheme} from "react-native";
+import activityIndicatorStyle from "../styles/activityIndicatorStyle";
 
 const LoadingScreen = () => {
     const colorScheme = useColorScheme();
     const color = colorScheme === 'dark' ? '#fff' : '#000';
     return (
-        <SafeAreaView style={[StyleSheet.absoluteFillObject,{ flex: 1, backgroundColor: color }]}>
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <LottieView source={require('../assets/loader.json')} autoPlay loop />
-            </View>
-        </SafeAreaView>  
+        <SafeAreaView style = {[activityIndicatorStyle.container, activityIndicatorStyle.horizontal, {backgroundColor: color}]}>
+            <ActivityIndicator size="large" color="#AD40AF" />
+        </SafeAreaView>
     );
 }
-
 export default LoadingScreen;

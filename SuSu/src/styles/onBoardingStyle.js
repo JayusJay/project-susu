@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const LandingStyle = StyleSheet.create({
+const OnBoardingStyle = StyleSheet.create({
     SafeAreaView: {
         flex: 1,
         backgroundColor: "#fff",
@@ -32,4 +32,4 @@ const LandingStyle = StyleSheet.create({
         marginBottom: 5,
     },
 })
-export default LandingStyle;    
+export default OnBoardingStyle;    

@@ -31,7 +31,7 @@ const LoginScreen = ({navigation}) => {
             <ScrollView>
                 <View style={LoginStyle.view1}>
                     <View style = {LoginStyle.view2}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Landing')}>
+                        <TouchableOpacity onPress={() => navigation.navigate('OnBoarding')}>
                             <LoginSVG height = {200} width = {200}/>
                         </TouchableOpacity>
                     </View>

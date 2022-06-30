@@ -48,7 +48,7 @@ const RegisterScreen = ({navigation}) => {
             <ScrollView showsVerticalScrollIndicator = {false}>
                 <View style={RegisterStyle.view1}>
                     <View style = {RegisterStyle.view2}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Landing')}>
+                        <TouchableOpacity onPress={() => navigation.navigate('OnBoarding')}>
                             <SVG height = {200} width = {200}/>
                         </TouchableOpacity>
                     </View>
