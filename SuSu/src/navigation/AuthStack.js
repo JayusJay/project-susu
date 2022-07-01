@@ -9,7 +9,7 @@ import { AuthContext } from '../components/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const stack = createNativeStackNavigator();
+const authStack = createNativeStackNavigator();
 
 const AuthStack = () => {
   const [isFirstLauch, setIsFirstLaunch] = useState(null);
@@ -33,13 +33,13 @@ const AuthStack = () => {
   firstRoute = isFirstLauch? "OnBoarding" : "Login";
 
   return (
-    <stack.Navigator initialRouteName={firstRoute}>
-        <stack.Screen component={OnBoardingScreen} name = "OnBoarding" options={{headerShown: false}}/>
-        <stack.Screen component={LoginScreen} name = "Login" options={{headerShown: false}}/>
-        <stack.Screen component={RegisterScreen} name = "Register" options={{headerShown: false}}/>
-        <stack.Screen component={LoadingScreen} name = "Loading" options={{headerShown: false}}/>
-        <stack.Screen component={ResetPasswordScreen} name = "ResetPassword" options={{headerShown: false}}/>
-    </stack.Navigator>
+    <authStack.Navigator initialRouteName={firstRoute}>
+      <authStack.Screen component={OnBoardingScreen} name = "OnBoarding" options={{headerShown: false}}/>
+      <authStack.Screen component={LoginScreen} name = "Login" options={{headerShown: false}}/>
+      <authStack.Screen component={RegisterScreen} name = "Register" options={{headerShown: false}}/>
+      <authStack.Screen component={LoadingScreen} name = "Loading" options={{headerShown: false}}/>
+      <authStack.Screen component={ResetPasswordScreen} name = "ResetPassword" options={{headerShown: false}}/>
+    </authStack.Navigator>
   )
 }
 

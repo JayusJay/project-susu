@@ -99,6 +99,7 @@ const RegisterScreen = ({navigation}) => {
                             placeholderTextColor='#8A8A8A'
                             style = {RegisterStyle.textInput} 
                             keyboardType = "email-address"
+                            autoCapitalize="none"
                             onBlur={() => {registerData.email.length == 0 ? setRegisterData({...registerData, isValidEmail: false}) : null}}
                         />
                     </View>

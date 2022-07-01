@@ -138,6 +138,7 @@ const AuthProvider = ({children}) => {
                 firebaseAuthenticationError(error)
             }
         }
+
         const handleDialog = () => {
             setLoading(true)
             setDialogData({...dialogData, showDialog: false})
@@ -382,8 +383,9 @@ const AuthProvider = ({children}) => {
             .createUserWithEmailAndPassword(email, password)
             .then(() => {
                 firestore()
-                .collection('users')
-                .add({
+                .collection('users').doc(auth().currentUser.uid)
+                .set({
+                    uid: auth().currentUser.uid,
                     firstName: firstName,
                     lastName: lastName,
                     email: email,
@@ -401,7 +403,15 @@ const AuthProvider = ({children}) => {
                         textColor: 'white',
                         backgroundColor: '#AD40AF',
                     })
-                });
+                })
+                .catch(error => {
+                    Snackbar.show({
+                        text: error.message,
+                        duration: Snackbar.LENGTH_SHORT,
+                        textColor: 'white',
+                        backgroundColor: 'red',
+                    })
+                })
             })
             .catch(error => {
                 setScreenError({registerError: true, loginError: false, resetError: false})
