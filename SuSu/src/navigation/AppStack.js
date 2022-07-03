@@ -1,14 +1,16 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from '../screens/HomeScreen';
+import DrawerStack from './DrawerStack';
+import TabStack from './TabStack';
 
-const stack = createNativeStackNavigator();
+const appStack = createNativeStackNavigator();
 
 const AppStack = () => {
     return (
-        <stack.Navigator>
-        <stack.Screen component={HomeScreen} name = "Home" options={{headerShown: false}}/>
-        </stack.Navigator>
+        <appStack.Navigator>
+            <appStack.Screen component={DrawerStack} name = "Drawer" options={{headerShown: false}}/>
+            {/* <appStack.Screen component={TabStack} name = "Tab" options={{headerShown: false}}/> */}
+        </appStack.Navigator>
     )
 }
 export default AppStack;

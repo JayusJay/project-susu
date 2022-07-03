@@ -4,7 +4,7 @@ import { AuthContext } from '../components/AuthContext';
 import HomeStyle from '../styles/homeStyle'
 
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const { loginValidation } = useContext(AuthContext);
   const {handleLogOut} = loginValidation()
   return (
