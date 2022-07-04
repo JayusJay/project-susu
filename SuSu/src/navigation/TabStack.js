@@ -12,10 +12,11 @@ const tabStack = createBottomTabNavigator();
 const TabStack = () => {
   return (
     <tabStack.Navigator screenOptions={{
-            headerShown: false, tabBarShowLabel: false, 
-            tabBarStyle:{backgroundColor: "#AD04AF",},
-            tabBarInactiveTintColor: "#fff",
-            //tabBarActiveTintColor: "yellow",
+          headerShown: false, tabBarShowLabel: false, 
+          tabBarStyle:{backgroundColor: "#AD04AF", },
+          tabBarInactiveTintColor: "#fff",
+          //tabBarActiveTintColor: "#AD04AF",
+
         }}>
       <tabStack.Screen name="Tab-Home" component={HomeScreen} options = {{
         tabBarIcon: ({color, size}) => (
