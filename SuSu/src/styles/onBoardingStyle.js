@@ -22,7 +22,7 @@ const OnBoardingStyle = StyleSheet.create({
         color: "#fff",
     },
     starterOpacity: {
-        backgroundColor: "#AD40AF",
+        backgroundColor: "#7966FF",
         padding: 20,
         width: '100%',
         flexDirection: 'row',

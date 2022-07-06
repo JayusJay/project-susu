@@ -10,7 +10,7 @@ const LoginStyle = StyleSheet.create({
         fontFamily: "Roboto-medium",
         fontSize: 28,
         fontWeight: "500",
-        color: "#AD40AF",
+        color: "#7966FF",
         marginBottom: 20,
     },
     view1: {
@@ -61,11 +61,11 @@ const LoginStyle = StyleSheet.create({
         marginBottom: 15,
     },
     forgotPassword: {
-        color: "#AD40AF",
+        color: "#7966FF",
         fontWeight: "500",
     },
     signupText: {
-        color: "#AD40AF",
+        color: "#7966FF",
         fontWeight: "400",
         marginTop: 15,
     },
@@ -73,7 +73,7 @@ const LoginStyle = StyleSheet.create({
         marginTop: -15,
     },
     loginOpacity: {
-        backgroundColor: "#AD40AF",
+        backgroundColor: "#7966FF",
         padding: 20,
         borderRadius: 10,
         marginTop: 25,

@@ -10,9 +10,9 @@ const HomeScreen = ({navigation}) => {
   return (
     <SafeAreaView style = {HomeStyle.SafeAreaView}>
         <Text style = {HomeStyle.Text}>HomeScreen</Text>
-        <TouchableOpacity onPress={() => {handleLogOut()}} style = {HomeStyle.logoutOpacity}>
+        {/* <TouchableOpacity onPress={() => {handleLogOut()}} style = {HomeStyle.logoutOpacity}>
         <Text style = {{color: "#fff"}}>Log Out</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
     </SafeAreaView>
   )
 }

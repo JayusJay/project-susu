@@ -98,7 +98,7 @@ const AuthProvider = ({children}) => {
                     text: 'Login Successful',
                     duration: Snackbar.LENGTH_SHORT,
                     textColor: 'white',
-                    backgroundColor: '#AD40AF',
+                    backgroundColor: '#7966FF',
                 })
             })
             .catch(error => {
@@ -128,7 +128,7 @@ const AuthProvider = ({children}) => {
                             text: 'Login Successful',
                             duration: Snackbar.LENGTH_SHORT,
                             textColor: 'white',
-                            backgroundColor: '#AD40AF',
+                            backgroundColor: '#7966FF',
                         })
                     }
                 })    
@@ -153,7 +153,7 @@ const AuthProvider = ({children}) => {
                         text: 'Login and Linking Successful',
                         duration: Snackbar.LENGTH_SHORT,
                         textColor: 'white',
-                        backgroundColor: '#AD40AF',
+                        backgroundColor: '#7966FF',
                     })
                 })
                 .catch(error => {
@@ -208,7 +208,7 @@ const AuthProvider = ({children}) => {
                     text: 'Password reset link has been sent to your email',
                     duration: Snackbar.LENGTH_LONG,
                     textColor: 'white',
-                    backgroundColor: '#AD40AF',
+                    backgroundColor: '#7966FF',
                 })
             })
             .catch(error => {
@@ -232,7 +232,7 @@ const AuthProvider = ({children}) => {
                         text: 'Gmail user signed out',
                         duration: Snackbar.LENGTH_SHORT,
                         textColor: 'white',
-                        backgroundColor: '#AD40AF',
+                        backgroundColor: '#7966FF',
                     })
                 })
                 .finally(() => {
@@ -246,7 +246,7 @@ const AuthProvider = ({children}) => {
                     text: 'User signed out',
                     duration: Snackbar.LENGTH_SHORT,
                     textColor: 'white',
-                    backgroundColor: '#AD40AF',
+                    backgroundColor: '#7966FF',
                 }))
                 .finally(() => {
                     setLoading(false)
@@ -401,7 +401,7 @@ const AuthProvider = ({children}) => {
                         text: 'Registration Successful',
                         duration: Snackbar.LENGTH_SHORT,
                         textColor: 'white',
-                        backgroundColor: '#AD40AF',
+                        backgroundColor: '#7966FF',
                     })
                 })
                 .catch(error => {

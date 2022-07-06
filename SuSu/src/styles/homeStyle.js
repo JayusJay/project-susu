@@ -12,7 +12,7 @@ const HomeStyle = StyleSheet.create({
         marginTop: 10,
     },
     logoutOpacity: {
-        backgroundColor: "#AD40AF",
+        backgroundColor: "#7966FF",
         padding: 20,
         borderRadius: 10,
         marginTop: 25,

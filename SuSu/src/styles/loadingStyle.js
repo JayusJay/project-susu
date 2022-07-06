@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native"
-const activityIndicatorStyle = StyleSheet.create({
+const loadingStyle = StyleSheet.create({
     container: {
         flex: 1,
         //backgroundColor: "#fff",
@@ -11,4 +11,4 @@ const activityIndicatorStyle = StyleSheet.create({
         padding: 10,
     },
 })
-export default activityIndicatorStyle
+export default loadingStyle

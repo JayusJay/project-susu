@@ -1,12 +1,12 @@
 import React from 'react'
 import {Text, SafeAreaView} from 'react-native'
 
-const TransactionScreen = () => {
+const KnowledgeScreen = () => {
   return (
     <SafeAreaView style = {{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text style = {{color: 'red'}}>Transaction Screen</Text>
+        <Text style = {{color: 'red'}}>How it works Screen</Text>
     </SafeAreaView>
   )
 }
 
-export default TransactionScreen
+export default KnowledgeScreen

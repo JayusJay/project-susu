@@ -12,26 +12,27 @@ const tabStack = createBottomTabNavigator();
 const TabStack = () => {
   return (
     <tabStack.Navigator screenOptions={{
-          headerShown: false, tabBarShowLabel: false, 
-          tabBarStyle:{backgroundColor: "#AD04AF", },
-          tabBarInactiveTintColor: "#fff",
-          //tabBarActiveTintColor: "#AD04AF",
+        headerShown: false, tabBarShowLabel: false, 
+        tabBarStyle:{backgroundColor: "#7966FF", },
+        tabBarInactiveTintColor: "#AD04AF",
+        
+        tabBarActiveTintColor: "#fff",
 
-        }}>
+      }}>
       <tabStack.Screen name="Tab-Home" component={HomeScreen} options = {{
         tabBarIcon: ({color, size}) => (
-            <Ionicons name="home-outline" color={color} size={size} />
+          <Ionicons name="home-outline" color={color} size={size} />
         )
       }} />
       <tabStack.Screen name="Savings" component={SavingsScreen} options = {{
         tabBarIcon: ({color, size}) => (
-            <FontAwesomeIcon name="piggy-bank" color={color} size = {size}/>
-            // <MaterialCommunityIcons name="piggy-bank-outline" color={color} size = {size}/>
+          //<FontAwesomeIcon name="piggy-bank" color={color} size = {size}/>
+          <MaterialCommunityIcons name="piggy-bank-outline" color={color} size = {30}/>
         )
       }} />
       <tabStack.Screen name="Investment" component={InvestmentScreen} options = {{
         tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name = "bank-outline" color={color} size={size}/>
+          <MaterialCommunityIcons name = "bank-outline" color={color} size={size}/>
         )
       }} />
     </tabStack.Navigator>

@@ -21,7 +21,7 @@ const OnBoardingScreen = ({navigation}) => {
                 subtitle: 'Done with React Native Onboarding Swiper',
                 },
                 {
-                backgroundColor: '#AD40AF',
+                backgroundColor: '#7966FF',
                 image: <Image source={require('../assets/images/onBoardingImages/img3.png')} />,
                 title: 'Onboarding',
                 subtitle: 'Done with React Native Onboarding Swiper',
@@ -29,19 +29,5 @@ const OnBoardingScreen = ({navigation}) => {
             ]}
         />
     )
-    // return (
-    //     <SafeAreaView style={OnBoardingStyle.SafeAreaView}>
-    //         <View>
-    //             <Text style = {OnBoardingStyle.header}>Welcome to SaveApp</Text>
-    //         </View>
-    //         <View style = {OnBoardingStyle.view2}>
-    //         </View>
-    //         <TouchableOpacity style = {OnBoardingStyle.starterOpacity} onPress={() => navigation.navigate('Login')}> 
-    //            <Text style = {OnBoardingStyle.text}>Get Started</Text>
-    //            <MaterialIcons name = 'arrow-forward' size={22} color="#fff"/>
-    //         </TouchableOpacity>
-    //     </SafeAreaView>
-
-    // );
 }
 export default OnBoardingScreen;

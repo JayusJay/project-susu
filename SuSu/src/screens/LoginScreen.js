@@ -48,6 +48,7 @@ const LoginScreen = ({navigation}) => {
                             placeholderTextColor='#8A8A8A'
                             style = {LoginStyle.textInput} 
                             keyboardType = "email-address"
+                            autoCapitalize="none"
                             onBlur={() => {loginData.email.length == 0 ? setLoginData({...loginData, isValidEmail: false}) : null}}
                         />
 

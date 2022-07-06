@@ -11,7 +11,7 @@ const ResetPasswordStyle = StyleSheet.create({
         fontFamily: "Roboto-medium",
         fontSize: 28,
         fontWeight: "500",
-        color: "#AD40AF",
+        color: "#7966FF",
         marginBottom: 20,
     },
     textInput: {
@@ -43,7 +43,7 @@ const ResetPasswordStyle = StyleSheet.create({
     },
 
     resetOpacity: {
-        backgroundColor: "#AD40AF",
+        backgroundColor: "#7966FF",
         padding: 20,
         width: '100%',
         flexDirection: 'row',
