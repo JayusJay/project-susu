@@ -1,54 +1,70 @@
-import {StyleSheet} from "react-native"
+import { StyleSheet } from 'react-native';
 
 const RegisterStyle = StyleSheet.create({
     safeAreaView: {
         flex: 1,
-        backgroundColor: "#fff",
-        justifyContent: "center",
+        backgroundColor: '#fff',
+        justifyContent: 'center',
     },
     text: {
-        fontFamily: "Roboto-medium",
+        fontFamily: 'Roboto-medium',
         fontSize: 28,
-        fontWeight: "500",
-        color: "#7966FF",
+        fontWeight: '500',
+        color: '#7966FF',
         marginBottom: 20,
     },
+    welcomeText: {
+        paddingTop: 30,
+        color: '#fff',
+        fontSize: 30,
+        fontWeight: '600',
+        fontFamily: 'Roboto-medium',
+    },
     view1: {
-        paddingHorizontal: 25,
+        alignItems: 'center',
+        backgroundColor: '#7966FF',
+        height: 170,
+        width: '100%',
+        borderBottomLeftRadius: 25,
+        borderBottomRightRadius: 25,
     },
     view2: {
-        alignItems: "center",
+        paddingTop: 20,
+        paddingHorizontal: 20,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        borderTopColor: '#7966FF',
     },
     view3: {
-        flexDirection: "row",
-        borderBottomColor: "#ccc",
+        flexDirection: 'row',
+        borderBottomColor: '#ccc',
         borderBottomWidth: 1,
         paddingBottom: 8,
         marginBottom: 25,
     },
     view4: {
         marginTop: -10,
-        flexDirection: "row",
+        flexDirection: 'row',
     },
     view4Text: {
-        color: "#8A8A8A",
+        color: '#8A8A8A',
     },
     view5: {
-        alignSelf: "center",
+        alignSelf: 'center',
         paddingBottom: 15,
     },
     icon: {
-        color: "#666",
+        color: '#666',
         marginRight: 5,
         paddingVertical: 10,
     },
     textInput: {
         flex: 1,
         paddingVertical: 0,
-        color: "#000"
+        color: '#000',
     },
     errorText: {
-        color: "red",
+        color: 'red',
         fontSize: 12,
         marginTop: -20,
         paddingBottom: 5,
@@ -57,43 +73,41 @@ const RegisterStyle = StyleSheet.create({
         marginTop: 15,
     },
     forgotPassword: {
-        color: "#7966FF",
-        fontWeight: "700",
+        color: '#7966FF',
+        fontWeight: '700',
     },
-    DoBOpacity: {
-
-    },
+    DoBOpacity: {},
     DoBText: {
-        color: "#666",
+        color: '#666',
         marginTop: 13,
         marginLeft: 5,
     },
     RegisterText: {
-        color: "#7966FF",
-        fontWeight: "400",
+        color: '#7966FF',
+        fontWeight: '400',
         marginTop: 15,
     },
     RegisterOpacity: {
         marginTop: -15,
     },
     loginOpacity: {
-        backgroundColor: "#7966FF",
+        backgroundColor: '#7966FF',
         padding: 20,
         borderRadius: 10,
         marginTop: 25,
         marginBottom: 5,
     },
     loginText: {
-        textAlign: "center",
-        fontWeight: "700",
+        textAlign: 'center',
+        fontWeight: '700',
         fontSize: 16,
-        color: "#fff",
+        color: '#fff',
     },
     alternate: {
-        textAlign: "center",
-        color: "#666",
+        textAlign: 'center',
+        color: '#666',
         marginTop: 10,
         marginBottom: 30,
     },
-})
-export default RegisterStyle
+});
+export default RegisterStyle;
