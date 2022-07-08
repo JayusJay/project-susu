@@ -42,15 +42,15 @@ const RegisterScreen = ({ navigation }) => {
                     phoneNumber: data.phoneNumber,
                 })
             )
-            .catch((err) => console.log(err));
+            .catch(() => null); // if data is null error should be ignored
     }, []);
 
     return (
         <SafeAreaView style={RegisterStyle.SafeAreaView}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={RegisterStyle.view1}>
-                    <Text style={RegisterStyle.welcomeText}>WELCOME</Text>
-                    <SVG height={100} width={100} />
+                    <SVG width={80} height={80} />
+                    <Text style={RegisterStyle.welcomeText}>SaveApp</Text>
                 </View>
                 <View style={RegisterStyle.view2}>
                     <Text style={RegisterStyle.text}>Register</Text>
@@ -224,15 +224,7 @@ const RegisterScreen = ({ navigation }) => {
                             />
                         </TouchableOpacity>
                     </View>
-                    <View style={RegisterStyle.view4}>
-                        <Text style={RegisterStyle.view4Text}>Already have an account?</Text>
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate('Login')}
-                            style={RegisterStyle.RegisterOpacity}
-                        >
-                            <Text style={RegisterStyle.RegisterText}> Login</Text>
-                        </TouchableOpacity>
-                    </View>
+
                     <TouchableOpacity
                         onPress={() => {
                             handleSubmit();
@@ -249,6 +241,15 @@ const RegisterScreen = ({ navigation }) => {
                             }}
                         >
                             <GoogleSVG height={40} width={40} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={RegisterStyle.view4}>
+                        <Text style={RegisterStyle.view4Text}>Already have an account?</Text>
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('Login')}
+                            style={RegisterStyle.RegisterOpacity}
+                        >
+                            <Text style={RegisterStyle.RegisterText}> Login</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

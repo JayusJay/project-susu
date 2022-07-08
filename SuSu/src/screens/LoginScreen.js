@@ -24,7 +24,7 @@ const LoginScreen = ({ navigation }) => {
                     password: data.password,
                 })
             )
-            .catch((err) => console.log(err));
+            .catch(() => null); // if data is null error should be ignored
     }, []);
 
     if (dialogData.showDialog) return <DialogScreen />;
@@ -32,8 +32,8 @@ const LoginScreen = ({ navigation }) => {
         <SafeAreaView style={LoginStyle.SafeAreaView}>
             <ScrollView>
                 <View style={LoginStyle.view1}>
-                    <Text style={LoginStyle.welcomeText}>WELCOME</Text>
-                    <LoginSVG width={100} height={100} />
+                    <LoginSVG width={80} height={80} />
+                    <Text style={LoginStyle.welcomeText}>SaveApp</Text>
                 </View>
                 <View style={LoginStyle.view2}>
                     <Text style={LoginStyle.text}>Login</Text>
@@ -92,15 +92,7 @@ const LoginScreen = ({ navigation }) => {
                             <Text style={LoginStyle.forgotPassword}>Forgot Password?</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={LoginStyle.view4}>
-                        <Text style={LoginStyle.view4Text}>Don't have an account?</Text>
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate('Register')}
-                            style={LoginStyle.signupOpacity}
-                        >
-                            <Text style={LoginStyle.signupText}> Sign up</Text>
-                        </TouchableOpacity>
-                    </View>
+
                     <TouchableOpacity
                         onPress={() => {
                             handleLogin();
@@ -117,6 +109,15 @@ const LoginScreen = ({ navigation }) => {
                             }}
                         >
                             <GoogleSVG height={40} width={40} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={LoginStyle.view4}>
+                        <Text style={LoginStyle.view4Text}>Don't have an account?</Text>
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('Register')}
+                            style={LoginStyle.signupOpacity}
+                        >
+                            <Text style={LoginStyle.signupText}> Sign up</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

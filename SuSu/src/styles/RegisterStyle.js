@@ -14,19 +14,21 @@ const RegisterStyle = StyleSheet.create({
         marginBottom: 20,
     },
     welcomeText: {
-        paddingTop: 30,
         color: '#fff',
-        fontSize: 30,
+        fontSize: 25,
         fontWeight: '600',
         fontFamily: 'Roboto-medium',
+        marginLeft: -20,
     },
     view1: {
         alignItems: 'center',
         backgroundColor: '#7966FF',
-        height: 170,
+        height: 140,
         width: '100%',
         borderBottomLeftRadius: 25,
         borderBottomRightRadius: 25,
+        flexDirection: 'row',
+        justifyContent: 'center',
     },
     view2: {
         paddingTop: 20,
@@ -43,8 +45,9 @@ const RegisterStyle = StyleSheet.create({
         marginBottom: 25,
     },
     view4: {
-        marginTop: -10,
         flexDirection: 'row',
+        alignSelf: 'center',
+        paddingBottom: 10,
     },
     view4Text: {
         color: '#8A8A8A',
@@ -94,7 +97,6 @@ const RegisterStyle = StyleSheet.create({
         backgroundColor: '#7966FF',
         padding: 20,
         borderRadius: 10,
-        marginTop: 25,
         marginBottom: 5,
     },
     loginText: {
