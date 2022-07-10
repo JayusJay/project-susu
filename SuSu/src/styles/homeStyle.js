@@ -33,5 +33,54 @@ const HomeStyle = StyleSheet.create({
         borderRadius: 40,
         //marginBottom: 10,
     },
+    instantView: {
+        padding: 40,
+        backgroundColor: '#9FB7FF',
+        borderRadius: 10,
+        marginBottom: 15,
+        instantText: {
+            color: '#504C6B',
+            paddingTop: 10,
+        },
+    },
+    savingsView: {
+        padding: 40,
+        backgroundColor: '#A6CAF0',
+        borderRadius: 10,
+        marginBottom: 15,
+        savingsText: {
+            color: '#504C6B',
+            paddingTop: 10,
+        },
+    },
+    investmentView: {
+        padding: 40,
+        backgroundColor: '#FFC466',
+        borderRadius: 10,
+        marginBottom: 15,
+        investmentText: {
+            color: '#504C6B',
+            paddingTop: 10,
+        },
+    },
+    transactionsOverview: {
+        padding: 40,
+        backgroundColor: '#FFffee',
+        transactionsText: {
+            color: '#504C6B',
+            marginRight: 10,
+            //paddingTop: 10,
+        },
+    },
+    innerView: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    viewText: {
+        color: '#000',
+        fontSize: 20,
+        fontWeight: '500',
+        marginTop: -20,
+    },
 });
 export default HomeStyle;
