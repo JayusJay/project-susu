@@ -30,7 +30,7 @@ const LoginScreen = ({ navigation }) => {
     if (dialogData.showDialog) return <DialogScreen />;
     return (
         <SafeAreaView style={LoginStyle.SafeAreaView}>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={LoginStyle.view1}>
                     <LoginSVG width={80} height={80} />
                     <Text style={LoginStyle.welcomeText}>SaveApp</Text>

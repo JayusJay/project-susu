@@ -1,22 +1,37 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 const HomeStyle = StyleSheet.create({
-    SafeAreaView: {
+    container: {
         flex: 1,
-        alignItems: "center", 
-        justifyContent: "center",
+        backgroundColor: '#7966FF',
     },
-    Text: {
-        color: "red",
-        fontSize: 25,
-        fontWeight: "bold",
-        marginTop: 10,
+    header: {
+        flex: 1,
+        paddingTop: 10,
+        paddingHorizontal: 20,
+        paddingBottom: 50,
     },
-    logoutOpacity: {
-        backgroundColor: "#7966FF",
-        padding: 20,
-        borderRadius: 10,
-        marginTop: 25,
-        marginBottom: 5,
+    headerText: {
+        color: '#fff',
+        fontSize: 20,
+        paddingTop: 5,
+    },
+    footer: {
+        flex: 5,
+        backgroundColor: '#fff',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        paddingHorizontal: 20,
+        paddingVertical: 30,
+    },
+    profileView: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    image: {
+        height: 35,
+        width: 35,
+        borderRadius: 40,
+        //marginBottom: 10,
     },
 });
 export default HomeStyle;
