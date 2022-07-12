@@ -65,7 +65,7 @@ const HomeStyle = StyleSheet.create({
     },
     transactionsOverview: {
         padding: 40,
-        backgroundColor: '#FFffee',
+        backgroundColor: '#FFFFEE',
         transactionsText: {
             color: '#504C6B',
             marginRight: 10,

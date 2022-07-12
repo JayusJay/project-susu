@@ -8,10 +8,31 @@ const customDrawerStyle = StyleSheet.create({
         padding: 20,
     },
     image: {
-        height: 80,
-        width: 80,
+        height: 70,
+        width: 70,
         borderRadius: 40,
         marginBottom: 10,
+    },
+    imageView: {
+        height: 130,
+        padding: 20,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        innerView: {
+            flexDirection: 'column',
+            alignContent: 'center',
+            padding: 20,
+            marginLeft: -5,
+            greetingText: {
+                color: '#fff',
+                marginTop: -10,
+            },
+            nameText: {
+                color: '#fff',
+                fontSize: 30,
+                fontWeight: '900',
+            },
+        },
     },
     view2: {
         flex: 1,

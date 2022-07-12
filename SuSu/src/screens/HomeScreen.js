@@ -2,28 +2,66 @@ import React, { useContext } from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Animatable from 'react-native-animatable';
-import { BarChart } from 'react-native-chart-kit';
+import { BarChart } from 'react-native-gifted-charts';
 import { AuthContext } from '../components/AuthContext';
 import HomeStyle from '../styles/homeStyle';
 
-const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-    datasets: [
-        {
-            data: [20, 45, 28, 80, 99, 43],
-        },
-    ],
-};
-const chartConfig = {
-    backgroundGradientFrom: '#1E2923',
-    //backgroundGradientFromOpacity: 0,
-    backgroundGradientTo: '#08130D',
-    //backgroundGradientToOpacity: 0.5,
-    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-    strokeWidth: 2, // optional, default 3
-    barPercentage: 0.5,
-    useShadowColorFromDataset: false, // optional
-};
+const barData = [
+    {
+        value: 40,
+        label: 'Jan',
+        spacing: 2,
+        labelWidth: 30,
+        labelTextStyle: { color: 'gray' },
+        frontColor: '#177AD5',
+    },
+    { value: 20, frontColor: '#ED6665' },
+    {
+        value: 50,
+        label: 'Feb',
+        spacing: 2,
+        labelWidth: 30,
+        labelTextStyle: { color: 'gray' },
+        frontColor: '#177AD5',
+    },
+    { value: 40, frontColor: '#ED6665' },
+    {
+        value: 75,
+        label: 'Mar',
+        spacing: 2,
+        labelWidth: 30,
+        labelTextStyle: { color: 'gray' },
+        frontColor: '#177AD5',
+    },
+    { value: 25, frontColor: '#ED6665' },
+    {
+        value: 30,
+        label: 'Apr',
+        spacing: 2,
+        labelWidth: 30,
+        labelTextStyle: { color: 'gray' },
+        frontColor: '#177AD5',
+    },
+    { value: 20, frontColor: '#ED6665' },
+    {
+        value: 60,
+        label: 'May',
+        spacing: 2,
+        labelWidth: 30,
+        labelTextStyle: { color: 'gray' },
+        frontColor: '#177AD5',
+    },
+    { value: 40, frontColor: '#ED6665' },
+    {
+        value: 65,
+        label: 'Jun',
+        spacing: 2,
+        labelWidth: 30,
+        labelTextStyle: { color: 'gray' },
+        frontColor: '#177AD5',
+    },
+    { value: 30, frontColor: '#ED6665' },
+];
 
 const HomeScreen = ({ navigation }) => {
     // const { loginValidation } = useContext(AuthContext);
@@ -83,20 +121,20 @@ const HomeScreen = ({ navigation }) => {
                             <Text style={{ color: '#FFCCFF', marginRight: 5 }}>{'\u2B24'}</Text>
                             <Text style={HomeStyle.transactionsOverview.transactionsText}>Expenses</Text>
                         </View>
-                        <View
-                            style={{
-                                marginLeft: -40,
-                                marginTop: 10,
-                            }}
-                        >
+                        <View style={{ marginLeft: -40, marginTop: 10 }}>
                             <BarChart
-                                style={{ borderRadius: 10, backgroundColor: '#fff' }}
-                                data={data}
-                                width={width - 40} // footer has a horizontal padding of 20px
-                                height={220}
-                                yAxisLabel={'\u20B5'}
-                                chartConfig={chartConfig}
-                                verticalLabelRotation={30}
+                                data={barData}
+                                barWidth={8}
+                                spacing={24}
+                                roundedTop
+                                roundedBottom
+                                hideRules
+                                xAxisThickness={0}
+                                yAxisThickness={0}
+                                yAxisLabelPrefix={'\u20B5'}
+                                yAxisTextStyle={{ color: 'gray' }}
+                                noOfSections={3}
+                                maxValue={75}
                             />
                         </View>
                     </View>
