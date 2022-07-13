@@ -6,8 +6,6 @@ import { BarChart } from 'react-native-gifted-charts';
 import Carousel from 'react-native-reanimated-carousel';
 import { AuthContext } from '../components/AuthContext';
 import HomeStyle from '../styles/homeStyle';
-import MoMo from '../assets/images/mtn-momo.svg';
-import creditCard from '../assets/images/creditCard.svg';
 import BannerSlider from '../components/BannerSlider';
 
 const barData = [
@@ -86,93 +84,101 @@ const HomeScreen = ({ navigation }) => {
     };
     return (
         <SafeAreaView style={HomeStyle.container}>
-            <View style={HomeStyle.header}>
-                <View style={HomeStyle.profileView}>
-                    <Text style={HomeStyle.headerText}>Hi, Jayus</Text>
-                    <TouchableOpacity
-                        onPress={() => {
-                            navigation.openDrawer();
-                        }}
-                    >
-                        <Image source={require('../assets/images/profile.jpg')} style={HomeStyle.image} />
-                    </TouchableOpacity>
+            <ScrollView stickyHeaderIndices={[0]}>
+                <View style={HomeStyle.header}>
+                    <View style={HomeStyle.profileView}>
+                        <View>
+                            <Text style={HomeStyle.headerText}>Hi,</Text>
+                            <Text style={{ fontSize: 30, color: '#fff', fontWeight: '800' }}>Jayus</Text>
+                        </View>
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigation.openDrawer();
+                            }}
+                        >
+                            <Image source={require('../assets/images/profile.jpg')} style={HomeStyle.image} />
+                        </TouchableOpacity>
+                    </View>
                 </View>
-                <View style={{ marginLeft: -20, height: 200 }}>
-                    <Carousel
-                        width={width}
-                        height={200}
-                        data={cards}
-                        sliderWidth={width}
-                        itemWidth={width * 0.9}
-                        itemHeight={200}
-                        itemHorizontalMargin={0}
-                        loop={true}
-                        autoplay={true}
-                        autoplayDelay={3000}
-                        autoplayInterval={3000}
-                        onSnapToItem={(index) => console.log(index)}
-                        renderItem={({ item, index }) => renderBanner({ item, index })}
-                    />
-                </View>
-            </View>
-            <View style={HomeStyle.footer}>
-                <ScrollView showsVerticalScrollIndicator={false}>
-                    <View style={HomeStyle.instantView}>
-                        <View style={HomeStyle.innerView}>
-                            <View>
-                                <Text style={HomeStyle.viewText}>Instant</Text>
-                                <Text style={HomeStyle.instantView.instantText}>Cash available</Text>
-                            </View>
-                            <Text>{'\u20B5'} 1000.00</Text>
-                        </View>
-                    </View>
-                    <View style={HomeStyle.savingsView}>
-                        <View style={HomeStyle.innerView}>
-                            <View>
-                                <Text style={HomeStyle.viewText}>Savings</Text>
-                                <Text style={HomeStyle.savingsView.savingsText}>Cash available</Text>
-                            </View>
-                            <Text>{'\u20B5'} 12000.00</Text>
-                        </View>
-                    </View>
-                    <View style={HomeStyle.investmentView}>
-                        <View style={HomeStyle.innerView}>
-                            <View>
-                                <Text style={HomeStyle.viewText}>Investment</Text>
-                                <Text style={HomeStyle.investmentView.investmentText}>Cash available</Text>
-                            </View>
-                            <Text>{'\u20B5'} 210000.00</Text>
-                        </View>
-                    </View>
-                    <View style={HomeStyle.transactionsOverview}>
-                        <View style={HomeStyle.innerView}>
-                            <Text style={HomeStyle.viewText}>Transactions Overview</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style={{ color: '#7966FF', marginRight: 5 }}>{'\u2B24'}</Text>
-                            <Text style={HomeStyle.transactionsOverview.transactionsText}>Savings</Text>
-                            <Text style={{ color: '#FFCCFF', marginRight: 5 }}>{'\u2B24'}</Text>
-                            <Text style={HomeStyle.transactionsOverview.transactionsText}>Expenses</Text>
-                        </View>
-                        <View style={{ marginLeft: -40, marginTop: 10 }}>
-                            <BarChart
-                                data={barData}
-                                barWidth={8}
-                                spacing={24}
-                                roundedTop
-                                roundedBottom
-                                hideRules
-                                xAxisThickness={0}
-                                yAxisThickness={0}
-                                yAxisLabelPrefix={'\u20B5'}
-                                yAxisTextStyle={{ color: 'gray' }}
-                                noOfSections={3}
-                                maxValue={75}
+                <View style={HomeStyle.footer}>
+                    <ScrollView showsVerticalScrollIndicator={false}>
+                        <View style={{ marginBottom: 10 }}>
+                            <Carousel
+                                width={width - 40}
+                                height={115}
+                                data={cards}
+                                sliderWidth={width}
+                                itemHorizontalMargin={0}
+                                mode="parallax"
+                                modeConfig={{
+                                    parallaxScrollingScale: 0.9,
+                                    parallaxScrollingOffset: 50,
+                                }}
+                                loop={true}
+                                autoplay={true}
+                                autoplayDelay={3000}
+                                autoplayInterval={3000}
+                                onSnapToItem={(index) => {}}
+                                renderItem={({ item, index }) => renderBanner({ item, index })}
                             />
                         </View>
-                    </View>
-                </ScrollView>
-            </View>
+                        <View style={HomeStyle.instantView}>
+                            <View style={HomeStyle.innerView}>
+                                <View>
+                                    <Text style={HomeStyle.viewText}>Instant</Text>
+                                    <Text style={HomeStyle.instantView.instantText}>Cash available</Text>
+                                </View>
+                                <Text>{'\u20B5'} 1000.00</Text>
+                            </View>
+                        </View>
+                        <View style={HomeStyle.savingsView}>
+                            <View style={HomeStyle.innerView}>
+                                <View>
+                                    <Text style={HomeStyle.viewText}>Savings</Text>
+                                    <Text style={HomeStyle.savingsView.savingsText}>Cash available</Text>
+                                </View>
+                                <Text>{'\u20B5'} 12000.00</Text>
+                            </View>
+                        </View>
+                        <View style={HomeStyle.investmentView}>
+                            <View style={HomeStyle.innerView}>
+                                <View>
+                                    <Text style={HomeStyle.viewText}>Investment</Text>
+                                    <Text style={HomeStyle.investmentView.investmentText}>Cash available</Text>
+                                </View>
+                                <Text>{'\u20B5'} 210000.00</Text>
+                            </View>
+                        </View>
+                        <View style={HomeStyle.transactionsOverview}>
+                            <View style={HomeStyle.innerView}>
+                                <Text style={HomeStyle.viewText}>Transactions Overview</Text>
+                            </View>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={{ color: '#7966FF', marginRight: 5 }}>{'\u2B24'}</Text>
+                                <Text style={HomeStyle.transactionsOverview.transactionsText}>Savings</Text>
+                                <Text style={{ color: '#FFCCFF', marginRight: 5 }}>{'\u2B24'}</Text>
+                                <Text style={HomeStyle.transactionsOverview.transactionsText}>Expenses</Text>
+                            </View>
+                            <View style={{ marginLeft: -40, marginTop: 10 }}>
+                                <BarChart
+                                    data={barData}
+                                    barWidth={8}
+                                    spacing={24}
+                                    roundedTop
+                                    roundedBottom
+                                    hideRules
+                                    xAxisThickness={0}
+                                    yAxisThickness={0}
+                                    yAxisLabelPrefix={'\u20B5'}
+                                    yAxisTextStyle={{ color: 'gray' }}
+                                    noOfSections={3}
+                                    maxValue={75}
+                                />
+                            </View>
+                        </View>
+                    </ScrollView>
+                </View>
+            </ScrollView>
         </SafeAreaView>
     );
 };

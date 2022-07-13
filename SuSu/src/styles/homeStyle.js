@@ -5,33 +5,32 @@ const HomeStyle = StyleSheet.create({
         backgroundColor: '#7966FF',
     },
     header: {
-        flex: 1,
         paddingTop: 10,
         paddingHorizontal: 20,
-        paddingBottom: 75,
     },
     headerText: {
         color: '#fff',
         fontSize: 20,
-        paddingTop: 5,
     },
     footer: {
-        flex: 4,
         backgroundColor: '#fff',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         paddingHorizontal: 20,
         paddingVertical: 30,
+        //marginBottom: 10,
     },
     profileView: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingBottom: 5,
+        marginBottom: 10,
     },
     image: {
-        height: 35,
-        width: 35,
+        height: 50,
+        width: 50,
         borderRadius: 40,
+        marginTop: 5,
         //marginBottom: 10,
     },
     instantView: {
