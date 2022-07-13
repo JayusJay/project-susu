@@ -1,12 +1,14 @@
 import React from 'react';
-import { Text, SafeAreaView } from 'react-native';
+import { Text, SafeAreaView, View } from 'react-native';
+import TransactionStyle from '../styles/transactionStyle';
 
 const TransactionScreen = () => {
-  return (
-    <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ color: 'red' }}>Transaction Screen</Text>
-    </SafeAreaView>
-  );
+    return (
+        <SafeAreaView style={TransactionStyle.container}>
+            <View style={TransactionStyle.header}></View>
+            <View style={TransactionStyle.footer}></View>
+        </SafeAreaView>
+    );
 };
 
 export default TransactionScreen;

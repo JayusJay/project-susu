@@ -8,7 +8,7 @@ const HomeStyle = StyleSheet.create({
         flex: 1,
         paddingTop: 10,
         paddingHorizontal: 20,
-        paddingBottom: 50,
+        paddingBottom: 75,
     },
     headerText: {
         color: '#fff',
@@ -16,7 +16,7 @@ const HomeStyle = StyleSheet.create({
         paddingTop: 5,
     },
     footer: {
-        flex: 5,
+        flex: 4,
         backgroundColor: '#fff',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
@@ -26,6 +26,7 @@ const HomeStyle = StyleSheet.create({
     profileView: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        paddingBottom: 5,
     },
     image: {
         height: 35,

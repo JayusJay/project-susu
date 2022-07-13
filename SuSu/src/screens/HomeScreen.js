@@ -3,8 +3,12 @@ import { View, Text, Image, TouchableOpacity, ScrollView, useWindowDimensions } 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Animatable from 'react-native-animatable';
 import { BarChart } from 'react-native-gifted-charts';
+import Carousel from 'react-native-reanimated-carousel';
 import { AuthContext } from '../components/AuthContext';
 import HomeStyle from '../styles/homeStyle';
+import MoMo from '../assets/images/mtn-momo.svg';
+import creditCard from '../assets/images/creditCard.svg';
+import BannerSlider from '../components/BannerSlider';
 
 const barData = [
     {
@@ -62,12 +66,24 @@ const barData = [
     },
     { value: 30, frontColor: '#ED6665' },
 ];
+const cards = [
+    {
+        image: require('../assets/images/mtn-momo.png'),
+        title: 'MTN MOMO',
+    },
+    {
+        image: require('../assets/images/creditCard.jpg'),
+        title: 'Credit Card',
+    },
+];
 
 const HomeScreen = ({ navigation }) => {
     // const { loginValidation } = useContext(AuthContext);
     // const { handleLogOut } = loginValidation();
     const { width } = useWindowDimensions();
-
+    const renderBanner = ({ item, index }) => {
+        return <BannerSlider data={item} />;
+    };
     return (
         <SafeAreaView style={HomeStyle.container}>
             <View style={HomeStyle.header}>
@@ -80,6 +96,23 @@ const HomeScreen = ({ navigation }) => {
                     >
                         <Image source={require('../assets/images/profile.jpg')} style={HomeStyle.image} />
                     </TouchableOpacity>
+                </View>
+                <View style={{ marginLeft: -20, height: 200 }}>
+                    <Carousel
+                        width={width}
+                        height={200}
+                        data={cards}
+                        sliderWidth={width}
+                        itemWidth={width * 0.9}
+                        itemHeight={200}
+                        itemHorizontalMargin={0}
+                        loop={true}
+                        autoplay={true}
+                        autoplayDelay={3000}
+                        autoplayInterval={3000}
+                        onSnapToItem={(index) => console.log(index)}
+                        renderItem={({ item, index }) => renderBanner({ item, index })}
+                    />
                 </View>
             </View>
             <View style={HomeStyle.footer}>
