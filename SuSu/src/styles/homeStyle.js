@@ -31,7 +31,12 @@ const HomeStyle = StyleSheet.create({
         width: 50,
         borderRadius: 40,
         marginTop: 5,
-        //marginBottom: 10,
+    },
+    circularProgressBaseView: {
+        flexDirection: 'row',
+        marginTop: 10,
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
     },
     instantView: {
         padding: 40,
@@ -45,6 +50,7 @@ const HomeStyle = StyleSheet.create({
     },
     savingsView: {
         padding: 40,
+        //paddingBottom: 10,
         backgroundColor: '#A6CAF0',
         borderRadius: 10,
         marginBottom: 15,
