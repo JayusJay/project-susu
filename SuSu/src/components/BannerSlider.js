@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, useWindowDimensions } from 'react-native';
 
 const BannerSlider = ({ data }) => {
+    const { width } = useWindowDimensions();
+
     return (
         <View>
-            <Image source={data.image} style={{ width: '100%', height: 110, borderRadius: 20 }} />
+            <Image source={data.image} style={{ width: width - 50, height: 150, borderRadius: 10 }} />
         </View>
     );
 };

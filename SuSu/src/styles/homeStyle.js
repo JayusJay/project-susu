@@ -38,6 +38,22 @@ const HomeStyle = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'flex-start',
     },
+    CircularProgressBaseSavingProps: {
+        activeStrokeWidth: 2,
+        inActiveStrokeWidth: 2,
+        inActiveStrokeOpacity: 0.2,
+        activeStrokeColor: '#7966FF',
+        inActiveStrokeColor: '#e84118',
+        radius: 20,
+    },
+    CircularProgressBaseInvestmentProps: {
+        activeStrokeWidth: 0,
+        inActiveStrokeWidth: 0,
+        inActiveStrokeOpacity: 0,
+        inActiveStrokeOpacity: 0.2,
+        circleBackgroundColor: '#7966FF',
+        radius: 20,
+    },
     instantView: {
         padding: 40,
         backgroundColor: '#9FB7FF',
@@ -50,7 +66,6 @@ const HomeStyle = StyleSheet.create({
     },
     savingsView: {
         padding: 40,
-        //paddingBottom: 10,
         backgroundColor: '#A6CAF0',
         borderRadius: 10,
         marginBottom: 15,
@@ -72,6 +87,7 @@ const HomeStyle = StyleSheet.create({
     transactionsOverview: {
         padding: 40,
         backgroundColor: '#FFFFEE',
+        borderRadius: 15,
         transactionsText: {
             color: '#504C6B',
             marginRight: 10,

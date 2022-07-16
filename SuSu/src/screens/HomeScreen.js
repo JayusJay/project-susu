@@ -20,7 +20,7 @@ const cards = [
         title: 'MTN MOMO',
     },
     {
-        image: require('../assets/images/creditCard.jpg'),
+        image: require('../assets/images/black-credit-card.jpg'),
         title: 'Credit Card',
     },
 ];
@@ -32,22 +32,7 @@ const HomeScreen = ({ navigation }) => {
     const renderBanner = ({ item, index }) => {
         return <BannerSlider data={item} />;
     };
-    const CircularProgressBaseSavingProps = {
-        activeStrokeWidth: 2,
-        inActiveStrokeWidth: 2,
-        inActiveStrokeOpacity: 0.2,
-        activeStrokeColor: '#7966FF',
-        inActiveStrokeColor: '#e84118',
-        radius: 20,
-    };
-    const CircularProgressBaseInvestmentProps = {
-        activeStrokeWidth: 0,
-        inActiveStrokeWidth: 0,
-        inActiveStrokeOpacity: 0,
-        inActiveStrokeOpacity: 0.2,
-        circleBackgroundColor: '#7966FF',
-        radius: 20,
-    };
+
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <SafeAreaView style={HomeStyle.container}>
@@ -70,14 +55,14 @@ const HomeScreen = ({ navigation }) => {
                     <View style={{ marginBottom: 10 }}>
                         <Carousel
                             width={width - 40}
-                            height={115}
+                            height={155}
                             data={cards}
                             sliderWidth={width}
                             itemHorizontalMargin={0}
-                            mode="parallax"
+                            mode="horizontal-stack"
                             modeConfig={{
-                                parallaxScrollingScale: 0.9,
-                                parallaxScrollingOffset: 50,
+                                snapDirection: 'left',
+                                stackInterval: 18,
                             }}
                             loop={true}
                             autoplay={true}
@@ -106,27 +91,27 @@ const HomeScreen = ({ navigation }) => {
                         </View>
                         <View style={HomeStyle.circularProgressBaseView}>
                             <TouchableOpacity onPress={() => {}}>
-                                <CircularProgressBase {...CircularProgressBaseSavingProps} value={80}>
+                                <CircularProgressBase {...HomeStyle.CircularProgressBaseSavingProps} value={80}>
                                     <Ionicons name="home-outline" size={20} color="#7966FF" />
                                 </CircularProgressBase>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => {}}>
-                                <CircularProgressBase {...CircularProgressBaseSavingProps} value={80}>
+                                <CircularProgressBase {...HomeStyle.CircularProgressBaseSavingProps} value={80}>
                                     <Ionicons name="gift-outline" size={20} color="#7966FF" />
                                 </CircularProgressBase>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => {}}>
-                                <CircularProgressBase {...CircularProgressBaseSavingProps} value={60}>
+                                <CircularProgressBase {...HomeStyle.CircularProgressBaseSavingProps} value={60}>
                                     <FontAwesome5 name="umbrella-beach" size={20} color="#7966FF" />
                                 </CircularProgressBase>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => {}}>
-                                <CircularProgressBase {...CircularProgressBaseSavingProps} value={90}>
+                                <CircularProgressBase {...HomeStyle.CircularProgressBaseSavingProps} value={90}>
                                     <Ionicons name="tv-outline" size={20} color="#7966FF" />
                                 </CircularProgressBase>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => {}}>
-                                <CircularProgressBase {...CircularProgressBaseSavingProps} value={70}>
+                                <CircularProgressBase {...HomeStyle.CircularProgressBaseSavingProps} value={70}>
                                     <Ionicons name="add" size={30} color="#7966FF" />
                                 </CircularProgressBase>
                             </TouchableOpacity>
@@ -142,17 +127,17 @@ const HomeScreen = ({ navigation }) => {
                         </View>
                         <View style={HomeStyle.circularProgressBaseView}>
                             <TouchableOpacity onPress={() => {}}>
-                                <CircularProgressBase {...CircularProgressBaseInvestmentProps}>
+                                <CircularProgressBase {...HomeStyle.CircularProgressBaseInvestmentProps}>
                                     <AntDesign name="barschart" size={30} color="#fff" />
                                 </CircularProgressBase>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => {}}>
-                                <CircularProgressBase {...CircularProgressBaseInvestmentProps}>
+                                <CircularProgressBase {...HomeStyle.CircularProgressBaseInvestmentProps}>
                                     <MaterialCommunityIcons name="lightning-bolt-outline" size={30} color="#fff" />
                                 </CircularProgressBase>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => {}}>
-                                <CircularProgressBase {...CircularProgressBaseInvestmentProps}>
+                                <CircularProgressBase {...HomeStyle.CircularProgressBaseInvestmentProps}>
                                     <Ionicons name="add" size={30} color="#fff" />
                                 </CircularProgressBase>
                             </TouchableOpacity>

@@ -6,6 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import HomeScreen from '../screens/HomeScreen';
 import SavingsScreen from '../screens/SavingsScreen';
 import InvestmentScreen from '../screens/InvestmentScreen';
+import FundRaisingScreen from '../screens/FundRaisingScreen';
 
 const tabStack = createBottomTabNavigator();
 
@@ -43,8 +44,15 @@ const TabStack = () => {
                 component={InvestmentScreen}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="bank-outline" color={color} size={size} />
+                        <MaterialCommunityIcons name="bank-outline" color={color} size={30} />
                     ),
+                }}
+            />
+            <tabStack.Screen
+                name="FundRaising"
+                component={FundRaisingScreen}
+                options={{
+                    tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="crowd" color={color} size={30} />,
                 }}
             />
         </tabStack.Navigator>
