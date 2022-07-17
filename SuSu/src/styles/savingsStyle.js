@@ -6,27 +6,44 @@ const SavingsStyle = StyleSheet.create({
         backgroundColor: '#7966FF',
     },
     header: {
-        paddingTop: 10,
+        //flex: 1,
+        justifyContent: 'flex-end',
         paddingHorizontal: 20,
-        flex: 1,
+        // paddingBottom: 50,
     },
     profileView: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        //justifyContent: 'space-between',
         paddingBottom: 5,
         marginBottom: 10,
     },
-    headerText: {
-        color: '#fff',
-        fontSize: 20,
-    },
+    backButton: {},
     footer: {
-        flex: 3,
         backgroundColor: '#fff',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         paddingHorizontal: 20,
         paddingVertical: 30,
+    },
+    barChartView: {
+        padding: 40,
+        backgroundColor: '#FFF',
+        borderRadius: 10,
+        marginBottom: 15,
+        instantText: {
+            color: '#504C6B',
+            paddingTop: 10,
+        },
+    },
+    overview: {
+        padding: 40,
+        backgroundColor: '#FFF',
+        borderRadius: 10,
+        marginBottom: 15,
+        instantText: {
+            color: '#504C6B',
+            paddingTop: 10,
+        },
     },
 });
 export default SavingsStyle;

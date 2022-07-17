@@ -1,5 +1,6 @@
 import React, {useState, useContext} from "react"
-import { SafeAreaView, TouchableOpacity, View } from "react-native"
+import { TouchableOpacity, View } from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import Dialog from "react-native-dialog"
 import { AuthContext } from "../components/AuthContext"

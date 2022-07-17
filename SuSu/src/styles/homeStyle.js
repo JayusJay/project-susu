@@ -18,7 +18,6 @@ const HomeStyle = StyleSheet.create({
         borderTopRightRadius: 20,
         paddingHorizontal: 20,
         paddingVertical: 30,
-        //marginBottom: 10,
     },
     profileView: {
         flexDirection: 'row',
