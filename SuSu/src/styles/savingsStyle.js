@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, useWindowDimensions } from 'react-native';
 
 const SavingsStyle = StyleSheet.create({
     container: {
@@ -23,7 +23,7 @@ const SavingsStyle = StyleSheet.create({
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
         paddingHorizontal: 20,
-        paddingVertical: 30,
+        paddingVertical: 10,
     },
     barChartView: {
         padding: 40,
@@ -37,12 +37,21 @@ const SavingsStyle = StyleSheet.create({
     },
     overview: {
         padding: 40,
-        backgroundColor: '#FFF',
+        width: '49%',
+        backgroundColor: '#000',
         borderRadius: 10,
-        marginBottom: 15,
+        //marginBottom: 10,
         instantText: {
             color: '#504C6B',
             paddingTop: 10,
+        },
+    },
+    gridContainerView: {
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        rowView: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
         },
     },
 });

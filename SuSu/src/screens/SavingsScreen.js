@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, useWindowDimensions } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -8,6 +8,7 @@ import barData from '../assets/bardata';
 import SavingsStyle from '../styles/savingsStyle';
 
 const SavingsScreen = ({ navigation }) => {
+    const { width, height } = useWindowDimensions();
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <SafeAreaView style={SavingsStyle.container}>
@@ -49,8 +50,25 @@ const SavingsScreen = ({ navigation }) => {
                             />
                         </View>
                     </View>
-                    <View style={SavingsStyle.overview}>
+                    <View style={SavingsStyle.gridContainerView}>
                         <Text style={{ color: '#000', fontSize: 30 }}>Overview</Text>
+
+                        <View style={SavingsStyle.gridContainerView.rowView}>
+                            <View style={[SavingsStyle.overview, { marginBottom: 0.02 * width }]}>
+                                <Text style={{ color: '#fff' }}>Something 1 </Text>
+                            </View>
+                            <View style={[SavingsStyle.overview, { marginBottom: 0.02 * width }]}>
+                                <Text style={{ color: '#fff' }}>Something 2</Text>
+                            </View>
+                        </View>
+                        <View style={SavingsStyle.gridContainerView.rowView}>
+                            <View style={[SavingsStyle.overview, { marginBottom: 0.02 * width }]}>
+                                <Text style={{ color: '#fff' }}>Something 3</Text>
+                            </View>
+                            <View style={[SavingsStyle.overview, { marginBottom: 0.02 * width }]}>
+                                <Text style={{ color: '#fff' }}>Something 4</Text>
+                            </View>
+                        </View>
                     </View>
                 </View>
             </SafeAreaView>
