@@ -6,18 +6,25 @@ const SavingsStyle = StyleSheet.create({
         backgroundColor: '#7966FF',
     },
     header: {
-        //flex: 1,
         justifyContent: 'flex-end',
         paddingHorizontal: 20,
-        // paddingBottom: 50,
     },
     profileView: {
-        flexDirection: 'row',
-        //justifyContent: 'space-between',
+        marginTop: 10,
         paddingBottom: 5,
         marginBottom: 10,
+        textView: {
+            alignSelf: 'center',
+            marginTop: -35,
+        },
+        text: {
+            color: '#fff',
+            fontSize: 30,
+        },
     },
-    backButton: {},
+    backButton: {
+        paddingTop: 10,
+    },
     footer: {
         backgroundColor: '#fff',
         borderTopLeftRadius: 20,
@@ -30,20 +37,50 @@ const SavingsStyle = StyleSheet.create({
         backgroundColor: '#FFF',
         borderRadius: 10,
         marginBottom: 15,
-        instantText: {
-            color: '#504C6B',
+        innerView: {
+            marginLeft: -40,
+            marginTop: 10,
+        },
+    },
+    createGoalView: {
+        padding: 20,
+        backgroundColor: '#000',
+        borderRadius: 25,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        textView: {
             paddingTop: 10,
+            text1: {
+                fontWeight: '700',
+                color: '#fff',
+                fontSize: 20,
+            },
+            text2: {
+                paddingTop: 3,
+            },
+        },
+        buttonView: {
+            padding: 20,
+            backgroundColor: '#ccc',
+            borderRadius: 10,
         },
     },
     overview: {
-        padding: 40,
+        padding: 20,
         width: '49%',
         backgroundColor: '#000',
-        borderRadius: 10,
-        //marginBottom: 10,
-        instantText: {
-            color: '#504C6B',
-            paddingTop: 10,
+        borderRadius: 25,
+        innerView: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            text: {
+                color: '#fff',
+                fontSize: 20,
+            },
+        },
+        overviewText: {
+            color: '#fff',
+            paddingTop: 5,
         },
     },
     gridContainerView: {
@@ -52,6 +89,12 @@ const SavingsStyle = StyleSheet.create({
         rowView: {
             flexDirection: 'row',
             justifyContent: 'space-between',
+        },
+        text: {
+            color: '#000',
+            fontSize: 20,
+            padding: 10,
+            fontFamily: 'roboto-medium',
         },
     },
 });
