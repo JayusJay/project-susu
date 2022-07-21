@@ -5,9 +5,45 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import { BarChart } from 'react-native-gifted-charts';
+import numberFormatter from '../../utils/numberFormatter';
+import GoalComponent from '../components/GoalComponent';
 import savingBarData from '../assets/savingBarData';
 import SavingsStyle from '../styles/savingsStyle';
 
+const goalImages = [
+    {
+        image: require('../assets/images/house.jpg'),
+        name: 'House',
+        amountSaved: numberFormatter(3000000),
+        totalAmount: numberFormatter(5000000),
+        timeLeft: '8 days',
+        value: (3000000 / 5000000) * 100,
+    },
+    {
+        image: require('../assets/images/car.jpg'),
+        name: 'Car',
+        amountSaved: numberFormatter(2000000),
+        totalAmount: numberFormatter(5000000),
+        timeLeft: '2 months',
+        value: (2000000 / 5000000) * 100,
+    },
+    {
+        image: require('../assets/images/vacation.jpg'),
+        name: 'Vacation',
+        amountSaved: numberFormatter(100000),
+        totalAmount: numberFormatter(300000),
+        timeLeft: '1 year',
+        value: (1000000 / 5000000) * 100,
+    },
+    {
+        image: require('../assets/images/PS5.jpg'),
+        name: 'PS5',
+        amountSaved: numberFormatter(2500),
+        totalAmount: numberFormatter(5000),
+        timeLeft: '6 months',
+        value: (2500 / 5000) * 100,
+    },
+];
 const SavingsScreen = ({ navigation }) => {
     const { width, height } = useWindowDimensions();
     return (
@@ -29,24 +65,6 @@ const SavingsScreen = ({ navigation }) => {
                     </View>
                 </View>
                 <View style={SavingsStyle.footer}>
-                    <View style={SavingsStyle.barChartView}>
-                        <View style={SavingsStyle.barChartView.innerView}>
-                            <BarChart
-                                data={savingBarData}
-                                barWidth={8}
-                                spacing={24}
-                                roundedTop
-                                roundedBottom
-                                hideRules
-                                xAxisThickness={0}
-                                yAxisThickness={0}
-                                yAxisLabelPrefix={'\u20B5'}
-                                yAxisTextStyle={{ color: 'gray' }}
-                                noOfSections={3}
-                                maxValue={75}
-                            />
-                        </View>
-                    </View>
                     <View style={SavingsStyle.createGoalView}>
                         <View style={SavingsStyle.createGoalView.textView}>
                             <Text style={SavingsStyle.createGoalView.textView.text1}>Create a new goal</Text>
@@ -58,6 +76,10 @@ const SavingsScreen = ({ navigation }) => {
                                 <Feather name="plus" size={25} color="#177AD5" />
                             </TouchableOpacity>
                         </View>
+                    </View>
+                    <Text> Your Goals</Text>
+                    <View style={SavingsStyle.goalView}>
+                        <GoalComponent navigation={navigation} data={goalImages} />
                     </View>
                     <View style={SavingsStyle.gridContainerView}>
                         <Text style={SavingsStyle.gridContainerView.text}>Overview</Text>
@@ -93,6 +115,26 @@ const SavingsScreen = ({ navigation }) => {
                                 </View>
                                 <Text style={SavingsStyle.overview.overviewText}> Revenue </Text>
                             </View>
+                        </View>
+                    </View>
+                    <Text style={SavingsStyle.barChartView.text}>History</Text>
+
+                    <View style={SavingsStyle.barChartView}>
+                        <View style={SavingsStyle.barChartView.innerView}>
+                            <BarChart
+                                data={savingBarData}
+                                barWidth={8}
+                                spacing={24}
+                                roundedTop
+                                roundedBottom
+                                hideRules
+                                xAxisThickness={0}
+                                yAxisThickness={0}
+                                yAxisLabelPrefix={'\u20B5'}
+                                yAxisTextStyle={{ color: 'gray' }}
+                                noOfSections={3}
+                                maxValue={75}
+                            />
                         </View>
                     </View>
                 </View>

@@ -1,10 +1,8 @@
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawer from '../components/CustomDrawer';
 import ProfileScreen from '../screens/ProfileScreen';
-import GoalsScreen from '../screens/GoalsScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import SettingScreen from '../screens/SettingScreen';
 import TransactionsScreen from '../screens/TransactionsScreen';
@@ -44,13 +42,6 @@ const DrawerStack = () => {
                 component={KnowledgeScreen}
                 options={{
                     drawerIcon: ({ color }) => <Ionicons name="book-outline" color={color} size={20} />,
-                }}
-            />
-            <drawerStack.Screen
-                name="Goals"
-                component={GoalsScreen}
-                options={{
-                    drawerIcon: ({ color }) => <MaterialIcons name="assessment" color={color} size={20} />,
                 }}
             />
             <drawerStack.Screen

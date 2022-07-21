@@ -32,14 +32,25 @@ const SavingsStyle = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 10,
     },
+    goalView: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+    },
     barChartView: {
         padding: 40,
-        backgroundColor: '#FFF',
+        backgroundColor: '#fff',
         borderRadius: 10,
         marginBottom: 15,
+        text: {
+            color: '#000',
+            fontSize: 20,
+            fontFamily: 'roboto-medium',
+            padding: 10,
+        },
         innerView: {
             marginLeft: -40,
-            marginTop: 10,
+            marginTop: -40,
         },
     },
     createGoalView: {
