@@ -20,7 +20,6 @@ const Screen1Styles = StyleSheet.create({
         text: {
             color: '#fff',
             fontSize: 30,
-            marginTop: -6,
             paddingBottom: 5,
         },
     },
@@ -33,6 +32,31 @@ const Screen1Styles = StyleSheet.create({
         borderTopRightRadius: 20,
         paddingHorizontal: 20,
         paddingVertical: 10,
+    },
+    goalView: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        padding: 10,
+        image: {
+            width: 80,
+            height: 80,
+        },
+        text: {
+            color: '#000',
+            fontSize: 20,
+            fontFamily: 'roboto-medium',
+            alignSelf: 'center',
+            paddingBottom: 10,
+        },
+    },
+    addGoalView: {
+        alignSelf: 'center',
+        padding: 20,
+        text: {
+            color: '#7966FF',
+            fontSize: 20,
+        },
     },
 });
 export default Screen1Styles;

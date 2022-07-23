@@ -37,6 +37,13 @@ const SavingsStyle = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'space-between',
     },
+    yourGoalsText: {
+        color: '#000',
+        fontSize: 20,
+        padding: 10,
+        marginTop: 10,
+        fontFamily: 'roboto-medium',
+    },
     barChartView: {
         padding: 40,
         backgroundColor: '#fff',

@@ -47,7 +47,7 @@ const SavingsScreen = ({ navigation }) => {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <Text> Your Goals</Text>
+                    <Text style={SavingsStyle.yourGoalsText}> Your Goals</Text>
                     <View style={SavingsStyle.goalView}>
                         <GoalComponent navigation={navigation} data={goalImages} />
                     </View>
