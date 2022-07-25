@@ -16,6 +16,13 @@ const Screen1Styles = StyleSheet.create({
         textView: {
             alignSelf: 'center',
             marginTop: -40,
+            innerView: {
+                marginTop: -15,
+                stepsText: {
+                    color: '#fff',
+                    alignSelf: 'center',
+                },
+            },
         },
         text: {
             color: '#fff',
@@ -52,6 +59,7 @@ const Screen1Styles = StyleSheet.create({
     },
     addGoalView: {
         alignSelf: 'center',
+        paddingTop: 80,
         padding: 20,
         text: {
             color: '#7966FF',

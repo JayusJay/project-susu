@@ -13,27 +13,27 @@ const GoalCreationNavScreen = () => {
         <goalNavStack.Navigator screenOptions={{ headerShown: false }}>
             <goalNavStack.Screen
                 component={Screen1}
-                name="Screen 1"
+                name="Screen1"
                 options={{ contentStyle: { backgroundColor: '#fff' } }}
             />
             <goalNavStack.Screen
                 component={Screen2}
-                name="Screen 2"
+                name="Screen2"
                 options={{ contentStyle: { backgroundColor: '#fff' } }}
             />
             <goalNavStack.Screen
                 component={Screen3}
-                name="Screen 3"
+                name="Screen3"
                 options={{ contentStyle: { backgroundColor: '#fff' } }}
             />
             <goalNavStack.Screen
                 component={Screen4}
-                name="Screen 4"
+                name="Screen4"
                 options={{ contentStyle: { backgroundColor: '#fff' } }}
             />
             <goalNavStack.Screen
                 component={Screen5}
-                name="Screen 5"
+                name="Screen5"
                 options={{ contentStyle: { backgroundColor: '#fff' } }}
             />
         </goalNavStack.Navigator>

@@ -16,6 +16,13 @@ const Screen2Styles = StyleSheet.create({
         textView: {
             alignSelf: 'center',
             marginTop: -40,
+            innerView: {
+                marginTop: -15,
+                stepsText: {
+                    color: '#fff',
+                    alignSelf: 'center',
+                },
+            },
         },
         text: {
             color: '#fff',

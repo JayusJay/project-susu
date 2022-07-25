@@ -20,17 +20,27 @@ const Screen4 = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                     <View style={Screen4Styles.headerContentView.textView}>
-                        <Text style={Screen4Styles.headerContentView.text}>Select Amount</Text>
+                        <View style={Screen4Styles.headerContentView.textView.innerView}>
+                            <Text style={Screen4Styles.headerContentView.textView.innerView.stepsText}>Step 4/5</Text>
+                            <Text style={Screen4Styles.headerContentView.text}>Select Amount</Text>
+                        </View>
                     </View>
                 </View>
                 <View style={Screen4Styles.footer}>
                     <TouchableOpacity
                         onPress={() => {
-                            navigation.navigate('Screen 5');
+                            navigation.navigate('Screen5');
                         }}
-                        style={{ padding: 20, backgroundColor: '#7966FF', borderRadius: 20 }}
+                        style={{
+                            padding: 20,
+                            backgroundColor: '#7966FF',
+                            borderRadius: 40,
+                            marginTop: 30,
+                        }}
                     >
-                        <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'center' }}>Next</Text>
+                        <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'center', fontWeight: '700' }}>
+                            Next
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </SafeAreaView>

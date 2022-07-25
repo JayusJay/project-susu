@@ -20,7 +20,10 @@ const Screen5 = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                     <View style={Screen5Styles.headerContentView.textView}>
-                        <Text style={Screen5Styles.headerContentView.text}>Done</Text>
+                        <View style={Screen5Styles.headerContentView.textView.innerView}>
+                            <Text style={Screen5Styles.headerContentView.textView.innerView.stepsText}>Step 1/5</Text>
+                            <Text style={Screen5Styles.headerContentView.text}>Done</Text>
+                        </View>
                     </View>
                 </View>
                 <View style={Screen5Styles.footer}>
@@ -28,9 +31,16 @@ const Screen5 = ({ navigation }) => {
                         onPress={() => {
                             navigation.navigate('Savings');
                         }}
-                        style={{ padding: 20, backgroundColor: '#7966FF', borderRadius: 20 }}
+                        style={{
+                            padding: 20,
+                            backgroundColor: '#7966FF',
+                            borderRadius: 40,
+                            marginTop: 30,
+                        }}
                     >
-                        <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'center' }}>Done</Text>
+                        <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'center', fontWeight: '700' }}>
+                            Done
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </SafeAreaView>

@@ -4,6 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Screen1Styles from '../../styles/goal_creation/screen1Styles';
 
+const goalCreationData = {};
+
 const Screen1 = ({ navigation }) => {
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -20,50 +22,91 @@ const Screen1 = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                     <View style={Screen1Styles.headerContentView.textView}>
-                        <View style={{ marginTop: -15 }}>
-                            <Text style={{ color: '#fff', alignSelf: 'center' }}>Step 1/5</Text>
+                        <View style={Screen1Styles.headerContentView.textView.innerView}>
+                            <Text style={Screen1Styles.headerContentView.textView.innerView.stepsText}>Step 1/5</Text>
                             <Text style={Screen1Styles.headerContentView.text}>Select a Goal</Text>
                         </View>
                     </View>
                 </View>
                 <View style={Screen1Styles.footer}>
                     <View style={Screen1Styles.goalView}>
-                        <TouchableOpacity onPress={() => {}}>
+                        <TouchableOpacity
+                            onPress={() => {
+                                goalCreationData.image = '../../assets/images/goal_creation/home.png';
+                                goalCreationData.name = 'Home';
+                                navigation.navigate('Screen2', { goalCreationData });
+                            }}
+                        >
                             <Image
                                 source={require('../../assets/images/goal_creation/home.png')}
                                 style={Screen1Styles.goalView.image}
                             />
                             <Text style={Screen1Styles.goalView.text}>Home</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => {}}>
+
+                        <TouchableOpacity
+                            onPress={() => {
+                                goalCreationData.image = '../../assets/images/goal_creation/phone.jpg';
+                                goalCreationData.name = 'Phone';
+                                navigation.navigate('Screen2', { goalCreationData });
+                            }}
+                        >
                             <Image
                                 source={require('../../assets/images/goal_creation/phone.jpg')}
                                 style={Screen1Styles.goalView.image}
                             />
                             <Text style={Screen1Styles.goalView.text}>Phone</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => {}}>
+
+                        <TouchableOpacity
+                            onPress={() => {
+                                goalCreationData.image = '../../assets/images/goal_creation/vacation.png';
+                                goalCreationData.name = 'Vacation';
+                                navigation.navigate('Screen2', { goalCreationData });
+                            }}
+                        >
                             <Image
                                 source={require('../../assets/images/goal_creation/vacation.png')}
                                 style={Screen1Styles.goalView.image}
                             />
                             <Text style={Screen1Styles.goalView.text}>Vacation</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => {}}>
+
+                        <TouchableOpacity
+                            onPress={() => {
+                                goalCreationData.image = '../../assets/images/goal_creation/car.png';
+                                goalCreationData.name = 'Car';
+                                navigation.navigate('Screen2', { goalCreationData });
+                            }}
+                        >
                             <Image
                                 source={require('../../assets/images/goal_creation/car.png')}
                                 style={Screen1Styles.goalView.image}
                             />
                             <Text style={Screen1Styles.goalView.text}>Car</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => {}}>
+
+                        <TouchableOpacity
+                            onPress={() => {
+                                goalCreationData.image = '../../assets/images/goal_creation/motorcycle.jpg';
+                                goalCreationData.name = 'Motorcycle';
+                                navigation.navigate('Screen2', { goalCreationData });
+                            }}
+                        >
                             <Image
                                 source={require('../../assets/images/goal_creation/motorcycle.jpg')}
                                 style={Screen1Styles.goalView.image}
                             />
                             <Text style={Screen1Styles.goalView.text}>Motorcycle</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => {}}>
+
+                        <TouchableOpacity
+                            onPress={() => {
+                                goalCreationData.image = '../../assets/images/goal_creation/piggybank.jpg';
+                                goalCreationData.name = 'Emergency';
+                                navigation.navigate('Screen2', { goalCreationData });
+                            }}
+                        >
                             <Image
                                 source={require('../../assets/images/goal_creation/piggybank.jpg')}
                                 style={Screen1Styles.goalView.image}
@@ -76,9 +119,9 @@ const Screen1 = ({ navigation }) => {
                             <Text style={Screen1Styles.addGoalView.text}>Create my own goal</Text>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         onPress={() => {
-                            navigation.navigate('Screen 2');
+                            navigation.navigate('Screen2');
                         }}
                         style={{
                             padding: 20,
@@ -90,7 +133,7 @@ const Screen1 = ({ navigation }) => {
                         <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'center', fontWeight: '700' }}>
                             Next
                         </Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </SafeAreaView>
         </ScrollView>
