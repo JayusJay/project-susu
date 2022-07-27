@@ -1,25 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Snackbar from 'react-native-snackbar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { action } from 'mobx';
+import { observer } from 'mobx-react';
+import { AppStoreContext } from '../../components/AppStoreContext';
+//import goalCreationStore from '../../stores/goalCreation';
 import Screen2Styles from '../../styles/goal_creation/screen2Styles';
 
-const Screen2 = ({ route, navigation }) => {
-    const [isValidAmount, setIsValidAmount] = useState(true);
-    const [amount, setAmount] = useState(0);
-    const { goalCreationData } = route.params;
+const Screen2 = observer(({ navigation }) => {
+    const { goalCreationStore } = useContext(AppStoreContext);
+    //Do not destructure goalCreationStore here, it will cause state issues with mobx
+    //console.log(goalCreationStore.goalCreationData);
+    const [amount, setAmount] = useState({
+        isValid: false,
+        value: '',
+    });
 
-    function handleAmountChange(text) {
-        //if (text === 0) setIsValidAmount(false);
-        let reg = new RegExp(/^\d*\.?\d{0,2}$/).test(text);
+    const handleAmountChange = (num) => {
+        let reg = new RegExp(/^\d*\.?\d{0,2}$/).test(num);
         if (reg) {
-            setAmount(text);
-            setIsValidAmount(true);
-            goalCreationData.amount = amount;
-        } else setIsValidAmount(false);
-    }
+            setAmount({ isValid: true, value: num });
+        } else setAmount({ isValid: false, value: num });
+    };
 
+    const handleNext = () => {
+        if (amount.isValid && amount.value != 0) {
+            goalCreationStore.setGoalCreationData('amount', amount.value);
+            navigation.navigate('Screen3');
+        } else {
+            Snackbar.show({
+                text: 'Please enter a valid amount',
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor: 'red',
+            });
+        }
+    };
+
+    //write a regex function to validate the amount
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <SafeAreaView style={Screen2Styles.container}>
@@ -47,7 +66,7 @@ const Screen2 = ({ route, navigation }) => {
                             How much would you like to save{' '}
                         </Text>
                         <Text style={{ alignSelf: 'center', color: '#000', fontSize: 16 }}>
-                            for a {goalCreationData.name}?
+                            for a {goalCreationStore.title}?
                         </Text>
                     </View>
                     <View
@@ -63,22 +82,16 @@ const Screen2 = ({ route, navigation }) => {
                     >
                         <TextInput
                             style={{ color: '#000', fontSize: 20 }}
-                            placeholder={isValidAmount ? 'Enter Amount' : 'Invalid Amount'}
-                            placeholderTextColor={isValidAmount ? '#ccc' : 'red'}
-                            value={amount}
+                            placeholder="Enter Amount"
+                            placeholderTextColor="#ccc"
+                            value={amount.value}
                             keyboardType="numeric"
-                            onChangeText={(text) => handleAmountChange(text)}
+                            onChangeText={(num) => handleAmountChange(num)}
                         />
                     </View>
                     <TouchableOpacity
                         onPress={() => {
-                            isValidAmount && amount != 0
-                                ? navigation.navigate('Screen3', { goalCreationData })
-                                : Snackbar.show({
-                                      text: 'Please enter a valid amount',
-                                      duration: Snackbar.LENGTH_LONG,
-                                      backgroundColor: 'red',
-                                  });
+                            handleNext();
                         }}
                         style={{
                             padding: 20,
@@ -95,6 +108,6 @@ const Screen2 = ({ route, navigation }) => {
             </SafeAreaView>
         </ScrollView>
     );
-};
+});
 
 export default Screen2;

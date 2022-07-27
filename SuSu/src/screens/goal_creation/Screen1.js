@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { action } from 'mobx';
+import { observer } from 'mobx-react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { AppStoreContext } from '../../components/AppStoreContext';
+// import goalCreationStore from '../../stores/goalCreation';
+
 import Screen1Styles from '../../styles/goal_creation/screen1Styles';
 
-const goalCreationData = {};
-
 const Screen1 = ({ navigation }) => {
+    const { goalCreationStore } = useContext(AppStoreContext);
+    //Do not destructure goalCreationStore here, it will cause state issues with mobx
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <SafeAreaView style={Screen1Styles.container}>
@@ -31,11 +36,14 @@ const Screen1 = ({ navigation }) => {
                 <View style={Screen1Styles.footer}>
                     <View style={Screen1Styles.goalView}>
                         <TouchableOpacity
-                            onPress={() => {
-                                goalCreationData.image = '../../assets/images/goal_creation/home.png';
-                                goalCreationData.name = 'Home';
-                                navigation.navigate('Screen2', { goalCreationData });
-                            }}
+                            onPress={action(() => {
+                                goalCreationStore.setGoalCreationData(
+                                    'image',
+                                    '../../assets/images/goal_creation/home.png'
+                                );
+                                goalCreationStore.setGoalCreationData('title', 'Home');
+                                navigation.navigate('Screen2');
+                            })}
                         >
                             <Image
                                 source={require('../../assets/images/goal_creation/home.png')}
@@ -46,9 +54,13 @@ const Screen1 = ({ navigation }) => {
 
                         <TouchableOpacity
                             onPress={() => {
-                                goalCreationData.image = '../../assets/images/goal_creation/phone.jpg';
-                                goalCreationData.name = 'Phone';
-                                navigation.navigate('Screen2', { goalCreationData });
+                                goalCreationStore.setGoalCreationData(
+                                    'image',
+                                    '../../assets/images/goal_creation/phone.jpg'
+                                );
+                                goalCreationStore.setGoalCreationData('title', 'Phone');
+                                navigation.navigate('Screen2');
+                                //setGoalCreationData from goalCreationStore
                             }}
                         >
                             <Image
@@ -60,9 +72,12 @@ const Screen1 = ({ navigation }) => {
 
                         <TouchableOpacity
                             onPress={() => {
-                                goalCreationData.image = '../../assets/images/goal_creation/vacation.png';
-                                goalCreationData.name = 'Vacation';
-                                navigation.navigate('Screen2', { goalCreationData });
+                                goalCreationStore.setGoalCreationData(
+                                    'image',
+                                    '../../assets/images/goal_creation/vacation.png'
+                                );
+                                goalCreationStore.setGoalCreationData('title', 'Vacation');
+                                navigation.navigate('Screen2');
                             }}
                         >
                             <Image
@@ -74,9 +89,12 @@ const Screen1 = ({ navigation }) => {
 
                         <TouchableOpacity
                             onPress={() => {
-                                goalCreationData.image = '../../assets/images/goal_creation/car.png';
-                                goalCreationData.name = 'Car';
-                                navigation.navigate('Screen2', { goalCreationData });
+                                goalCreationStore.setGoalCreationData(
+                                    'image',
+                                    '../../assets/images/goal_creation/car.png'
+                                );
+                                goalCreationStore.setGoalCreationData('title', 'Car');
+                                navigation.navigate('Screen2');
                             }}
                         >
                             <Image
@@ -88,9 +106,12 @@ const Screen1 = ({ navigation }) => {
 
                         <TouchableOpacity
                             onPress={() => {
-                                goalCreationData.image = '../../assets/images/goal_creation/motorcycle.jpg';
-                                goalCreationData.name = 'Motorcycle';
-                                navigation.navigate('Screen2', { goalCreationData });
+                                goalCreationStore.setGoalCreationData(
+                                    'image',
+                                    '../../assets/images/goal_creation/motorcycle.jpg'
+                                );
+                                goalCreationStore.setGoalCreationData('title', 'Motorcycle');
+                                navigation.navigate('Screen2');
                             }}
                         >
                             <Image
@@ -102,9 +123,12 @@ const Screen1 = ({ navigation }) => {
 
                         <TouchableOpacity
                             onPress={() => {
-                                goalCreationData.image = '../../assets/images/goal_creation/piggybank.jpg';
-                                goalCreationData.name = 'Emergency';
-                                navigation.navigate('Screen2', { goalCreationData });
+                                goalCreationStore.setGoalCreationData(
+                                    'image',
+                                    '../../assets/images/goal_creation/piggybank.jpg'
+                                );
+                                goalCreationStore.setGoalCreationData('title', 'Emergency Fund');
+                                navigation.navigate('Screen2');
                             }}
                         >
                             <Image
@@ -119,6 +143,7 @@ const Screen1 = ({ navigation }) => {
                             <Text style={Screen1Styles.addGoalView.text}>Create my own goal</Text>
                         </TouchableOpacity>
                     </View>
+
                     {/* <TouchableOpacity
                         onPress={() => {
                             navigation.navigate('Screen2');
