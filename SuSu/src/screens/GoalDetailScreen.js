@@ -9,9 +9,9 @@ import GoalDetailScreenStyle from '../styles/goalDetailScreenStyle';
 const GoalDetailScreen = ({ route, navigation }) => {
     const { image, name, amountSaved, totalAmount, timeLeft, value } = route.params;
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#fff', padding: 20 }}>
+        <SafeAreaView style={GoalDetailScreenStyle.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={{ flexDirection: 'row' }}>
+                <View>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Ionicons name="close-outline" size={30} color="#000" />
                     </TouchableOpacity>

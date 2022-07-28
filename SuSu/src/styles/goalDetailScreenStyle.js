@@ -1,6 +1,11 @@
 import { StyleSheet } from 'react-native';
 
 const GoalDetailScreenStyle = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        padding: 20,
+    },
     circularBaseView: {
         padding: 40,
         alignItems: 'center',

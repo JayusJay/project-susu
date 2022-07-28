@@ -1,6 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-//import goalCreationStore from '../../stores/goalCreation';
+import CustomGoalCreationScreen from './customGoalCreationScreen';
 import Screen1 from './Screen1';
 import Screen2 from './Screen2';
 import Screen3 from './Screen3';
@@ -35,6 +35,11 @@ const GoalCreationNavScreen = () => {
             <goalNavStack.Screen
                 component={Screen5}
                 name="Screen5"
+                options={{ contentStyle: { backgroundColor: '#fff' } }}
+            />
+            <goalNavStack.Screen
+                component={CustomGoalCreationScreen}
+                name="CustomGoalCreation"
                 options={{ contentStyle: { backgroundColor: '#fff' } }}
             />
         </goalNavStack.Navigator>
