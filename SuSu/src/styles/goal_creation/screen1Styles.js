@@ -39,15 +39,25 @@ const Screen1Styles = StyleSheet.create({
         borderTopRightRadius: 20,
         paddingHorizontal: 20,
         paddingVertical: 10,
+        text: {
+            color: '#000',
+            alignSelf: 'center',
+            fontSize: 25,
+            padding: 30,
+        },
     },
     goalView: {
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
         padding: 10,
+        innerViews: {
+            padding: 10,
+        },
         image: {
-            width: 80,
-            height: 80,
+            width: 50,
+            height: 50,
+            alignSelf: 'center',
         },
         text: {
             color: '#000',
@@ -59,10 +69,12 @@ const Screen1Styles = StyleSheet.create({
     },
     addGoalView: {
         alignSelf: 'center',
-        paddingTop: 80,
+        marginTop: 80,
         padding: 20,
+        backgroundColor: '#7966FF',
+        borderRadius: 30,
         text: {
-            color: '#7966FF',
+            color: '#fff',
             fontSize: 20,
         },
     },
