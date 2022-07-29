@@ -2,18 +2,28 @@ import React, { useState, useContext } from 'react';
 import { Text, View, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Snackbar from 'react-native-snackbar';
+import Dialog from 'react-native-dialog';
 import { AppStoreContext } from '../../components/AppStoreContext';
 
 const CustomGoalCreationScreen = ({ navigation }) => {
     const { goalCreationStore } = useContext(AppStoreContext);
 
+    const [dialogVisible, setDialogVisible] = useState(false);
     const [goalState, setGoalState] = useState({
         image: '',
         title: '',
         isImage: false,
         isTitle: false,
     });
+    const photoOptions = {
+        mediaType: 'photo',
+        cameraType: 'back',
+        maxWidth: 500,
+        maxHeight: 500,
+        saveToPhotos: true,
+    };
     const handleTitle = (title) => {
         let reg = new RegExp(/^[a-zA-Z0-9 ]*$/).test(title);
         if (reg) {
@@ -43,6 +53,46 @@ const CustomGoalCreationScreen = ({ navigation }) => {
             });
         }
     };
+
+    const handlePhoto = (type) => {
+        if (type === 'camera') {
+            launchCamera(photoOptions, (response) => {
+                if (response.didCancel) {
+                    console.log('User cancelled image picker');
+                } else if (response.error) {
+                    console.log('ImagePicker Error: ', response.error);
+                } else if (response.customButton) {
+                    console.log('User tapped custom button: ', response.customButton);
+                } else {
+                    setGoalState({
+                        ...goalState,
+                        image: response.assets[0].uri,
+                        isImage: true,
+                    });
+                    setDialogVisible(false);
+                    console.log(response.assets[0].uri);
+                }
+            });
+        } else {
+            launchImageLibrary(photoOptions, (response) => {
+                if (response.didCancel) {
+                    console.log('User cancelled image picker');
+                } else if (response.error) {
+                    console.log('ImagePicker Error: ', response.error);
+                } else if (response.customButton) {
+                    console.log('User tapped custom button: ', response.customButton);
+                } else {
+                    setGoalState({
+                        ...goalState,
+                        image: response.assets[0].uri,
+                        isImage: true,
+                    });
+                    setDialogVisible(false);
+                    console.log(response);
+                }
+            });
+        }
+    };
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <SafeAreaView style={{ flex: 1, padding: 20 }}>
@@ -53,7 +103,11 @@ const CustomGoalCreationScreen = ({ navigation }) => {
                 </View>
                 <View style={{ alignItems: 'center', padding: 20 }}>
                     <Image
-                        source={{ uri: 'https://via.placeholder.com/150.jpg' }}
+                        source={
+                            !goalState.isImage
+                                ? { uri: 'https://via.placeholder.com/150.jpg' }
+                                : { uri: goalState.image }
+                        }
                         style={{ width: 150, height: 150, borderRadius: 80 }}
                     />
                 </View>
@@ -71,10 +125,16 @@ const CustomGoalCreationScreen = ({ navigation }) => {
                         borderRadius: 60,
                     }}
                 >
-                    <TouchableOpacity onPress={() => {}}>
+                    <TouchableOpacity
+                        onPress={() => {
+                            setDialogVisible(true);
+                            // selectImage();
+                        }}
+                    >
                         <Ionicons name="camera-outline" size={60} color="#fff" />
                     </TouchableOpacity>
                 </View>
+
                 <View style={{ paddingTop: 50 }}>
                     <TextInput
                         underlineColorAndroid="transparent"
@@ -103,6 +163,43 @@ const CustomGoalCreationScreen = ({ navigation }) => {
                 >
                     <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold' }}>Next</Text>
                 </TouchableOpacity>
+                <View>
+                    <Dialog.Container visible={dialogVisible} onBackdropPress={() => setDialogVisible(false)}>
+                        <Dialog.Description>Select a photo from your device to upload for your goal</Dialog.Description>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                            <View style={{ flexDirection: 'row', borderRadius: 20 }}>
+                                <Ionicons
+                                    name="camera-outline"
+                                    size={20}
+                                    color="#7966FF"
+                                    style={{ paddingTop: 5, paddingLeft: 5 }}
+                                />
+                                <Dialog.Button
+                                    label="Camera"
+                                    color="#7966FF"
+                                    onPress={() => {
+                                        handlePhoto('camera');
+                                    }}
+                                />
+                            </View>
+                            <View style={{ flexDirection: 'row', borderRadius: 20 }}>
+                                <Ionicons
+                                    name="image-outline"
+                                    size={20}
+                                    color="#7966FF"
+                                    style={{ paddingTop: 5, paddingLeft: 5 }}
+                                />
+                                <Dialog.Button
+                                    label="Gallery"
+                                    color="#7966FF"
+                                    onPress={() => {
+                                        handlePhoto('gallery');
+                                    }}
+                                />
+                            </View>
+                        </View>
+                    </Dialog.Container>
+                </View>
             </SafeAreaView>
         </ScrollView>
     );
