@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const Screen1Styles = StyleSheet.create({
+const GoalSelectionStyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#7966FF',
@@ -79,4 +79,4 @@ const Screen1Styles = StyleSheet.create({
         },
     },
 });
-export default Screen1Styles;
+export default GoalSelectionStyles;

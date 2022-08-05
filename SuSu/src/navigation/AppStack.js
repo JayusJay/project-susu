@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AppStoreProvider } from '../components/AppStoreContext';
 import DrawerStack from './DrawerStack';
 import GoalDetailScreen from '../screens/GoalDetailScreen';
-import GoalCreationNavScreen from '../screens/goal_creation/goalCreationNavScreen';
+import GoalCreationNavScreen from '../screens/goal_creation/GoalCreationNavScreen';
 const appStack = createNativeStackNavigator();
 
 const AppStack = () => {
