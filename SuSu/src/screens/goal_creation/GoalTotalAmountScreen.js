@@ -5,9 +5,9 @@ import Snackbar from 'react-native-snackbar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { observer } from 'mobx-react';
 import { AppStoreContext } from '../../components/AppStoreContext';
-import GoalAmountStyles from '../../styles/goal_creation/goalAmountStyles';
+import GoalTotalAmountStyles from '../../styles/goal_creation/goalTotalAmountStyle';
 
-const GoalAmountScreen = observer(({ navigation }) => {
+const GoalTotalAmountScreen = observer(({ navigation }) => {
     const { goalCreationStore } = useContext(AppStoreContext);
     //Do not destructure goalCreationStore here, it will cause state issues with mobx
     const [amount, setAmount] = useState({
@@ -24,8 +24,9 @@ const GoalAmountScreen = observer(({ navigation }) => {
 
     const handleNext = () => {
         if (amount.isValid && amount.value != 0) {
-            goalCreationStore.setGoalCreationData('amount', amount.value);
-            navigation.navigate('Screen3');
+            goalCreationStore.setGoalCreationData('totalAmount', +amount.value);
+            //+value is used to convert string to number
+            navigation.navigate('GoalType');
         } else {
             Snackbar.show({
                 text: 'Please enter a valid amount',
@@ -37,49 +38,39 @@ const GoalAmountScreen = observer(({ navigation }) => {
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
-            <SafeAreaView style={GoalAmountStyles.container}>
-                <View style={GoalAmountStyles.header}>
-                    <View style={GoalAmountStyles.headerContentView}>
+            <SafeAreaView style={GoalTotalAmountStyles.container}>
+                <View style={GoalTotalAmountStyles.header}>
+                    <View style={GoalTotalAmountStyles.headerContentView}>
                         <TouchableOpacity
                             onPress={() => {
                                 navigation.goBack();
                             }}
-                            style={GoalAmountStyles.backButton}
+                            style={GoalTotalAmountStyles.backButton}
                         >
                             <Ionicons name="arrow-back-outline" size={30} color="white" />
                         </TouchableOpacity>
                     </View>
-                    <View style={GoalAmountStyles.headerContentView.textView}>
-                        <View style={GoalAmountStyles.headerContentView.textView.innerView}>
-                            <Text style={GoalAmountStyles.headerContentView.textView.innerView.stepsText}>
+                    <View style={GoalTotalAmountStyles.headerContentView.textView}>
+                        <View style={GoalTotalAmountStyles.headerContentView.textView.innerView}>
+                            <Text style={GoalTotalAmountStyles.headerContentView.textView.innerView.stepsText}>
                                 Step 2/5
                             </Text>
-                            <Text style={GoalAmountStyles.headerContentView.text}>Goal Amount</Text>
+                            <Text style={GoalTotalAmountStyles.headerContentView.text}>Goal Amount</Text>
                         </View>
                     </View>
                 </View>
-                <View style={GoalAmountStyles.footer}>
-                    <View style={{ paddingTop: 100 }}>
-                        <Text style={{ alignSelf: 'center', color: '#000', fontSize: 16 }}>
+                <View style={GoalTotalAmountStyles.footer}>
+                    <View style={GoalTotalAmountStyles.headingView}>
+                        <Text style={GoalTotalAmountStyles.headingView.headingText}>
                             How much would you like to save
                         </Text>
-                        <Text style={{ alignSelf: 'center', color: '#000', fontSize: 16 }}>
+                        <Text style={GoalTotalAmountStyles.headingView.headingText}>
                             for a {goalCreationStore.title}?
                         </Text>
                     </View>
-                    <View
-                        style={{
-                            marginTop: 20,
-                            alignSelf: 'center',
-                            alignItems: 'center',
-                            borderWidth: 1,
-                            borderRadius: 40,
-                            borderColor: '#ccc',
-                            width: '90%',
-                        }}
-                    >
+                    <View style={GoalTotalAmountStyles.inputView}>
                         <TextInput
-                            style={{ color: '#000', fontSize: 20 }}
+                            style={GoalTotalAmountStyles.inputView.inputStyle}
                             placeholder="Enter Amount"
                             placeholderTextColor="#ccc"
                             value={amount.value}
@@ -91,16 +82,9 @@ const GoalAmountScreen = observer(({ navigation }) => {
                         onPress={() => {
                             handleNext();
                         }}
-                        style={{
-                            padding: 20,
-                            backgroundColor: '#7966FF',
-                            borderRadius: 40,
-                            marginTop: 30,
-                        }}
+                        style={GoalTotalAmountStyles.buttonTouchable}
                     >
-                        <Text style={{ fontSize: 20, color: '#fff', alignSelf: 'center', fontWeight: '700' }}>
-                            Next
-                        </Text>
+                        <Text style={GoalTotalAmountStyles.buttonTouchable.text}>Next</Text>
                     </TouchableOpacity>
                 </View>
             </SafeAreaView>
@@ -108,4 +92,4 @@ const GoalAmountScreen = observer(({ navigation }) => {
     );
 });
 
-export default GoalAmountScreen;
+export default GoalTotalAmountScreen;

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const GoalAmountStyles = StyleSheet.create({
+const GoalTotalAmountStyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#7966FF',
@@ -41,5 +41,38 @@ const GoalAmountStyles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 10,
     },
+    headingView: {
+        paddingTop: 100,
+        headingText: {
+            alignSelf: 'center',
+            color: '#000',
+            fontSize: 16,
+        },
+    },
+    inputView: {
+        marginTop: 20,
+        alignSelf: 'center',
+        paddingLeft: 20,
+        borderWidth: 1,
+        borderRadius: 40,
+        borderColor: '#ccc',
+        width: '90%',
+        inputStyle: {
+            color: '#000',
+            fontSize: 20,
+        },
+    },
+    buttonTouchable: {
+        padding: 20,
+        backgroundColor: '#7966FF',
+        borderRadius: 40,
+        marginTop: 40,
+        text: {
+            fontSize: 20,
+            color: '#fff',
+            alignSelf: 'center',
+            fontWeight: '700',
+        },
+    },
 });
-export default GoalAmountStyles;
+export default GoalTotalAmountStyles;

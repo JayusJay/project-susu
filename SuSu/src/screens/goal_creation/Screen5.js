@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { AppStoreContext } from '../../components/AppStoreContext';
 import Screen5Styles from '../../styles/goal_creation/screen5Styles';
 
 const Screen5 = ({ navigation }) => {
+    const { goalCreationStore } = useContext(AppStoreContext);
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <SafeAreaView style={Screen5Styles.container}>
@@ -21,12 +23,22 @@ const Screen5 = ({ navigation }) => {
                     </View>
                     <View style={Screen5Styles.headerContentView.textView}>
                         <View style={Screen5Styles.headerContentView.textView.innerView}>
-                            <Text style={Screen5Styles.headerContentView.textView.innerView.stepsText}>Step 1/5</Text>
+                            <Text style={Screen5Styles.headerContentView.textView.innerView.stepsText}>Step 5/5</Text>
                             <Text style={Screen5Styles.headerContentView.text}>Done</Text>
                         </View>
                     </View>
                 </View>
                 <View style={Screen5Styles.footer}>
+                    <View>
+                        {/* <Text style={{ color: '#000', fontSize: 20 }}> */}
+                        {Object.values(goalCreationStore.goalCreationData).map((value, index) => (
+                            <Text key={index} style={{ color: '#000' }}>
+                                {value}
+                            </Text>
+                        ))}
+
+                        {/* </Text> */}
+                    </View>
                     <TouchableOpacity
                         onPress={() => {
                             navigation.navigate('Savings');

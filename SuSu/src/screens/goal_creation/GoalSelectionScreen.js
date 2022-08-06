@@ -3,7 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { AppStoreContext } from '../../components/AppStoreContext';
-import GoalSelectionStyles from '../../styles/goal_creation/goalSelectionStyles';
+import GoalSelectionStyles from '../../styles/goal_creation/goalSelectionStyle';
 
 const GoalSelectionScreen = ({ navigation }) => {
     const { goalCreationStore } = useContext(AppStoreContext);
@@ -43,7 +43,7 @@ const GoalSelectionScreen = ({ navigation }) => {
                                         '../../assets/images/goal_creation/home.png'
                                     );
                                     goalCreationStore.setGoalCreationData('title', 'Home');
-                                    navigation.navigate('GoalAmount');
+                                    navigation.navigate('GoalTotalAmount');
                                 }}
                             >
                                 <Image
@@ -61,7 +61,7 @@ const GoalSelectionScreen = ({ navigation }) => {
                                         '../../assets/images/goal_creation/phone.jpg'
                                     );
                                     goalCreationStore.setGoalCreationData('title', 'Phone');
-                                    navigation.navigate('GoalAmount');
+                                    navigation.navigate('GoalTotalAmount');
                                 }}
                             >
                                 <Image
@@ -79,7 +79,7 @@ const GoalSelectionScreen = ({ navigation }) => {
                                         '../../assets/images/goal_creation/vacation.png'
                                     );
                                     goalCreationStore.setGoalCreationData('title', 'Vacation');
-                                    navigation.navigate('GoalAmount');
+                                    navigation.navigate('GoalTotalAmount');
                                 }}
                             >
                                 <Image
@@ -98,7 +98,7 @@ const GoalSelectionScreen = ({ navigation }) => {
                                         '../../assets/images/goal_creation/car.png'
                                     );
                                     goalCreationStore.setGoalCreationData('title', 'Car');
-                                    navigation.navigate('GoalAmount');
+                                    navigation.navigate('GoalTotalAmount');
                                 }}
                             >
                                 <Image
@@ -116,7 +116,7 @@ const GoalSelectionScreen = ({ navigation }) => {
                                         '../../assets/images/goal_creation/motorcycle.jpg'
                                     );
                                     goalCreationStore.setGoalCreationData('title', 'Motorcycle');
-                                    navigation.navigate('GoalAmount');
+                                    navigation.navigate('GoalTotalAmount');
                                 }}
                             >
                                 <Image
@@ -135,7 +135,7 @@ const GoalSelectionScreen = ({ navigation }) => {
                                         '../../assets/images/goal_creation/piggybank.jpg'
                                     );
                                     goalCreationStore.setGoalCreationData('title', 'Emergency Fund');
-                                    navigation.navigate('GoalAmount');
+                                    navigation.navigate('GoalTotalAmount');
                                 }}
                             >
                                 <Image

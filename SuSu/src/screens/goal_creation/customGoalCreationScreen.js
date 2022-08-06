@@ -6,11 +6,12 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Snackbar from 'react-native-snackbar';
 import Dialog from 'react-native-dialog';
 import { AppStoreContext } from '../../components/AppStoreContext';
+import errors from '../../utils/errors';
 import customGoalCreationStyles from '../../styles/goal_creation/customGoalCreationStyle';
 
 const CustomGoalCreationScreen = ({ navigation }) => {
     const { goalCreationStore } = useContext(AppStoreContext);
-
+    const { RNImagePickerError } = errors();
     const [dialogVisible, setDialogVisible] = useState(false);
     const [goalState, setGoalState] = useState({
         image: '',
@@ -59,7 +60,7 @@ const CustomGoalCreationScreen = ({ navigation }) => {
         if (goalState.isImage && goalState.isTitle) {
             goalCreationStore.setGoalCreationData('title', goalState.title);
             goalCreationStore.setGoalCreationData('image', goalState.image);
-            navigation.navigate('GoalAmount');
+            navigation.navigate('GoalTotalAmount');
         } else {
             Snackbar.show({
                 text: 'Please upload a photo and enter a valid title',
@@ -74,18 +75,13 @@ const CustomGoalCreationScreen = ({ navigation }) => {
             PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, {})
                 .then(() => {
                     launchCamera(photoOptions, (response) => {
-                        if (response.errorCode == 'camera_unavailable') {
-                            Snackbar.show({
-                                text: 'ImagePicker Error: Camera unavailable',
-                                duration: Snackbar.LENGTH_LONG,
-                                backgroundColor: 'red',
-                            });
-                        } else if (response.errorCode == 'permission') {
-                            Snackbar.show({
-                                text: 'ImagePicker Error: Permission denied',
-                                duration: Snackbar.LENGTH_LONG,
-                                backgroundColor: 'red',
-                            });
+                        if (
+                            response.errorCode == 'camera_unavailable' ||
+                            response.errorCode == 'permission' ||
+                            response.errorCode == 'others' ||
+                            response.didCancel
+                        ) {
+                            RNImagePickerError(response);
                         } else {
                             setGoalState({
                                 ...goalState,
@@ -105,18 +101,13 @@ const CustomGoalCreationScreen = ({ navigation }) => {
                 });
         } else {
             launchImageLibrary(photoOptions, (response) => {
-                if (response.errorCode == 'camera_unavailable') {
-                    Snackbar.show({
-                        text: 'ImagePicker Error: Camera unavailable',
-                        duration: Snackbar.LENGTH_LONG,
-                        backgroundColor: 'red',
-                    });
-                } else if (response.errorCode == 'permission') {
-                    Snackbar.show({
-                        text: 'ImagePicker Error: Permission denied',
-                        duration: Snackbar.LENGTH_LONG,
-                        backgroundColor: 'red',
-                    });
+                if (
+                    response.errorCode == 'camera_unavailable' ||
+                    response.errorCode == 'permission' ||
+                    response.errorCode == 'others' ||
+                    response.didCancel
+                ) {
+                    RNImagePickerError(response);
                 } else {
                     setGoalState({
                         ...goalState,
@@ -142,7 +133,7 @@ const CustomGoalCreationScreen = ({ navigation }) => {
                         source={
                             !goalState.isImage
                                 ? goalCreationStore.image === '' || goalCreationStore.image.startsWith('../../assets')
-                                    ? { uri: 'https://via.placeholder.com/150.jpg' }
+                                    ? { uri: 'https://placehold.jp/150x150.png' }
                                     : { uri: goalCreationStore.image }
                                 : { uri: goalState.image }
                         }

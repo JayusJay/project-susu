@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
         credential: null,
         showDialog: false,
     });
-    const firebaseAuthenticationError = errors();
+    const { firebaseAuthenticationError } = errors();
     const onAuthStateChanged = (user) => {
         setUser(user);
         setLoading(false);

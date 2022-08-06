@@ -2,9 +2,9 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CustomGoalCreationScreen from './CustomGoalCreationScreen';
 import GoalSelectionScreen from './GoalSelectionScreen';
-import GoalAmountScreen from './GoalAmountScreen';
-import Screen3 from './Screen3';
-import Screen4 from './Screen4';
+import GoalTotalAmountScreen from './GoalTotalAmountScreen';
+import GoalTypeScreen from './GoalTypeScreen';
+import GoalSavingAmountScreen from './GoalSavingAmountScreen';
 import Screen5 from './Screen5';
 
 const goalNavStack = createNativeStackNavigator();
@@ -18,18 +18,18 @@ const GoalCreationNavScreen = () => {
                 options={{ contentStyle: { backgroundColor: '#fff' } }}
             />
             <goalNavStack.Screen
-                component={GoalAmountScreen}
-                name="GoalAmount"
+                component={GoalTotalAmountScreen}
+                name="GoalTotalAmount"
                 options={{ contentStyle: { backgroundColor: '#fff' } }}
             />
             <goalNavStack.Screen
-                component={Screen3}
-                name="Screen3"
+                component={GoalTypeScreen}
+                name="GoalType"
                 options={{ contentStyle: { backgroundColor: '#fff' } }}
             />
             <goalNavStack.Screen
-                component={Screen4}
-                name="Screen4"
+                component={GoalSavingAmountScreen}
+                name="GoalSavingAmount"
                 options={{ contentStyle: { backgroundColor: '#fff' } }}
             />
             <goalNavStack.Screen

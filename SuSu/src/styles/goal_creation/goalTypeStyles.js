@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const Screen2Styles = StyleSheet.create({
+const GoalTypeStyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#7966FF',
@@ -41,5 +41,33 @@ const Screen2Styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 10,
     },
+    headingView: {
+        marginTop: 20,
+        headingText: {
+            color: '#7966FF',
+            fontSize: 25,
+            alignSelf: 'center',
+        },
+    },
+    selectedStrictView: {
+        marginTop: 20,
+        innerText: {
+            color: '#7966FF',
+            fontSize: 25,
+            alignSelf: 'center',
+        },
+    },
+    buttonTouchable: {
+        padding: 20,
+        backgroundColor: '#7966FF',
+        borderRadius: 40,
+        marginTop: 30,
+        text: {
+            fontSize: 20,
+            color: '#fff',
+            alignSelf: 'center',
+            fontWeight: '700',
+        },
+    },
 });
-export default Screen2Styles;
+export default GoalTypeStyles;

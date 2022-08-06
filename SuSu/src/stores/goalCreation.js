@@ -4,10 +4,12 @@ class GoalCreationStore {
     image = '';
     title = '';
     description = '';
-    amount = '';
+    totalAmount = 0;
+    savingAmount = 0;
     startDate = '';
     endDate = '';
     frequency = '';
+    epoch = '';
     goalType = '';
     goalCategory = '';
     goalStatus = '';
@@ -16,9 +18,12 @@ class GoalCreationStore {
             image: observable,
             title: observable,
             description: observable,
+            totalAmount: observable,
+            savingAmount: observable,
             startDate: observable,
             endDate: observable,
             frequency: observable,
+            epoch: observable,
             goalType: observable,
             goalCategory: observable,
             goalStatus: observable,
@@ -35,10 +40,12 @@ class GoalCreationStore {
             image: this.image,
             title: this.title,
             description: this.description,
-            amount: this.amount,
+            totalAmount: this.totalAmount,
+            savingAmount: this.savingAmount,
             startDate: this.startDate,
             endDate: this.endDate,
             frequency: this.frequency,
+            epoch: this.epoch,
             goalType: this.goalType,
             goalCategory: this.goalCategory,
             goalStatus: this.goalStatus,
