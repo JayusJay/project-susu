@@ -45,8 +45,9 @@ const GoalTotalAmountStyles = StyleSheet.create({
         paddingTop: 100,
         headingText: {
             alignSelf: 'center',
-            color: '#000',
-            fontSize: 16,
+            color: '#7966FF',
+            fontSize: 20,
+            textAlign: 'center',
         },
     },
     inputView: {

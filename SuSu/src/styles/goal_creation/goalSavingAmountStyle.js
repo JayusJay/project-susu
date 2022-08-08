@@ -42,12 +42,11 @@ const GoalSavingAmountStyles = StyleSheet.create({
         paddingVertical: 10,
     },
     headingView: {
-        flexDirection: 'row',
-        justifyContent: 'center',
         marginTop: 100,
         innerText: {
             color: '#7966FF',
             fontSize: 20,
+            textAlign: 'center',
         },
     },
     inputView: {

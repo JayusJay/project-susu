@@ -43,7 +43,7 @@ const SavingsScreen = ({ navigation }) => {
                                     navigation.navigate('Goal Creation Nav');
                                 }}
                             >
-                                <Feather name="plus" size={25} color="#177AD5" />
+                                <Feather name="plus" size={25} color="#177AD5" style={{ padding: 12 }} />
                             </TouchableOpacity>
                         </View>
                     </View>

@@ -62,11 +62,9 @@ const GoalTotalAmountScreen = observer(({ navigation }) => {
                 <View style={GoalTotalAmountStyles.footer}>
                     <View style={GoalTotalAmountStyles.headingView}>
                         <Text style={GoalTotalAmountStyles.headingView.headingText}>
-                            How much would you like to save
+                            How much do you need to save in total towards {goalCreationStore.title}?
                         </Text>
-                        <Text style={GoalTotalAmountStyles.headingView.headingText}>
-                            for a {goalCreationStore.title}?
-                        </Text>
+                      
                     </View>
                     <View style={GoalTotalAmountStyles.inputView}>
                         <TextInput

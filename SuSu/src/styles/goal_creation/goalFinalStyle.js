@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const Screen2Styles = StyleSheet.create({
+const GoalFinalStyle = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#7966FF',
@@ -42,4 +42,4 @@ const Screen2Styles = StyleSheet.create({
         paddingVertical: 10,
     },
 });
-export default Screen2Styles;
+export default GoalFinalStyle;

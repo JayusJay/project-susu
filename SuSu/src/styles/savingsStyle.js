@@ -78,7 +78,7 @@ const SavingsStyle = StyleSheet.create({
             },
         },
         buttonView: {
-            padding: 20,
+            padding: 5,
             backgroundColor: '#ccc',
             borderRadius: 10,
         },

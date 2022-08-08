@@ -42,7 +42,7 @@ const GoalSelectionScreen = ({ navigation }) => {
                                         'image',
                                         '../../assets/images/goal_creation/home.png'
                                     );
-                                    goalCreationStore.setGoalCreationData('title', 'Home');
+                                    goalCreationStore.setGoalCreationData('name', 'Home');
                                     navigation.navigate('GoalTotalAmount');
                                 }}
                             >
@@ -60,7 +60,7 @@ const GoalSelectionScreen = ({ navigation }) => {
                                         'image',
                                         '../../assets/images/goal_creation/phone.jpg'
                                     );
-                                    goalCreationStore.setGoalCreationData('title', 'Phone');
+                                    goalCreationStore.setGoalCreationData('name', 'Phone');
                                     navigation.navigate('GoalTotalAmount');
                                 }}
                             >
@@ -78,7 +78,7 @@ const GoalSelectionScreen = ({ navigation }) => {
                                         'image',
                                         '../../assets/images/goal_creation/vacation.png'
                                     );
-                                    goalCreationStore.setGoalCreationData('title', 'Vacation');
+                                    goalCreationStore.setGoalCreationData('name', 'Vacation');
                                     navigation.navigate('GoalTotalAmount');
                                 }}
                             >
@@ -97,7 +97,7 @@ const GoalSelectionScreen = ({ navigation }) => {
                                         'image',
                                         '../../assets/images/goal_creation/car.png'
                                     );
-                                    goalCreationStore.setGoalCreationData('title', 'Car');
+                                    goalCreationStore.setGoalCreationData('name', 'Car');
                                     navigation.navigate('GoalTotalAmount');
                                 }}
                             >
@@ -115,7 +115,7 @@ const GoalSelectionScreen = ({ navigation }) => {
                                         'image',
                                         '../../assets/images/goal_creation/motorcycle.jpg'
                                     );
-                                    goalCreationStore.setGoalCreationData('title', 'Motorcycle');
+                                    goalCreationStore.setGoalCreationData('name', 'Motorcycle');
                                     navigation.navigate('GoalTotalAmount');
                                 }}
                             >
@@ -134,7 +134,7 @@ const GoalSelectionScreen = ({ navigation }) => {
                                         'image',
                                         '../../assets/images/goal_creation/piggybank.jpg'
                                     );
-                                    goalCreationStore.setGoalCreationData('title', 'Emergency Fund');
+                                    goalCreationStore.setGoalCreationData('name', 'Emergency Fund');
                                     navigation.navigate('GoalTotalAmount');
                                 }}
                             >

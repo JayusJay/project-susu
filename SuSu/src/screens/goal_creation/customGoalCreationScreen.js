@@ -29,7 +29,7 @@ const CustomGoalCreationScreen = ({ navigation }) => {
     };
 
     const handleTitle = (title) => {
-        let reg = new RegExp(/^[a-zA-Z0-9 ]*$/).test(title);
+        let reg = new RegExp(/^[a-zA-Z0-9' ]*$/).test(title);
         if (reg) {
             setGoalState({
                 ...goalState,
@@ -53,12 +53,12 @@ const CustomGoalCreationScreen = ({ navigation }) => {
                 backgroundColor: 'red',
             });
             goalCreationStore.setGoalCreationData('image', goalState.image);
-            goalCreationStore.setGoalCreationData('title', goalState.title);
+            goalCreationStore.setGoalCreationData('name', goalState.title);
         }
     })(); //this hack automatically sets the image to the last image selected if the user does not select an image
     const handleButton = () => {
         if (goalState.isImage && goalState.isTitle) {
-            goalCreationStore.setGoalCreationData('title', goalState.title);
+            goalCreationStore.setGoalCreationData('name', goalState.title);
             goalCreationStore.setGoalCreationData('image', goalState.image);
             navigation.navigate('GoalTotalAmount');
         } else {

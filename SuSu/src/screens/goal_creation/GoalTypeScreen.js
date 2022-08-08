@@ -46,7 +46,7 @@ const GoalTypeScreen = ({ navigation }) => {
                 goalCreationStore.setGoalCreationData('frequency', selectedStrictPlan);
                 goalCreationStore.setGoalCreationData(
                     'epoch',
-                    selectedStrictPlan === 'Daily' ? '1' : 'weekly' ? '7' : 'monthly' ? '30' : ''
+                    selectedStrictPlan === 'Daily' ? '1' : selectedStrictPlan === 'Weekly' ? '7' : '30'
                 );
                 setSelectedStyle(null);
                 setSelectedStrictPlan(null);
@@ -54,9 +54,9 @@ const GoalTypeScreen = ({ navigation }) => {
             }
         } else if (selectedStyle === 'Lenient') {
             goalCreationStore.setGoalCreationData('goalType', selectedStyle);
-            goalCreationStore.setGoalCreationData('frequency', 'sporadic');
+            goalCreationStore.setGoalCreationData('frequency', 'Sporadic');
             goalCreationStore.setGoalCreationData('epoch', 'none');
-            navigation.navigate('Screen5');
+            navigation.navigate('GoalFinal');
         } else {
             Snackbar.show({
                 text: 'Please select a savings type',

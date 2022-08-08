@@ -5,7 +5,7 @@ import GoalSelectionScreen from './GoalSelectionScreen';
 import GoalTotalAmountScreen from './GoalTotalAmountScreen';
 import GoalTypeScreen from './GoalTypeScreen';
 import GoalSavingAmountScreen from './GoalSavingAmountScreen';
-import Screen5 from './Screen5';
+import GoalFinalScreen from './GoalFinalScreen';
 
 const goalNavStack = createNativeStackNavigator();
 
@@ -33,8 +33,8 @@ const GoalCreationNavScreen = () => {
                 options={{ contentStyle: { backgroundColor: '#fff' } }}
             />
             <goalNavStack.Screen
-                component={Screen5}
-                name="Screen5"
+                component={GoalFinalScreen}
+                name="GoalFinal"
                 options={{ contentStyle: { backgroundColor: '#fff' } }}
             />
             <goalNavStack.Screen

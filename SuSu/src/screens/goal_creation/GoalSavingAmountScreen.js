@@ -25,10 +25,10 @@ const GoalSavingAmountScreen = observer(({ navigation }) => {
         if (amount.isValid && amount.value != 0 && +amount.value < goalCreationStore.totalAmount) {
             goalCreationStore.setGoalCreationData('savingAmount', +amount.value);
             //+value is used to convert string to number
-            navigation.navigate('Screen5');
+            navigation.navigate('GoalFinal');
         } else {
             Snackbar.show({
-                text: 'Please enter a valid amount',
+                text: 'Enter an amount less than your total savings goal.',
                 duration: Snackbar.LENGTH_LONG,
                 backgroundColor: 'red',
             });
