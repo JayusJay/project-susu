@@ -11,7 +11,7 @@ import goalImages from '../assets/goalImages';
 import SavingsStyle from '../styles/savingsStyle';
 
 const SavingsScreen = ({ navigation }) => {
-    const { width, height } = useWindowDimensions();
+    const { width } = useWindowDimensions();
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <SafeAreaView style={SavingsStyle.container}>

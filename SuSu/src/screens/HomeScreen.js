@@ -26,8 +26,6 @@ const cards = [
 ];
 
 const HomeScreen = ({ navigation }) => {
-    // const { loginValidation } = useContext(AuthContext);
-    // const { handleLogOut } = loginValidation();
     const { width } = useWindowDimensions();
     const renderBanner = ({ item, index }) => {
         return <BannerSlider data={item} />;
@@ -110,7 +108,11 @@ const HomeScreen = ({ navigation }) => {
                                     <Ionicons name="tv-outline" size={20} color="#7966FF" />
                                 </CircularProgressBase>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    navigation.navigate('Goal Creation Nav', { screen: 'GoalSelection' });
+                                }}
+                            >
                                 <CircularProgressBase {...HomeStyle.CircularProgressBaseSavingProps} value={70}>
                                     <Ionicons name="add" size={30} color="#7966FF" />
                                 </CircularProgressBase>

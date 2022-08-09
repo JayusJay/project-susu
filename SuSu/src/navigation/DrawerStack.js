@@ -28,6 +28,7 @@ const DrawerStack = () => {
                 options={{
                     drawerIcon: ({ color }) => <Ionicons name="home-outline" color={color} size={20} />,
                     headerShown: false,
+                    drawerContentStyle: { backgroundColor: '#fff' },
                 }}
             />
             <drawerStack.Screen
