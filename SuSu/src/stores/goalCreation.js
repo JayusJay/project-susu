@@ -2,26 +2,37 @@ import { makeObservable, observable, computed, action } from 'mobx';
 
 class GoalCreationStore {
     image = '';
-    title = '';
+    name = '';
     description = '';
-    amount = '';
+    totalAmount = 0;
+    savingAmount = 0;
+    amountSaved = 0;
     startDate = '';
     endDate = '';
+    timeLeft = '';
     frequency = '';
+    epoch = '';
     goalType = '';
     goalCategory = '';
     goalStatus = '';
+    value = 0;
     constructor() {
         makeObservable(this, {
             image: observable,
-            title: observable,
+            name: observable,
             description: observable,
+            totalAmount: observable,
+            savingAmount: observable,
+            amountSaved: observable,
             startDate: observable,
             endDate: observable,
+            timeLeft: observable,
             frequency: observable,
+            epoch: observable,
             goalType: observable,
             goalCategory: observable,
             goalStatus: observable,
+            value: computed,
             setGoalCreationData: action,
             goalCreationData: computed,
         });
@@ -30,18 +41,27 @@ class GoalCreationStore {
     setGoalCreationData(key, value) {
         this[key] = value;
     }
+
+    get value() {
+        return (this.amountSaved / this.totalAmount) * 100;
+    }
     get goalCreationData() {
         return {
             image: this.image,
-            title: this.title,
+            name: this.name,
             description: this.description,
-            amount: this.amount,
+            totalAmount: this.totalAmount,
+            savingAmount: this.savingAmount,
+            amountSaved: this.amountSaved,
             startDate: this.startDate,
             endDate: this.endDate,
+            timeLeft: this.timeLeft,
             frequency: this.frequency,
+            epoch: this.epoch,
             goalType: this.goalType,
             goalCategory: this.goalCategory,
             goalStatus: this.goalStatus,
+            value: this.value,
         };
     }
 }

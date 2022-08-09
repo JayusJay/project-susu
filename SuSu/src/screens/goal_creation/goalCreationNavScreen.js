@@ -1,11 +1,11 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CustomGoalCreationScreen from './customGoalCreationScreen';
-import Screen1 from './Screen1';
-import Screen2 from './Screen2';
-import Screen3 from './Screen3';
-import Screen4 from './Screen4';
-import Screen5 from './Screen5';
+import CustomGoalCreationScreen from './CustomGoalCreationScreen';
+import GoalSelectionScreen from './GoalSelectionScreen';
+import GoalTotalAmountScreen from './GoalTotalAmountScreen';
+import GoalTypeScreen from './GoalTypeScreen';
+import GoalSavingAmountScreen from './GoalSavingAmountScreen';
+import GoalFinalScreen from './GoalFinalScreen';
 
 const goalNavStack = createNativeStackNavigator();
 
@@ -13,28 +13,28 @@ const GoalCreationNavScreen = () => {
     return (
         <goalNavStack.Navigator screenOptions={{ headerShown: false }}>
             <goalNavStack.Screen
-                component={Screen1}
-                name="Screen1"
+                component={GoalSelectionScreen}
+                name="GoalSelection"
                 options={{ contentStyle: { backgroundColor: '#fff' } }}
             />
             <goalNavStack.Screen
-                component={Screen2}
-                name="Screen2"
+                component={GoalTotalAmountScreen}
+                name="GoalTotalAmount"
                 options={{ contentStyle: { backgroundColor: '#fff' } }}
             />
             <goalNavStack.Screen
-                component={Screen3}
-                name="Screen3"
+                component={GoalTypeScreen}
+                name="GoalType"
                 options={{ contentStyle: { backgroundColor: '#fff' } }}
             />
             <goalNavStack.Screen
-                component={Screen4}
-                name="Screen4"
+                component={GoalSavingAmountScreen}
+                name="GoalSavingAmount"
                 options={{ contentStyle: { backgroundColor: '#fff' } }}
             />
             <goalNavStack.Screen
-                component={Screen5}
-                name="Screen5"
+                component={GoalFinalScreen}
+                name="GoalFinal"
                 options={{ contentStyle: { backgroundColor: '#fff' } }}
             />
             <goalNavStack.Screen

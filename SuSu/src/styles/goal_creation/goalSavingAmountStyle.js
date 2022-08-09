@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const Screen2Styles = StyleSheet.create({
+const GoalSavingAmountStyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#7966FF',
@@ -41,5 +41,38 @@ const Screen2Styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 10,
     },
+    headingView: {
+        marginTop: 100,
+        innerText: {
+            color: '#7966FF',
+            fontSize: 20,
+            textAlign: 'center',
+        },
+    },
+    inputView: {
+        marginTop: 20,
+        alignSelf: 'center',
+        paddingLeft: 20,
+        borderWidth: 1,
+        borderRadius: 40,
+        borderColor: '#ccc',
+        width: '90%',
+        inputStyle: {
+            color: '#000',
+            fontSize: 20,
+        },
+    },
+    buttonTouchable: {
+        padding: 20,
+        backgroundColor: '#7966FF',
+        borderRadius: 40,
+        marginTop: 30,
+        innerText: {
+            fontSize: 20,
+            color: '#fff',
+            alignSelf: 'center',
+            fontWeight: '700',
+        },
+    },
 });
-export default Screen2Styles;
+export default GoalSavingAmountStyles;

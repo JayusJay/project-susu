@@ -1,4 +1,4 @@
-import numberFormatter from '../../utils/numberFormatter';
+import numberFormatter from '../utils/numberFormatter';
 
 const goalImages = [
     {

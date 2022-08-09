@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const Screen1Styles = StyleSheet.create({
+const GoalTotalAmountStyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#7966FF',
@@ -27,6 +27,7 @@ const Screen1Styles = StyleSheet.create({
         text: {
             color: '#fff',
             fontSize: 30,
+            marginTop: -6,
             paddingBottom: 5,
         },
     },
@@ -39,44 +40,40 @@ const Screen1Styles = StyleSheet.create({
         borderTopRightRadius: 20,
         paddingHorizontal: 20,
         paddingVertical: 10,
-        text: {
-            color: '#000',
+    },
+    headingView: {
+        paddingTop: 100,
+        headingText: {
             alignSelf: 'center',
-            fontSize: 25,
-            padding: 30,
+            color: '#7966FF',
+            fontSize: 20,
+            textAlign: 'center',
         },
     },
-    goalView: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-        padding: 10,
-        innerViews: {
-            padding: 10,
-        },
-        image: {
-            width: 50,
-            height: 50,
-            alignSelf: 'center',
-        },
-        text: {
+    inputView: {
+        marginTop: 20,
+        alignSelf: 'center',
+        paddingLeft: 20,
+        borderWidth: 1,
+        borderRadius: 40,
+        borderColor: '#ccc',
+        width: '90%',
+        inputStyle: {
             color: '#000',
             fontSize: 20,
-            fontFamily: 'roboto-medium',
-            alignSelf: 'center',
-            paddingBottom: 10,
         },
     },
-    addGoalView: {
-        alignSelf: 'center',
-        marginTop: 80,
+    buttonTouchable: {
         padding: 20,
         backgroundColor: '#7966FF',
-        borderRadius: 30,
+        borderRadius: 40,
+        marginTop: 40,
         text: {
-            color: '#fff',
             fontSize: 20,
+            color: '#fff',
+            alignSelf: 'center',
+            fontWeight: '700',
         },
     },
 });
-export default Screen1Styles;
+export default GoalTotalAmountStyles;
