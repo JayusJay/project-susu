@@ -4,115 +4,104 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { CircularProgressBase } from 'react-native-circular-progress-indicator';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import GoalDetailScreenStyle from '../styles/goalDetailScreenStyle';
+import GoalDetailStyle from '../styles/goalDetailStyle';
 
 const GoalDetailScreen = ({ route, navigation }) => {
     const { image, name, amountSaved, totalAmount, timeLeft, value } = route.params;
     return (
-        <SafeAreaView style={GoalDetailScreenStyle.container}>
+        <SafeAreaView style={GoalDetailStyle.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Ionicons name="close-outline" size={30} color="#000" />
                     </TouchableOpacity>
                 </View>
-                <View style={GoalDetailScreenStyle.circularBaseView}>
-                    <CircularProgressBase {...GoalDetailScreenStyle.CircularProgressBaseProps} value={value}>
-                        <Image source={image} style={GoalDetailScreenStyle.circularImage} />
+                <View style={GoalDetailStyle.circularBaseView}>
+                    <CircularProgressBase {...GoalDetailStyle.CircularProgressBaseProps} value={value}>
+                        <Image source={image} style={GoalDetailStyle.circularImage} />
                     </CircularProgressBase>
                 </View>
-                <Text style={GoalDetailScreenStyle.goalNameText}>{name}</Text>
-                <View style={GoalDetailScreenStyle.amountSavedView}>
-                    <View style={GoalDetailScreenStyle.amountSavedView.innerView1}>
-                        <Text style={GoalDetailScreenStyle.amountSavedView.innerView1.currencyText}>{'\u20B5 '}</Text>
-                        <Text style={GoalDetailScreenStyle.amountSavedView.innerView1.amountSavedText}>
-                            {amountSaved}
-                        </Text>
+                <Text style={GoalDetailStyle.goalNameText}>{name}</Text>
+                <View style={GoalDetailStyle.amountSavedView}>
+                    <View style={GoalDetailStyle.amountSavedView.innerView1}>
+                        <Text style={GoalDetailStyle.amountSavedView.innerView1.currencyText}>{'\u20B5 '}</Text>
+                        <Text style={GoalDetailStyle.amountSavedView.innerView1.amountSavedText}>{amountSaved}</Text>
                     </View>
-                    <View style={GoalDetailScreenStyle.amountSavedView.innerView2}>
-                        <Text style={GoalDetailScreenStyle.amountSavedView.innerView2.totalAmountText}>
-                            of {'\u20B5 '}
-                            {totalAmount}
+                    <View style={GoalDetailStyle.amountSavedView.innerView2}>
+                        <Text style={GoalDetailStyle.amountSavedView.innerView2.totalAmountText}>
+                            of {['\u20B5 ', totalAmount]}
                         </Text>
                     </View>
                 </View>
-                <Text style={GoalDetailScreenStyle.subHeaderText}>Goal</Text>
-                <View style={GoalDetailScreenStyle.detailsComponentView}>
-                    <Text style={GoalDetailScreenStyle.detailsComponentView.descriptionText}>Name</Text>
-                    <TouchableOpacity
-                        style={GoalDetailScreenStyle.detailsComponentView.touchableOpacity}
-                        onPress={() => {}}
-                    >
-                        <Text style={GoalDetailScreenStyle.detailsComponentView.touchableOpacity.contentText}>
-                            {name}
-                        </Text>
+                <Text style={GoalDetailStyle.subHeaderText}>Goal</Text>
+                <View style={GoalDetailStyle.detailsComponentView}>
+                    <Text style={GoalDetailStyle.detailsComponentView.descriptionText}>Name</Text>
+                    <TouchableOpacity style={GoalDetailStyle.detailsComponentView.touchableOpacity} onPress={() => {}}>
+                        <Text style={GoalDetailStyle.detailsComponentView.touchableOpacity.contentText}>{name}</Text>
                         <EvilIcons
                             name="chevron-right"
                             size={30}
                             color="#8A8A8A"
-                            style={GoalDetailScreenStyle.detailsComponentView.touchableOpacity.evilIcon}
+                            style={GoalDetailStyle.detailsComponentView.touchableOpacity.evilIcon}
                         />
                     </TouchableOpacity>
                 </View>
-                <View style={GoalDetailScreenStyle.detailsComponentView}>
-                    <Text style={GoalDetailScreenStyle.detailsComponentView.descriptionText}>Image</Text>
+                <View style={GoalDetailStyle.detailsComponentView}>
+                    <Text style={GoalDetailStyle.detailsComponentView.descriptionText}>Image</Text>
                     <TouchableOpacity
-                        style={[GoalDetailScreenStyle.detailsComponentView.touchableOpacity, { paddingLeft: 20 }]}
+                        style={[GoalDetailStyle.detailsComponentView.touchableOpacity, { paddingLeft: 20 }]}
                         onPress={() => {}}
                     >
                         <EvilIcons
                             name="chevron-right"
                             size={30}
                             color="#8A8A8A"
-                            style={GoalDetailScreenStyle.detailsComponentView.touchableOpacity.evilIcon}
+                            style={GoalDetailStyle.detailsComponentView.touchableOpacity.evilIcon}
                         />
                     </TouchableOpacity>
                 </View>
-                <View style={GoalDetailScreenStyle.detailsComponentView}>
-                    <Text style={GoalDetailScreenStyle.detailsComponentView.descriptionText}>Amount</Text>
-                    <TouchableOpacity
-                        style={GoalDetailScreenStyle.detailsComponentView.touchableOpacity}
-                        onPress={() => {}}
-                    >
-                        <Text style={GoalDetailScreenStyle.detailsComponentView.touchableOpacity.contentText}>
+                <View style={GoalDetailStyle.detailsComponentView}>
+                    <Text style={GoalDetailStyle.detailsComponentView.descriptionText}>Amount</Text>
+                    <TouchableOpacity style={GoalDetailStyle.detailsComponentView.touchableOpacity} onPress={() => {}}>
+                        <Text style={GoalDetailStyle.detailsComponentView.touchableOpacity.contentText}>
                             {['\u20B5 ', amountSaved]}
                         </Text>
                         <EvilIcons
                             name="chevron-right"
                             size={30}
                             color="#8A8A8A"
-                            style={GoalDetailScreenStyle.detailsComponentView.touchableOpacity.evilIcon}
+                            style={GoalDetailStyle.detailsComponentView.touchableOpacity.evilIcon}
                         />
                     </TouchableOpacity>
                 </View>
 
-                <Text style={GoalDetailScreenStyle.subHeaderText}>Utilities</Text>
+                <Text style={GoalDetailStyle.subHeaderText}>Utilities</Text>
 
-                <View style={GoalDetailScreenStyle.detailsComponentView}>
-                    <Text style={GoalDetailScreenStyle.detailsComponentView.descriptionText}>Add Funds</Text>
+                <View style={GoalDetailStyle.detailsComponentView}>
+                    <Text style={GoalDetailStyle.detailsComponentView.descriptionText}>Add Funds</Text>
                     <TouchableOpacity
-                        style={[GoalDetailScreenStyle.detailsComponentView.touchableOpacity, { paddingLeft: 20 }]}
+                        style={[GoalDetailStyle.detailsComponentView.touchableOpacity, { paddingLeft: 20 }]}
                         onPress={() => {}}
                     >
                         <EvilIcons
                             name="chevron-right"
                             size={30}
                             color="#8A8A8A"
-                            style={GoalDetailScreenStyle.detailsComponentView.touchableOpacity.evilIcon}
+                            style={GoalDetailStyle.detailsComponentView.touchableOpacity.evilIcon}
                         />
                     </TouchableOpacity>
                 </View>
-                <View style={GoalDetailScreenStyle.detailsComponentView}>
-                    <Text style={GoalDetailScreenStyle.detailsComponentView.descriptionText}>Withdraw Funds</Text>
+                <View style={GoalDetailStyle.detailsComponentView}>
+                    <Text style={GoalDetailStyle.detailsComponentView.descriptionText}>Withdraw Funds</Text>
                     <TouchableOpacity
-                        style={[GoalDetailScreenStyle.detailsComponentView.touchableOpacity, { paddingLeft: 20 }]}
+                        style={[GoalDetailStyle.detailsComponentView.touchableOpacity, { paddingLeft: 20 }]}
                         onPress={() => {}}
                     >
                         <EvilIcons
                             name="chevron-right"
                             size={30}
                             color="#8A8A8A"
-                            style={GoalDetailScreenStyle.detailsComponentView.touchableOpacity.evilIcon}
+                            style={GoalDetailStyle.detailsComponentView.touchableOpacity.evilIcon}
                         />
                     </TouchableOpacity>
                 </View>

@@ -9,16 +9,20 @@ const GroupComponent = ({ navigation, data }) => {
 
     return data.map((item, index) => (
         <View key={index} style={[GroupComponentStyle.container, { width: width - 40 }]}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <View style={{ flexDirection: 'row' }}>
+            <View style={GroupComponentStyle.container.innerView}>
+                <View style={GroupComponentStyle.container.innerView.innerView}>
                     <Image source={item.image} style={GroupComponentStyle.container.image} />
                     <View>
                         <Text style={GroupComponentStyle.container.nameText}>{item.name}</Text>
                         <TextTicker
-                            style={{ paddingLeft: 20, marginTop: 5, fontSize: 16, width: 0.6 * width }}
+                            style={[
+                                GroupComponentStyle.container.innerView.innerView.textTicker,
+                                { width: 0.6 * width },
+                            ]}
                             duration={10000}
                             loop
                             bounce
+                            scroll
                             repeatSpacer={50}
                             marqueeDelay={1000}
                         >
@@ -28,11 +32,16 @@ const GroupComponent = ({ navigation, data }) => {
                 </View>
                 <TouchableOpacity
                     onPress={() => {
-                        navigation.navigate('Goal Detail', item); /*passing data to GoalDetailScreen*/
+                        navigation.navigate('Group Detail', item); /*passing data to GroupDetailScreen*/
                     }}
-                    style={{ alignSelf: 'center' }}
+                    style={GroupComponentStyle.container.buttonTouchable}
                 >
-                    <EvilIcons name="chevron-right" size={30} color="#8A8A8A" style={{ padding: 10 }} />
+                    <EvilIcons
+                        name="chevron-right"
+                        size={30}
+                        color="#8A8A8A"
+                        style={GroupComponentStyle.container.chevronButton}
+                    />
                 </TouchableOpacity>
             </View>
         </View>

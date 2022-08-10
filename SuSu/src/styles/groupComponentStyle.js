@@ -11,6 +11,18 @@ const GroupComponentStyle = StyleSheet.create({
             height: 50,
             borderRadius: 30,
         },
+        innerView: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            innerView: {
+                flexDirection: 'row',
+                textTicker: {
+                    paddingLeft: 20,
+                    marginTop: 5,
+                    fontSize: 16,
+                },
+            },
+        },
         textView: {
             paddingTop: -20,
             alignSelf: 'center',
@@ -20,14 +32,11 @@ const GroupComponentStyle = StyleSheet.create({
             fontSize: 20,
             paddingLeft: 20,
         },
-        amountText: {
-            color: '#fff',
-            fontSize: 20,
-            fontWeight: '700',
+        buttonTouchable: {
+            alignSelf: 'center',
         },
-        timeLeftText: {
-            color: '#fff',
-            fontSize: 16,
+        chevronButton: {
+            padding: 10,
         },
     },
 });
