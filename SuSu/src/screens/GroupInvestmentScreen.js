@@ -7,6 +7,7 @@ import GroupComponent from '../components/GroupComponent';
 import groupImages from '../assets/groupImages';
 import GroupInvestmentStyle from '../styles/groupInvestmentStyle';
 
+//let dummy = [];
 const GroupInvestmentScreen = ({ navigation }) => {
     return (
         <ScrollView showsVerticalScrollIndicator={false} style={GroupInvestmentStyle.scrollable}>

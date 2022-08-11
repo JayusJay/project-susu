@@ -5,6 +5,11 @@ const GroupDetailStyle = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         padding: 20,
+        navigationTouchablesView: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            shareTouchable: { paddingTop: 4 },
+        },
     },
     imageView: {
         padding: 40,

@@ -6,7 +6,15 @@ import GroupComponentStyle from '../styles/groupComponentStyle';
 
 const GroupComponent = ({ navigation, data }) => {
     const { width } = useWindowDimensions();
-
+    if (data.length === 0) {
+        return (
+            <View>
+                <Text style={{ color: '#7966FF', fontSize: 25, textAlign: 'center' }}>
+                    You have no groups at the moment
+                </Text>
+            </View>
+        );
+    }
     return data.map((item, index) => (
         <View key={index} style={[GroupComponentStyle.container, { width: width - 40 }]}>
             <View style={GroupComponentStyle.container.innerView}>

@@ -28,7 +28,7 @@ const CustomDrawer = (props) => {
                 </View>
             </DrawerContentScrollView>
             <View style={customDrawerStyle.view3}>
-                <TouchableOpacity onPress={() => {}}>
+                <TouchableOpacity onPress={() => {}} style={customDrawerStyle.view3.shareTouchable}>
                     <View style={customDrawerStyle.touchableView}>
                         <Ionicons name="share-social-outline" color="#000" size={20} />
                         <Text style={customDrawerStyle.touchableText}>Share</Text>
@@ -38,7 +38,7 @@ const CustomDrawer = (props) => {
                     onPress={() => {
                         handleLogOut();
                     }}
-                    style={{ marginTop: 15, marginBottom: -5 }}
+                    style={customDrawerStyle.view3.logoutTouchable}
                 >
                     <View style={customDrawerStyle.touchableView}>
                         <Ionicons name="exit-outline" color="#000" size={20} />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Share from 'react-native-share';
 import Snackbar from 'react-native-snackbar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
@@ -9,12 +10,38 @@ import GroupDetailStyle from '../styles/groupDetailStyle';
 const GroupDetailScreen = ({ route, navigation }) => {
     const { image, name, members, seedMoneyPerMember } = route.params;
     const totalSeedMoney = members.length * seedMoneyPerMember;
+    const options = {
+        title: 'Share via ',
+        url: 'https://www.google.com/',
+        message: `${members[0].name} is inviting you to invest with them on SaveApp. Join them now!`,
+    };
+    const onShare = () => {
+        Share.open(options)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
     return (
         <SafeAreaView style={GroupDetailStyle.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View>
+                <View style={GroupDetailStyle.container.navigationTouchablesView}>
                     <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Ionicons name="close-outline" size={30} color="#000" />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+                            onShare();
+                        }}
+                    >
+                        <Ionicons
+                            name="share-social-outline"
+                            color="#000"
+                            size={25}
+                            style={GroupDetailStyle.container.navigationTouchablesView.shareTouchable}
+                        />
                     </TouchableOpacity>
                 </View>
                 <View style={GroupDetailStyle.imageView}>
