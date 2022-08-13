@@ -17,26 +17,27 @@ const customGoalCreationStyles = StyleSheet.create({
     textView: {
         marginBottom: 50,
         alignItems: 'center',
-        firstText: {
-            marginTop: 30,
-            color: '#000',
-            fontSize: 25,
-        },
-        secondText: {
+        text: {
             marginTop: 10,
-            color: '#000',
-            fontSize: 25,
+            color: '#7966FF',
+            fontSize: 20,
+            textAlign: 'center',
         },
     },
     cameraView: {
         marginTop: 50,
         padding: 20,
-        backgroundColor: '#7966FF',
+        paddingBottom: -20,
         alignSelf: 'center',
         borderRadius: 60,
     },
     titleInputView: {
         paddingTop: 50,
+        textInput: {
+            borderBottomWidth: 1,
+            borderColor: '#8A8A8A',
+            color: '#000',
+        },
     },
     nextButtonTouchable: {
         marginTop: 40,

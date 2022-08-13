@@ -37,14 +37,14 @@ const GroupInvestmentScreen = ({ navigation }) => {
                         <View style={GroupInvestmentStyle.createGroupView.buttonView}>
                             <TouchableOpacity
                                 onPress={() => {
-                                    //navigation.navigate('Goal Creation Nav');
+                                    navigation.navigate('Group Creation');
                                 }}
                             >
                                 <Feather name="plus" size={25} color="#177AD5" style={{ padding: 12 }} />
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <Text style={GroupInvestmentStyle.yourGroupsText}> Your Groups</Text>
+                    <Text style={GroupInvestmentStyle.yourGroupsText}>Your Groups</Text>
                     <View style={GroupInvestmentStyle.groupView}>
                         <GroupComponent navigation={navigation} data={groupImages} />
                     </View>

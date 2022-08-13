@@ -65,9 +65,7 @@ const RegisterScreen = ({ navigation }) => {
                             placeholderTextColor="#8A8A8A"
                             style={RegisterStyle.textInput}
                             onBlur={() => {
-                                registerData.firstName.length == 0
-                                    ? setRegisterData({ ...registerData, isValidFirstName: false })
-                                    : null;
+                                handleFirstName(registerData.firstName);
                             }}
                         />
                     </View>
@@ -87,9 +85,7 @@ const RegisterScreen = ({ navigation }) => {
                             placeholderTextColor="#8A8A8A"
                             style={RegisterStyle.textInput}
                             onBlur={() => {
-                                registerData.lastName.length == 0
-                                    ? setRegisterData({ ...registerData, isValidLastName: false })
-                                    : null;
+                                handleLastName(registerData.lastName);
                             }}
                         />
                     </View>
@@ -110,9 +106,7 @@ const RegisterScreen = ({ navigation }) => {
                             keyboardType="email-address"
                             autoCapitalize="none"
                             onBlur={() => {
-                                registerData.email.length == 0
-                                    ? setRegisterData({ ...registerData, isValidEmail: false })
-                                    : null;
+                                handleEmail(registerData.email);
                             }}
                         />
                     </View>
@@ -130,9 +124,7 @@ const RegisterScreen = ({ navigation }) => {
                             style={RegisterStyle.textInput}
                             keyboardType="phone-pad"
                             onBlur={() => {
-                                registerData.phoneNumber.length == 0
-                                    ? setRegisterData({ ...registerData, isValidPhoneNumber: false })
-                                    : null;
+                                handlePhoneNumber(registerData.phoneNumber);
                             }}
                         />
                     </View>
@@ -150,9 +142,7 @@ const RegisterScreen = ({ navigation }) => {
                             style={RegisterStyle.textInput}
                             secureTextEntry={visibility}
                             onBlur={() => {
-                                registerData.password.length == 0
-                                    ? setRegisterData({ ...registerData, isValidPassword: false })
-                                    : null;
+                                handlePassword(registerData.password);
                             }}
                         />
                         <TouchableOpacity
@@ -184,9 +174,7 @@ const RegisterScreen = ({ navigation }) => {
                             style={RegisterStyle.textInput}
                             secureTextEntry={visibility}
                             onBlur={() => {
-                                registerData.confirmPassword.length == 0
-                                    ? setRegisterData({ ...registerData, isValidConfirmPassword: false })
-                                    : null;
+                                handleConfirmPassword(registerData.confirmPassword);
                             }}
                         />
                         <TouchableOpacity
@@ -202,7 +190,7 @@ const RegisterScreen = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                     {registerData.isValidConfirmPassword ? null : (
-                        <Text style={RegisterStyle.errorText}>Passwords do not match</Text>
+                        <Text style={RegisterStyle.errorText}>Password mismatch</Text>
                     )}
                     <View style={RegisterStyle.view3}>
                         <Ionicons name="calendar-outline" size={20} style={RegisterStyle.icon} />
