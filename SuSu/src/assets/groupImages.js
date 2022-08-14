@@ -4,6 +4,8 @@ const goalImages = [
     {
         image: require('../assets/images/group.png'),
         name: 'Group 1',
+        seedMoneyPerMember: 3000,
+        frequency: '30',
         members: [
             {
                 name: 'John',
@@ -27,11 +29,12 @@ const goalImages = [
                 seedMoney: 3000,
             },
         ],
-        seedMoneyPerMember: 3000,
     },
     {
         image: require('../assets/images/group.png'),
         name: 'Group 2',
+        seedMoneyPerMember: 3400,
+        frequency: '7',
         members: [
             {
                 name: 'John',
@@ -55,11 +58,12 @@ const goalImages = [
                 seedMoney: 3400,
             },
         ],
-        seedMoneyPerMember: 3400,
     },
     {
         image: require('../assets/images/group.png'),
         name: 'Group 3',
+        seedMoneyPerMember: 2000,
+        frequency: '90',
         members: [
             {
                 name: 'John',
@@ -83,11 +87,12 @@ const goalImages = [
                 seedMoney: 1000,
             },
         ],
-        seedMoneyPerMember: 2000,
     },
     {
         image: require('../assets/images/group.png'),
         name: 'Group 4',
+        seedMoneyPerMember: 7000,
+        frequency: '180',
         members: [
             {
                 name: 'John',
@@ -132,7 +137,6 @@ const goalImages = [
                 seedMoney: 7000,
             },
         ],
-        seedMoneyPerMember: 7000,
     },
 ];
 export default goalImages;

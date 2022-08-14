@@ -64,7 +64,7 @@ const CustomGoalCreationScreen = ({ navigation }) => {
             navigation.navigate('GoalTotalAmount');
         } else {
             Snackbar.show({
-                text: 'Please upload a photo and enter a valid title',
+                text: 'Please upload a photo and enter a valid name',
                 duration: Snackbar.LENGTH_LONG,
                 backgroundColor: 'red',
             });

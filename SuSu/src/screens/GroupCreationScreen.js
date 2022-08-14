@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
-import { ScrollView, View, Text, TouchableOpacity, TextInput, Image, PermissionsAndroid } from 'react-native';
+import {
+    ScrollView,
+    View,
+    Text,
+    TouchableOpacity,
+    TextInput,
+    Image,
+    PermissionsAndroid,
+    useColorScheme,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { Dropdown } from 'react-native-element-dropdown';
 import Dialog from 'react-native-dialog';
-import DatePicker from 'react-native-date-picker';
+import Snackbar from 'react-native-snackbar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import errors from '../utils/errors';
 import GroupCreationStyle from '../styles/groupCreationStyle';
+import groupImages from '../assets/groupImages';
 
 const photoOptions = {
     mediaType: 'photo',
@@ -16,19 +28,28 @@ const photoOptions = {
     maxHeight: 500,
     //saveToPhotos: true,
 };
+const dropDownData = [
+    { label: 'Daily', value: '1' },
+    { label: 'Weekly', value: '7' },
+    { label: 'Monthly', value: '30' },
+    { label: 'Quarterly', value: '90' },
+    { label: 'Semi-annual', value: '180' },
+];
 const GoalCreationScreen = ({ navigation }) => {
     const { RNImagePickerError } = errors();
+    const [dialogVisible, setDialogVisible] = useState(false);
+    const [openDropDown, setOpenDropDown] = useState(false);
     const [groupData, setGroupData] = useState({
         name: '',
         seedAmount: 0,
         imageUri: '../assets/images/group.png',
-        epoch: new Date(),
+        frequency: null,
         isName: true,
         isSeedAmount: true,
     });
-    const [dialogVisible, setDialogVisible] = useState(false);
-    const [open, setOpen] = useState(false);
-    const [DoBLabel, setDoBLabel] = useState('Savings epoch');
+    const colorScheme = useColorScheme();
+    const color = colorScheme === 'dark' ? '#000' : '#fff';
+
     const handleValidation = (type, text) => {
         if (type === 'name') {
             let reg = new RegExp(/^[a-zA-Z0-9 ]+$/).test(text);
@@ -46,6 +67,25 @@ const GoalCreationScreen = ({ navigation }) => {
             }
         }
     };
+    const handleButton = () => {
+        if (groupData.name !== '' && groupData.seedAmount != 0 && groupData.frequency !== null) {
+            groupImages.push({
+                image: groupData.imageUri,
+                name: groupData.name,
+                seedMoneyPerMember: groupData.seedAmount,
+                frequency: groupData.frequency,
+                members: [],
+            });
+            navigation.navigate('Group Creation Final');
+        } else {
+            Snackbar.show({
+                text: 'Please fill all the fields',
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor: 'red',
+            });
+        }
+    };
+
     const handlePhoto = (type) => {
         if (type === 'camera') {
             PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, {})
@@ -95,6 +135,7 @@ const GoalCreationScreen = ({ navigation }) => {
             });
         }
     };
+
     return (
         <ScrollView showsVerticalScrollIndicator={false} style={GroupCreationStyle.scrollable}>
             <SafeAreaView style={GroupCreationStyle.container}>
@@ -157,7 +198,7 @@ const GoalCreationScreen = ({ navigation }) => {
                     </View>
                     {!groupData.isName ? <Text style={{ color: 'red' }}>Please enter a valid name</Text> : null}
 
-                    <View style={GroupCreationStyle.textInputView}>
+                    <View style={[GroupCreationStyle.textInputView, { marginBottom: 20 }]}>
                         <Text style={GroupCreationStyle.textInputView.cediSymbol}>{'\u20B5'}</Text>
                         <TextInput
                             underlineColorAndroid="transparent"
@@ -168,7 +209,7 @@ const GoalCreationScreen = ({ navigation }) => {
                             }}
                             placeholderTextColor="#8A8A8A"
                             keyboardType="numeric"
-                            style={GroupCreationStyle.textInputView.textInput}
+                            style={[GroupCreationStyle.textInputView.textInput]}
                             onBlur={() => {
                                 groupData.seedAmount === 0 || groupData.seedAmount === ''
                                     ? setGroupData({ ...groupData, seedAmount: 0, isSeedAmount: false })
@@ -179,33 +220,56 @@ const GoalCreationScreen = ({ navigation }) => {
                     {!groupData.isSeedAmount ? (
                         <Text style={{ color: 'red' }}>Please enter a valid seed amount</Text>
                     ) : null}
-                    <View style={GroupCreationStyle.textInputView}>
-                        <Ionicons
-                            name="calendar-outline"
-                            size={20}
-                            color={'#7966FF'}
-                            style={{ padding: 10, paddingTop: -10 }}
+
+                    <View style={GroupCreationStyle.textInputView.dropDownView.container}>
+                        {groupData.frequency || openDropDown ? (
+                            <Text
+                                style={[
+                                    GroupCreationStyle.textInputView.dropDownView.label,
+                                    openDropDown && { color: 'blue' },
+                                ]}
+                            >
+                                Savings frequency
+                            </Text>
+                        ) : null}
+                        <Dropdown
+                            style={[
+                                GroupCreationStyle.textInputView.dropDownView.dropdown,
+                                openDropDown && { borderColor: 'blue' },
+                            ]}
+                            placeholderStyle={GroupCreationStyle.textInputView.dropDownView.placeholderStyle}
+                            selectedTextStyle={GroupCreationStyle.textInputView.dropDownView.selectedTextStyle}
+                            iconStyle={GroupCreationStyle.textInputView.dropDownView.iconStyle}
+                            containerStyle={color === '#000' ? { backgroundColor: color } : null}
+                            activeColor="#7966FF"
+                            data={dropDownData}
+                            maxHeight={300}
+                            labelField="label"
+                            valueField="value"
+                            placeholder={!openDropDown ? 'Savings cycle' : '...'}
+                            value={groupData.frequency}
+                            onFocus={() => setOpenDropDown(true)}
+                            onBlur={() => setOpenDropDown(false)}
+                            onChange={(item) => {
+                                setGroupData({ ...groupData, frequency: item.value });
+                                setOpenDropDown(false);
+                            }}
+                            renderLeftIcon={() => (
+                                <AntDesign
+                                    style={GroupCreationStyle.textInputView.dropDownView.icon}
+                                    color={groupData.frequency ? '#7966FF' : '#000'}
+                                    name="Safety"
+                                    size={20}
+                                />
+                            )}
                         />
-                        <TouchableOpacity onPress={() => setOpen(true)}>
-                            <Text style={{ color: '#000' }}>{DoBLabel}</Text>
-                            <DatePicker
-                                modal
-                                open={open}
-                                date={groupData.epoch}
-                                mode={'date'}
-                                androidVariant={'nativeAndroid'}
-                                onConfirm={(date) => {
-                                    setOpen(false);
-                                    //handleDateOfBirth(date);
-                                    setDoBLabel(date.toDateString());
-                                }}
-                                onCancel={() => {
-                                    setOpen(false);
-                                }}
-                            />
-                        </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={() => {}} style={{ alignSelf: 'center' }}>
+                    <TouchableOpacity
+                        onPress={() => {
+                            handleButton();
+                        }}
+                        style={{ alignSelf: 'center' }}
+                    >
                         <View
                             style={{
                                 marginTop: 50,
@@ -219,11 +283,11 @@ const GoalCreationScreen = ({ navigation }) => {
                             </Text>
                         </View>
                     </TouchableOpacity>
+
+                    {/* Camera Dialog */}
                     <View>
                         <Dialog.Container visible={dialogVisible} onBackdropPress={() => setDialogVisible(false)}>
-                            <Dialog.Description>
-                                Select a photo from your device to upload for your goal
-                            </Dialog.Description>
+                            <Dialog.Description>Select a group picture from your device</Dialog.Description>
                             <View style={GroupCreationStyle.dialogInnerView}>
                                 <View style={GroupCreationStyle.dialogInnerView.innerView}>
                                     <Ionicons
