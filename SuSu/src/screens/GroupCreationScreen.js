@@ -19,7 +19,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import errors from '../utils/errors';
 import GroupCreationStyle from '../styles/groupCreationStyle';
-import groupImages from '../assets/groupImages';
+import groupData from '../assets/groupData';
 
 const photoOptions = {
     mediaType: 'photo',
@@ -69,7 +69,7 @@ const GoalCreationScreen = ({ navigation }) => {
     };
     const handleButton = () => {
         if (groupData.name !== '' && groupData.seedAmount != 0 && groupData.frequency !== null) {
-            groupImages.push({
+            groupData.push({
                 image: groupData.imageUri,
                 name: groupData.name,
                 seedMoneyPerMember: groupData.seedAmount,
@@ -163,7 +163,7 @@ const GoalCreationScreen = ({ navigation }) => {
                     </View>
                 </View>
                 <View style={GroupCreationStyle.footer}>
-                    <View style={{ alignSelf: 'center', marginTop: 10, marginBottom: 10 }}>
+                    <View style={GroupCreationStyle.imageView}>
                         <Image
                             source={
                                 require('../assets/images/group.png')
@@ -187,7 +187,7 @@ const GoalCreationScreen = ({ navigation }) => {
                             <MaterialIcons name="add-a-photo" size={35} color="#7966FF" />
                         </TouchableOpacity>
                     </View>
-                    <Text style={{ color: '#7966FF', alignSelf: 'center' }}>Add a group picture</Text>
+                    <Text style={GroupCreationStyle.addGroupPhotoText}>Add a group picture</Text>
                     <View style={GroupCreationStyle.textInputView}>
                         <MaterialIcons name="groups" size={25} color="#7966FF" style={{ padding: 12 }} />
                         <TextInput
@@ -276,19 +276,10 @@ const GoalCreationScreen = ({ navigation }) => {
                         onPress={() => {
                             handleButton();
                         }}
-                        style={{ alignSelf: 'center' }}
+                        style={GroupCreationStyle.buttonTouchable}
                     >
-                        <View
-                            style={{
-                                marginTop: 50,
-                                padding: 20,
-                                backgroundColor: '#7966FF',
-                                borderRadius: 20,
-                            }}
-                        >
-                            <Text style={{ color: '#fff', alignSelf: 'center', fontSize: 20, fontWeight: '500' }}>
-                                Create group
-                            </Text>
+                        <View style={GroupCreationStyle.buttonTouchable.innerView}>
+                            <Text style={GroupCreationStyle.buttonTouchable.innerView.text}>Create group</Text>
                         </View>
                     </TouchableOpacity>
 

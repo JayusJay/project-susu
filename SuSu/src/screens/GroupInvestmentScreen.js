@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import GroupComponent from '../components/GroupComponent';
-import groupImages from '../assets/groupImages';
+import groupData from '../assets/groupData';
 import GroupInvestmentStyle from '../styles/groupInvestmentStyle';
 
 //let dummy = [];
@@ -46,7 +46,7 @@ const GroupInvestmentScreen = ({ navigation }) => {
                     </View>
                     <Text style={GroupInvestmentStyle.yourGroupsText}>Your Groups</Text>
                     <View style={GroupInvestmentStyle.groupView}>
-                        <GroupComponent navigation={navigation} data={groupImages} />
+                        <GroupComponent navigation={navigation} data={groupData} />
                     </View>
                 </View>
             </SafeAreaView>

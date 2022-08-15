@@ -1,0 +1,60 @@
+const transactionData = [
+    {
+        transactionID: 1,
+        image: require('../assets/images/transaction.png'),
+        timeStamp: '2022-08-15T17:59:27.739Z',
+        description: 'Groceries',
+        amount: '$10.00',
+        status: 'Successful',
+        accountTo: 'MoMo',
+        accountFrom: 'Bank', //merchant received momo transfer to bank
+        transactionType: 'Expense',
+    },
+    {
+        transactionID: 2,
+        image: require('../assets/images/transaction.png'),
+        timeStamp: '2022-08-15T17:59:27.739Z',
+        description: 'Savings deposit',
+        amount: '$10.00',
+        status: 'Successful',
+        accountTo: 'Savings',
+        accountFrom: 'Credit Card',
+        transactionType: 'Deposit',
+    },
+    {
+        transactionID: 3,
+        image: require('../assets/images/transaction.png'),
+        timeStamp: '2022-08-15T17:59:27.739Z',
+        description: 'Savings deposit',
+        amount: '$10.00',
+        status: 'Pending',
+        accountTo: 'Savings',
+        accountFrom: 'MoMo',
+        transactionType: 'Deposit',
+    },
+    {
+        transactionID: 4,
+        image: require('../assets/images/transaction.png'),
+        timeStamp: '2022-08-15T17:59:27.739Z',
+        description: 'Group Investment seed deposit',
+        amount: '$100.00',
+        status: 'Failed',
+        accountTo: 'Group Investment',
+        accountFrom: 'Bank',
+        transactionType: 'Deposit',
+    },
+    {
+        transactionID: 5,
+        image: require('../assets/images/transaction.png'),
+        timeStamp: '2022-08-15T17:59:27.739Z',
+        description: 'Savings withdrawal',
+        amount: '$20.00',
+        status: 'Successful',
+        accountTo: 'Savings',
+        accountFrom: 'MoMo',
+        transactionType: 'Withdrawal',
+    },
+];
+export default transactionData;
+//format linux timestamp
+//

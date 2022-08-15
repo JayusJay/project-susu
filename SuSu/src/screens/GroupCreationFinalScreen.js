@@ -30,7 +30,7 @@ const GroupCreationFinalScreen = ({ navigation }) => {
                     navigation.goBack();
                 }}
             >
-                <Dialog.Description style={{ textAlign: 'center' }}>
+                <Dialog.Description style={GroupCreationFinalStyle.dialogInnerView.dialogDescription}>
                     You have successfully created your group, invite friends to invest with you.
                 </Dialog.Description>
                 <View style={GroupCreationFinalStyle.dialogInnerView}>

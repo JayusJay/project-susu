@@ -33,6 +33,15 @@ const GroupCreationStyle = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 10,
     },
+    imageView: {
+        alignSelf: 'center',
+        marginTop: 10,
+        marginBottom: 10,
+    },
+    addGroupPhotoText: {
+        color: '#7966FF',
+        alignSelf: 'center',
+    },
     image: {
         height: 100,
         width: 120,
@@ -102,6 +111,21 @@ const GroupCreationStyle = StyleSheet.create({
         },
     },
 
+    buttonTouchable: {
+        alignSelf: 'center',
+        innerView: {
+            marginTop: 50,
+            padding: 20,
+            backgroundColor: '#7966FF',
+            borderRadius: 20,
+            text: {
+                color: '#fff',
+                alignSelf: 'center',
+                fontSize: 20,
+                fontWeight: '500',
+            },
+        },
+    },
     dialogInnerView: {
         flexDirection: 'row',
         justifyContent: 'space-around',

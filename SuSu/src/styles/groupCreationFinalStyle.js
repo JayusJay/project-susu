@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native';
 
 const customGoalCreationStyles = StyleSheet.create({
     dialogInnerView: {
+        dialogDescription: {
+            textAlign: 'center',
+        },
         flexDirection: 'row',
         justifyContent: 'space-around',
         innerView: {

@@ -19,6 +19,7 @@ const DrawerStack = () => {
                 drawerLabelStyle: { marginLeft: -25 },
                 drawerActiveBackgroundColor: '#7966FF',
                 drawerActiveTintColor: '#fff',
+                headerShown: false,
             }}
             drawerContent={(props) => <CustomDrawer {...props} />}
         >

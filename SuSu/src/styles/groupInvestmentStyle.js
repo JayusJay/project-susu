@@ -24,6 +24,7 @@ const GroupInvestmentStyle = StyleSheet.create({
         },
     },
     backButton: {
+        alignSelf: 'flex-start',
         paddingTop: 10,
     },
     footer: {

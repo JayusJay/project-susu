@@ -22,9 +22,14 @@ const SavingsStyle = StyleSheet.create({
             fontSize: 30,
         },
     },
+    backButtonView: {
+        alignSelf: 'flex-start',
+    },
     backButton: {
+        alignSelf: 'flex-start',
         paddingTop: 10,
     },
+
     footer: {
         backgroundColor: '#fff',
         borderTopLeftRadius: 20,
