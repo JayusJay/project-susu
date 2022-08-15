@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Share from 'react-native-share';
@@ -22,17 +22,16 @@ const GroupCreationFinalScreen = ({ navigation }) => {
                 console.log(err);
             });
     };
-    const [visible, setVisible] = useState(true);
     return (
         <SafeAreaView>
             <Dialog.Container
-                visible={visible}
+                visible={true}
                 onBackdropPress={() => {
-                    setVisible(false);
+                    navigation.goBack();
                 }}
             >
                 <Dialog.Description style={{ textAlign: 'center' }}>
-                    You have successfully created your group, invite friends to invest with you
+                    You have successfully created your group, invite friends to invest with you.
                 </Dialog.Description>
                 <View style={GroupCreationFinalStyle.dialogInnerView}>
                     <View style={GroupCreationFinalStyle.dialogInnerView.innerView}>

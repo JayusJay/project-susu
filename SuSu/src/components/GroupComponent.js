@@ -17,41 +17,43 @@ const GroupComponent = ({ navigation, data }) => {
     }
     return data.map((item, index) => (
         <View key={index} style={[GroupComponentStyle.container, { width: width - 40 }]}>
-            <View style={GroupComponentStyle.container.innerView}>
-                <View style={GroupComponentStyle.container.innerView.innerView}>
-                    <Image source={item.image} style={GroupComponentStyle.container.image} />
-                    <View>
-                        <Text style={GroupComponentStyle.container.nameText}>{item.name}</Text>
-                        <TextTicker
-                            style={[
-                                GroupComponentStyle.container.innerView.innerView.textTicker,
-                                { width: 0.6 * width },
-                            ]}
-                            duration={10000}
-                            loop
-                            bounce
-                            scroll
-                            repeatSpacer={50}
-                            marqueeDelay={1000}
-                        >
-                            {item.members.map((member) => member.name).join(', ')}
-                        </TextTicker>
+            <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate('Group Detail', item);
+                }}
+            >
+                <View style={GroupComponentStyle.container.innerView}>
+                    <View style={GroupComponentStyle.container.innerView.innerView}>
+                        <Image source={item.image} style={GroupComponentStyle.container.image} />
+
+                        <View>
+                            <Text style={GroupComponentStyle.container.nameText}>{item.name}</Text>
+
+                            <TextTicker
+                                style={[
+                                    GroupComponentStyle.container.innerView.innerView.textTicker,
+                                    { width: 0.6 * width },
+                                ]}
+                                duration={10000}
+                                loop
+                                bounce
+                                scroll
+                                repeatSpacer={50}
+                                marqueeDelay={1000}
+                            >
+                                {item.members.map((member) => member.name).join(', ')}
+                            </TextTicker>
+                        </View>
                     </View>
-                </View>
-                <TouchableOpacity
-                    onPress={() => {
-                        navigation.navigate('Group Detail', item); /*passing data to GroupDetailScreen*/
-                    }}
-                    style={GroupComponentStyle.container.buttonTouchable}
-                >
+
                     <EvilIcons
                         name="chevron-right"
                         size={30}
                         color="#8A8A8A"
                         style={GroupComponentStyle.container.chevronButton}
                     />
-                </TouchableOpacity>
-            </View>
+                </View>
+            </TouchableOpacity>
         </View>
     ));
 };

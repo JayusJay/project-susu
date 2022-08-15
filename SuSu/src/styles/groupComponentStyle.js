@@ -32,11 +32,10 @@ const GroupComponentStyle = StyleSheet.create({
             fontSize: 20,
             paddingLeft: 20,
         },
-        buttonTouchable: {
-            alignSelf: 'center',
-        },
+
         chevronButton: {
             padding: 10,
+            alignSelf: 'center',
         },
     },
 });

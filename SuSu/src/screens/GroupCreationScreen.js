@@ -74,7 +74,15 @@ const GoalCreationScreen = ({ navigation }) => {
                 name: groupData.name,
                 seedMoneyPerMember: groupData.seedAmount,
                 frequency: groupData.frequency,
-                members: [],
+                members: [
+                    {
+                        name: 'Jonathan',
+                        id: '5',
+                        image: require('../assets/images/profile.jpg'),
+                        group_id: '#1',
+                        seedMoney: 7000,
+                    },
+                ], //Group creator.
             });
             navigation.navigate('Group Creation Final');
         } else {

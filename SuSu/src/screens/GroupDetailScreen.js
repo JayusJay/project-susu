@@ -8,7 +8,7 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import GroupDetailStyle from '../styles/groupDetailStyle';
 
 const GroupDetailScreen = ({ route, navigation }) => {
-    const { image, name, members, seedMoneyPerMember } = route.params;
+    const { image, name, members, seedMoneyPerMember, frequency } = route.params;
     const totalSeedMoney = members.length * seedMoneyPerMember;
     const options = {
         title: 'Share via ',
@@ -47,7 +47,6 @@ const GroupDetailScreen = ({ route, navigation }) => {
                 <View style={GroupDetailStyle.imageView}>
                     <Image source={image} style={GroupDetailStyle.image} />
                 </View>
-
                 <Text style={GroupDetailStyle.subHeaderText}>{name}</Text>
                 <View style={GroupDetailStyle.detailsComponentView}>
                     <Text style={GroupDetailStyle.detailsComponentView.descriptionText}>Name</Text>
@@ -61,7 +60,7 @@ const GroupDetailScreen = ({ route, navigation }) => {
                         />
                     </TouchableOpacity>
                 </View>
-                <View style={GroupDetailStyle.detailsComponentView}>
+                {/* <View style={GroupDetailStyle.detailsComponentView}>
                     <Text style={GroupDetailStyle.detailsComponentView.descriptionText}>Image</Text>
                     <TouchableOpacity
                         style={[GroupDetailStyle.detailsComponentView.touchableOpacity, { paddingLeft: 20 }]}
@@ -74,7 +73,7 @@ const GroupDetailScreen = ({ route, navigation }) => {
                             style={GroupDetailStyle.detailsComponentView.touchableOpacity.evilIcon}
                         />
                     </TouchableOpacity>
-                </View>
+                </View> */}
                 <View style={GroupDetailStyle.detailsComponentView}>
                     <Text style={GroupDetailStyle.detailsComponentView.descriptionText}>Size</Text>
                     <Text style={GroupDetailStyle.detailsComponentView.countText}>{members.length}</Text>
@@ -84,49 +83,60 @@ const GroupDetailScreen = ({ route, navigation }) => {
                     <Text style={GroupDetailStyle.detailsComponentView.countText}>{['\u20B5 ', totalSeedMoney]}</Text>
                 </View>
                 <View style={GroupDetailStyle.detailsComponentView}>
-                    <Text style={GroupDetailStyle.detailsComponentView.descriptionText}>Next Beneficiary</Text>
+                    <Text style={GroupDetailStyle.detailsComponentView.descriptionText}>Payment frequency</Text>
+                    <Text style={GroupDetailStyle.detailsComponentView.countText}>{frequency} days</Text>
+                </View>
+                <View style={GroupDetailStyle.detailsComponentView}>
+                    <Text style={GroupDetailStyle.detailsComponentView.descriptionText}>Next beneficiary</Text>
                     <Text style={GroupDetailStyle.detailsComponentView.countText}>
                         {/* {members[Math.floor(Math.random() * (members.length - 0 + 1)) + 0].name} */}
                         Jayus
                     </Text>
                 </View>
-
                 <Text style={GroupDetailStyle.subHeaderText}>Members</Text>
-                {members.map((item, index) => (
-                    <View style={GroupDetailStyle.detailsComponentView} key={index}>
-                        <View style={GroupDetailStyle.detailsComponentView.innerView}>
-                            <Image source={item.image} style={GroupDetailStyle.detailsComponentView.innerView.image} />
-                            <Text style={GroupDetailStyle.detailsComponentView.descriptionText}>{item.name}</Text>
-                        </View>
-                        <TouchableOpacity
-                            style={GroupDetailStyle.detailsComponentView.touchableOpacity}
-                            onPress={() => {
-                                Snackbar.show({
-                                    text: `Name: ${item.name} \n\nSeed Money: \u20B5 ${item.seedMoney} \n\nRequired Seed Money: \u20B5 ${seedMoneyPerMember}`,
-                                    duration: Snackbar.LENGTH_INDEFINITE,
-                                    numberOfLines: 10,
-                                    action: {
-                                        text: 'OK',
-                                        onPress: () => {
-                                            Snackbar.dismiss();
+                {members.length > 0 ? (
+                    members.map((item, index) => (
+                        <View style={GroupDetailStyle.detailsComponentView} key={index}>
+                            <View style={GroupDetailStyle.detailsComponentView.innerView}>
+                                <Image
+                                    source={item.image}
+                                    style={GroupDetailStyle.detailsComponentView.innerView.image}
+                                />
+                                <Text style={GroupDetailStyle.detailsComponentView.descriptionText}>{item.name}</Text>
+                            </View>
+                            <TouchableOpacity
+                                style={GroupDetailStyle.detailsComponentView.touchableOpacity}
+                                onPress={() => {
+                                    Snackbar.show({
+                                        text: `Name: ${item.name} \n\nSeed Money: \u20B5 ${item.seedMoney} \n\nRequired Seed Money: \u20B5 ${seedMoneyPerMember}`,
+                                        duration: Snackbar.LENGTH_INDEFINITE,
+                                        numberOfLines: 10,
+                                        action: {
+                                            text: 'OK',
+                                            onPress: () => {
+                                                Snackbar.dismiss();
+                                            },
                                         },
-                                    },
-                                    backgroundColor: '#7966FF',
-                                });
-                            }}
-                        >
-                            <Text style={GroupDetailStyle.detailsComponentView.touchableOpacity.contentText}>
-                                Details
-                            </Text>
-                            <EvilIcons
-                                name="chevron-right"
-                                size={30}
-                                color="#8A8A8A"
-                                style={GroupDetailStyle.detailsComponentView.touchableOpacity.evilIcon}
-                            />
-                        </TouchableOpacity>
-                    </View>
-                ))}
+                                        backgroundColor: '#7966FF',
+                                    });
+                                }}
+                            >
+                                <Text style={GroupDetailStyle.detailsComponentView.touchableOpacity.contentText}>
+                                    Details
+                                </Text>
+                                <EvilIcons
+                                    name="chevron-right"
+                                    size={30}
+                                    color="#8A8A8A"
+                                    style={GroupDetailStyle.detailsComponentView.touchableOpacity.evilIcon}
+                                />
+                            </TouchableOpacity>
+                        </View>
+                    ))
+                ) : (
+                    <Text style={{ color: '#000' }}>There are no group members</Text>
+                )}
+                {/*Just for testing purposes, members array will always contain at least the group creator*/}
             </ScrollView>
         </SafeAreaView>
     );
