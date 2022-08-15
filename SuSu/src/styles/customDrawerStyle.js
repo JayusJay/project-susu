@@ -43,6 +43,14 @@ const customDrawerStyle = StyleSheet.create({
         padding: 20,
         borderTopWidth: 1,
         borderColor: '#ccc',
+        shareTouchable: {
+            width: 60,
+        },
+        logoutTouchable: {
+            marginTop: 15,
+            marginBottom: -5,
+            width: 70,
+        },
     },
     touchableView: {
         flexDirection: 'row',

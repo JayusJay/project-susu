@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
-const SavingsStyle = StyleSheet.create({
+const GroupInvestmentStyle = StyleSheet.create({
+    scrollable: { backgroundColor: '#fff' },
     container: {
         flex: 1,
         backgroundColor: '#7966FF',
@@ -22,14 +23,10 @@ const SavingsStyle = StyleSheet.create({
             fontSize: 30,
         },
     },
-    backButtonView: {
-        alignSelf: 'flex-start',
-    },
     backButton: {
         alignSelf: 'flex-start',
         paddingTop: 10,
     },
-
     footer: {
         backgroundColor: '#fff',
         borderTopLeftRadius: 20,
@@ -37,17 +34,17 @@ const SavingsStyle = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 10,
     },
-    goalView: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-    },
-    yourGoalsText: {
+    yourGroupsText: {
         color: '#000',
         fontSize: 20,
         padding: 10,
         marginTop: 10,
         fontFamily: 'roboto-medium',
+    },
+    groupView: {
+        //flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
     },
     barChartView: {
         padding: 40,
@@ -65,7 +62,7 @@ const SavingsStyle = StyleSheet.create({
             marginTop: -40,
         },
     },
-    createGoalView: {
+    createGroupView: {
         padding: 20,
         backgroundColor: '#000',
         borderRadius: 25,
@@ -121,4 +118,4 @@ const SavingsStyle = StyleSheet.create({
         },
     },
 });
-export default SavingsStyle;
+export default GroupInvestmentStyle;

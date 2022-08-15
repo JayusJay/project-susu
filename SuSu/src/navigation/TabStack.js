@@ -1,11 +1,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeScreen from '../screens/HomeScreen';
 import SavingsScreen from '../screens/SavingsScreen';
-import InvestmentScreen from '../screens/InvestmentScreen';
+import GroupInvestmentScreen from '../screens/GroupInvestmentScreen';
 import FundRaisingScreen from '../screens/FundRaisingScreen';
 
 const tabStack = createBottomTabNavigator();
@@ -26,33 +26,30 @@ const TabStack = () => {
                 name="Tab-Home"
                 component={HomeScreen}
                 options={{
-                    tabBarIcon: ({ color, size }) => <Ionicons name="home-outline" color={color} size={size} />,
+                    tabBarIcon: ({ color }) => <Ionicons name="home-outline" color={color} size={27} />,
                 }}
             />
             <tabStack.Screen
                 name="Savings"
                 component={SavingsScreen}
                 options={{
-                    tabBarIcon: ({ color, size }) => (
-                        //<FontAwesomeIcon name="piggy-bank" color={color} size = {size}/>
-                        <MaterialCommunityIcons name="piggy-bank-outline" color={color} size={30} />
+                    tabBarIcon: ({ color }) => (
+                        <MaterialCommunityIcons name="piggy-bank-outline" color={color} size={27} />
                     ),
                 }}
             />
             <tabStack.Screen
-                name="Investment"
-                component={InvestmentScreen}
+                name="GroupInvestment"
+                component={GroupInvestmentScreen}
                 options={{
-                    tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="bank-outline" color={color} size={30} />
-                    ),
+                    tabBarIcon: ({ color }) => <MaterialIcons name="groups" color={color} size={27} />,
                 }}
             />
             <tabStack.Screen
                 name="FundRaising"
                 component={FundRaisingScreen}
                 options={{
-                    tabBarIcon: ({ color, size }) => <MaterialCommunityIcons name="crowd" color={color} size={30} />,
+                    tabBarIcon: ({ color }) => <MaterialCommunityIcons name="crowd" color={color} size={27} />,
                 }}
             />
         </tabStack.Navigator>

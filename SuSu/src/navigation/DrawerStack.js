@@ -19,6 +19,7 @@ const DrawerStack = () => {
                 drawerLabelStyle: { marginLeft: -25 },
                 drawerActiveBackgroundColor: '#7966FF',
                 drawerActiveTintColor: '#fff',
+                headerShown: false,
             }}
             drawerContent={(props) => <CustomDrawer {...props} />}
         >
@@ -28,6 +29,7 @@ const DrawerStack = () => {
                 options={{
                     drawerIcon: ({ color }) => <Ionicons name="home-outline" color={color} size={20} />,
                     headerShown: false,
+                    drawerContentStyle: { backgroundColor: '#fff' },
                 }}
             />
             <drawerStack.Screen

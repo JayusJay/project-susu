@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Text, View, TouchableOpacity, Image, ScrollView, TextInput, PermissionsAndroid } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Snackbar from 'react-native-snackbar';
 import Dialog from 'react-native-dialog';
@@ -63,7 +64,7 @@ const CustomGoalCreationScreen = ({ navigation }) => {
             navigation.navigate('GoalTotalAmount');
         } else {
             Snackbar.show({
-                text: 'Please upload a photo and enter a valid title',
+                text: 'Please upload a photo and enter a valid name',
                 duration: Snackbar.LENGTH_LONG,
                 backgroundColor: 'red',
             });
@@ -140,10 +141,6 @@ const CustomGoalCreationScreen = ({ navigation }) => {
                         style={customGoalCreationStyles.image}
                     />
                 </View>
-                <View style={customGoalCreationStyles.textView}>
-                    <Text style={customGoalCreationStyles.textView.firstText}>Select an appropriate photo</Text>
-                    <Text style={customGoalCreationStyles.textView.secondText}>for your goal</Text>
-                </View>
 
                 <View style={customGoalCreationStyles.cameraView}>
                     <TouchableOpacity
@@ -151,10 +148,12 @@ const CustomGoalCreationScreen = ({ navigation }) => {
                             setDialogVisible(true);
                         }}
                     >
-                        <Ionicons name="camera-outline" size={60} color="#fff" />
+                        <MaterialIcons name="add-a-photo" size={50} color="#7966FF" />
                     </TouchableOpacity>
                 </View>
-
+                <View style={customGoalCreationStyles.textView}>
+                    <Text style={customGoalCreationStyles.textView.text}>Add a goal picture</Text>
+                </View>
                 <View style={customGoalCreationStyles.titleInputView}>
                     <TextInput
                         underlineColorAndroid="transparent"
@@ -162,7 +161,7 @@ const CustomGoalCreationScreen = ({ navigation }) => {
                         value={goalState.title}
                         onChangeText={(text) => handleTitle(text)}
                         placeholderTextColor="#8A8A8A"
-                        style={{ borderBottomWidth: 1, borderColor: '#8A8A8A', color: '#000' }}
+                        style={customGoalCreationStyles.titleInputView.textInput}
                         onBlur={() => {
                             goalState.title.length === 0 ? setGoalState({ ...goalState, isTitle: false }) : null;
                         }}

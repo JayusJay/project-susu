@@ -1,29 +1,27 @@
 import { StyleSheet } from 'react-native';
 
-const GoalDetailScreenStyle = StyleSheet.create({
+const GroupDetailStyle = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
         padding: 20,
+        navigationTouchablesView: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            shareTouchable: { paddingTop: 4 },
+        },
     },
-    circularBaseView: {
+    imageView: {
         padding: 40,
         alignItems: 'center',
     },
-    circularImage: {
+    image: {
         width: 150,
         height: 150,
         borderRadius: 80,
     },
-    CircularProgressBaseProps: {
-        activeStrokeWidth: 5,
-        inActiveStrokeWidth: 5,
-        inActiveStrokeOpacity: 0.2,
-        activeStrokeColor: '#7966FF',
-        inActiveStrokeColor: '#8A8A8A',
-        radius: 80,
-    },
-    goalNameText: {
+
+    groupNameText: {
         fontSize: 25,
         fontWeight: 'bold',
         color: '#000',
@@ -68,10 +66,26 @@ const GoalDetailScreenStyle = StyleSheet.create({
         justifyContent: 'space-between',
         borderBottomColor: '#ccc',
         borderBottomWidth: 0.2,
+        innerView: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            image: {
+                height: 25,
+                width: 25,
+                borderRadius: 25,
+                marginTop: -3,
+            },
+        },
         descriptionText: {
             color: '#000',
+            paddingLeft: 10,
             paddingBottom: 20,
             fontSize: 16,
+        },
+        countText: {
+            fontSize: 16,
+            color: '#8A8A8A',
+            paddingRight: 10,
         },
         touchableOpacity: {
             flexDirection: 'row',
@@ -85,4 +99,4 @@ const GoalDetailScreenStyle = StyleSheet.create({
         },
     },
 });
-export default GoalDetailScreenStyle;
+export default GroupDetailStyle;

@@ -7,24 +7,26 @@ import Feather from 'react-native-vector-icons/Feather';
 import { BarChart } from 'react-native-gifted-charts';
 import GoalComponent from '../components/GoalComponent';
 import savingBarData from '../assets/savingBarData';
-import goalImages from '../assets/goalImages';
+import goalData from '../assets/goalData';
 import SavingsStyle from '../styles/savingsStyle';
 
 const SavingsScreen = ({ navigation }) => {
-    const { width, height } = useWindowDimensions();
+    const { width } = useWindowDimensions();
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <SafeAreaView style={SavingsStyle.container}>
                 <View style={SavingsStyle.header}>
                     <View style={SavingsStyle.profileView}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                navigation.goBack();
-                            }}
-                            style={SavingsStyle.backButton}
-                        >
-                            <Ionicons name="arrow-back-outline" size={30} color="white" />
-                        </TouchableOpacity>
+                        <View style={SavingsStyle.backButtonView}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    navigation.goBack();
+                                }}
+                                style={SavingsStyle.backButton}
+                            >
+                                <Ionicons name="arrow-back-outline" size={30} color="white" />
+                            </TouchableOpacity>
+                        </View>
                         <View style={SavingsStyle.profileView.textView}>
                             <Text style={SavingsStyle.profileView.text}>Savings</Text>
                         </View>
@@ -49,7 +51,7 @@ const SavingsScreen = ({ navigation }) => {
                     </View>
                     <Text style={SavingsStyle.yourGoalsText}> Your Goals</Text>
                     <View style={SavingsStyle.goalView}>
-                        <GoalComponent navigation={navigation} data={goalImages} />
+                        <GoalComponent navigation={navigation} data={goalData} />
                     </View>
                     <View style={SavingsStyle.gridContainerView}>
                         <Text style={SavingsStyle.gridContainerView.text}>Overview</Text>

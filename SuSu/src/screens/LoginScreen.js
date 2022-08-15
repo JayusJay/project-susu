@@ -51,9 +51,7 @@ const LoginScreen = ({ navigation }) => {
                             keyboardType="email-address"
                             autoCapitalize="none"
                             onBlur={() => {
-                                loginData.email.length == 0
-                                    ? setLoginData({ ...loginData, isValidEmail: false })
-                                    : null;
+                                handleEmail(loginData.email);
                             }}
                         />
                     </View>
