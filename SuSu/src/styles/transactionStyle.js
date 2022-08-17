@@ -52,6 +52,7 @@ const TransactionStyle = StyleSheet.create({
                 width: 25,
                 borderRadius: 25,
                 marginTop: -3,
+                alignSelf: 'center',
             },
         },
         descriptionText: {

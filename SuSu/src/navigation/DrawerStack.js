@@ -15,11 +15,11 @@ const DrawerStack = () => {
     return (
         <drawerStack.Navigator
             screenOptions={{
-                //headerShown: true,
                 drawerLabelStyle: { marginLeft: -25 },
                 drawerActiveBackgroundColor: '#7966FF',
                 drawerActiveTintColor: '#fff',
                 headerShown: false,
+                swipeEdgeWidth: 100,
             }}
             drawerContent={(props) => <CustomDrawer {...props} />}
         >

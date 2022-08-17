@@ -15,6 +15,66 @@ const formatDate = (timestamp) => {
     const second = date.getSeconds();
     return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
 };
+const transactionMessage = (
+    transactionID,
+    transactionType,
+    transactionStatus,
+    amount,
+    timeStamp,
+    accountFrom,
+    accountTo
+) => {
+    switch (transactionType) {
+        case 'Deposit':
+            if (transactionStatus === 'Successful')
+                return (
+                    'You have successfully deposited ' +
+                    amount +
+                    ' from ' +
+                    accountFrom +
+                    ' at ' +
+                    formatDate(timeStamp) +
+                    '. Transaction ID: ' +
+                    transactionID
+                );
+            else if (transactionStatus === 'Pending')
+                return (
+                    'Your deposit of ' +
+                    amount +
+                    ' from ' +
+                    accountFrom +
+                    ' is pending awaiting confirmation. Time: ' +
+                    formatDate(timeStamp)
+                );
+            else return 'Your deposit of ' + amount + ' from ' + accountFrom + ' failed at ' + formatDate(timeStamp);
+        case 'Withdrawal':
+            if (transactionStatus === 'Successful')
+                return (
+                    'You have successfully withdrawn ' +
+                    amount +
+                    ' to your ' +
+                    accountTo +
+                    '. Time ' +
+                    formatDate(timeStamp) +
+                    '. Transaction ID: ' +
+                    transactionID
+                );
+            else if (transactionStatus === 'Pending')
+                return (
+                    'Your withdrawal of ' +
+                    amount +
+                    ' to your ' +
+                    accountTo +
+                    ' is pending awaiting confirmation. ' +
+                    'Time: ' +
+                    formatDate(timeStamp)
+                );
+            else
+                return (
+                    'Your withdrawal of ' + amount + ' to your ' + accountTo + ' failed. Time: ' + formatDate(timeStamp)
+                );
+    }
+};
 const TransactionScreen = ({ navigation }) => {
     return (
         <ScrollView showsVerticalScrollIndicator={false} style={TransactionStyle.scrollable}>
@@ -41,12 +101,7 @@ const TransactionScreen = ({ navigation }) => {
                     <View style={TransactionStyle.transactionView}>
                         {transactionData.map((item, index) => {
                             return (
-                                <TouchableOpacity
-                                    key={index}
-                                    onPress={() => {
-                                        //navigation.navigate('Transaction Details', item);
-                                    }}
-                                >
+                                <View key={index}>
                                     <View style={TransactionStyle.detailsComponentView}>
                                         <View style={{ flexDirection: 'row', width: '70%' }}>
                                             <View style={TransactionStyle.detailsComponentView.innerView}>
@@ -62,36 +117,43 @@ const TransactionScreen = ({ navigation }) => {
                                                 <Text
                                                     style={{
                                                         color: '#000',
-                                                        //textAlign: 'left',
+                                                        paddingRight: 10,
+                                                        textAlign: 'left',
                                                     }}
                                                 >
-                                                    You have successfully {item.transactionType} from {item.accountFrom}{' '}
-                                                    to {item.accountTo} at {formatDate(item.timeStamp)}
+                                                    {transactionMessage(
+                                                        item.transactionID,
+                                                        item.transactionType,
+                                                        item.transactionStatus,
+                                                        item.amount,
+                                                        item.timeStamp,
+                                                        item.accountFrom,
+                                                        item.accountTo
+                                                    )}
                                                 </Text>
                                             </View>
                                         </View>
-                                        <View>
-                                            <Text style={{ color: '#000', fontWeight: '600', alignSelf: 'center' }}>
-                                                {item.amount}
-                                            </Text>
-                                            <Text
-                                                style={[
-                                                    item.status === 'Successful'
-                                                        ? { color: 'green' }
-                                                        : item.status === 'Pending'
-                                                        ? { color: '#FFC466' }
-                                                        : { color: 'red' },
-                                                    { fontWeight: '500', alignSelf: 'center' },
-                                                ]}
-                                            >
-                                                {item.status}
-                                            </Text>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                                            <View style={{ paddingLeft: 10, alignSelf: 'center' }}>
+                                                <Text style={{ color: '#000', fontWeight: '600', alignSelf: 'center' }}>
+                                                    {item.amount}
+                                                </Text>
+                                                <Text
+                                                    style={[
+                                                        item.transactionStatus === 'Successful'
+                                                            ? { color: 'green' }
+                                                            : item.transactionStatus === 'Pending'
+                                                            ? { color: '#FFC466' }
+                                                            : { color: 'red' },
+                                                        { fontWeight: '500', alignSelf: 'center' },
+                                                    ]}
+                                                >
+                                                    {item.transactionStatus}
+                                                </Text>
+                                            </View>
                                         </View>
-                                        {/* <Text style={{ color: '#000' }}>{item.timeStamp}</Text> */}
-                                        {/* <Text style={{ color: '#000' }}>{item.description}</Text>
-                                        <Text style={{ color: '#000' }}>{item.amount}</Text> */}
                                     </View>
-                                </TouchableOpacity>
+                                </View>
                             );
                         })}
                     </View>
