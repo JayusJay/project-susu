@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { observer } from 'mobx-react';
 import Snackbar from 'react-native-snackbar';
-import { AppStoreContext } from '../../components/AppStoreContext';
+import { AppStoreContext } from '../../services/AppStoreContext';
 import GoalSavingAmountStyle from '../../styles/goal_creation/goalSavingAmountStyle';
 
 const GoalSavingAmountScreen = observer(({ navigation }) => {

@@ -2,9 +2,9 @@ import React, { useEffect, useContext } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { AuthContext } from '../components/AuthContext';
+import { AuthContext } from '../services/AuthContext';
 import ResetPasswordStyle from '../styles/resetPasswordStyle';
-import asyncStorage from '../components/AsyncStorage';
+import asyncStorage from '../utils/AsyncStorage';
 
 const ResetPasswordScreen = () => {
     const { loginValidation } = useContext(AuthContext);

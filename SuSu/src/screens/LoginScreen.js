@@ -6,8 +6,8 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LoginSVG from '../assets/images/sampleLogo.svg';
 import GoogleSVG from '../assets/images/google.svg';
-import { AuthContext } from '../components/AuthContext';
-import asyncStorage from '../components/AsyncStorage';
+import { AuthContext } from '../services/AuthContext';
+import asyncStorage from '../utils/AsyncStorage';
 import DialogScreen from './DialogScreen';
 
 const LoginScreen = ({ navigation }) => {

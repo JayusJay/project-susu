@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { AppStoreContext } from '../../components/AppStoreContext';
+import { AppStoreContext } from '../../services/AppStoreContext';
 import CelebrationSVG from '../../assets/images/goal_creation/celebrating.svg';
 import goalImages from '../../assets/goalData';
 import goalFinalStyle from '../../styles/goal_creation/goalFinalStyle';

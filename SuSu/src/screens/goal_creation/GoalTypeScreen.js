@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import RadioButtonRN from 'radio-buttons-react-native';
 import Snackbar from 'react-native-snackbar';
-import { AppStoreContext } from '../../components/AppStoreContext';
+import { AppStoreContext } from '../../services/AppStoreContext';
 import GoalTypeStyle from '../../styles/goal_creation/goalTypeStyles';
 
 const data = [

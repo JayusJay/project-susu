@@ -6,9 +6,9 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SVG from '../assets/images/sampleLogo.svg';
 import GoogleSVG from '../assets/images/google.svg';
-import { AuthContext } from '../components/AuthContext';
+import { AuthContext } from '../services/AuthContext';
 import DatePicker from 'react-native-date-picker';
-import asyncStorage from '../components/AsyncStorage';
+import asyncStorage from '../utils/AsyncStorage';
 
 const RegisterScreen = ({ navigation }) => {
     const { registrationValidation, loginValidation } = useContext(AuthContext);

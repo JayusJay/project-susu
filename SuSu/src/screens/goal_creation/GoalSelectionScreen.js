@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { AppStoreContext } from '../../components/AppStoreContext';
+import { AppStoreContext } from '../../services/AppStoreContext';
 import GoalSelectionStyles from '../../styles/goal_creation/goalSelectionStyle';
 
 const GoalSelectionScreen = ({ navigation }) => {

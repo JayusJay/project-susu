@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Snackbar from 'react-native-snackbar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { observer } from 'mobx-react';
-import { AppStoreContext } from '../../components/AppStoreContext';
+import { AppStoreContext } from '../../services/AppStoreContext';
 import GoalTotalAmountStyles from '../../styles/goal_creation/goalTotalAmountStyle';
 
 const GoalTotalAmountScreen = observer(({ navigation }) => {
@@ -64,7 +64,6 @@ const GoalTotalAmountScreen = observer(({ navigation }) => {
                         <Text style={GoalTotalAmountStyles.headingView.headingText}>
                             How much do you need to save in total towards {goalCreationStore.title}?
                         </Text>
-                      
                     </View>
                     <View style={GoalTotalAmountStyles.inputView}>
                         <TextInput

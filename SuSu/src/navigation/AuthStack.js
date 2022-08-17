@@ -5,7 +5,7 @@ import OnBoardingScreen from '../screens/OnBoardingScreen';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import LoadingScreen from '../screens/LoadingScreen';
-import { AuthContext } from '../components/AuthContext';
+import { AuthContext } from '../services/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const authStack = createNativeStackNavigator();

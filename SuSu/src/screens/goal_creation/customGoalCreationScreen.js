@@ -6,7 +6,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import Snackbar from 'react-native-snackbar';
 import Dialog from 'react-native-dialog';
-import { AppStoreContext } from '../../components/AppStoreContext';
+import { AppStoreContext } from '../../services/AppStoreContext';
 import errors from '../../utils/errors';
 import customGoalCreationStyles from '../../styles/goal_creation/customGoalCreationStyle';
 

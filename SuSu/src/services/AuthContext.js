@@ -4,7 +4,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import errors from '../utils/errors';
-import asyncStorage from './AsyncStorage';
+import asyncStorage from '../utils/AsyncStorage';
 
 const AuthContext = createContext();
 
@@ -403,6 +403,7 @@ const AuthProvider = ({ children }) => {
                         .doc(auth().currentUser.uid)
                         .set({
                             uid: auth().currentUser.uid,
+                            userOnBoarded: false,
                             firstName: firstName,
                             lastName: lastName,
                             email: email,

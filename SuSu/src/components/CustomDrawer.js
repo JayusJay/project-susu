@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View, Text, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { AuthContext } from './AuthContext';
+import { AuthContext } from '../services/AuthContext';
 import customDrawerStyle from '../styles/customDrawerStyle';
 
 const CustomDrawer = (props) => {
