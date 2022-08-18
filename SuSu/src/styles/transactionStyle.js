@@ -37,6 +37,12 @@ const TransactionStyle = StyleSheet.create({
         marginTop: 10,
         paddingBottom: 5,
     },
+    transactionText: {
+        color: '#000',
+        alignSelf: 'center',
+        fontSize: 20,
+        marginTop: 10,
+    },
     detailsComponentView: {
         paddingTop: 15,
         marginBottom: 15,
@@ -46,13 +52,46 @@ const TransactionStyle = StyleSheet.create({
         borderBottomWidth: 0.5,
         innerView: {
             flexDirection: 'row',
-            justifyContent: 'space-between',
-            image: {
-                height: 25,
-                width: 25,
-                borderRadius: 25,
-                marginTop: -3,
+            width: '70%',
+            innerView: {
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                image: {
+                    height: 25,
+                    width: 25,
+                    borderRadius: 25,
+                    marginTop: -3,
+                    alignSelf: 'center',
+                },
+            },
+            secondView: {
+                paddingLeft: 10,
+                text1: {
+                    color: '#000',
+                    fontWeight: '600',
+                },
+                text2: {
+                    color: '#000',
+                    paddingRight: 10,
+                    textAlign: 'left',
+                },
+            },
+        },
+        secondView: {
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            innerView: {
+                paddingLeft: 10,
                 alignSelf: 'center',
+                text1: {
+                    color: '#000',
+                    fontWeight: '600',
+                    alignSelf: 'center',
+                },
+                text2: {
+                    fontWeight: '500',
+                    alignSelf: 'center',
+                },
             },
         },
         descriptionText: {

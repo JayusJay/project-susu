@@ -16,8 +16,8 @@ const AppNav = observer(() => {
 
     return (
         <NavigationContainer>
-            {/* {user ? newUserOnBoardingStore.onBoarded ? <AppStack /> : <NewUserOnBoardingNav /> : <AuthStack />} */}
-            {user ? <AppStack /> : <AuthStack />}
+            {user ? newUserOnBoardingStore.onBoarded ? <AppStack /> : <NewUserOnBoardingNav /> : <AuthStack />}
+            {/* {user ? <AppStack /> : <AuthStack />} */}
         </NavigationContainer>
     );
 });

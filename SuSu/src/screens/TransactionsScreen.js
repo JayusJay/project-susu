@@ -95,31 +95,31 @@ const TransactionScreen = ({ navigation }) => {
                     </View>
                 </View>
                 <View style={TransactionStyle.footer}>
-                    <Text style={{ color: '#000', alignSelf: 'center', fontSize: 20, marginTop: 10 }}>
-                        Transaction History
-                    </Text>
+                    <Text style={TransactionStyle.transactionText}>Transaction History</Text>
                     <View style={TransactionStyle.transactionView}>
                         {transactionData.map((item, index) => {
                             return (
                                 <View key={index}>
                                     <View style={TransactionStyle.detailsComponentView}>
-                                        <View style={{ flexDirection: 'row', width: '70%' }}>
-                                            <View style={TransactionStyle.detailsComponentView.innerView}>
+                                        <View style={TransactionStyle.detailsComponentView.innerView}>
+                                            <View style={TransactionStyle.detailsComponentView.innerView.innerView}>
                                                 <Image
                                                     source={item.image}
                                                     style={TransactionStyle.detailsComponentView.innerView.image}
                                                 />
                                             </View>
-                                            <View style={{ paddingLeft: 10 }}>
-                                                <Text style={{ color: '#000', fontWeight: '600' }}>
+                                            <View style={TransactionStyle.detailsComponentView.innerView.secondView}>
+                                                <Text
+                                                    style={
+                                                        TransactionStyle.detailsComponentView.innerView.secondView.text1
+                                                    }
+                                                >
                                                     Transfer to {item.accountTo}
                                                 </Text>
                                                 <Text
-                                                    style={{
-                                                        color: '#000',
-                                                        paddingRight: 10,
-                                                        textAlign: 'left',
-                                                    }}
+                                                    style={
+                                                        TransactionStyle.detailsComponentView.innerView.secondView.text2
+                                                    }
                                                 >
                                                     {transactionMessage(
                                                         item.transactionID,
@@ -133,9 +133,13 @@ const TransactionScreen = ({ navigation }) => {
                                                 </Text>
                                             </View>
                                         </View>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                                            <View style={{ paddingLeft: 10, alignSelf: 'center' }}>
-                                                <Text style={{ color: '#000', fontWeight: '600', alignSelf: 'center' }}>
+                                        <View style={TransactionStyle.detailsComponentView.secondView}>
+                                            <View style={TransactionStyle.detailsComponentView.secondView.innerView}>
+                                                <Text
+                                                    style={
+                                                        TransactionStyle.detailsComponentView.secondView.innerView.text1
+                                                    }
+                                                >
                                                     {item.amount}
                                                 </Text>
                                                 <Text
@@ -145,7 +149,8 @@ const TransactionScreen = ({ navigation }) => {
                                                             : item.transactionStatus === 'Pending'
                                                             ? { color: '#FFC466' }
                                                             : { color: 'red' },
-                                                        { fontWeight: '500', alignSelf: 'center' },
+                                                        TransactionStyle.detailsComponentView.secondView.innerView
+                                                            .text2,
                                                     ]}
                                                 >
                                                     {item.transactionStatus}
