@@ -135,7 +135,7 @@ const AuthProvider = ({ children }) => {
                 firebaseAuthenticationError(error);
             }
         };
-
+        //cloud functions with firebase solves this now...upgrade later.
         const handleDialog = () => {
             setLoading(true);
             setDialogData({ ...dialogData, showDialog: false });
@@ -413,6 +413,23 @@ const AuthProvider = ({ children }) => {
                         .then(async () => {
                             //reset error state
                             setScreenError({ registerError: false, loginError: false, resetError: false });
+                            //reset registration data
+                            setRegisterData({
+                                firstName: '',
+                                lastName: '',
+                                email: '',
+                                password: '',
+                                confirmPassword: '',
+                                phoneNumber: '',
+                                dateOfBirth: new Date(),
+                                isValidFirstName: true,
+                                isValidLastName: true,
+                                isValidEmail: true,
+                                isValidPassword: true,
+                                isValidConfirmPassword: true,
+                                isValidPhoneNumber: true,
+                                isValidDateOfBirth: true,
+                            });
                             //remove registration data from AsyncStorage
                             await registrationRemove();
                             Snackbar.show({

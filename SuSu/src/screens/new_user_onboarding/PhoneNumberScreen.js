@@ -2,13 +2,16 @@ import React, { useState, useContext } from 'react';
 import { View, Text, Image, TextInput, ScrollView, useWindowDimensions, TouchableOpacity, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Snackbar from 'react-native-snackbar';
+import { AppStoreContext } from '../../services/AppStoreContext';
+import LoadingScreen from '../LoadingScreen';
 import PhoneNumberStyle from '../../styles/new_user_onBoarding/phoneNumberStyle';
 
-const PhoneNumberScreen = () => {
+const PhoneNumberScreen = ({ navigation }) => {
+    const { newUserOnBoardingStore, appLoading, setAppLoading } = useContext(AppStoreContext);
     const { width } = useWindowDimensions();
     const [phoneNumber, setPhoneNumber] = useState('');
 
-    const handleButton = () => {
+    const handleButton = async () => {
         let phoneNum = phoneNumber.replace(/\D/g, '');
         if (phoneNum.length >= 9) {
             if (phoneNum.length == 9) {
@@ -20,10 +23,15 @@ const PhoneNumberScreen = () => {
                     });
                     return;
                 }
-                phoneNum = `0${phoneNum}`;
+                phoneNum = `+233${phoneNum}`;
             }
-
-            //set state
+            if (phoneNum.length == 10) phoneNum = `+233${phoneNum.slice(1)}`;
+            newUserOnBoardingStore.setStateValue('phoneNumber', phoneNum); //set unformatted phone number
+            setAppLoading(true);
+            if (await newUserOnBoardingStore.sendFirebaseOTP()) {
+                setAppLoading(false);
+                navigation.navigate('OTPConfirmation');
+            }
         } else {
             Snackbar.show({
                 text: 'Please enter a valid phone number',
@@ -50,7 +58,7 @@ const PhoneNumberScreen = () => {
         }
         return `(${number.slice(0, 3)}) ${number.slice(3, 6)}-${number.slice(6, 9)}`;
     };
-
+    if (appLoading) return <LoadingScreen />;
     return (
         <ScrollView showsVerticalScrollIndicator={false} style={PhoneNumberStyle.scrollable}>
             <SafeAreaView style={PhoneNumberStyle.container}>
