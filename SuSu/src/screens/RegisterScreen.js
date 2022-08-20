@@ -159,8 +159,8 @@ const RegisterScreen = ({ navigation }) => {
                     </View>
                     {registerData.isValidPassword ? null : (
                         <Text style={RegisterStyle.errorText}>
-                            Password must be at least 8 characters long, contain at least one number and one special
-                            character
+                            Password must be at least 8 characters long, contain at least one number, uppercase letter
+                            and special character.
                         </Text>
                     )}
                     <View style={RegisterStyle.view3}>

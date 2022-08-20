@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const OTPConfirmationStyle = StyleSheet.create({
+const SetPINStyle = StyleSheet.create({
     scrollable: { backgroundColor: '#fff' },
     container: {
         padding: 20,
@@ -33,4 +33,4 @@ const OTPConfirmationStyle = StyleSheet.create({
         },
     },
 });
-export default OTPConfirmationStyle;
+export default SetPINStyle;

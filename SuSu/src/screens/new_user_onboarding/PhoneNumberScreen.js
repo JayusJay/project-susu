@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, Image, TextInput, ScrollView, useWindowDimensions, TouchableOpacity, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Snackbar from 'react-native-snackbar';
 import { AppStoreContext } from '../../services/AppStoreContext';
 import LoadingScreen from '../LoadingScreen';
@@ -30,7 +31,9 @@ const PhoneNumberScreen = ({ navigation }) => {
             setAppLoading(true);
             if (await newUserOnBoardingStore.sendFirebaseOTP()) {
                 setAppLoading(false);
-                navigation.navigate('OTPConfirmation');
+                //newUserOnBoardingStore.setStateValue('initialRouteName', 'OTPConfirmation');
+                AsyncStorage.setItem('initialScreen', 'OTPConfirmation');
+                navigation.replace('OTPConfirmation'); //prevent back button from going back to this screen
             }
         } else {
             Snackbar.show({
@@ -39,7 +42,6 @@ const PhoneNumberScreen = ({ navigation }) => {
                 backgroundColor: 'red',
             });
         }
-        console.log('Phone number', phoneNum);
     };
     const validatePhoneNumber = (number) => {
         const formatedNumber = formatPhoneNumber(number);

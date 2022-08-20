@@ -44,7 +44,24 @@ const errors = () => {
                   textColor: 'white',
                   backgroundColor: 'red',
               })
-            : null;
+            : error.code === 'auth/invalid-verification-code'
+            ? Snackbar.show({
+                  text: 'Invalid code',
+                  duration: Snackbar.LENGTH_LONG,
+                  textColor: 'white',
+                  backgroundColor: 'red',
+              })
+            : error.code === 'auth/session-expired'
+            ? Snackbar.show({
+                  text: 'Session expired, resend code',
+                  duration: Snackbar.LENGTH_LONG,
+                  backgroundColor: 'red',
+              })
+            : Snackbar.show({
+                  text: 'Something went wrong, try again later',
+                  duration: Snackbar.LENGTH_LONG,
+                  backgroundColor: 'red',
+              });
     };
     const RNImagePickerError = (response) => {
         return response.errorCode == 'camera_unavailable'

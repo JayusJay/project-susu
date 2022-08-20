@@ -5,9 +5,7 @@ import firestore from '@react-native-firebase/firestore';
 class NewUserOnBoardingStore {
     onBoarded = null;
     phoneNumber = '';
-    isOTPSent = false;
     confirmationCode = null;
-    userInputCode = null;
     constructor() {
         makeObservable(this, {
             onBoarded: observable,
@@ -25,33 +23,25 @@ class NewUserOnBoardingStore {
             const user = await firestore().collection('users').doc(auth().currentUser.uid).get();
             this.setStateValue('onBoarded', user.data().userOnBoarded);
         } catch (error) {
-            console.log(error);
+            console.log('checkOnBoarded error: ', error);
         }
     };
     sendFirebaseOTP = async () => {
         try {
             const confirmation = await auth().verifyPhoneNumber(this.phoneNumber);
             this.setStateValue('confirmationCode', confirmation);
-            console.log('confirmation', confirmation);
-        } catch {
-            console.log('error');
+        } catch (error) {
+            console.log('sendFirebaseOTP error: ', error);
         }
         return true;
     };
-    verifyOTPCode = async () => {
+    verifyOTPCode = async (code) => {
         try {
-            const credential = auth.PhoneAuthProvider.credential(
-                this.confirmationCode.verificationId,
-                this.userInputCode
-            );
+            const credential = auth.PhoneAuthProvider.credential(this.confirmationCode.verificationId, code);
             await auth().currentUser.linkWithCredential(credential);
         } catch (error) {
-            console.log(error);
-            // if (error.code == 'auth/invalid-verification-code') {
-            //     console.log('Invalid code.');
-            // } else {
-            //     console.log('Account linking error');
-            // }
+            console.log('verifyOTPCode error: ', error);
+            return error;
         }
     };
 }
