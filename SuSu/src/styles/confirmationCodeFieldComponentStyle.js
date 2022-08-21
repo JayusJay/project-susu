@@ -62,13 +62,7 @@ const ConfirmationCodeFieldComponentStyle = StyleSheet.create({
         color: '#000',
         textAlign: 'center',
     },
-    resendText: {
-        color: '#7966FF',
-        fontSize: 15,
-        marginTop: 50,
-        marginLeft: -20,
-        fontWeight: '450',
-    },
+
     buttonTouchable: {
         marginTop: 100,
         innerView: {

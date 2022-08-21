@@ -29,10 +29,11 @@ const PhoneNumberScreen = ({ navigation }) => {
             if (phoneNum.length == 10) phoneNum = `+233${phoneNum.slice(1)}`;
             newUserOnBoardingStore.setStateValue('phoneNumber', phoneNum); //set unformatted phone number
             setAppLoading(true);
-            if (await newUserOnBoardingStore.sendFirebaseOTP()) {
+            if (await newUserOnBoardingStore.sendFirebaseOTP('')) {
                 setAppLoading(false);
                 //newUserOnBoardingStore.setStateValue('initialRouteName', 'OTPConfirmation');
                 AsyncStorage.setItem('initialScreen', 'OTPConfirmation');
+                AsyncStorage.setItem('phoneNumber', phoneNum);
                 navigation.replace('OTPConfirmation'); //prevent back button from going back to this screen
             }
         } else {

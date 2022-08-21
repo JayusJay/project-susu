@@ -2,10 +2,11 @@
 Concept: https://dribbble.com/shots/5476562-Forgot-Password-Verification/attachments
 */
 import { Animated, SafeAreaView, View, Text, TouchableOpacity, useWindowDimensions } from 'react-native';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { CodeField, Cursor, useBlurOnFulfill, useClearByFocusCell } from 'react-native-confirmation-code-field';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingScreen from '../screens/LoadingScreen';
+import ResendTimer from './ResendTimer';
 import { AppStoreContext } from '../services/AppStoreContext';
 import errors from '../utils/errors';
 import ConfirmationCodeFieldComponentStyle, {
@@ -20,9 +21,16 @@ const { Value, Text: AnimatedText } = Animated;
 
 const ConfirmationCodeFieldComponent = ({ navigation, CELL_COUNT, type }) => {
     const { width } = useWindowDimensions();
-    const { newUserOnBoardingStore, appLoading, setAppLoading } = useContext(AppStoreContext);
+    const { newUserOnBoardingStore, appLoading, setAppLoading, timer, resendTimeInterval, setTimer, triggerTimer } =
+        useContext(AppStoreContext);
     const { firebaseAuthenticationError } = errors();
 
+    useEffect(() => {
+        triggerTimer();
+        return () => {
+            clearInterval(resendTimeInterval);
+        };
+    }, []); //trigger timer when page mounts
     const animationsColor = [...new Array(CELL_COUNT)].map(() => new Value(0));
     const animationsScale = [...new Array(CELL_COUNT)].map(() => new Value(1));
     const animateCell = ({ hasValue, index, isFocused }) => {
@@ -123,7 +131,8 @@ const ConfirmationCodeFieldComponent = ({ navigation, CELL_COUNT, type }) => {
                 textContentType="oneTimeCode"
                 renderCell={renderCell}
             />
-            <Text style={ConfirmationCodeFieldComponentStyle.resendText}>Resend verification code in</Text>
+
+            <ResendTimer timer={timer} />
 
             <TouchableOpacity
                 onPress={async () => {

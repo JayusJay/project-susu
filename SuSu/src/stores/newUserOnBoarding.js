@@ -1,6 +1,7 @@
 import { makeObservable, observable, computed, action } from 'mobx';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class NewUserOnBoardingStore {
     onBoarded = null;
@@ -26,14 +27,22 @@ class NewUserOnBoardingStore {
             console.log('checkOnBoarded error: ', error);
         }
     };
-    sendFirebaseOTP = async () => {
+    sendFirebaseOTP = async (action) => {
         try {
-            const confirmation = await auth().verifyPhoneNumber(this.phoneNumber);
-            this.setStateValue('confirmationCode', confirmation);
+            if (action === 'resend') {
+                let storedPhoneNumber = await AsyncStorage.getItem('phoneNumber');
+                this.setStateValue('phoneNumber', storedPhoneNumber);
+                const confirmation = await auth().verifyPhoneNumber(this.phoneNumber);
+                this.setStateValue('confirmationCode', confirmation);
+                return true;
+            } else {
+                const confirmation = await auth().verifyPhoneNumber(this.phoneNumber);
+                this.setStateValue('confirmationCode', confirmation);
+                return true;
+            }
         } catch (error) {
             console.log('sendFirebaseOTP error: ', error);
         }
-        return true;
     };
     verifyOTPCode = async (code) => {
         try {
@@ -43,6 +52,7 @@ class NewUserOnBoardingStore {
             console.log('verifyOTPCode error: ', error);
             return error;
         }
+        3;
     };
 }
 export { NewUserOnBoardingStore };
