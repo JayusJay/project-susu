@@ -10,7 +10,7 @@ const SetPINScreen = ({ navigation }) => {
             <SafeAreaView style={SetPINStyle.container}>
                 <Text style={SetPINStyle.titleText}>Set your PIN</Text>
                 <Text style={SetPINStyle.text}>You will use this PIN to authorize payments.</Text>
-                <ConfirmationCodeFieldComponent navigation={navigation} CELL_COUNT={6} type={'PIN'} />
+                <ConfirmationCodeFieldComponent navigation={navigation} CELL_COUNT={4} type={'PIN'} />
             </SafeAreaView>
         </ScrollView>
     );

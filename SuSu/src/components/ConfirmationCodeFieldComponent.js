@@ -21,7 +21,7 @@ const { Value, Text: AnimatedText } = Animated;
 
 const ConfirmationCodeFieldComponent = ({ navigation, CELL_COUNT, type }) => {
     const { width } = useWindowDimensions();
-    const { newUserOnBoardingStore, appLoading, setAppLoading, timer, resendTimeInterval, setTimer, triggerTimer } =
+    const { newUserOnBoardingStore, appLoading, setAppLoading, resendTimeInterval, triggerTimer } =
         useContext(AppStoreContext);
     const { firebaseAuthenticationError } = errors();
 
@@ -131,8 +131,7 @@ const ConfirmationCodeFieldComponent = ({ navigation, CELL_COUNT, type }) => {
                 textContentType="oneTimeCode"
                 renderCell={renderCell}
             />
-
-            <ResendTimer timer={timer} />
+            {type === 'OTP' ? <ResendTimer /> : null}
 
             <TouchableOpacity
                 onPress={async () => {

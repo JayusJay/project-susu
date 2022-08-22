@@ -10,7 +10,7 @@ const newUserOnBoardingStore = new NewUserOnBoardingStore();
 const AppStoreProvider = ({ children }) => {
     const [appLoading, setAppLoading] = useState(false);
     const [timer, setTimer] = useState({
-        resendStatus: 'resend',
+        //resendStatus: 'resend',
         timeLeft: null,
         targetTime: null,
         activeResend: false,
@@ -26,7 +26,7 @@ const AppStoreProvider = ({ children }) => {
         const calculateTimeLeft = (finalTime) => {
             const difference = finalTime - Date.now();
             if (difference > 0) {
-                setTimer({ ...timer, timeLeft: Math.floor(difference / 1000) });
+                setTimer({ ...timer, timeLeft: Math.floor(difference / 1000), activeResend: false });
             } else {
                 setTimer({ ...timer, timeLeft: null, activeResend: true });
                 clearInterval(resendTimerInterval);
@@ -42,7 +42,6 @@ const AppStoreProvider = ({ children }) => {
                 setAppLoading,
                 timer,
                 resendTimerInterval,
-                setTimer,
                 triggerTimer,
             }}
         >

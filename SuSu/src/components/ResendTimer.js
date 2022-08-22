@@ -4,13 +4,13 @@ import Snackbar from 'react-native-snackbar';
 import { AppStoreContext } from '../services/AppStoreContext';
 import ResendTimerComponentStyle from '../styles/resendTimerComponentStyle';
 
-const ResendTimer = ({ timer }) => {
-    const { newUserOnBoardingStore } = useContext(AppStoreContext);
+const ResendTimer = ({}) => {
+    const { newUserOnBoardingStore, timer, triggerTimer } = useContext(AppStoreContext);
     const [resendLoading, setResendLoading] = useState(false);
-    const [resendCount, setResendCount] = useState(0);
+    const [resendCount, setResendCount] = useState(1);
 
     const resendCode = async () => {
-        console.log('resendCount'), resendCount;
+        console.log('resendCount', resendCount);
         if (resendCount > 3) {
             Snackbar.show({
                 text: 'You have reached the maximum number of resends, try again later',
@@ -21,10 +21,9 @@ const ResendTimer = ({ timer }) => {
         }
         setResendLoading(true);
         if (await newUserOnBoardingStore.sendFirebaseOTP('resend')) {
+            triggerTimer();
             setResendLoading(false);
             setResendCount(resendCount + 1);
-            console.log('resendCount', resendCount);
-
             Snackbar.show({
                 text: 'Code sent successfully',
                 duration: Snackbar.LENGTH_SHORT,
