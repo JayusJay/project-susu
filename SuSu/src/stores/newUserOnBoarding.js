@@ -2,15 +2,18 @@ import { makeObservable, observable, computed, action } from 'mobx';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { JSHash, CONSTANTS } from 'react-native-hash';
 
 class NewUserOnBoardingStore {
     onBoarded = null;
     phoneNumber = '';
     confirmationCode = null;
+    PINHash = null;
     constructor() {
         makeObservable(this, {
             onBoarded: observable,
             phoneNumber: observable,
+            PINHash: observable,
             setStateValue: action,
         });
         this.checkOnBoarded();
@@ -52,7 +55,35 @@ class NewUserOnBoardingStore {
             console.log('verifyOTPCode error: ', error);
             return error;
         }
-        3;
+    };
+    hashPINCode = async (pin) => {
+        try {
+            if (this.PINHash === null) {
+                try {
+                    const hash = await JSHash(pin, CONSTANTS.HashAlgorithms.sha256);
+                    console.log('Hash: ', hash);
+                    this.setStateValue('PINHash', hash);
+                    return true;
+                } catch {
+                    return false;
+                }
+            } else {
+                const hash = await JSHash(pin, CONSTANTS.HashAlgorithms.sha256);
+                // pin match
+                if (this.PINHash === hash) {
+                    firestore().collection('users').doc(auth().currentUser.uid).update({
+                        PINHash: this.PINHash,
+                        userOnBoarded: true,
+                    });
+                    this.setStateValue('onBoarded', true);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } catch (err) {
+            console.log('Hash error', err);
+        }
     };
 }
 export { NewUserOnBoardingStore };

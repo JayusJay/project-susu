@@ -85,7 +85,7 @@ const LoginStyle = StyleSheet.create({
     },
     signupText: {
         color: '#7966FF',
-        fontWeight: '400',
+        fontWeight: '600',
         marginTop: 15,
     },
     signupOpacity: {

@@ -105,7 +105,9 @@ const TransactionScreen = ({ navigation }) => {
                                             <View style={TransactionStyle.detailsComponentView.innerView.innerView}>
                                                 <Image
                                                     source={item.image}
-                                                    style={TransactionStyle.detailsComponentView.innerView.image}
+                                                    style={
+                                                        TransactionStyle.detailsComponentView.innerView.innerView.image
+                                                    }
                                                 />
                                             </View>
                                             <View style={TransactionStyle.detailsComponentView.innerView.secondView}>

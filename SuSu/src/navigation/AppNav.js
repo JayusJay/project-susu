@@ -12,7 +12,7 @@ const AppNav = observer(() => {
     const { newUserOnBoardingStore } = useContext(AppStoreContext);
     const { loading, user } = useContext(AuthContext);
 
-    if (loading) return <LoadingScreen />;
+    if (loading || newUserOnBoardingStore.onBoarded === null) return <LoadingScreen />;
     return (
         <NavigationContainer>
             {user ? newUserOnBoardingStore.onBoarded ? <AppStack /> : <NewUserOnBoardingNav /> : <AuthStack />}

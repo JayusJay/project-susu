@@ -16,6 +16,7 @@ import ConfirmationCodeFieldComponentStyle, {
     DEFAULT_CELL_BG_COLOR,
     NOT_EMPTY_CELL_BG_COLOR,
 } from '../styles/confirmationCodeFieldComponentStyle';
+import Snackbar from 'react-native-snackbar';
 
 const { Value, Text: AnimatedText } = Animated;
 
@@ -115,6 +116,29 @@ const ConfirmationCodeFieldComponent = ({ navigation, CELL_COUNT, type }) => {
             navigation.replace('SetPIN'); //don't allow user to go back to previous screens
         } else {
             //type === PIN
+            if (newUserOnBoardingStore.PINHash === null) {
+                if (newUserOnBoardingStore.hashPINCode(value)) {
+                    navigation.push('SetPIN', { type: 'PIN' });
+                } else {
+                    Snackbar.show({
+                        text: 'An error occurred, try again later',
+                        duration: Snackbar.LENGTH_LONG,
+                        backgroundColor: 'red',
+                    });
+                    return;
+                }
+            } else {
+                if (newUserOnBoardingStore.hashPINCode(value)) {
+                    //user will be automatically navigated to the main app since onBoarding is complete
+                } else {
+                    Snackbar.show({
+                        text: 'PIN code is not valid',
+                        duration: Snackbar.LENGTH_LONG,
+                        backgroundColor: 'red',
+                    });
+                    return;
+                }
+            }
         }
     };
     if (appLoading) return <LoadingScreen />;

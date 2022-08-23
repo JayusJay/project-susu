@@ -4,13 +4,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import SetPINStyle from '../../styles/new_user_onBoarding/setPINStyle';
 import ConfirmationCodeFieldComponent from '../../components/ConfirmationCodeFieldComponent';
 
-const SetPINScreen = ({ navigation }) => {
+const SetPINScreen = ({ navigation, route }) => {
     return (
         <ScrollView style={SetPINStyle.scrollable}>
             <SafeAreaView style={SetPINStyle.container}>
                 <Text style={SetPINStyle.titleText}>Set your PIN</Text>
                 <Text style={SetPINStyle.text}>You will use this PIN to authorize payments.</Text>
-                <ConfirmationCodeFieldComponent navigation={navigation} CELL_COUNT={4} type={'PIN'} />
+                <ConfirmationCodeFieldComponent navigation={navigation} CELL_COUNT={6} type={'PIN'} />
             </SafeAreaView>
         </ScrollView>
     );

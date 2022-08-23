@@ -47,10 +47,11 @@ const RegisterStyle = StyleSheet.create({
     view4: {
         flexDirection: 'row',
         alignSelf: 'center',
-        paddingBottom: 10,
+        paddingBottom: 30,
     },
     view4Text: {
         color: '#8A8A8A',
+        fontSize: 15,
     },
     view5: {
         alignSelf: 'center',
@@ -87,8 +88,9 @@ const RegisterStyle = StyleSheet.create({
     },
     RegisterText: {
         color: '#7966FF',
-        fontWeight: '400',
+        fontWeight: '500',
         marginTop: 15,
+        fontSize: 15,
     },
     RegisterOpacity: {
         marginTop: -15,

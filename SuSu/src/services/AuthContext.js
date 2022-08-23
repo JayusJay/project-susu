@@ -5,6 +5,7 @@ import firestore from '@react-native-firebase/firestore';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import errors from '../utils/errors';
 import asyncStorage from '../utils/AsyncStorage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AuthContext = createContext();
 
@@ -220,6 +221,7 @@ const AuthProvider = ({ children }) => {
 
         const handleLogOut = async () => {
             setLoading(true);
+            await AsyncStorage.removeItem('initialScreen'); //reset newUser onBoarding nav initial screen
             if (await GoogleSignin.isSignedIn()) {
                 GoogleSignin.signOut()
                     .then(() => {

@@ -1,4 +1,6 @@
 import { StyleSheet } from 'react-native';
+
+
 const TransactionStyle = StyleSheet.create({
     scrollable: { backgroundColor: '#fff' },
     container: {
