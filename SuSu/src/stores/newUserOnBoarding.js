@@ -27,6 +27,7 @@ class NewUserOnBoardingStore {
             const user = await firestore().collection('users').doc(auth().currentUser.uid).get();
             this.setStateValue('onBoarded', user.data().userOnBoarded);
         } catch (error) {
+            this.setStateValue('onBoarded', false);
             console.log('checkOnBoarded error: ', error);
         }
     };

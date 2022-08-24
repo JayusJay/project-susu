@@ -98,6 +98,14 @@ const ConfirmationCodeFieldComponent = ({ navigation, CELL_COUNT, type }) => {
         );
     };
     const handleButton = async (type) => {
+        if (value.length < CELL_COUNT) {
+            Snackbar.show({
+                text: 'Please fill all the fields',
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor: 'red',
+            });
+            return;
+        }
         if (type === 'OTP') {
             setAppLoading(true);
             const response = await newUserOnBoardingStore.verifyOTPCode(value);
