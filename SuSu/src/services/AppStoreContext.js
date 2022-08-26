@@ -1,16 +1,19 @@
 import React, { useState, createContext } from 'react';
-import { GoalCreationStore } from '../stores/goalCreation';
-import { NewUserOnBoardingStore } from '../stores/newUserOnBoarding';
+import AppStore from '../stores/appStore';
+import GoalCreationStore from '../stores/goalCreation';
+import GroupCreation from '../stores/groupCreation';
+import NewUserOnBoardingStore from '../stores/newUserOnBoarding';
 
 const AppStoreContext = createContext();
 
+const appStore = new AppStore();
 const goalCreationStore = new GoalCreationStore();
+const groupCreationStore = new GroupCreation();
 const newUserOnBoardingStore = new NewUserOnBoardingStore();
 
 const AppStoreProvider = ({ children }) => {
     const [appLoading, setAppLoading] = useState(false);
     const [timer, setTimer] = useState({
-        //resendStatus: 'resend',
         timeLeft: null,
         targetTime: null,
         activeResend: false,
@@ -36,7 +39,9 @@ const AppStoreProvider = ({ children }) => {
     return (
         <AppStoreContext.Provider
             value={{
+                appStore,
                 goalCreationStore,
+                groupCreationStore,
                 newUserOnBoardingStore,
                 appLoading,
                 setAppLoading,

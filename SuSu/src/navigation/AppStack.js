@@ -13,7 +13,6 @@ const appStack = createNativeStackNavigator();
 
 const AppStack = () => {
     return (
-        // <AppStoreProvider>
         <appStack.Navigator>
             <appStack.Screen component={DrawerStack} name="Drawer" options={{ headerShown: false }} />
             <appStack.Screen component={GoalDetailScreen} name="Goal Detail" options={{ headerShown: false }} />
@@ -31,7 +30,6 @@ const AppStack = () => {
             />
             <appStack.Screen component={GoalCreationNav} name="Goal Creation Nav" options={{ headerShown: false }} />
         </appStack.Navigator>
-        //</AppStoreProvider>
     );
 };
 export default AppStack;

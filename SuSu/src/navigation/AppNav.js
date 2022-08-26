@@ -3,8 +3,8 @@ import { observer } from 'mobx-react-lite';
 import { NavigationContainer } from '@react-navigation/native';
 import { AuthContext } from '../services/AuthContext';
 import { AppStoreContext } from '../services/AppStoreContext';
-import AuthStack from '../navigation/AuthStack';
-import AppStack from '../navigation/AppStack';
+import AuthStack from './AuthStack';
+import AppStack from './AppStack';
 import NewUserOnBoardingNav from './NewUserOnBoardingNav';
 import LoadingScreen from '../screens/LoadingScreen';
 

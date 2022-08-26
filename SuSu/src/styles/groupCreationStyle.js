@@ -113,8 +113,8 @@ const GroupCreationStyle = StyleSheet.create({
 
     buttonTouchable: {
         alignSelf: 'center',
+        marginTop: 50,
         innerView: {
-            marginTop: 50,
             padding: 20,
             backgroundColor: '#7966FF',
             borderRadius: 20,
@@ -126,6 +126,7 @@ const GroupCreationStyle = StyleSheet.create({
             },
         },
     },
+
     dialogInnerView: {
         flexDirection: 'row',
         justifyContent: 'space-around',

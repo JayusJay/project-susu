@@ -1,4 +1,4 @@
-import { makeObservable, observable, computed, action } from 'mobx';
+import { makeObservable, observable, action } from 'mobx';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -87,4 +87,4 @@ class NewUserOnBoardingStore {
         }
     };
 }
-export { NewUserOnBoardingStore };
+export default NewUserOnBoardingStore;

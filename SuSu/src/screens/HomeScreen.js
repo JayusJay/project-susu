@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -8,6 +8,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { BarChart } from 'react-native-gifted-charts';
 import Carousel from 'react-native-reanimated-carousel';
 import { CircularProgressBase } from 'react-native-circular-progress-indicator';
+import { AppStoreContext } from '../services/AppStoreContext';
 import HomeStyle from '../styles/homeStyle';
 import barData from '../assets/bardata';
 import BannerSlider from '../components/BannerSlider';
@@ -24,10 +25,15 @@ const cards = [
 ];
 
 const HomeScreen = ({ navigation }) => {
+    const { appStore } = useContext(AppStoreContext);
     const { width } = useWindowDimensions();
     const renderBanner = ({ item, index }) => {
         return <BannerSlider data={item} />;
     };
+    // (async function a() {
+    //     await appStore.getGroups();
+    //     await appStore.getUserData();
+    // })();
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>

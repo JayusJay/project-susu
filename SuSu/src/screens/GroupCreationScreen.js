@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
     ScrollView,
     View,
@@ -17,9 +17,11 @@ import Snackbar from 'react-native-snackbar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { AppStoreContext } from '../services/AppStoreContext';
 import errors from '../utils/errors';
 import GroupCreationStyle from '../styles/groupCreationStyle';
-import groupData from '../assets/groupData';
+import groupData1 from '../assets/groupData';
+import LoadingScreen from './LoadingScreen';
 
 const photoOptions = {
     mediaType: 'photo',
@@ -36,6 +38,7 @@ const dropDownData = [
     { label: 'Semi-annual', value: '180' },
 ];
 const GoalCreationScreen = ({ navigation }) => {
+    const { appStore,groupCreationStore, appLoading, setAppLoading } = useContext(AppStoreContext);
     const { RNImagePickerError } = errors();
     const [dialogVisible, setDialogVisible] = useState(false);
     const [openDropDown, setOpenDropDown] = useState(false);
@@ -67,24 +70,34 @@ const GoalCreationScreen = ({ navigation }) => {
             }
         }
     };
-    const handleButton = () => {
-        if (groupData.name !== '' && groupData.seedAmount != 0 && groupData.frequency !== null) {
-            groupData.push({
-                image: groupData.imageUri,
-                name: groupData.name,
-                seedMoneyPerMember: groupData.seedAmount,
-                frequency: groupData.frequency,
-                members: [
-                    {
-                        name: 'Jonathan',
-                        id: '5',
-                        image: require('../assets/images/profile.jpg'),
-                        group_id: '#1',
-                        seedMoney: 7000,
-                    },
-                ], //Group creator.
+    const handleButton = async () => {
+        if (groupData.imageUri.startsWith('../assets/')) {
+            Snackbar.show({
+                text: 'Please select an image for the group',
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor: 'red',
             });
-            navigation.navigate('Group Creation Final');
+            return;
+        }
+        if (groupData.name !== '' && groupData.seedAmount != 0 && groupData.frequency !== null) {
+            groupCreationStore.setStateValue('imageUri', groupData.imageUri);
+            groupCreationStore.setStateValue('name', groupData.name);
+            groupCreationStore.setStateValue('seedMoney', groupData.seedAmount);
+            groupCreationStore.setStateValue('frequency', groupData.frequency);
+            setAppLoading(true);
+            let value = await groupCreationStore.createGroup();
+            if (value) {
+                setAppLoading(false);
+                appStore.getInvestmentGroups();
+                navigation.navigate('Group Creation Final');
+            } else {
+                Snackbar.show({
+                    text: 'Group creation failed',
+                    duration: Snackbar.LENGTH_LONG,
+                    backgroundColor: 'red',
+                });
+                return;
+            }
         } else {
             Snackbar.show({
                 text: 'Please fill all the fields',
@@ -143,7 +156,7 @@ const GoalCreationScreen = ({ navigation }) => {
             });
         }
     };
-
+    if (appLoading) return <LoadingScreen />;
     return (
         <ScrollView showsVerticalScrollIndicator={false} style={GroupCreationStyle.scrollable}>
             <SafeAreaView style={GroupCreationStyle.container}>

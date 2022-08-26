@@ -66,4 +66,4 @@ class GoalCreationStore {
     }
 }
 
-export { GoalCreationStore };
+export default GoalCreationStore;

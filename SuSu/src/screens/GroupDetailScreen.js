@@ -8,7 +8,7 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import GroupDetailStyle from '../styles/groupDetailStyle';
 
 const GroupDetailScreen = ({ route, navigation }) => {
-    const { image, name, members, seedMoneyPerMember, frequency } = route.params;
+    const { imageUri, name, members, seedMoneyPerMember, frequency } = route.params;
     const totalSeedMoney = members.length * seedMoneyPerMember;
     const options = {
         title: 'Share via ',
@@ -45,7 +45,7 @@ const GroupDetailScreen = ({ route, navigation }) => {
                     </TouchableOpacity>
                 </View>
                 <View style={GroupDetailStyle.imageView}>
-                    <Image source={image} style={GroupDetailStyle.image} />
+                    <Image source={{ uri: imageUri }} style={GroupDetailStyle.image} />
                 </View>
                 <Text style={GroupDetailStyle.subHeaderText}>{name}</Text>
                 <View style={GroupDetailStyle.detailsComponentView}>

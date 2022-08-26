@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Text, ScrollView, View, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
+import { observer } from 'mobx-react';
+import { AppStoreContext } from '../services/AppStoreContext';
 import GroupComponent from '../components/GroupComponent';
 import groupData from '../assets/groupData';
 import GroupInvestmentStyle from '../styles/groupInvestmentStyle';
 
 //let dummy = [];
-const GroupInvestmentScreen = ({ navigation }) => {
+const GroupInvestmentScreen = observer(({ navigation }) => {
+    const { appStore } = useContext(AppStoreContext);
+    useEffect(() => {
+        appStore.getInvestmentGroups();
+    }, []);
     return (
         <ScrollView showsVerticalScrollIndicator={false} style={GroupInvestmentStyle.scrollable}>
             <SafeAreaView style={GroupInvestmentStyle.container}>
@@ -46,12 +52,12 @@ const GroupInvestmentScreen = ({ navigation }) => {
                     </View>
                     <Text style={GroupInvestmentStyle.yourGroupsText}>Your Groups</Text>
                     <View style={GroupInvestmentStyle.groupView}>
-                        <GroupComponent navigation={navigation} data={groupData} />
+                        <GroupComponent navigation={navigation} data={appStore.investmentGroups} />
                     </View>
                 </View>
             </SafeAreaView>
         </ScrollView>
     );
-};
+});
 
 export default GroupInvestmentScreen;

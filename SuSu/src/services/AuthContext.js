@@ -405,6 +405,7 @@ const AuthProvider = ({ children }) => {
                         .doc(auth().currentUser.uid)
                         .set({
                             uid: auth().currentUser.uid,
+                            imageUri: '',
                             userOnBoarded: false,
                             firstName: firstName,
                             lastName: lastName,
