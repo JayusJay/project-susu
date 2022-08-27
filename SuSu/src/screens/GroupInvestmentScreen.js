@@ -5,12 +5,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import { observer } from 'mobx-react';
 import { AppStoreContext } from '../services/AppStoreContext';
+//import { AuthContext } from '../services/AuthContext';
 import GroupComponent from '../components/GroupComponent';
 import groupData from '../assets/groupData';
 import GroupInvestmentStyle from '../styles/groupInvestmentStyle';
 
 //let dummy = [];
 const GroupInvestmentScreen = observer(({ navigation }) => {
+    //const { user } = useContext(AuthContext);
     const { appStore } = useContext(AppStoreContext);
     useEffect(() => {
         appStore.getInvestmentGroups();

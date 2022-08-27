@@ -24,7 +24,6 @@ const GroupComponent = ({ navigation, data }) => {
             >
                 <View style={GroupComponentStyle.container.innerView}>
                     <View style={GroupComponentStyle.container.innerView.innerView}>
-                        {console.log('Item image: ', item)}
                         <Image source={{ uri: item.imageUri }} style={GroupComponentStyle.container.image} />
 
                         <View>

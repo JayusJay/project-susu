@@ -38,7 +38,7 @@ const dropDownData = [
     { label: 'Semi-annual', value: '180' },
 ];
 const GoalCreationScreen = ({ navigation }) => {
-    const { appStore,groupCreationStore, appLoading, setAppLoading } = useContext(AppStoreContext);
+    const { appStore, groupCreationStore, appLoading, setAppLoading } = useContext(AppStoreContext);
     const { RNImagePickerError } = errors();
     const [dialogVisible, setDialogVisible] = useState(false);
     const [openDropDown, setOpenDropDown] = useState(false);
@@ -177,18 +177,11 @@ const GoalCreationScreen = ({ navigation }) => {
                 </View>
                 <View style={GroupCreationStyle.footer}>
                     <View style={GroupCreationStyle.imageView}>
-                        <Image
-                            source={
-                                require('../assets/images/group.png')
-                                // !groupData.isImage
-                                //     ? goalCreationStore.image === '' ||
-                                //       goalCreationStore.image.startsWith('../../assets')
-                                //         ? { uri: 'https://placehold.jp/150x150.png' }
-                                //         : { uri: goalCreationStore.image }
-                                //     : { uri: groupData.image }
-                            }
-                            style={GroupCreationStyle.image}
-                        />
+                        {groupData.imageUri.startsWith('../assets/') ? (
+                            <Image source={require('../assets/images/group.png')} style={GroupCreationStyle.image} />
+                        ) : (
+                            <Image source={{ uri: groupData.imageUri }} style={GroupCreationStyle.image} />
+                        )}
                     </View>
                     <View style={GroupCreationStyle.imageView}>
                         <TouchableOpacity

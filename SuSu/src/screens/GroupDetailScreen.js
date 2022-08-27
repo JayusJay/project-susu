@@ -9,7 +9,7 @@ import GroupDetailStyle from '../styles/groupDetailStyle';
 
 const GroupDetailScreen = ({ route, navigation }) => {
     const { imageUri, name, members, seedMoneyPerMember, frequency } = route.params;
-    const totalSeedMoney = members.length * seedMoneyPerMember;
+    const totalSeedMoney = members.map((member) => member.seedMoney).reduce((a, b) => a + b);
     const options = {
         title: 'Share via ',
         url: 'https://www.google.com/',
@@ -60,20 +60,7 @@ const GroupDetailScreen = ({ route, navigation }) => {
                         />
                     </TouchableOpacity>
                 </View>
-                {/* <View style={GroupDetailStyle.detailsComponentView}>
-                    <Text style={GroupDetailStyle.detailsComponentView.descriptionText}>Image</Text>
-                    <TouchableOpacity
-                        style={[GroupDetailStyle.detailsComponentView.touchableOpacity, { paddingLeft: 20 }]}
-                        onPress={() => {}}
-                    >
-                        <EvilIcons
-                            name="chevron-right"
-                            size={30}
-                            color="#8A8A8A"
-                            style={GroupDetailStyle.detailsComponentView.touchableOpacity.evilIcon}
-                        />
-                    </TouchableOpacity>
-                </View> */}
+
                 <View style={GroupDetailStyle.detailsComponentView}>
                     <Text style={GroupDetailStyle.detailsComponentView.descriptionText}>Size</Text>
                     <Text style={GroupDetailStyle.detailsComponentView.countText}>{members.length}</Text>
@@ -99,7 +86,13 @@ const GroupDetailScreen = ({ route, navigation }) => {
                         <View style={GroupDetailStyle.detailsComponentView} key={index}>
                             <View style={GroupDetailStyle.detailsComponentView.innerView}>
                                 <Image
-                                    source={item.image}
+                                    source={
+                                        item.image == ''
+                                            ? {
+                                                  uri: 'https://www.shareicon.net/data/512x512/2016/08/01/822711_user_512x512.png',
+                                              }
+                                            : { uri: item.image }
+                                    }
                                     style={GroupDetailStyle.detailsComponentView.innerView.image}
                                 />
                                 <Text style={GroupDetailStyle.detailsComponentView.descriptionText}>{item.name}</Text>

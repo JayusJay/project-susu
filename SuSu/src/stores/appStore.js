@@ -4,22 +4,31 @@ import firestore from '@react-native-firebase/firestore';
 //import storage from '@react-native-firebase/storage';
 
 class AppStore {
-    user = null;
+    //user = null;
     investmentGroups = [];
     constructor() {
         makeObservable(this, {
-            user: observable,
+            //user: observable,
             investmentGroups: observable,
             setStateValue: action,
+            resetValues: action,
         });
-        this.user = auth().currentUser;
+        // this.user = auth().currentUser;
     }
     setStateValue(state, value) {
         this[state] = value;
     }
+    // resetValues = () => {
+    //     this.name = '';
+    //     this.seedMoney = '0';
+    //     this.imageUri = '';
+    //     this.frequency = null;
+    //     //this.user = null;
+    //     this.investmentGroups = [];
+    // };
     getUserData = async () => {
         try {
-            const userData = await firestore().collection('users').doc(this.user.uid).get();
+            const userData = await firestore().collection('users').doc(auth().currentUser.uid).get();
             console.log('userData: ', userData.data());
             return userData.data();
         } catch (error) {
@@ -28,21 +37,14 @@ class AppStore {
     };
     getInvestmentGroups = async () => {
         try {
-            const groups = await firestore()
-                .collection('investmentGroups')
-                //.where('members', 'array-contains', this.user.uid)
-                .where('members', 'array-contains', {
-                    imageUri: this.user.imageUri,
-                    name: this.user.firstName,
-                    phoneNumber: this.user.phoneNumber,
-                    seedMoney: '0',
-                    uid: this.user.uid,
-                })
-                .get();
-            groups.docs.map((doc) => {
-                this.setStateValue('investmentGroups', [...this.investmentGroups, doc.data()]);
+            if (this.investmentGroups.length > 0) this.setStateValue('investmentGroups', []);
+            const userData = await this.getUserData();
+            if (userData.groups === undefined) return;
+            userData.groups.map(async (groupID) => {
+                const groups = await firestore().collection('investmentGroups').doc(groupID).get();
+                this.setStateValue('investmentGroups', [...this.investmentGroups, groups.data()]);
             });
-            //return this.investmentGroups;
+            //console.log('investmentGroups: ', this.investmentGroups);
         } catch (error) {
             console.log('getGroups error: ', error);
         }

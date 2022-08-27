@@ -37,27 +37,29 @@ class GroupCreation {
     //fetch data of person joining group to add to members array in group doc
     setGroupMemberData = async () => {
         let groupMembers = [];
+        let memberIDs = [];
 
         let user = await firestore().collection('users').doc(auth().currentUser.uid).get();
         let userData = user.data();
         groupMembers.push({
-            uid: auth().currentUser.uid,
             phoneNumber: userData.phoneNumber,
             name: userData.firstName,
             imageUri: userData.imageUri,
             seedMoney: '0',
         });
-        return groupMembers;
+        memberIDs.push(auth().currentUser.uid);
+        return { groupMembers, memberIDs };
     };
     createGroup = async () => {
         try {
             const cloudStorageURL = await this.uploadImage();
-            const groupMembers = await this.setGroupMemberData();
+            const { groupMembers, memberIDs } = await this.setGroupMemberData();
             const group = await firestore().collection('investmentGroups').add({
                 name: this.name,
-                seedMoney: this.seedMoney,
+                seedMoneyPerMember: this.seedMoney,
                 imageUri: cloudStorageURL,
                 members: groupMembers,
+                memberIDs: memberIDs,
                 frequency: this.frequency,
                 createdBy: auth().currentUser.uid,
                 createdAt: firestore.FieldValue.serverTimestamp(),

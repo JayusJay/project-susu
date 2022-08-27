@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Text, ImageBackground, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { AuthContext } from '../services/AuthContext';
@@ -11,10 +11,6 @@ const CustomDrawer = (props) => {
     return (
         <View style={customDrawerStyle.view1}>
             <DrawerContentScrollView {...props} contentContainerStyle={{ backgroundColor: '#7966FF' }}>
-                {/* <ImageBackground
-                    source={require('../assets/images/background1.jpg')}
-                    style={customDrawerStyle.backgroundImage}
-                > */}
                 <View style={customDrawerStyle.imageView}>
                     <Image source={require('../assets/images/profile.jpg')} style={customDrawerStyle.image} />
                     <View style={customDrawerStyle.imageView.innerView}>
@@ -22,7 +18,6 @@ const CustomDrawer = (props) => {
                         <Text style={customDrawerStyle.imageView.innerView.nameText}>Jonathan</Text>
                     </View>
                 </View>
-                {/* </ImageBackground> */}
                 <View style={customDrawerStyle.view2}>
                     <DrawerItemList {...props} />
                 </View>
