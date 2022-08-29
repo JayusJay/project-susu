@@ -11,7 +11,7 @@ class AppStore {
             //user: observable,
             investmentGroups: observable,
             setStateValue: action,
-            resetValues: action,
+            //resetValues: action,
         });
         // this.user = auth().currentUser;
     }

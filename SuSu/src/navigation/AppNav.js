@@ -7,14 +7,22 @@ import AuthStack from './AuthStack';
 import AppStack from './AppStack';
 import NewUserOnBoardingNav from './NewUserOnBoardingNav';
 import LoadingScreen from '../screens/LoadingScreen';
-
+import config from '../utils/linkingConfig';
+const linking = {
+    prefixes: [
+        'susu://',
+        /* your linking prefixes */
+        /*adb shell am start -W -a android.intent.action.VIEW -d "susu://drawer/home/savings" com.susu*/
+    ],
+    config,
+};
 const AppNav = observer(() => {
     const { newUserOnBoardingStore } = useContext(AppStoreContext);
     const { loading, user } = useContext(AuthContext);
 
     if (loading || newUserOnBoardingStore.onBoarded === null) return <LoadingScreen />;
     return (
-        <NavigationContainer>
+        <NavigationContainer linking={linking}>
             {user ? newUserOnBoardingStore.onBoarded ? <AppStack /> : <NewUserOnBoardingNav /> : <AuthStack />}
         </NavigationContainer>
     );

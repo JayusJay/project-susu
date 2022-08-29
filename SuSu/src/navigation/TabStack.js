@@ -23,7 +23,7 @@ const TabStack = () => {
             }}
         >
             <tabStack.Screen
-                name="Tab-Home"
+                name="TabHome"
                 component={HomeScreen}
                 options={{
                     tabBarIcon: ({ color }) => <Ionicons name="home-outline" color={color} size={27} />,
