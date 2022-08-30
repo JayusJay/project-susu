@@ -11,6 +11,11 @@ const GroupComponentStyle = StyleSheet.create({
             height: 50,
             borderRadius: 30,
         },
+        noGroupsText: {
+            color: '#7966FF',
+            fontSize: 20,
+            textAlign: 'center',
+        },
         innerView: {
             flexDirection: 'row',
             justifyContent: 'space-between',

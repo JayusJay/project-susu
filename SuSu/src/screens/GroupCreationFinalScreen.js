@@ -1,22 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Share from 'react-native-share';
 import Dialog from 'react-native-dialog';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { AppStoreContext } from '../services/AppStoreContext';
 import GroupCreationFinalStyle from '../styles/groupCreationFinalStyle';
 
-const GroupCreationFinalScreen = ({ navigation }) => {
+const GroupCreationFinalScreen = ({ navigation, route }) => {
+    const { appStore } = useContext(AppStoreContext);
+    const groupLink = route.params.groupLink;
+    //console.log('GroupLink', groupLink);
     const options = {
         title: 'Share via ',
-        url: 'https://www.google.com/',
-        message: `Jayus is inviting you to invest with them on SaveApp. Join them now!`,
+        url: groupLink,
+        message: `${appStore.userData.firstName} is inviting you to invest with them on SaveApp. Join them now!`,
     };
     const onShare = () => {
         Share.open(options)
             .then((res) => {
                 console.log(res);
+                navigation.goBack();
             })
             .catch((err) => {
                 console.log(err);

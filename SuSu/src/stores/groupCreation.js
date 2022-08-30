@@ -8,12 +8,14 @@ class GroupCreation {
     seedMoney = '0';
     imageUri = '';
     frequency = null;
+    groupLink = '';
     constructor() {
         makeObservable(this, {
             name: observable,
             seedMoney: observable,
             imageUri: observable,
             frequency: observable,
+            groupLink: observable,
             setStateValue: action,
         });
     }
@@ -71,11 +73,53 @@ class GroupCreation {
                 .update({
                     groups: firestore.FieldValue.arrayUnion(group.id),
                 });
+            this.setStateValue('groupLink', `susu://join-group/${group.id}`);
+            //groupLink = 'susu://join-group/' + group.id;
             return true;
         } catch (error) {
             console.log('createGroup error: ', error);
             return false;
         }
     };
+    //the user must be logged in to join a group
+    addGroupMember = async (groupID) => {
+        try {
+            const group = await firestore().collection('investmentGroups').doc(groupID).get();
+            const groupData = group.data();
+            if (groupData.memberIDs.includes(auth().currentUser.uid)) return false;
+            const { groupMembers, memberIDs } = await this.setGroupMemberData();
+            const newMembers = [...groupData.members, ...groupMembers];
+            const newMemberIDs = [...groupData.memberIDs, ...memberIDs];
+            await firestore().collection('investmentGroups').doc(groupID).update({
+                members: newMembers,
+                memberIDs: newMemberIDs,
+            });
+            //a3ActxF0Bwws9TVdl4wB;
+            await firestore()
+                .collection('users')
+                .doc(auth().currentUser.uid)
+                .update({
+                    groups: firestore.FieldValue.arrayUnion(groupID),
+                });
+            //console.log('addGroupMember success');
+            return true;
+        } catch (error) {
+            console.log('addGroupMember error: ', error);
+            return false;
+        }
+    };
+    // addGroupMember = async (groupID, userID) => {
+    //     try {
+    //         const group = await firestore().collection('investmentGroups').doc(groupID).get();
+    //         const groupData = group.data();
+    //         const newMembers = [...groupData.members, userID];
+    //         await firestore().collection('investmentGroups').doc(groupID).update({
+    //             members: newMembers,
+    //         });
+    //
+    //     } catch (error) {
+    //         console.log('addGroupMember error: ', error);
+    //     }
+    // };
 }
 export default GroupCreation;

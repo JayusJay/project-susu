@@ -3,10 +3,12 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { AuthContext } from '../services/AuthContext';
+import { AppStoreContext } from '../services/AppStoreContext';
 import customDrawerStyle from '../styles/customDrawerStyle';
 
 const CustomDrawer = (props) => {
     const { loginValidation } = useContext(AuthContext);
+    const { appStore } = useContext(AppStoreContext);
     const { handleLogOut } = loginValidation();
     return (
         <View style={customDrawerStyle.view1}>
@@ -15,7 +17,9 @@ const CustomDrawer = (props) => {
                     <Image source={require('../assets/images/profile.jpg')} style={customDrawerStyle.image} />
                     <View style={customDrawerStyle.imageView.innerView}>
                         <Text style={customDrawerStyle.imageView.innerView.greetingText}>Welcome back,</Text>
-                        <Text style={customDrawerStyle.imageView.innerView.nameText}>Jonathan</Text>
+                        <Text style={customDrawerStyle.imageView.innerView.nameText}>
+                            {appStore.userData.firstName}
+                        </Text>
                     </View>
                 </View>
                 <View style={customDrawerStyle.view2}>

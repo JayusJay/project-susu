@@ -8,7 +8,7 @@ const GoalComponent = ({ navigation, data }) => {
         <TouchableOpacity
             key={index}
             onPress={() => {
-                navigation.navigate('Goal Detail', item); //passing data to GoalDetailScreen
+                navigation.navigate('GoalDetail', item); //passing data to GoalDetailScreen
             }}
         >
             <View style={GoalComponentStyle.container}>

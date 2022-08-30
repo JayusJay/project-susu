@@ -85,11 +85,11 @@ const GoalCreationScreen = ({ navigation }) => {
             groupCreationStore.setStateValue('seedMoney', groupData.seedAmount);
             groupCreationStore.setStateValue('frequency', groupData.frequency);
             setAppLoading(true);
-            let value = await groupCreationStore.createGroup();
+            const value = await groupCreationStore.createGroup();
             if (value) {
                 setAppLoading(false);
                 appStore.getInvestmentGroups();
-                navigation.navigate('Group Creation Final');
+                navigation.navigate('GroupCreationFinal', { groupLink: groupCreationStore.groupLink });
             } else {
                 Snackbar.show({
                     text: 'Group creation failed',

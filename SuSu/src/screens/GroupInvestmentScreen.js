@@ -45,7 +45,7 @@ const GroupInvestmentScreen = observer(({ navigation }) => {
                         <View style={GroupInvestmentStyle.createGroupView.buttonView}>
                             <TouchableOpacity
                                 onPress={() => {
-                                    navigation.navigate('Group Creation');
+                                    navigation.navigate('GroupCreation');
                                 }}
                             >
                                 <Feather name="plus" size={25} color="#177AD5" style={{ padding: 12 }} />

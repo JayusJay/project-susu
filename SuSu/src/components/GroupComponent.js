@@ -9,9 +9,7 @@ const GroupComponent = ({ navigation, data }) => {
     if (data.length === 0) {
         return (
             <View>
-                <Text style={{ color: '#7966FF', fontSize: 25, textAlign: 'center' }}>
-                    You have no groups at the moment
-                </Text>
+                <Text style={GroupComponentStyle.container.noGroupsText}>You have no groups at the moment</Text>
             </View>
         );
     }
@@ -19,7 +17,7 @@ const GroupComponent = ({ navigation, data }) => {
         <View key={index} style={[GroupComponentStyle.container, { width: width - 40 }]}>
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate('Group Detail', item);
+                    navigation.navigate('GroupDetail', item);
                 }}
             >
                 <View style={GroupComponentStyle.container.innerView}>

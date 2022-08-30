@@ -8,6 +8,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { BarChart } from 'react-native-gifted-charts';
 import Carousel from 'react-native-reanimated-carousel';
 import { CircularProgressBase } from 'react-native-circular-progress-indicator';
+import { observer } from 'mobx-react';
 import { AppStoreContext } from '../services/AppStoreContext';
 import HomeStyle from '../styles/homeStyle';
 import barData from '../assets/bardata';
@@ -24,16 +25,12 @@ const cards = [
     },
 ];
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = observer(({ navigation }) => {
     const { appStore } = useContext(AppStoreContext);
     const { width } = useWindowDimensions();
     const renderBanner = ({ item, index }) => {
         return <BannerSlider data={item} />;
     };
-    // (async function a() {
-    //     await appStore.getGroups();
-    //     await appStore.getUserData();
-    // })();
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -42,7 +39,9 @@ const HomeScreen = ({ navigation }) => {
                     <View style={HomeStyle.profileView}>
                         <View>
                             <Text style={HomeStyle.headerText}>Hi,</Text>
-                            <Text style={{ fontSize: 30, color: '#fff', fontWeight: '800' }}>Jayus</Text>
+                            <Text style={{ fontSize: 30, color: '#fff', fontWeight: '800' }}>
+                                {appStore.userData.firstName}
+                            </Text>
                         </View>
                         <TouchableOpacity
                             onPress={() => {
@@ -180,5 +179,5 @@ const HomeScreen = ({ navigation }) => {
             </SafeAreaView>
         </ScrollView>
     );
-};
+});
 export default HomeScreen;

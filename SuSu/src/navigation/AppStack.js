@@ -8,6 +8,7 @@ import GroupDetailScreen from '../screens/GroupDetailScreen';
 import GroupCreationScreen from '../screens/GroupCreationScreen';
 import GroupCreationFinalScreen from '../screens/GroupCreationFinalScreen';
 import GoalCreationNav from './GoalCreationNav';
+import JoinGroupScreen from '../screens/JoinGroupScreen';
 
 const appStack = createNativeStackNavigator();
 
@@ -15,20 +16,21 @@ const AppStack = () => {
     return (
         <appStack.Navigator>
             <appStack.Screen component={DrawerStack} name="Drawer" options={{ headerShown: false }} />
-            <appStack.Screen component={GoalDetailScreen} name="Goal Detail" options={{ headerShown: false }} />
-            <appStack.Screen component={GroupDetailScreen} name="Group Detail" options={{ headerShown: false }} />
-            <appStack.Screen
+            <appStack.Screen component={GoalDetailScreen} name="GoalDetail" options={{ headerShown: false }} />
+            <appStack.Screen component={GroupDetailScreen} name="GroupDetail" options={{ headerShown: false }} />
+            {/* <appStack.Screen
                 component={GroupInvestmentScreen}
                 name="Group Investment"
                 options={{ headerShown: false }}
-            />
-            <appStack.Screen component={GroupCreationScreen} name="Group Creation" options={{ headerShown: false }} />
+            /> */}
+            <appStack.Screen component={GroupCreationScreen} name="GroupCreation" options={{ headerShown: false }} />
             <appStack.Screen
                 component={GroupCreationFinalScreen}
-                name="Group Creation Final"
+                name="GroupCreationFinal"
                 options={{ headerShown: false }}
             />
-            <appStack.Screen component={GoalCreationNav} name="Goal Creation Nav" options={{ headerShown: false }} />
+            <appStack.Screen component={GoalCreationNav} name="GoalCreationNav" options={{ headerShown: false }} />
+            <appStack.Screen component={JoinGroupScreen} name="JoinGroup" options={{ headerShown: false }} />
         </appStack.Navigator>
     );
 };

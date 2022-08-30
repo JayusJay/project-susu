@@ -45,12 +45,28 @@ const config = {
             },
         },
 
-        // GoalDetail: 'goal/:id',
-        // GroupDetail: 'group/:id',
-        // GroupInvestment: 'group/:id/investment',
-        // GroupCreation: 'create-group',
-        // GroupCreationFinal: 'create-group/final',
-        // GoalCreationNav: 'create-goal',
+        GoalDetail: {
+            path: 'goal/:id',
+            parse: {
+                id: (id) => `${id}`,
+            },
+        },
+        GroupDetail: {
+            path: 'group/:id',
+            parse: {
+                id: (id) => `${id}`,
+            },
+        },
+        GroupInvestment: 'group/:id/investment',
+        GroupCreation: 'create-group',
+        GroupCreationFinal: 'create-group/final',
+        GoalCreationNav: 'create-goal',
+        JoinGroup: {
+            path: 'join-group/:id',
+            parse: {
+                id: (id) => `${id}`,
+            },
+        },
         OnBoarding: 'onboarding',
         Login: 'login',
         Register: 'register',

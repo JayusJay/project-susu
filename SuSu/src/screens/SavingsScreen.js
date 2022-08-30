@@ -42,7 +42,7 @@ const SavingsScreen = ({ navigation }) => {
                         <View style={SavingsStyle.createGoalView.buttonView}>
                             <TouchableOpacity
                                 onPress={() => {
-                                    navigation.navigate('Goal Creation Nav');
+                                    navigation.navigate('GoalCreationNav');
                                 }}
                             >
                                 <Feather name="plus" size={25} color="#177AD5" style={{ padding: 12 }} />

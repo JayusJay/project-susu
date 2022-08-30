@@ -40,7 +40,7 @@ const DrawerStack = () => {
                 }}
             />
             <drawerStack.Screen
-                name="How it works"
+                name="HowItWorks"
                 component={KnowledgeScreen}
                 options={{
                     drawerIcon: ({ color }) => <Ionicons name="book-outline" color={color} size={20} />,
