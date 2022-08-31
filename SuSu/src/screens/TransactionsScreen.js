@@ -3,18 +3,9 @@ import { Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import transactionData from '../assets/transactionData';
+import formatDate from '../utils/formatData';
 import TransactionStyle from '../styles/transactionStyle';
 
-const formatDate = (timestamp) => {
-    const date = new Date(timestamp);
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const hour = date.getHours();
-    const minute = date.getMinutes();
-    const second = date.getSeconds();
-    return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
-};
 const transactionMessage = (
     transactionID,
     transactionType,

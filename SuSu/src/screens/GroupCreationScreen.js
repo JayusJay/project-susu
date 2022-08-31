@@ -17,10 +17,11 @@ import Snackbar from 'react-native-snackbar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { observer } from 'mobx-react';
 import { AppStoreContext } from '../services/AppStoreContext';
 import errors from '../utils/errors';
 import GroupCreationStyle from '../styles/groupCreationStyle';
-import groupData1 from '../assets/groupData';
+import CalendarComponent from '../components/CalendarComponent';
 import LoadingScreen from './LoadingScreen';
 
 const photoOptions = {
@@ -37,7 +38,7 @@ const dropDownData = [
     { label: 'Quarterly', value: '90' },
     { label: 'Semi-annual', value: '180' },
 ];
-const GoalCreationScreen = ({ navigation }) => {
+const GoalCreationScreen = observer(({ navigation }) => {
     const { appStore, groupCreationStore, appLoading, setAppLoading } = useContext(AppStoreContext);
     const { RNImagePickerError } = errors();
     const [dialogVisible, setDialogVisible] = useState(false);
@@ -74,6 +75,14 @@ const GoalCreationScreen = ({ navigation }) => {
         if (groupData.imageUri.startsWith('../assets/')) {
             Snackbar.show({
                 text: 'Please select an image for the group',
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor: 'red',
+            });
+            return;
+        }
+        if (groupCreationStore.startDate === null) {
+            Snackbar.show({
+                text: 'Please select a start date for the group',
                 duration: Snackbar.LENGTH_LONG,
                 backgroundColor: 'red',
             });
@@ -210,9 +219,11 @@ const GoalCreationScreen = ({ navigation }) => {
                             }}
                         />
                     </View>
-                    {!groupData.isName ? <Text style={{ color: 'red' }}>Please enter a valid name</Text> : null}
+                    {!groupData.isName ? (
+                        <Text style={GroupCreationStyle.textInputView.errorText}>Please enter a valid name</Text>
+                    ) : null}
 
-                    <View style={[GroupCreationStyle.textInputView, { marginBottom: 20 }]}>
+                    <View style={GroupCreationStyle.textInputView}>
                         <Text style={GroupCreationStyle.textInputView.cediSymbol}>{'\u20B5'}</Text>
                         <TextInput
                             underlineColorAndroid="transparent"
@@ -223,7 +234,7 @@ const GoalCreationScreen = ({ navigation }) => {
                             }}
                             placeholderTextColor="#8A8A8A"
                             keyboardType="numeric"
-                            style={[GroupCreationStyle.textInputView.textInput]}
+                            style={GroupCreationStyle.textInputView.textInput}
                             onBlur={() => {
                                 groupData.seedAmount === 0 || groupData.seedAmount === ''
                                     ? setGroupData({ ...groupData, seedAmount: 0, isSeedAmount: false })
@@ -232,9 +243,11 @@ const GoalCreationScreen = ({ navigation }) => {
                         />
                     </View>
                     {!groupData.isSeedAmount ? (
-                        <Text style={{ color: 'red' }}>Please enter a valid seed amount</Text>
+                        <Text style={GroupCreationStyle.textInputView.errorText}>Please enter a valid seed amount</Text>
                     ) : null}
-
+                    <Text style={GroupCreationStyle.textInputView.dropDownView.container.descriptionText}>
+                        Select savings frequency. Eg: Each month
+                    </Text>
                     <View style={GroupCreationStyle.textInputView.dropDownView.container}>
                         {groupData.frequency || openDropDown ? (
                             <Text
@@ -260,7 +273,7 @@ const GoalCreationScreen = ({ navigation }) => {
                             maxHeight={300}
                             labelField="label"
                             valueField="value"
-                            placeholder={!openDropDown ? 'Savings cycle' : '...'}
+                            placeholder={!openDropDown ? 'Savings frequency' : '...'}
                             value={groupData.frequency}
                             onFocus={() => setOpenDropDown(true)}
                             onBlur={() => setOpenDropDown(false)}
@@ -278,6 +291,9 @@ const GoalCreationScreen = ({ navigation }) => {
                             )}
                         />
                     </View>
+
+                    <CalendarComponent />
+
                     <TouchableOpacity
                         onPress={() => {
                             handleButton();
@@ -331,5 +347,5 @@ const GoalCreationScreen = ({ navigation }) => {
             </SafeAreaView>
         </ScrollView>
     );
-};
+});
 export default GoalCreationScreen;

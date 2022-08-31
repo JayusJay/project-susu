@@ -57,9 +57,11 @@ const GroupCreationStyle = StyleSheet.create({
     },
     textInputView: {
         flexDirection: 'row',
+        marginLeft: 20,
+        marginRight: 20,
         borderBottomWidth: 0.5,
         borderColor: '#8A8A8A',
-        marginTop: 30,
+        marginTop: 20,
         cediSymbol: {
             color: '#7966FF',
             fontSize: 25,
@@ -69,11 +71,24 @@ const GroupCreationStyle = StyleSheet.create({
         },
         textInput: {
             color: '#000',
+            flex: 1,
+        },
+        errorText: {
+            color: 'red',
+            marginLeft: 20,
         },
         dropDownView: {
             container: {
-                backgroundColor: 'white',
+                backgroundColor: 'fff',
                 padding: 16,
+                descriptionText: {
+                    marginLeft: 20,
+                    marginTop: 30,
+                    marginBottom: -10,
+                    color: '#7966FF',
+                    paddingBottom: 10,
+                    fontSize: 16,
+                },
             },
             dropdown: {
                 height: 50,

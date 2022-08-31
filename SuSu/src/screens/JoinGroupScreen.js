@@ -11,7 +11,6 @@ import JoinGroupStyle from '../styles/joinGroupStyle';
 
 const JoinGroupScreen = ({ navigation, route }) => {
     const { groupCreationStore, appLoading, setAppLoading } = useContext(AppStoreContext);
-    //console.log('ID', route.params.id);
     const groupID = route.params.id;
 
     if (appLoading) return <LoadingScreen />;

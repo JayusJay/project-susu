@@ -22,6 +22,10 @@ class AppStore {
         this.userData = null;
         this.investmentGroups = [];
     };
+
+    getServerTime = () => {
+        return firestore.Timestamp.now();
+    };
     getUserData = async () => {
         try {
             const userData = await firestore().collection('users').doc(auth().currentUser.uid).get();
@@ -44,6 +48,5 @@ class AppStore {
             console.log('getGroups error: ', error);
         }
     };
-    
 }
 export default AppStore;

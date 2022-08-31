@@ -8,11 +8,11 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import GroupDetailStyle from '../styles/groupDetailStyle';
 
 const GroupDetailScreen = ({ route, navigation }) => {
-    const { imageUri, name, members, seedMoneyPerMember, frequency } = route.params;
+    const { imageUri, name, members, seedMoneyPerMember, frequency, groupLink } = route.params;
     const totalSeedMoney = members.map((member) => member.seedMoney).reduce((a, b) => a + b);
     const options = {
         title: 'Share via ',
-        url: 'https://www.google.com/',
+        url: groupLink,
         message: `${members[0].name} is inviting you to invest with them on SaveApp. Join them now!`,
     };
     const onShare = () => {

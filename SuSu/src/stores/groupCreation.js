@@ -8,6 +8,7 @@ class GroupCreation {
     seedMoney = '0';
     imageUri = '';
     frequency = null;
+    startDate = null;
     groupLink = '';
     constructor() {
         makeObservable(this, {
@@ -15,6 +16,7 @@ class GroupCreation {
             seedMoney: observable,
             imageUri: observable,
             frequency: observable,
+            startDate: observable,
             groupLink: observable,
             setStateValue: action,
         });
@@ -25,11 +27,10 @@ class GroupCreation {
     uploadImage = async () => {
         try {
             console.log('local imageUri: ', this.imageUri);
-            const reference = `groupImages/${this.imageUri.split('/').pop()}`;
-            const imageRef = storage().ref(reference); //pick the last part of the image uri
+            const reference = `groupImages/${this.imageUri.split('/').pop()}`; //pick the last part of the image uri
+            const imageRef = storage().ref(reference);
             await imageRef.putFile(this.imageUri);
             const url = await imageRef.getDownloadURL();
-            console.log('cloud bucket url: ', url);
             return url;
         } catch (error) {
             console.log('uploadImage error: ', error);
@@ -63,6 +64,7 @@ class GroupCreation {
                 members: groupMembers,
                 memberIDs: memberIDs,
                 frequency: this.frequency,
+                startDate: this.startDate,
                 createdBy: auth().currentUser.uid,
                 createdAt: firestore.FieldValue.serverTimestamp(),
                 updatedAt: firestore.FieldValue.serverTimestamp(),
@@ -73,8 +75,13 @@ class GroupCreation {
                 .update({
                     groups: firestore.FieldValue.arrayUnion(group.id),
                 });
+            await firestore()
+                .collection('investmentGroups')
+                .doc(group.id)
+                .update({
+                    groupLink: `susu://join-group/${group.id}`,
+                });
             this.setStateValue('groupLink', `susu://join-group/${group.id}`);
-            //groupLink = 'susu://join-group/' + group.id;
             return true;
         } catch (error) {
             console.log('createGroup error: ', error);
@@ -108,18 +115,5 @@ class GroupCreation {
             return false;
         }
     };
-    // addGroupMember = async (groupID, userID) => {
-    //     try {
-    //         const group = await firestore().collection('investmentGroups').doc(groupID).get();
-    //         const groupData = group.data();
-    //         const newMembers = [...groupData.members, userID];
-    //         await firestore().collection('investmentGroups').doc(groupID).update({
-    //             members: newMembers,
-    //         });
-    //
-    //     } catch (error) {
-    //         console.log('addGroupMember error: ', error);
-    //     }
-    // };
 }
 export default GroupCreation;
