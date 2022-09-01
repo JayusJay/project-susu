@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { AuthContext } from '../services/AuthContext';
@@ -18,7 +18,11 @@ const CustomDrawer = (props) => {
                     <View style={customDrawerStyle.imageView.innerView}>
                         <Text style={customDrawerStyle.imageView.innerView.greetingText}>Welcome back,</Text>
                         <Text style={customDrawerStyle.imageView.innerView.nameText}>
-                            {appStore.userData.firstName}
+                            {appStore.userData === null ? (
+                                <ActivityIndicator size="small" color="#7966FF" />
+                            ) : (
+                                appStore.userData.firstName
+                            )}
                         </Text>
                     </View>
                 </View>

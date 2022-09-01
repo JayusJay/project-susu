@@ -13,7 +13,6 @@ class AppStore {
             setStateValue: action,
             resetValues: action,
         });
-        this.getUserData();
     }
     setStateValue(state, value) {
         this[state] = value;
@@ -22,7 +21,6 @@ class AppStore {
         this.userData = null;
         this.investmentGroups = [];
     };
-
     getServerTime = () => {
         return firestore.Timestamp.now();
     };

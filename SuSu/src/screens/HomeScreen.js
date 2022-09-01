@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView, useWindowDimensions } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView, useWindowDimensions, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -13,6 +13,7 @@ import { AppStoreContext } from '../services/AppStoreContext';
 import HomeStyle from '../styles/homeStyle';
 import barData from '../assets/bardata';
 import BannerSlider from '../components/BannerSlider';
+import LoadingScreen from './LoadingScreen';
 
 const cards = [
     {
@@ -28,6 +29,9 @@ const cards = [
 const HomeScreen = observer(({ navigation }) => {
     const { appStore } = useContext(AppStoreContext);
     const { width } = useWindowDimensions();
+    useEffect(() => {
+        appStore.getUserData();
+    }, []);
     const renderBanner = ({ item, index }) => {
         return <BannerSlider data={item} />;
     };
@@ -40,7 +44,11 @@ const HomeScreen = observer(({ navigation }) => {
                         <View>
                             <Text style={HomeStyle.headerText}>Hi,</Text>
                             <Text style={{ fontSize: 30, color: '#fff', fontWeight: '800' }}>
-                                {appStore.userData.firstName}
+                                {appStore.userData === null ? (
+                                    <ActivityIndicator size="small" color="#FFF" />
+                                ) : (
+                                    appStore.userData.firstName
+                                )}
                             </Text>
                         </View>
                         <TouchableOpacity
@@ -113,7 +121,7 @@ const HomeScreen = observer(({ navigation }) => {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 onPress={() => {
-                                    navigation.navigate('Goal Creation Nav', { screen: 'GoalSelection' });
+                                    navigation.navigate('GoalCreationNav', { screen: 'GoalSelection' });
                                 }}
                             >
                                 <CircularProgressBase {...HomeStyle.CircularProgressBaseSavingProps} value={70}>

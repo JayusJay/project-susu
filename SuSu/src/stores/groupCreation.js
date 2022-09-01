@@ -45,8 +45,9 @@ class GroupCreation {
         let user = await firestore().collection('users').doc(auth().currentUser.uid).get();
         let userData = user.data();
         groupMembers.push({
+            uid: auth().currentUser.uid,
             phoneNumber: userData.phoneNumber,
-            name: userData.firstName,
+            name: `${userData.firstName} ${userData.lastName}`,
             imageUri: userData.imageUri,
             seedMoney: '0',
         });

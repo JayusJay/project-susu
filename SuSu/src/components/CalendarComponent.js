@@ -8,8 +8,9 @@ import CalendarStyle from '../styles/calendarComponentStyle';
 const CalendarComponent = () => {
     const { appStore, groupCreationStore } = useContext(AppStoreContext);
     let initialDate = appStore.getServerTime().toDate();
+    console.log('initial Date from server: ', initialDate);
+    console.log('checking Date: ', formatDate(initialDate));
     initialDate = formatDate(initialDate).slice(0, 10);
-
     const [selected, setSelected] = useState(initialDate);
 
     const getDate = (count) => {
@@ -21,7 +22,7 @@ const CalendarComponent = () => {
     const onDayPress = useCallback((day) => {
         setSelected(day.dateString);
         groupCreationStore.setStateValue('startDate', day.dateString);
-        console.log('selected day:', day.dateString);
+        //console.log('selected day:', day.dateString);
     }, []);
 
     const marked = useMemo(() => {

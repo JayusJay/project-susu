@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Text, ScrollView, View, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -7,7 +7,7 @@ import { observer } from 'mobx-react';
 import { AppStoreContext } from '../services/AppStoreContext';
 //import { AuthContext } from '../services/AuthContext';
 import GroupComponent from '../components/GroupComponent';
-import groupData from '../assets/groupData';
+//import groupData from '../assets/groupData';
 import GroupInvestmentStyle from '../styles/groupInvestmentStyle';
 
 //let dummy = [];

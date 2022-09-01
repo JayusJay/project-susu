@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { NavigationContainer } from '@react-navigation/native';
 import { AuthContext } from '../services/AuthContext';
@@ -19,6 +19,12 @@ const linking = {
 const AppNav = observer(() => {
     const { newUserOnBoardingStore } = useContext(AppStoreContext);
     const { loading, user } = useContext(AuthContext);
+
+    useEffect(() => {
+        if (user) {
+            newUserOnBoardingStore.checkOnBoarded();
+        }
+    }, [user]);
 
     if (loading || newUserOnBoardingStore.onBoarded === null) return <LoadingScreen />;
     return (

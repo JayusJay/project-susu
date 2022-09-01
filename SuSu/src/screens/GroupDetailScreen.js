@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Share from 'react-native-share';
 import Snackbar from 'react-native-snackbar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import TextTicker from 'react-native-text-ticker';
+import { AppStoreContext } from '../services/AppStoreContext';
 import GroupDetailStyle from '../styles/groupDetailStyle';
 
 const GroupDetailScreen = ({ route, navigation }) => {
-    const { imageUri, name, members, seedMoneyPerMember, frequency, groupLink } = route.params;
+    const [showBanner, setShowBanner] = useState(false);
+    const { appStore } = useContext(AppStoreContext);
+    const { imageUri, name, members, seedMoneyPerMember, frequency, groupLink, startDate } = route.params;
     const totalSeedMoney = members.map((member) => member.seedMoney).reduce((a, b) => a + b);
+    useEffect(() => {
+        for (let member of members) {
+            if (member.uid === appStore.userData.uid && member.seedMoney < seedMoneyPerMember) {
+                setShowBanner(true);
+                break;
+            }
+        }
+    }, []);
     const options = {
         title: 'Share via ',
         url: groupLink,
@@ -44,6 +56,20 @@ const GroupDetailScreen = ({ route, navigation }) => {
                         />
                     </TouchableOpacity>
                 </View>
+                {showBanner ? (
+                    <TextTicker
+                        style={{ color: 'red', fontSize: 16 }}
+                        duration={10000}
+                        //loop
+                        bounce
+                        scroll
+                        repeatSpacer={50}
+                        marqueeDelay={1000}
+                    >
+                        You are required to deposit {['\u20B5', seedMoneyPerMember]} to the group's vault as your seed
+                        money by the close of {startDate} to join this group.
+                    </TextTicker>
+                ) : null}
                 <View style={GroupDetailStyle.imageView}>
                     <Image source={{ uri: imageUri }} style={GroupDetailStyle.image} />
                 </View>
@@ -82,26 +108,27 @@ const GroupDetailScreen = ({ route, navigation }) => {
                 </View>
                 <Text style={GroupDetailStyle.subHeaderText}>Members</Text>
                 {members.length > 0 ? (
-                    members.map((item, index) => (
+                    members.map((member, index) => (
                         <View style={GroupDetailStyle.detailsComponentView} key={index}>
                             <View style={GroupDetailStyle.detailsComponentView.innerView}>
-                                <Image
-                                    source={
-                                        item.image == ''
-                                            ? {
-                                                  uri: 'https://www.shareicon.net/data/512x512/2016/08/01/822711_user_512x512.png',
-                                              }
-                                            : { uri: item.image }
-                                    }
-                                    style={GroupDetailStyle.detailsComponentView.innerView.image}
-                                />
-                                <Text style={GroupDetailStyle.detailsComponentView.descriptionText}>{item.name}</Text>
+                                {member.imageUri === '' ? (
+                                    <Image
+                                        source={require('../assets/images/profile.jpg')}
+                                        style={GroupDetailStyle.detailsComponentView.innerView.image}
+                                    />
+                                ) : (
+                                    <Image
+                                        source={{ uri: member.image }}
+                                        style={GroupDetailStyle.detailsComponentView.innerView.image}
+                                    />
+                                )}
+                                <Text style={GroupDetailStyle.detailsComponentView.descriptionText}>{member.name}</Text>
                             </View>
                             <TouchableOpacity
                                 style={GroupDetailStyle.detailsComponentView.touchableOpacity}
                                 onPress={() => {
                                     Snackbar.show({
-                                        text: `Name: ${item.name} \n\nSeed Money: \u20B5 ${item.seedMoney} \n\nRequired Seed Money: \u20B5 ${seedMoneyPerMember}`,
+                                        text: `Name: ${member.name} \n\nSeed Money: \u20B5 ${member.seedMoney} \n\nRequired Seed Money: \u20B5 ${seedMoneyPerMember}`,
                                         duration: Snackbar.LENGTH_INDEFINITE,
                                         numberOfLines: 10,
                                         action: {

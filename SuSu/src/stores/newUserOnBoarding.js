@@ -16,7 +16,7 @@ class NewUserOnBoardingStore {
             PINHash: observable,
             setStateValue: action,
         });
-        this.checkOnBoarded();
+       // this.checkOnBoarded();
     }
     setStateValue(state, value) {
         this[state] = value;
