@@ -21,7 +21,7 @@ const cards = [
         title: 'MTN MOMO',
     },
     {
-        image: require('../assets/images/black-credit-card.jpg'),
+        image: require('../assets/images/visa-1.jpg'),
         title: 'Credit Card',
     },
 ];

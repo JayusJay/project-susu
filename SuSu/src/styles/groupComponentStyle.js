@@ -4,12 +4,22 @@ const GroupComponentStyle = StyleSheet.create({
     container: {
         padding: 15,
         marginTop: 10,
-        backgroundColor: '#000',
-        borderRadius: 25,
+        backgroundColor: '#fff',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        borderRadius: 10,
         image: {
             width: 50,
             height: 50,
             borderRadius: 30,
+            borderWidth: 1,
+            borderColor: '#7966FF',
         },
         noGroupsText: {
             color: '#7966FF',
@@ -25,6 +35,7 @@ const GroupComponentStyle = StyleSheet.create({
                     paddingLeft: 20,
                     marginTop: 5,
                     fontSize: 16,
+                    color: '#8a8a8a',
                 },
             },
         },
@@ -33,7 +44,7 @@ const GroupComponentStyle = StyleSheet.create({
             alignSelf: 'center',
         },
         nameText: {
-            color: '#ccc',
+            color: '#000',
             fontSize: 20,
             paddingLeft: 20,
         },

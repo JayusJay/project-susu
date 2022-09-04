@@ -11,13 +11,17 @@ import GroupDetailStyle from '../styles/groupDetailStyle';
 
 const GroupDetailScreen = ({ route, navigation }) => {
     const [showBanner, setShowBanner] = useState(false);
+    const [amountOwed, setAmountOwed] = useState(0);
     const { appStore } = useContext(AppStoreContext);
     const { imageUri, name, members, seedMoneyPerMember, frequency, groupLink, startDate } = route.params;
     const totalSeedMoney = members.map((member) => member.seedMoney).reduce((a, b) => a + b);
     useEffect(() => {
         for (let member of members) {
-            if (member.uid === appStore.userData.uid && member.seedMoney < seedMoneyPerMember) {
-                setShowBanner(true);
+            if (member.uid === appStore.userData.uid) {
+                if (member.seedMoney < seedMoneyPerMember) {
+                    setShowBanner(true);
+                }
+                setAmountOwed(member.amountOwed);
                 break;
             }
         }
@@ -25,7 +29,7 @@ const GroupDetailScreen = ({ route, navigation }) => {
     const options = {
         title: 'Share via ',
         url: groupLink,
-        message: `${members[0].name} is inviting you to invest with them on SaveApp. Join them now!`,
+        message: `${appStore.userData.firstName} is inviting you to invest with them on SaveApp. Join them now!`,
     };
     const onShare = () => {
         Share.open(options)
@@ -66,8 +70,8 @@ const GroupDetailScreen = ({ route, navigation }) => {
                         repeatSpacer={50}
                         marqueeDelay={1000}
                     >
-                        You are required to deposit {['\u20B5', seedMoneyPerMember]} to the group's vault as your seed
-                        money by the close of {startDate} to join this group.
+                        You are required to deposit {['GH', '\u20B5', seedMoneyPerMember]} to the group's vault as your
+                        seed money by the close of {startDate} to join this group.
                     </TextTicker>
                 ) : null}
                 <View style={GroupDetailStyle.imageView}>
@@ -93,7 +97,9 @@ const GroupDetailScreen = ({ route, navigation }) => {
                 </View>
                 <View style={GroupDetailStyle.detailsComponentView}>
                     <Text style={GroupDetailStyle.detailsComponentView.descriptionText}>Total seed amount</Text>
-                    <Text style={GroupDetailStyle.detailsComponentView.countText}>{['\u20B5 ', totalSeedMoney]}</Text>
+                    <Text style={GroupDetailStyle.detailsComponentView.countText}>
+                        {['GH', '\u20B5 ', totalSeedMoney]}
+                    </Text>
                 </View>
                 <View style={GroupDetailStyle.detailsComponentView}>
                     <Text style={GroupDetailStyle.detailsComponentView.descriptionText}>Payment frequency</Text>
@@ -105,6 +111,10 @@ const GroupDetailScreen = ({ route, navigation }) => {
                         {/* {members[Math.floor(Math.random() * (members.length - 0 + 1)) + 0].name} */}
                         Jayus
                     </Text>
+                </View>
+                <View style={GroupDetailStyle.detailsComponentView}>
+                    <Text style={GroupDetailStyle.detailsComponentView.descriptionText}>Next payment in</Text>
+                    <Text style={GroupDetailStyle.detailsComponentView.countText}>{frequency} days</Text>
                 </View>
                 <Text style={GroupDetailStyle.subHeaderText}>Members</Text>
                 {members.length > 0 ? (
@@ -157,6 +167,29 @@ const GroupDetailScreen = ({ route, navigation }) => {
                     <Text style={{ color: '#000' }}>There are no group members</Text>
                 )}
                 {/*Just for testing purposes, members array will always contain at least the group creator*/}
+                <Text style={GroupDetailStyle.subHeaderText}>Utilities</Text>
+                <View style={GroupDetailStyle.detailsComponentView}>
+                    <Text style={GroupDetailStyle.detailsComponentView.descriptionText}>Add Funds</Text>
+                    <TouchableOpacity
+                        style={[GroupDetailStyle.detailsComponentView.touchableOpacity, { paddingLeft: 20 }]}
+                        onPress={() => {
+                            amountOwed > 0
+                                ? navigation.navigate('Payment', { amountOwed: amountOwed })
+                                : Snackbar.show({
+                                      text: 'You have no outstanding balance',
+                                      duration: Snackbar.LENGTH_SHORT,
+                                      backgroundColor: '#7966FF',
+                                  });
+                        }}
+                    >
+                        <EvilIcons
+                            name="chevron-right"
+                            size={30}
+                            color="#8A8A8A"
+                            style={GroupDetailStyle.detailsComponentView.touchableOpacity.evilIcon}
+                        />
+                    </TouchableOpacity>
+                </View>
             </ScrollView>
         </SafeAreaView>
     );

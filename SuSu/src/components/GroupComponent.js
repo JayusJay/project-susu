@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Text, TouchableOpacity, useWindowDimensions } from 'react-native';
+import { View, Image, Text, Pressable, useWindowDimensions } from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import TextTicker from 'react-native-text-ticker';
 import GroupComponentStyle from '../styles/groupComponentStyle';
@@ -15,7 +15,7 @@ const GroupComponent = ({ navigation, data }) => {
     }
     return data.map((item, index) => (
         <View key={index} style={[GroupComponentStyle.container, { width: width - 40 }]}>
-            <TouchableOpacity
+            <Pressable
                 onPress={() => {
                     navigation.navigate('GroupDetail', item);
                 }}
@@ -51,7 +51,7 @@ const GroupComponent = ({ navigation, data }) => {
                         style={GroupComponentStyle.container.chevronButton}
                     />
                 </View>
-            </TouchableOpacity>
+            </Pressable>
         </View>
     ));
 };

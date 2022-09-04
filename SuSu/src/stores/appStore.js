@@ -45,6 +45,7 @@ class AppStore {
         } catch (error) {
             console.log('getGroups error: ', error);
         }
+        return true;
     };
 }
 export default AppStore;

@@ -81,7 +81,9 @@ const GoalDetailScreen = ({ route, navigation }) => {
                     <Text style={GoalDetailStyle.detailsComponentView.descriptionText}>Add Funds</Text>
                     <TouchableOpacity
                         style={[GoalDetailStyle.detailsComponentView.touchableOpacity, { paddingLeft: 20 }]}
-                        onPress={() => {}}
+                        onPress={() => {
+                            navigation.navigate('Payment');
+                        }}
                     >
                         <EvilIcons
                             name="chevron-right"

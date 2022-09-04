@@ -1,24 +1,33 @@
-import React, { useContext, useEffect } from 'react';
-import { Text, ScrollView, View, TouchableOpacity } from 'react-native';
+import React, { useState, useContext, useEffect } from 'react';
+import { Text, ScrollView, View, TouchableOpacity, RefreshControl } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import { observer } from 'mobx-react';
 import { AppStoreContext } from '../services/AppStoreContext';
-//import { AuthContext } from '../services/AuthContext';
 import GroupComponent from '../components/GroupComponent';
-//import groupData from '../assets/groupData';
 import GroupInvestmentStyle from '../styles/groupInvestmentStyle';
 
-//let dummy = [];
 const GroupInvestmentScreen = observer(({ navigation }) => {
-    //const { user } = useContext(AuthContext);
+    const [refreshing, setRefreshing] = useState(false);
     const { appStore } = useContext(AppStoreContext);
     useEffect(() => {
         appStore.getInvestmentGroups();
     }, []);
     return (
-        <ScrollView showsVerticalScrollIndicator={false} style={GroupInvestmentStyle.scrollable}>
+        <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={GroupInvestmentStyle.scrollable}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={async () => {
+                        setRefreshing(true);
+                        if (await appStore.getInvestmentGroups()) setRefreshing(false);
+                    }}
+                />
+            }
+        >
             <SafeAreaView style={GroupInvestmentStyle.container}>
                 <View style={GroupInvestmentStyle.header}>
                     <View style={GroupInvestmentStyle.profileView}>

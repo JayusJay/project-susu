@@ -50,6 +50,7 @@ class GroupCreation {
             name: `${userData.firstName} ${userData.lastName}`,
             imageUri: userData.imageUri,
             seedMoney: '0',
+            amountOwed: this.seedMoney,
         });
         memberIDs.push(auth().currentUser.uid);
         return { groupMembers, memberIDs };

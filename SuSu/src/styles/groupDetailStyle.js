@@ -19,6 +19,8 @@ const GroupDetailStyle = StyleSheet.create({
         width: 150,
         height: 150,
         borderRadius: 80,
+        borderWidth: 2,
+        borderColor: '#7966FF',
     },
 
     groupNameText: {
@@ -59,6 +61,7 @@ const GroupDetailStyle = StyleSheet.create({
         color: '#000',
         paddingTop: 30,
     },
+
     detailsComponentView: {
         paddingTop: 15,
         marginBottom: 15,
