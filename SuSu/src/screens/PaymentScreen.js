@@ -14,7 +14,8 @@ const PaymentScreen = ({ navigation, route }) => {
                 <Text style={PaymentStyle.container.text}>Pay with...</Text>
                 <Pressable
                     onPress={() => {
-                        console.log('Pressed pressable');
+                        // console.log('Pressed pressable');
+                        navigation.navigate('PaymentSummary');
                     }}
                 >
                     <View style={PaymentStyle.optionsViews}>

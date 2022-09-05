@@ -10,6 +10,7 @@ import GroupCreationFinalScreen from '../screens/GroupCreationFinalScreen';
 import GoalCreationNav from './GoalCreationNav';
 import JoinGroupScreen from '../screens/JoinGroupScreen';
 import PaymentScreen from '../screens/PaymentScreen';
+import PaymentSummaryScreen from '../screens/PaymentSummaryScreen';
 
 const appStack = createNativeStackNavigator();
 
@@ -33,6 +34,7 @@ const AppStack = () => {
             <appStack.Screen component={GoalCreationNav} name="GoalCreationNav" options={{ headerShown: false }} />
             <appStack.Screen component={JoinGroupScreen} name="JoinGroup" options={{ headerShown: false }} />
             <appStack.Screen component={PaymentScreen} name="Payment" options={{ headerShown: false }} />
+            <appStack.Screen component={PaymentSummaryScreen} name="PaymentSummary" options={{ headerShown: false }} />
         </appStack.Navigator>
     );
 };
