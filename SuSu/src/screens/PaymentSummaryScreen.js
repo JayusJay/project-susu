@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, Text, View, TextInput, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PaymentSummaryStyle from '../styles/paymentSummaryStyle';
+import { PayWithMomo } from '../core/payment_apis/mtn-momo/momo';
 
 const PaymentSummaryScreen = () => {
     const { width } = useWindowDimensions();
@@ -69,7 +70,7 @@ const PaymentSummaryScreen = () => {
                         </View>
                     </View>
                 </View>
-                <TouchableOpacity onPress={() => {}} style={{ marginTop: 70 }}>
+                <TouchableOpacity onPress={() => {PayWithMomo('a','b')}} style={{ marginTop: 70 }}>
                     <View style={{ backgroundColor: '#7966FF', borderRadius: 10, padding: 20, width: width - 40 }}>
                         <Text style={{ color: '#fff', fontSize: 16, alignSelf: 'center' }}>Pay</Text>
                     </View>

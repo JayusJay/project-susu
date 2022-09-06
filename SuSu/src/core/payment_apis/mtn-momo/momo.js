@@ -11,6 +11,9 @@ const collections = Collections({
     primaryKey: 'd4e93067fe69477995a3ec5578954c11', //process.env.MOMO_COLLECTION_PRIMARY_KEY,
 });
 
+export const PayWithMomo = (amount, phoneNumber) => {
+    console.log('MoMo callbackhost: ', process.env.MOMO_CALLBACK_HOST);
+};
 collections
     .requestToPay({
         amount: '50',
