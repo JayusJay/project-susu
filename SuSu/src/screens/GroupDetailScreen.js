@@ -11,7 +11,7 @@ import GroupDetailStyle from '../styles/groupDetailStyle';
 
 const GroupDetailScreen = ({ route, navigation }) => {
     const [showBanner, setShowBanner] = useState(false);
-    const [amountOwed, setAmountOwed] = useState(0);
+    const [paymentData, setPaymentData] = useState({ amountOwed: 0, phoneNumber: '' });
     const { appStore } = useContext(AppStoreContext);
     const { imageUri, name, members, seedMoneyPerMember, frequency, groupLink, startDate } = route.params;
     const totalSeedMoney = members.map((member) => member.seedMoney).reduce((a, b) => a + b);
@@ -21,7 +21,7 @@ const GroupDetailScreen = ({ route, navigation }) => {
                 if (member.seedMoney < seedMoneyPerMember) {
                     setShowBanner(true);
                 }
-                setAmountOwed(member.amountOwed);
+                setPaymentData({ amountOwed: seedMoneyPerMember - member.seedMoney, phoneNumber: member.phoneNumber });
                 break;
             }
         }
@@ -173,8 +173,8 @@ const GroupDetailScreen = ({ route, navigation }) => {
                     <TouchableOpacity
                         style={[GroupDetailStyle.detailsComponentView.touchableOpacity, { paddingLeft: 20 }]}
                         onPress={() => {
-                            amountOwed > 0
-                                ? navigation.navigate('Payment', { amountOwed: amountOwed })
+                            paymentData.amountOwed > 0
+                                ? navigation.navigate('Payment', paymentData)
                                 : Snackbar.show({
                                       text: 'You have no outstanding balance',
                                       duration: Snackbar.LENGTH_SHORT,

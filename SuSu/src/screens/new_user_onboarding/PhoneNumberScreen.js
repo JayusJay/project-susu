@@ -34,7 +34,7 @@ const PhoneNumberScreen = ({ navigation }) => {
                 //newUserOnBoardingStore.setStateValue('initialRouteName', 'OTPConfirmation');
                 AsyncStorage.setItem('initialScreen', 'OTPConfirmation');
                 AsyncStorage.setItem('phoneNumber', phoneNum);
-                navigation.replace('OTPConfirmation'); //prevent back button from going back to this screen
+                navigation.navigate('OTPConfirmation');
             }
         } else {
             Snackbar.show({

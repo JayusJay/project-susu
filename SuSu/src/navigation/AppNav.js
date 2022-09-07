@@ -21,9 +21,7 @@ const AppNav = observer(() => {
     const { loading, user } = useContext(AuthContext);
 
     useEffect(() => {
-        if (user) {
-            newUserOnBoardingStore.checkOnBoarded();
-        }
+        newUserOnBoardingStore.checkOnBoarded();
     }, [user]);
 
     if (loading || newUserOnBoardingStore.onBoarded === null) return <LoadingScreen />;

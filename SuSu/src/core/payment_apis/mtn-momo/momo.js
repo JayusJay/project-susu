@@ -12,33 +12,34 @@ const collections = Collections({
 });
 
 export const PayWithMomo = (amount, phoneNumber) => {
-    console.log('MoMo callbackhost: ', process.env.MOMO_CALLBACK_HOST);
+    //console.log('MoMo callbackhost: ', process.env.MOMO_CALLBACK_HOST);
+
+    collections
+        .requestToPay({
+            amount: amount,
+            currency: 'EUR',
+            externalId: '123456',
+            payer: {
+                partyIdType: 'MSISDN',
+                partyId: phoneNumber,
+            },
+            payerMessage: 'testing',
+            payeeNote: 'hello',
+        })
+        .then((transactionId) => {
+            console.log({ transactionId });
+
+            // Get transaction status
+            return collections.getTransaction(transactionId);
+        })
+        .then((transaction) => {
+            console.log({ transaction });
+
+            // Get account balance
+            return collections.getBalance();
+        })
+        .then((accountBalance) => console.log({ accountBalance }))
+        .catch((error) => {
+            console.log(error);
+        });
 };
-collections
-    .requestToPay({
-        amount: '50',
-        currency: 'EUR',
-        externalId: '123456',
-        payer: {
-            partyIdType: 'MSISDN',
-            partyId: '256774290781',
-        },
-        payerMessage: 'testing',
-        payeeNote: 'hello',
-    })
-    .then((transactionId) => {
-        console.log({ transactionId });
-
-        // Get transaction status
-        return collections.getTransaction(transactionId);
-    })
-    .then((transaction) => {
-        console.log({ transaction });
-
-        // Get account balance
-        return collections.getBalance();
-    })
-    .then((accountBalance) => console.log({ accountBalance }))
-    .catch((error) => {
-        console.log(error);
-    });

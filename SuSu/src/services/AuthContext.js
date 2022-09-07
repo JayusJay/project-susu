@@ -11,7 +11,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     //This state navigates AuthStack's initial screen to the screen an error has occured on.
     const [screenError, setScreenError] = useState({
         loginError: false,

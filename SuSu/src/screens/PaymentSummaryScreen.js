@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView, Text, View, TextInput, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PaymentSummaryStyle from '../styles/paymentSummaryStyle';
 import { PayWithMomo } from '../core/payment_apis/mtn-momo/momo';
 
-const PaymentSummaryScreen = () => {
+const PaymentSummaryScreen = ({ navigation, route }) => {
+    console.log('PaymentSummaryScreen: route.params: ', route.params);
+    const [amount, setAmount] = useState(`${route.params.amountOwed}`);
+    const phoneNumber = route.params.phoneNumber;
     const { width } = useWindowDimensions();
+
+    const handleInput = (input) => {
+        setAmount(input);
+    };
     return (
         <ScrollView style={PaymentSummaryStyle.scrollable}>
             <SafeAreaView style={PaymentSummaryStyle.container}>
@@ -19,7 +26,10 @@ const PaymentSummaryScreen = () => {
                         placeholder="Enter amount"
                         placeholderTextColor="#8A8A8A"
                         keyboardType="numeric"
-                        value="4000"
+                        value={amount}
+                        onChangeText={(text) => {
+                            handleInput(text);
+                        }}
                         editable={false}
                     />
                 </View>
@@ -41,7 +51,7 @@ const PaymentSummaryScreen = () => {
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ flexDirection: 'column', alignSelf: 'center' }}>
                             <Text style={{ fontSize: 16, color: '#000' }}>MTN MobileMoney</Text>
-                            <Text style={{ color: '#8A8A8A', fontSize: 12 }}>0596462013</Text>
+                            <Text style={{ color: '#8A8A8A', fontSize: 12 }}>{phoneNumber}</Text>
                         </View>
                         {/* <View style={{ marginLeft: 'auto', marginBottom: 'auto', padding: 5 }}>
                             <Text style={{ color: '#7966FF', fontSize: 16 }}>Edit</Text>
@@ -55,7 +65,7 @@ const PaymentSummaryScreen = () => {
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ flexDirection: 'column', alignSelf: 'center' }}>
                             <Text style={{ fontSize: 16, color: '#000' }}>Today</Text>
-                            <Text style={{ color: '#8A8A8A', fontSize: 12 }}>05/09/2022</Text>
+                            <Text style={{ color: '#8A8A8A', fontSize: 12 }}>07/09/2022</Text>
                         </View>
                     </View>
                 </View>
@@ -70,7 +80,12 @@ const PaymentSummaryScreen = () => {
                         </View>
                     </View>
                 </View>
-                <TouchableOpacity onPress={() => {PayWithMomo('a','b')}} style={{ marginTop: 70 }}>
+                <TouchableOpacity
+                    onPress={() => {
+                        PayWithMomo(amount, phoneNumber);
+                    }}
+                    style={{ marginTop: 70 }}
+                >
                     <View style={{ backgroundColor: '#7966FF', borderRadius: 10, padding: 20, width: width - 40 }}>
                         <Text style={{ color: '#fff', fontSize: 16, alignSelf: 'center' }}>Pay</Text>
                     </View>

@@ -11,7 +11,12 @@ const OTPConfirmationScreen = ({ navigation }) => {
     return (
         <ScrollView style={OTPConfirmationStyle.scrollable}>
             <SafeAreaView style={OTPConfirmationStyle.container}>
-                <Ionicons name="arrow-back-outline" size={30} color="#000" onPress={() => navigation.goBack()} />
+                <Ionicons
+                    name="arrow-back-outline"
+                    size={30}
+                    color="#000"
+                    onPress={() => navigation.navigate('PhoneNumber')}
+                />
                 <Text style={OTPConfirmationStyle.titleText}>Verification</Text>
                 <Text style={OTPConfirmationStyle.text}>
                     Enter the verification code sent to {newUserOnBoardingStore.phoneNumber}

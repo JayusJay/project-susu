@@ -57,6 +57,7 @@ const phoneNumberStyle = StyleSheet.create({
         numberInputView: {
             marginLeft: 4,
             textInput: {
+                flex: 1,
                 marginTop: -5,
                 marginBottom: -5,
                 paddingLeft: 10,

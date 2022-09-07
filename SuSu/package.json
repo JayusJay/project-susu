@@ -6,6 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
+    "postinstall": "rn-nodeify --install assert,process,util --hack",
     "test": "jest",
     "lint": "eslint ."
   },
@@ -20,9 +21,11 @@
     "@react-navigation/drawer": "^6.4.2",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.2",
+    "assert": "^1.1.1",
     "mobx": "^6.6.1",
     "mobx-react": "^7.5.2",
     "mtn-momo": "^2.0.0",
+    "process": "^0.11.0",
     "radio-buttons-react-native": "^1.0.4",
     "react": "18.1.0",
     "react-native": "0.70.0",
@@ -34,6 +37,7 @@
     "react-native-dialog": "^9.2.2",
     "react-native-element-dropdown": "^2.1.0",
     "react-native-gesture-handler": "^2.5.0",
+    "react-native-get-random-values": "^1.8.0",
     "react-native-gifted-charts": "^1.2.41",
     "react-native-hash": "^3.0.0",
     "react-native-image-picker": "^4.8.4",
@@ -48,7 +52,9 @@
     "react-native-svg": "^12.3.0",
     "react-native-svg-transformer": "^1.0.0",
     "react-native-text-ticker": "^1.14.0",
-    "react-native-vector-icons": "^9.1.0"
+    "react-native-vector-icons": "^9.1.0",
+    "rn-nodeify": "^10.3.0",
+    "util": "^0.10.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

@@ -16,7 +16,7 @@ class NewUserOnBoardingStore {
             PINHash: observable,
             setStateValue: action,
         });
-       // this.checkOnBoarded();
+        // this.checkOnBoarded();
     }
     setStateValue(state, value) {
         this[state] = value;
@@ -24,6 +24,10 @@ class NewUserOnBoardingStore {
 
     checkOnBoarded = async () => {
         try {
+            if (auth().currentUser === null) {
+                this.setStateValue('onBoarded', false);
+                return;
+            }
             const user = await firestore().collection('users').doc(auth().currentUser.uid).get();
             this.setStateValue('onBoarded', user.data().userOnBoarded);
         } catch (error) {

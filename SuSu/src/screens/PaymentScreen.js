@@ -5,8 +5,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import PaymentStyle from '../styles/paymentStyle';
 
 const PaymentScreen = ({ navigation, route }) => {
-    if (typeof route.params.amountOwed === 'undefined') {
-    }
+    // if (typeof route.params.amountOwed === 'undefined') {
+    // }
     const [disabled, setDisabled] = useState(true);
     return (
         <ScrollView style={PaymentStyle.scrollable}>
@@ -15,7 +15,7 @@ const PaymentScreen = ({ navigation, route }) => {
                 <Pressable
                     onPress={() => {
                         // console.log('Pressed pressable');
-                        navigation.navigate('PaymentSummary');
+                        navigation.navigate('PaymentSummary', route.params);
                     }}
                 >
                     <View style={PaymentStyle.optionsViews}>

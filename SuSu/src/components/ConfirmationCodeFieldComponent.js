@@ -108,24 +108,33 @@ const ConfirmationCodeFieldComponent = ({ navigation, CELL_COUNT, type }) => {
         }
         if (type === 'OTP') {
             setAppLoading(true);
-            const response = await newUserOnBoardingStore.verifyOTPCode(value);
-            console.log('Response: ', response);
             try {
+                const response = await newUserOnBoardingStore.verifyOTPCode(value);
                 setAppLoading(false);
-                if (response.code.startsWith('auth/')) {
-                    firebaseAuthenticationError(response);
-                    return;
-                }
-            } catch (error) {} //ignore error
-            setValue(''); //reset value
-            newUserOnBoardingStore.setStateValue('confirmationCode', null); //reset confirmationCode
-            AsyncStorage.setItem('initialScreen', 'SetPIN');
-
-            navigation.replace('SetPIN'); //don't allow user to go back to previous screens
+                try {
+                    if (response.code.startsWith('auth/')) {
+                        firebaseAuthenticationError(response);
+                        return;
+                    }
+                } catch (error) {} //ignore error
+                setValue(''); //reset value
+                newUserOnBoardingStore.setStateValue('confirmationCode', null); //reset confirmationCode
+                AsyncStorage.setItem('initialScreen', 'SetPIN');
+                navigation.replace('SetPIN'); //don't allow user to go back to previous screens
+            } catch (error) {
+                console.log("Error in 'ConfirmationCodeFieldComponent.js' in 'handleButton' function: ", error);
+                setAppLoading(false);
+                Snackbar.show({
+                    text: 'Something went wrong, please try again',
+                    duration: Snackbar.LENGTH_LONG,
+                    backgroundColor: 'red',
+                });
+                return;
+            }
         } else {
             //type === PIN
             if (newUserOnBoardingStore.PINHash === null) {
-                if (newUserOnBoardingStore.hashPINCode(value)) {
+                if (await newUserOnBoardingStore.hashPINCode(value)) {
                     navigation.push('SetPIN', { type: 'PIN' });
                 } else {
                     Snackbar.show({
@@ -136,11 +145,12 @@ const ConfirmationCodeFieldComponent = ({ navigation, CELL_COUNT, type }) => {
                     return;
                 }
             } else {
-                if (newUserOnBoardingStore.hashPINCode(value)) {
-                    //user will be automatically navigated to the main app since onBoarding is complete
+                if (await newUserOnBoardingStore.hashPINCode(value)) {
+                    /*user will be automatically navigated to the main app since onBoarding is complete 
+                    and newUserOnBoardingStore.onBoarded is set to true*/
                 } else {
                     Snackbar.show({
-                        text: 'PIN code is not valid',
+                        text: 'PIN code mismatch',
                         duration: Snackbar.LENGTH_LONG,
                         backgroundColor: 'red',
                     });
