@@ -16,11 +16,9 @@ const PaymentSummaryScreen = ({ navigation, route }) => {
     return (
         <ScrollView style={PaymentSummaryStyle.scrollable}>
             <SafeAreaView style={PaymentSummaryStyle.container}>
-                <Text style={{ color: '#7966FF', fontSize: 25, alignSelf: 'center', padding: 20 }}>
-                    Payment Summary
-                </Text>
-                <View style={{}}>
-                    <Text style={{ color: '#7966FF', fontSize: 20, marginBottom: 5, fontWeight: '500' }}>Amount</Text>
+                <Text style={PaymentSummaryStyle.container.sumaryText}>Payment Summary</Text>
+                <View>
+                    <Text style={PaymentSummaryStyle.titleText}>Amount</Text>
                     <TextInput
                         style={PaymentSummaryStyle.textInput}
                         placeholder="Enter amount"
@@ -33,9 +31,7 @@ const PaymentSummaryScreen = ({ navigation, route }) => {
                         editable={false}
                     />
                 </View>
-                <Text style={{ color: '#7966FF', marginTop: 20, marginBottom: 5, fontSize: 20, fontWeight: '500' }}>
-                    Payment Method
-                </Text>
+                <Text style={[PaymentSummaryStyle.titleText, { marginTop: 20 }]}>Payment Method</Text>
                 {/* <View style={{}}>
                     <View style={{ flexDirection: 'row' }}>
                         <View style={{ flexDirection: 'column', alignSelf: 'center' }}>
@@ -47,36 +43,34 @@ const PaymentSummaryScreen = ({ navigation, route }) => {
                         </View>
                     </View>
                 </View> */}
-                <View style={{}}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <View style={{ flexDirection: 'column', alignSelf: 'center' }}>
-                            <Text style={{ fontSize: 16, color: '#000' }}>MTN MobileMoney</Text>
-                            <Text style={{ color: '#8A8A8A', fontSize: 12 }}>{phoneNumber}</Text>
+                <View>
+                    <View style={PaymentSummaryStyle.paymentView}>
+                        <View>
+                            <Text style={PaymentSummaryStyle.paymentView.text1}>MTN MobileMoney</Text>
+                            <Text style={PaymentSummaryStyle.paymentView.text2}>{phoneNumber}</Text>
                         </View>
                         {/* <View style={{ marginLeft: 'auto', marginBottom: 'auto', padding: 5 }}>
                             <Text style={{ color: '#7966FF', fontSize: 16 }}>Edit</Text>
                         </View> */}
                     </View>
                 </View>
-                <Text style={{ color: '#7966FF', marginTop: 20, marginBottom: 5, fontSize: 20, fontWeight: '600' }}>
-                    Payment Date
-                </Text>
-                <View style={{}}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <View style={{ flexDirection: 'column', alignSelf: 'center' }}>
-                            <Text style={{ fontSize: 16, color: '#000' }}>Today</Text>
-                            <Text style={{ color: '#8A8A8A', fontSize: 12 }}>07/09/2022</Text>
+                <Text style={[PaymentSummaryStyle.titleText, { marginTop: 20 }]}>Payment Date</Text>
+                <View>
+                    <View style={PaymentSummaryStyle.paymentView}>
+                        <View>
+                            <Text style={PaymentSummaryStyle.paymentView.text1}>Today</Text>
+                            <Text style={PaymentSummaryStyle.paymentView.text2}>07/09/2022</Text>
                         </View>
                     </View>
                 </View>
 
-                <Text style={{ color: '#7966FF', marginTop: 20, marginBottom: 5, fontSize: 20, fontWeight: '600' }}>
-                    Purpose
-                </Text>
-                <View style={{}}>
-                    <View style={{ flexDirection: 'row' }}>
-                        <View style={{ flexDirection: 'column', alignSelf: 'center' }}>
-                            <Text style={{ fontSize: 16, color: '#000' }}>Seed money payment for group #94930</Text>
+                <Text style={[PaymentSummaryStyle.titleText, { marginTop: 20 }]}>Purpose</Text>
+                <View>
+                    <View style={PaymentSummaryStyle.paymentView}>
+                        <View>
+                            <Text style={PaymentSummaryStyle.paymentView.text1}>
+                                Seed money payment for group #94930
+                            </Text>
                         </View>
                     </View>
                 </View>
@@ -86,8 +80,8 @@ const PaymentSummaryScreen = ({ navigation, route }) => {
                     }}
                     style={{ marginTop: 70 }}
                 >
-                    <View style={{ backgroundColor: '#7966FF', borderRadius: 10, padding: 20, width: width - 40 }}>
-                        <Text style={{ color: '#fff', fontSize: 16, alignSelf: 'center' }}>Pay</Text>
+                    <View style={[PaymentSummaryStyle.touchableView, { width: width - 40 }]}>
+                        <Text style={PaymentSummaryStyle.touchableView.text}>Pay</Text>
                     </View>
                 </TouchableOpacity>
             </SafeAreaView>
