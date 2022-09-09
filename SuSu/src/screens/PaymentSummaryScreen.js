@@ -5,7 +5,6 @@ import PaymentSummaryStyle from '../styles/paymentSummaryStyle';
 import { PayWithMomo } from '../core/payment_apis/mtn-momo/momo';
 
 const PaymentSummaryScreen = ({ navigation, route }) => {
-    console.log('PaymentSummaryScreen: route.params: ', route.params);
     const [amount, setAmount] = useState(`${route.params.amountOwed}`);
     const phoneNumber = route.params.phoneNumber;
     const { width } = useWindowDimensions();
