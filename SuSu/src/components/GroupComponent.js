@@ -17,15 +17,15 @@ const GroupComponent = ({ navigation, data }) => {
         <View key={index} style={[GroupComponentStyle.container, { width: width - 40 }]}>
             <Pressable
                 onPress={() => {
-                    navigation.navigate('GroupDetail', item);
+                    navigation.navigate('GroupDetail', item._data);
                 }}
             >
                 <View style={GroupComponentStyle.container.innerView}>
                     <View style={GroupComponentStyle.container.innerView.innerView}>
-                        <Image source={{ uri: item.imageUri }} style={GroupComponentStyle.container.image} />
+                        <Image source={{ uri: item._data.imageUri }} style={GroupComponentStyle.container.image} />
 
                         <View>
-                            <Text style={GroupComponentStyle.container.nameText}>{item.name}</Text>
+                            <Text style={GroupComponentStyle.container.nameText}>{item._data.name}</Text>
 
                             <TextTicker
                                 style={[
@@ -39,7 +39,7 @@ const GroupComponent = ({ navigation, data }) => {
                                 repeatSpacer={50}
                                 marqueeDelay={1000}
                             >
-                                {item.members.map((member) => member.name).join(', ')}
+                                {item._data.members.map((member) => member.name).join(', ')}
                             </TextTicker>
                         </View>
                     </View>

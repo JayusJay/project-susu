@@ -38,7 +38,8 @@ const CustomDrawer = (props) => {
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={() => {
+                    onPress={async () => {
+                        await appStore.removeFCMTokenFromDatabase();
                         handleLogOut();
                     }}
                     style={customDrawerStyle.view3.logoutTouchable}

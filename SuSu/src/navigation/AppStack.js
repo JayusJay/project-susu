@@ -3,7 +3,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 //import { AppStoreProvider } from '../services/AppStoreContext';
 import DrawerStack from './DrawerStack';
 import GoalDetailScreen from '../screens/GoalDetailScreen';
-import GroupInvestmentScreen from '../screens/GroupInvestmentScreen';
 import GroupDetailScreen from '../screens/GroupDetailScreen';
 import GroupCreationScreen from '../screens/GroupCreationScreen';
 import GroupCreationFinalScreen from '../screens/GroupCreationFinalScreen';
