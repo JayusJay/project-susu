@@ -11,35 +11,56 @@ const collections = Collections({
     primaryKey: 'd4e93067fe69477995a3ec5578954c11', //process.env.MOMO_COLLECTION_PRIMARY_KEY,
 });
 
-export const PayWithMomo = (amount, phoneNumber) => {
+export const PayWithMomo = async (amount, phoneNumber) => {
     //console.log('MoMo callbackhost: ', process.env.MOMO_CALLBACK_HOST);
-
-    collections
-        .requestToPay({
+    try {
+        const paymentId = await collections.requestToPay({
             amount: amount,
             currency: 'EUR',
-            externalId: '123456',
+            externalId: '123456789',
             payer: {
                 partyIdType: 'MSISDN',
                 partyId: phoneNumber,
             },
-            payerMessage: 'testing',
-            payeeNote: 'hello',
-        })
-        .then((transactionId) => {
-            console.log({ transactionId });
-
-            // Get transaction status
-            return collections.getTransaction(transactionId);
-        })
-        .then((transaction) => {
-            console.log({ transaction });
-
-            // Get account balance
-            return collections.getBalance();
-        })
-        .then((accountBalance) => console.log({ accountBalance }))
-        .catch((error) => {
-            console.log(error);
+            payerMessage: 'Payment for goods',
+            payeeNote: 'Payment for goods',
         });
+        //console.log('Payment ID: ', paymentId);
+        const paymentStatus = await collections.getTransaction(paymentId);
+        return paymentStatus.status === 'SUCCESSFUL' ? true : false;
+    } catch (error) {
+        console.log('MoMo error: ', error);
+        return false;
+    }
+    // collections
+    //     .requestToPay({
+    //         amount: amount,
+    //         currency: 'EUR',
+    //         externalId: '123456',
+    //         payer: {
+    //             partyIdType: 'MSISDN',
+    //             partyId: phoneNumber,
+    //         },
+    //         payerMessage: 'testing',
+    //         payeeNote: 'hello',
+    //     })
+    //     .then((transactionId) => {
+    //         //console.log({ transactionId });
+
+    //         // Get transaction status
+    //         collections.getTransaction(transactionId).then((transaction) => {
+    //             console.log(transaction.status);
+    //             return transaction.status === 'SUCCESSFUL' ? true : false;
+    //         });
+    //     })
+    //     // .then((transaction) => {
+    //     //     console.log({ transaction });
+
+    //     //     // Get account balance
+    //     //     return collections.getBalance();
+    //     // })
+    //     // .then((accountBalance) => console.log({ accountBalance }))
+    //     .catch((error) => {
+    //         console.log(error);
+    //     });
 };

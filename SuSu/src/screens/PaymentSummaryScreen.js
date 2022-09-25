@@ -1,17 +1,40 @@
 import React, { useState } from 'react';
 import { ScrollView, Text, View, TextInput, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Snackbar from 'react-native-snackbar';
 import PaymentSummaryStyle from '../styles/paymentSummaryStyle';
 import { PayWithMomo } from '../core/payment_apis/mtn-momo/momo';
+import LoadingScreen from './LoadingScreen';
 
 const PaymentSummaryScreen = ({ navigation, route }) => {
     const [amount, setAmount] = useState(`${route.params.amountOwed}`);
+    const [loading, setLoading] = useState(false);
     const phoneNumber = route.params.phoneNumber;
     const { width } = useWindowDimensions();
 
     const handleInput = (input) => {
         setAmount(input);
     };
+    const handlePayment = async () => {
+        setLoading(true);
+        const paymentStatus = await PayWithMomo(amount, phoneNumber);
+        setLoading(false);
+        if (paymentStatus) {
+            Snackbar.show({
+                text: 'Payment Successful',
+                duration: Snackbar.LENGTH_SHORT,
+                backgroundColor: '#7966FF',
+            });
+            navigation.popToTop();
+        } else {
+            Snackbar.show({
+                text: 'Payment failed',
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor: 'red',
+            });
+        }
+    };
+    if (loading) return <LoadingScreen />;
     return (
         <ScrollView style={PaymentSummaryStyle.scrollable}>
             <SafeAreaView style={PaymentSummaryStyle.container}>
@@ -75,7 +98,7 @@ const PaymentSummaryScreen = ({ navigation, route }) => {
                 </View>
                 <TouchableOpacity
                     onPress={() => {
-                        PayWithMomo(amount, phoneNumber);
+                        handlePayment();
                     }}
                     style={{ marginTop: 70 }}
                 >
