@@ -83,7 +83,7 @@ class GroupCreation {
                 .update({
                     groupLink: `susu://join-group/${group.id}`,
                 });
-            this.setStateValue('groupLink', `susu://join-group/${group.id}`);
+            //this.setStateValue('groupLink', `susu://join-group/${group.id}`);
             return true;
         } catch (error) {
             console.log('createGroup error: ', error);

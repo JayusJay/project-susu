@@ -1,12 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { observer } from 'mobx-react';
+//import LoadingScreen from '../LoadingScreen';
 import { AppStoreContext } from '../../services/AppStoreContext';
 import GoalSelectionStyles from '../../styles/goal_creation/goalSelectionStyle';
 
-const GoalSelectionScreen = ({ navigation }) => {
+const GoalSelectionScreen = observer(({ navigation }) => {
     const { goalCreationStore } = useContext(AppStoreContext);
+
+    console.log(
+        'FOrmated Image',
+        goalCreationStore.formatImage(
+            'https://firebasestorage.googleapis.com/v0/b/project-susu.appspot.com/o/goalCreationImages%2Fhome.png?alt=media&token=76c37d76-9fdb-43b7-8f14-04dcc8b5809e'
+        )
+    );
+
     //Do not destructure goalCreationStore here, it will cause state issues with mobx
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -47,7 +57,7 @@ const GoalSelectionScreen = ({ navigation }) => {
                                 }}
                             >
                                 <Image
-                                    source={require('../../assets/images/goal_creation/home.png')}
+                                    //source={{ uri: goalCreationStore.findDefaultImage('home') }}
                                     style={GoalSelectionStyles.goalView.image}
                                 />
                                 <Text style={GoalSelectionStyles.goalView.text}>Home</Text>
@@ -161,6 +171,6 @@ const GoalSelectionScreen = ({ navigation }) => {
             </SafeAreaView>
         </ScrollView>
     );
-};
+});
 
 export default GoalSelectionScreen;
