@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CircularProgressBase } from 'react-native-circular-progress-indicator';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import { AppStoreContext } from '../services/AppStoreContext';
 import GoalDetailStyle from '../styles/goalDetailStyle';
 
 const GoalDetailScreen = ({ route, navigation }) => {
     const { image, name, amountSaved, totalAmount, timeLeft, value } = route.params;
+    const { appStore } = useContext(AppStoreContext);
+    const phoneNumber = appStore.userData.phoneNumber;
+
     return (
         <SafeAreaView style={GoalDetailStyle.container}>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -82,7 +86,7 @@ const GoalDetailScreen = ({ route, navigation }) => {
                     <TouchableOpacity
                         style={[GoalDetailStyle.detailsComponentView.touchableOpacity, { paddingLeft: 20 }]}
                         onPress={() => {
-                            navigation.navigate('Payment');
+                            navigation.navigate('Payment', { amountOwed: 0, phoneNumber });
                         }}
                     >
                         <EvilIcons

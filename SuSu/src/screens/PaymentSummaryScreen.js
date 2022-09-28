@@ -11,7 +11,6 @@ const PaymentSummaryScreen = ({ navigation, route }) => {
     const [loading, setLoading] = useState(false);
     const phoneNumber = route.params.phoneNumber;
     const { width } = useWindowDimensions();
-
     const handleInput = (input) => {
         setAmount(input);
     };
@@ -50,7 +49,7 @@ const PaymentSummaryScreen = ({ navigation, route }) => {
                         onChangeText={(text) => {
                             handleInput(text);
                         }}
-                        editable={false}
+                        editable={amount === '0' || amount === '' ? true : false}
                     />
                 </View>
                 <Text style={[PaymentSummaryStyle.titleText, { marginTop: 20 }]}>Payment Method</Text>
