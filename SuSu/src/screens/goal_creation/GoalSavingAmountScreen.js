@@ -39,14 +39,16 @@ const GoalSavingAmountScreen = observer(({ navigation }) => {
             <SafeAreaView style={GoalSavingAmountStyle.container}>
                 <View style={GoalSavingAmountStyle.header}>
                     <View style={GoalSavingAmountStyle.headerContentView}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                navigation.goBack();
-                            }}
-                            style={GoalSavingAmountStyle.backButton}
-                        >
-                            <Ionicons name="arrow-back-outline" size={30} color="white" />
-                        </TouchableOpacity>
+                        <View style={GoalSavingAmountStyle.backButtonView}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    navigation.goBack();
+                                }}
+                                style={GoalSavingAmountStyle.backButton}
+                            >
+                                <Ionicons name="arrow-back-outline" size={30} color="white" />
+                            </TouchableOpacity>
+                        </View>
                     </View>
                     <View style={GoalSavingAmountStyle.headerContentView.textView}>
                         <View style={GoalSavingAmountStyle.headerContentView.textView.innerView}>

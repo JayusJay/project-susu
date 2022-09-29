@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { ScrollView, Text, View, TextInput, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Snackbar from 'react-native-snackbar';
+import { AppStoreContext } from '../services/AppStoreContext';
 import PaymentSummaryStyle from '../styles/paymentSummaryStyle';
 import { PayWithMomo } from '../core/payment_apis/mtn-momo/momo';
 import LoadingScreen from './LoadingScreen';
@@ -11,6 +12,8 @@ const PaymentSummaryScreen = ({ navigation, route }) => {
     const [loading, setLoading] = useState(false);
     const phoneNumber = route.params.phoneNumber;
     const { width } = useWindowDimensions();
+    const { paymentStore } = useContext(AppStoreContext);
+
     const handleInput = (input) => {
         setAmount(input);
     };
@@ -19,6 +22,7 @@ const PaymentSummaryScreen = ({ navigation, route }) => {
         const paymentStatus = await PayWithMomo(amount, phoneNumber);
         setLoading(false);
         if (paymentStatus) {
+            //paymentStore.updatePaymentStatus(accountTo, amount);
             Snackbar.show({
                 text: 'Payment Successful',
                 duration: Snackbar.LENGTH_SHORT,
@@ -49,7 +53,7 @@ const PaymentSummaryScreen = ({ navigation, route }) => {
                         onChangeText={(text) => {
                             handleInput(text);
                         }}
-                        editable={amount === '0' || amount === '' ? true : false}
+                        editable={route.params.amountOwed === 0 || route.params.amountOwed === '' ? true : false}
                     />
                 </View>
                 <Text style={[PaymentSummaryStyle.titleText, { marginTop: 20 }]}>Payment Method</Text>

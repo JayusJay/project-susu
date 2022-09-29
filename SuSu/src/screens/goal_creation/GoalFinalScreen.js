@@ -2,14 +2,15 @@ import React, { useContext } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Snackbar from 'react-native-snackbar';
 import { AppStoreContext } from '../../services/AppStoreContext';
 import LoadingScreen from '../LoadingScreen';
 import CelebrationSVG from '../../assets/images/goal_creation/celebrating.svg';
-import goalImages from '../../assets/goalData';
+//import goalImages from '../../assets/goalData';
 import goalFinalStyle from '../../styles/goal_creation/goalFinalStyle';
 
 const GoalFinalScreen = ({ navigation }) => {
-    const { goalCreationStore, appLoading, setAppLoading } = useContext(AppStoreContext);
+    const { goalCreationStore, appStore, appLoading, setAppLoading } = useContext(AppStoreContext);
     const achievementTime = () => {
         let time =
             goalCreationStore.frequency === 'Daily'
@@ -34,6 +35,9 @@ const GoalFinalScreen = ({ navigation }) => {
                 duration: Snackbar.LENGTH_SHORT,
                 backgroundColor: '#7966FF',
             });
+            setAppLoading(true);
+            await appStore.getPersonalSavings();
+            setAppLoading(false);
             navigation.navigate('Savings');
         } else
             Snackbar.show({
@@ -48,14 +52,16 @@ const GoalFinalScreen = ({ navigation }) => {
             <SafeAreaView style={goalFinalStyle.container}>
                 <View style={goalFinalStyle.header}>
                     <View style={goalFinalStyle.headerContentView}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                navigation.goBack();
-                            }}
-                            style={goalFinalStyle.backButton}
-                        >
-                            <Ionicons name="arrow-back-outline" size={30} color="white" />
-                        </TouchableOpacity>
+                        <View style={goalFinalStyle.backButtonView}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    navigation.goBack();
+                                }}
+                                style={goalFinalStyle.backButton}
+                            >
+                                <Ionicons name="arrow-back-outline" size={30} color="white" />
+                            </TouchableOpacity>
+                        </View>
                     </View>
                     <View style={goalFinalStyle.headerContentView.textView}>
                         <View style={goalFinalStyle.headerContentView.textView.innerView}>
@@ -74,13 +80,13 @@ const GoalFinalScreen = ({ navigation }) => {
                         </Text>
                     </View>
 
-                    <View>
+                    {/* <View>
                         {Object.values(goalCreationStore.goalCreationData).map((value, index) => (
                             <Text key={index} style={{ color: '#000' }}>
                                 {value}
                             </Text>
                         ))}
-                    </View>
+                    </View> */}
                     <TouchableOpacity
                         onPress={() => {
                             //should navigate to payments screen rather

@@ -19,14 +19,16 @@ const GoalSelectionScreen = observer(({ navigation }) => {
             <SafeAreaView style={GoalSelectionStyles.container}>
                 <View style={GoalSelectionStyles.header}>
                     <View style={GoalSelectionStyles.headerContentView}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                navigation.goBack();
-                            }}
-                            style={GoalSelectionStyles.backButton}
-                        >
-                            <Ionicons name="arrow-back-outline" size={30} color="white" />
-                        </TouchableOpacity>
+                        <View style={GoalSelectionStyles.backButtonView}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    navigation.goBack();
+                                }}
+                                style={GoalSelectionStyles.backButton}
+                            >
+                                <Ionicons name="arrow-back-outline" size={30} color="white" />
+                            </TouchableOpacity>
+                        </View>
                     </View>
                     <View style={GoalSelectionStyles.headerContentView.textView}>
                         <View style={GoalSelectionStyles.headerContentView.textView.innerView}>
@@ -47,7 +49,7 @@ const GoalSelectionScreen = observer(({ navigation }) => {
                                     <TouchableOpacity
                                         onPress={() => {
                                             goalCreationStore.setGoalCreationData(
-                                                'image',
+                                                'imageUri',
                                                 goalCreationStore.defaultGoalImagesURLs.home
                                             );
                                             goalCreationStore.setGoalCreationData('name', 'Home');
@@ -65,7 +67,7 @@ const GoalSelectionScreen = observer(({ navigation }) => {
                                     <TouchableOpacity
                                         onPress={() => {
                                             goalCreationStore.setGoalCreationData(
-                                                'image',
+                                                'imageUri',
                                                 goalCreationStore.defaultGoalImagesURLs.phone
                                             );
                                             goalCreationStore.setGoalCreationData('name', 'Phone');
@@ -83,7 +85,7 @@ const GoalSelectionScreen = observer(({ navigation }) => {
                                     <TouchableOpacity
                                         onPress={() => {
                                             goalCreationStore.setGoalCreationData(
-                                                'image',
+                                                'imageUri',
                                                 goalCreationStore.defaultGoalImagesURLs.vacation
                                             );
                                             goalCreationStore.setGoalCreationData('name', 'Vacation');
@@ -102,7 +104,7 @@ const GoalSelectionScreen = observer(({ navigation }) => {
                                     <TouchableOpacity
                                         onPress={() => {
                                             goalCreationStore.setGoalCreationData(
-                                                'image',
+                                                'imageUri',
                                                 goalCreationStore.defaultGoalImagesURLs.car
                                             );
                                             goalCreationStore.setGoalCreationData('name', 'Car');
@@ -120,7 +122,7 @@ const GoalSelectionScreen = observer(({ navigation }) => {
                                     <TouchableOpacity
                                         onPress={() => {
                                             goalCreationStore.setGoalCreationData(
-                                                'image',
+                                                'imageUri',
                                                 goalCreationStore.defaultGoalImagesURLs.motorcycle
                                             );
                                             goalCreationStore.setGoalCreationData('name', 'Motorcycle');
@@ -141,7 +143,7 @@ const GoalSelectionScreen = observer(({ navigation }) => {
                                     <TouchableOpacity
                                         onPress={() => {
                                             goalCreationStore.setGoalCreationData(
-                                                'image',
+                                                'imageUri',
                                                 goalCreationStore.defaultGoalImagesURLs.piggybank
                                             );
                                             goalCreationStore.setGoalCreationData('name', 'Emergency Fund');

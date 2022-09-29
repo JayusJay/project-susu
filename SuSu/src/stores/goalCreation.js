@@ -4,7 +4,7 @@ import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 
 class GoalCreationStore {
-    image = '';
+    imageUri = '';
     name = '';
     description = '';
     totalAmount = 0;
@@ -22,7 +22,7 @@ class GoalCreationStore {
     defaultGoalImagesURLs = null;
     constructor() {
         makeObservable(this, {
-            image: observable,
+            imageUri: observable,
             name: observable,
             description: observable,
             totalAmount: observable,
@@ -98,7 +98,7 @@ class GoalCreationStore {
     };
     get goalCreationData() {
         return {
-            image: this.image,
+            imageUri: this.imageUri,
             name: this.name,
             description: this.description,
             totalAmount: this.totalAmount,

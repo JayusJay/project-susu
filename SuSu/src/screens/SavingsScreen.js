@@ -1,5 +1,5 @@
-import React, { useEffect, useContext } from 'react';
-import { Text, View, ScrollView, useWindowDimensions } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { Text, View, ScrollView, useWindowDimensions, RefreshControl } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -9,17 +9,29 @@ import { observer } from 'mobx-react';
 import { AppStoreContext } from '../services/AppStoreContext';
 import GoalComponent from '../components/GoalComponent';
 import savingBarData from '../assets/savingBarData';
-import goalData from '../assets/goalData';
+//import goalData from '../assets/goalData';
 import SavingsStyle from '../styles/savingsStyle';
 
 const SavingsScreen = observer(({ navigation }) => {
+    const [refreshing, setRefreshing] = useState(false);
     const { width } = useWindowDimensions();
     const { appStore } = useContext(AppStoreContext);
     useEffect(() => {
         appStore.getPersonalSavings();
     }, []);
     return (
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={async () => {
+                        setRefreshing(true);
+                        if (await appStore.getPersonalSavings()) setRefreshing(false);
+                    }}
+                />
+            }
+        >
             <SafeAreaView style={SavingsStyle.container}>
                 <View style={SavingsStyle.header}>
                     <View style={SavingsStyle.profileView}>

@@ -15,7 +15,7 @@ const CustomGoalCreationScreen = ({ navigation }) => {
     const { RNImagePickerError } = errors();
     const [dialogVisible, setDialogVisible] = useState(false);
     const [goalState, setGoalState] = useState({
-        image: '',
+        imageUri: '',
         title: '',
         isImage: false,
         isTitle: false,
@@ -47,20 +47,20 @@ const CustomGoalCreationScreen = ({ navigation }) => {
     };
 
     (function subFunction() {
-        if (goalCreationStore.image.startsWith('../../assets/')) {
+        if (goalCreationStore.imageUri.startsWith('../../assets/')) {
             Snackbar.show({
                 text: 'Please select an image',
                 duration: Snackbar.LENGTH_LONG,
                 backgroundColor: 'red',
             });
-            goalCreationStore.setGoalCreationData('image', goalState.image);
+            goalCreationStore.setGoalCreationData('imageUri', goalState.imageUri);
             goalCreationStore.setGoalCreationData('name', goalState.title);
         }
     })(); //this hack automatically sets the image to the last image selected if the user does not select an image
     const handleButton = () => {
         if (goalState.isImage && goalState.isTitle) {
             goalCreationStore.setGoalCreationData('name', goalState.title);
-            goalCreationStore.setGoalCreationData('image', goalState.image);
+            goalCreationStore.setGoalCreationData('imageUri', goalState.imageUri);
             navigation.navigate('GoalTotalAmount');
         } else {
             Snackbar.show({
@@ -86,7 +86,7 @@ const CustomGoalCreationScreen = ({ navigation }) => {
                         } else {
                             setGoalState({
                                 ...goalState,
-                                image: response.assets[0].uri,
+                                imageUri: response.assets[0].uri,
                                 isImage: true,
                             });
                             setDialogVisible(false);
@@ -112,7 +112,7 @@ const CustomGoalCreationScreen = ({ navigation }) => {
                 } else {
                     setGoalState({
                         ...goalState,
-                        image: response.assets[0].uri,
+                        imageUri: response.assets[0].uri,
                         isImage: true,
                     });
                     setDialogVisible(false);
@@ -133,10 +133,10 @@ const CustomGoalCreationScreen = ({ navigation }) => {
                     <Image
                         source={
                             !goalState.isImage
-                                ? goalCreationStore.image === '' || goalCreationStore.image.startsWith('../../assets')
+                                ? goalCreationStore.imageUri === '' || goalCreationStore.imageUri.startsWith('../../assets')
                                     ? { uri: 'https://placehold.jp/150x150.png' }
-                                    : { uri: goalCreationStore.image }
-                                : { uri: goalState.image }
+                                    : { uri: goalCreationStore.imageUri }
+                                : { uri: goalState.imageUri }
                         }
                         style={customGoalCreationStyles.image}
                     />

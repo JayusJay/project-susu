@@ -71,14 +71,16 @@ const GoalTypeScreen = ({ navigation }) => {
             <SafeAreaView style={GoalTypeStyle.container}>
                 <View style={GoalTypeStyle.header}>
                     <View style={GoalTypeStyle.headerContentView}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                navigation.goBack();
-                            }}
-                            style={GoalTypeStyle.backButton}
-                        >
-                            <Ionicons name="arrow-back-outline" size={30} color="white" />
-                        </TouchableOpacity>
+                        <View style={GoalTypeStyle.backButtonView}>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    navigation.goBack();
+                                }}
+                                style={GoalTypeStyle.backButton}
+                            >
+                                <Ionicons name="arrow-back-outline" size={30} color="white" />
+                            </TouchableOpacity>
+                        </View>
                     </View>
                     <View style={GoalTypeStyle.headerContentView.textView}>
                         <View style={GoalTypeStyle.headerContentView.textView.innerView}>

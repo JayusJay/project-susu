@@ -26,7 +26,6 @@ class GroupCreation {
     }
     uploadImage = async () => {
         try {
-            console.log('local imageUri: ', this.imageUri);
             const reference = `groupImages/${this.imageUri.split('/').pop()}`; //pick the last part of the image uri
             const imageRef = storage().ref(reference);
             await imageRef.putFile(this.imageUri);
@@ -83,7 +82,6 @@ class GroupCreation {
                 .update({
                     groupLink: `susu://join-group/${group.id}`,
                 });
-            //this.setStateValue('groupLink', `susu://join-group/${group.id}`);
             return true;
         } catch (error) {
             console.log('createGroup error: ', error);

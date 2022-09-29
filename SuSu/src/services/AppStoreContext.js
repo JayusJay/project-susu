@@ -3,6 +3,7 @@ import AppStore from '../stores/appStore';
 import GoalCreationStore from '../stores/goalCreation';
 import GroupCreation from '../stores/groupCreation';
 import NewUserOnBoardingStore from '../stores/newUserOnBoarding';
+import PaymentStore from '../stores/paymentStore';
 
 const AppStoreContext = createContext();
 
@@ -10,6 +11,7 @@ const appStore = new AppStore();
 const goalCreationStore = new GoalCreationStore();
 const groupCreationStore = new GroupCreation();
 const newUserOnBoardingStore = new NewUserOnBoardingStore();
+const paymentStore = new PaymentStore();
 
 const AppStoreProvider = ({ children }) => {
     const [appLoading, setAppLoading] = useState(false);
@@ -43,6 +45,7 @@ const AppStoreProvider = ({ children }) => {
                 goalCreationStore,
                 groupCreationStore,
                 newUserOnBoardingStore,
+                paymentStore,
                 appLoading,
                 setAppLoading,
                 timer,

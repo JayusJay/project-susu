@@ -8,7 +8,7 @@ import { AppStoreContext } from '../services/AppStoreContext';
 import GoalDetailStyle from '../styles/goalDetailStyle';
 
 const GoalDetailScreen = ({ route, navigation }) => {
-    const { image, name, amountSaved, totalAmount, timeLeft, value } = route.params;
+    const { imageUri, name, amountSaved, totalAmount, timeLeft, value } = route.params;
     const { appStore } = useContext(AppStoreContext);
     const phoneNumber = appStore.userData.phoneNumber;
 
@@ -22,7 +22,7 @@ const GoalDetailScreen = ({ route, navigation }) => {
                 </View>
                 <View style={GoalDetailStyle.circularBaseView}>
                     <CircularProgressBase {...GoalDetailStyle.CircularProgressBaseProps} value={value}>
-                        <Image source={image} style={GoalDetailStyle.circularImage} />
+                        <Image source={{ uri: imageUri }} style={GoalDetailStyle.circularImage} />
                     </CircularProgressBase>
                 </View>
                 <Text style={GoalDetailStyle.goalNameText}>{name}</Text>

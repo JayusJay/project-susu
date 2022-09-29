@@ -66,7 +66,7 @@ class NewUserOnBoardingStore {
             if (this.PINHash === null) {
                 try {
                     const hash = await JSHash(pin, CONSTANTS.HashAlgorithms.sha256);
-                    console.log('Hash: ', hash);
+                    //console.log('Hash: ', hash);
                     this.setStateValue('PINHash', hash);
                     return true;
                 } catch {
@@ -76,7 +76,7 @@ class NewUserOnBoardingStore {
                 const hash = await JSHash(pin, CONSTANTS.HashAlgorithms.sha256);
                 // pin match
                 if (this.PINHash === hash) {
-                    firestore().collection('users').doc(auth().currentUser.uid).update({
+                    await firestore().collection('users').doc(auth().currentUser.uid).update({
                         PINHash: this.PINHash,
                         userOnBoarded: true,
                     });

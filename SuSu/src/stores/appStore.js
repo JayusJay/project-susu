@@ -106,7 +106,6 @@ class AppStore {
                 promise.push(goals);
             });
             const goals = await Promise.all(promise);
-            console.log('GOALS:', goals);
             this.setStateValue('personalSavings', goals);
         } catch (error) {
             console.log('getGoals error: ', error);

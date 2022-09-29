@@ -3,7 +3,7 @@ import { Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import transactionData from '../assets/transactionData';
-import formatDate from '../utils/formatData';
+import formatDate from '../utils/formatDate';
 import TransactionStyle from '../styles/transactionStyle';
 
 const transactionMessage = (

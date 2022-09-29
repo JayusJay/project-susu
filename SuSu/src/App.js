@@ -1,8 +1,8 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import AppNav from './navigation/AppNav';
 import { AuthProvider } from './services/AuthContext';
 import { AppStoreProvider } from './services/AppStoreContext';
-import { StatusBar } from 'react-native';
 
 const App = () => {
     return (

@@ -34,6 +34,9 @@ const GoalTotalAmountStyles = StyleSheet.create({
     backButton: {
         paddingTop: 12,
     },
+    backButtonView: {
+        alignSelf: 'flex-start',
+    },
     footer: {
         backgroundColor: '#fff',
         borderTopLeftRadius: 20,

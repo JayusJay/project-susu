@@ -19,10 +19,9 @@ const GoalComponent = ({ navigation, data }) => {
                 navigation.navigate('GoalDetail', item._data); //passing data to GoalDetailScreen
             }}
         >
-            {console.log(item._data)}
             <View style={GoalComponentStyle.container}>
                 <CircularProgressBase {...GoalComponentStyle.CircularProgressBaseProps} value={item._data.value}>
-                    <Image source={{ url: item._data.imageUri }} style={GoalComponentStyle.container.image} />
+                    <Image source={{ uri: item._data.imageUri }} style={GoalComponentStyle.container.image} />
                 </CircularProgressBase>
                 <View style={GoalComponentStyle.container.textView}>
                     <Text style={GoalComponentStyle.container.nameText}>{item._data.name}</Text>
