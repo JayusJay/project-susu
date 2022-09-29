@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Text, View, ScrollView, useWindowDimensions } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import { BarChart } from 'react-native-gifted-charts';
+import { observer } from 'mobx-react';
+import { AppStoreContext } from '../services/AppStoreContext';
 import GoalComponent from '../components/GoalComponent';
 import savingBarData from '../assets/savingBarData';
 import goalData from '../assets/goalData';
 import SavingsStyle from '../styles/savingsStyle';
 
-const SavingsScreen = ({ navigation }) => {
+const SavingsScreen = observer(({ navigation }) => {
     const { width } = useWindowDimensions();
+    const { appStore } = useContext(AppStoreContext);
+    useEffect(() => {
+        appStore.getPersonalSavings();
+    }, []);
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <SafeAreaView style={SavingsStyle.container}>
@@ -51,7 +57,7 @@ const SavingsScreen = ({ navigation }) => {
                     </View>
                     <Text style={SavingsStyle.yourGoalsText}> Your Goals</Text>
                     <View style={SavingsStyle.goalView}>
-                        <GoalComponent navigation={navigation} data={goalData} />
+                        <GoalComponent navigation={navigation} data={appStore.personalSavings} />
                     </View>
                     <View style={SavingsStyle.gridContainerView}>
                         <Text style={SavingsStyle.gridContainerView.text}>Overview</Text>
@@ -113,5 +119,5 @@ const SavingsScreen = ({ navigation }) => {
             </SafeAreaView>
         </ScrollView>
     );
-};
+});
 export default SavingsScreen;

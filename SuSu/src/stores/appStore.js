@@ -7,10 +7,12 @@ import messaging from '@react-native-firebase/messaging';
 class AppStore {
     userData = null;
     investmentGroups = [];
+    personalSavings = [];
     constructor() {
         makeObservable(this, {
             userData: observable,
             investmentGroups: observable,
+            personalSavings: observable,
             setStateValue: action,
             resetValues: action,
         });
@@ -91,6 +93,23 @@ class AppStore {
             this.setStateValue('investmentGroups', groups);
         } catch (error) {
             console.log('getGroups error: ', error);
+        }
+        return true;
+    };
+    getPersonalSavings = async () => {
+        try {
+            const userData = await this.getUserData();
+            if (userData.savingGoals === undefined) return;
+            const promise = [];
+            userData.savingGoals.map(async (goalID) => {
+                const goals = firestore().collection('personal_savings').doc(goalID).get();
+                promise.push(goals);
+            });
+            const goals = await Promise.all(promise);
+            console.log('GOALS:', goals);
+            this.setStateValue('personalSavings', goals);
+        } catch (error) {
+            console.log('getGoals error: ', error);
         }
         return true;
     };

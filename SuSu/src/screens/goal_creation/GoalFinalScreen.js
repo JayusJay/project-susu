@@ -3,12 +3,13 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { AppStoreContext } from '../../services/AppStoreContext';
+import LoadingScreen from '../LoadingScreen';
 import CelebrationSVG from '../../assets/images/goal_creation/celebrating.svg';
 import goalImages from '../../assets/goalData';
 import goalFinalStyle from '../../styles/goal_creation/goalFinalStyle';
 
 const GoalFinalScreen = ({ navigation }) => {
-    const { goalCreationStore } = useContext(AppStoreContext);
+    const { goalCreationStore, appLoading, setAppLoading } = useContext(AppStoreContext);
     const achievementTime = () => {
         let time =
             goalCreationStore.frequency === 'Daily'
@@ -21,11 +22,27 @@ const GoalFinalScreen = ({ navigation }) => {
         }
         return `in approximately, ${Math.ceil(goalCreationStore.totalAmount / goalCreationStore.savingAmount)} ${time}`;
     };
-    const handleButton = () => {
+    const handleButton = async () => {
         //goalCreationStore.setGoalCreationData('amountSaved', 2000);
-        goalImages.push(goalCreationStore.goalCreationData);
-        navigation.navigate('Savings');
+        //goalImages.push(goalCreationStore.goalCreationData);
+        setAppLoading(true);
+        response = await goalCreationStore.createGoal();
+        setAppLoading(false);
+        if (response) {
+            Snackbar.show({
+                text: 'Goal created successfully',
+                duration: Snackbar.LENGTH_SHORT,
+                backgroundColor: '#7966FF',
+            });
+            navigation.navigate('Savings');
+        } else
+            Snackbar.show({
+                text: 'An error occured, please try again',
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor: 'red',
+            });
     };
+    if (appLoading) return <LoadingScreen />;
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <SafeAreaView style={goalFinalStyle.container}>

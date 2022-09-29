@@ -19,7 +19,7 @@ class GoalCreationStore {
     goalCategory = '';
     goalStatus = '';
     value = 0;
-    defaultGoalImagesURLs = [];
+    defaultGoalImagesURLs = null;
     constructor() {
         makeObservable(this, {
             image: observable,
@@ -52,7 +52,6 @@ class GoalCreationStore {
     }
     fetchDefaultGoalImages = async () => {
         try {
-            //const defaultGoalImages = [];
             const defaultGoalImagesRef = await storage().ref('goalCreationImages');
             const defaultGoalImagesSnapshot = await defaultGoalImagesRef.listAll();
             const defaultGoalImagesURLs = await Promise.all(
@@ -61,40 +60,24 @@ class GoalCreationStore {
                     return url;
                 })
             );
-            this.formatImageURLs(defaultGoalImagesURLs);
-            this.setGoalCreationData('defaultGoalImagesURLs', defaultGoalImagesURLs);
-            console.log('defaultGoalImagesURLs: ', defaultGoalImagesURLs);
-            //console.log('defaultGoalImages: ', defaultGoalImages);
-            return defaultGoalImagesURLs;
+            const formattedURLs = this.formatImageURLs(defaultGoalImagesURLs);
+            this.setGoalCreationData('defaultGoalImagesURLs', formattedURLs);
         } catch (error) {
             console.log('fetchDefaultGoalImages error: ', error);
             return error;
         }
     };
-    formatImageURLs = (nameArray) => {
-        for (let i = 0; i < nameArray.length; i++) {
-            let url = nameArray[i];
-            let name = name[i].substr(nameArray[i].lastIndexOf('F') + 1);
-            name = name[i].slice(0, nameArray[i].lastIndexOf('.'));
-            console.log('name', name);
-            name[i] = name[i].replace(url, { name: url });
+    formatImageURLs = (URLsArray) => {
+        let formattedURLs = {};
+        for (let i = 0; i < URLsArray.length; i++) {
+            let url = URLsArray[i];
+            let name = URLsArray[i].substr(URLsArray[i].lastIndexOf('F') + 1);
+            name = name.slice(0, name.lastIndexOf('.'));
+            formattedURLs[name] = url;
         }
-        return nameArray;
+        return formattedURLs;
     };
 
-    uploadImage = async () => {
-        try {
-            console.log('local imageUri: ', this.image);
-            const reference = `personal_savings/${this.image.split('/').pop()}`; //pick the last part of the image uri
-            const imageRef = storage().ref(reference);
-            await imageRef.putFile(this.image);
-            const url = await imageRef.getDownloadURL();
-            return url;
-        } catch (error) {
-            console.log('goal uploadImage error: ', error);
-            return error;
-        }
-    };
     createGoal = async () => {
         try {
             const goalData = this.goalCreationData;
@@ -107,6 +90,7 @@ class GoalCreationStore {
                 .update({
                     savingGoals: firestore.FieldValue.arrayUnion(goal.id),
                 });
+            return true;
         } catch (error) {
             console.log('createGoal error: ', error);
             return error;

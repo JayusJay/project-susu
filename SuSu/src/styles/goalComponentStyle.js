@@ -18,6 +18,11 @@ const GoalComponentStyle = StyleSheet.create({
             color: '#ccc',
             fontSize: 20,
         },
+        noGroupsText: {
+            color: '#7966FF',
+            fontSize: 20,
+            textAlign: 'center',
+        },
         amountText: {
             color: '#fff',
             fontSize: 20,
